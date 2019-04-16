@@ -3,6 +3,8 @@ package graphics;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 
@@ -30,7 +32,7 @@ import objets.Objet_Bomb;
 //import game.Game;
 import game.BombermanGame;
 import game.GameObserver;
-
+import key.Keys;
 import map.Map;
 
 //Création graphique de la carte et des agents
@@ -76,6 +78,9 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		//Taille de la carte
 	   taille_x= this.BbmG.etatJeu.getMap().getSizeX();
 	   taille_y= this.BbmG.etatJeu.getMap().getSizeY();
+	   
+	   this.addKeyListener(BbmG.etatJeu.key_action);
+	   
 		
 	}
 	
@@ -558,7 +563,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 	@Override
 	public void update() {
 		this.repaint();
-		
+		this.requestFocus();	
 		
 	}
 

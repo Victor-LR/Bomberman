@@ -8,6 +8,7 @@ import agents.AgentAction;
 import agents.AgentType;
 import agents.Agent_Bomberman;
 import agents.ColorBomberman;
+import key.Keys;
 import objets.Objet;
 import objets.Objet_Bomb;
 import objets.ObjetType;
@@ -16,13 +17,15 @@ public class GameState {
 	
 	Map map;
 	
+	public Keys key_action;
+	
 	private ArrayList<Agent> ennemies;
 	private ArrayList<Agent_Bomberman> bombermans;
 	private ArrayList<Objet_Bomb> bombes;
 	private ArrayList<Objet> items;
 	
 	private static Random numberGenerator = new Random();
-	private int pourcentage = 100;
+	private int pourcentage = 25;
 	
 	//Construit l'état courant de la map
 	
@@ -32,6 +35,8 @@ public class GameState {
 		bombermans = new ArrayList<Agent_Bomberman>();
 		bombes = new ArrayList<Objet_Bomb>();
 		items = new ArrayList<Objet>();
+		
+		key_action = new Keys();
 
 		this.map=map;
 
@@ -376,14 +381,20 @@ public class GameState {
 			
 			for(int i = 0; i < bombermans.size(); i++){
 				
+//				Agent_Bomberman bomberman = bombermans.get(i);
+//				AgentAction bombermanAction = bomberman.chooseAction(this);
 					
-				Agent_Bomberman bomberman = bombermans.get(i);
-				AgentAction bombermanAction = bomberman.chooseAction(this);
 				
+				Agent_Bomberman bomberman = bombermans.get(i);
+				//Keys key_action = new Keys();
+				AgentAction bombermanAction = bomberman.chooseAction(this,key_action.getKaction());
+				this.key_action.setKaction(new AgentAction(Map.STOP));
+				
+				System.out.println(bombermanAction.getAction());
+				//key_action.keyPressed(evt);
 				
 				//System.out.println(bomberman.getId()+ ":" + bomberman.getPoints());
 				
-				//Boucle permettant de gérer les effets des différents items récupéré par les bombermans
 				
 				for (int j = 0; j < items.size(); j++){
 					
@@ -401,7 +412,7 @@ public class GameState {
 							
 						}else if((item.getType() == ObjetType.SKULL & !bomberman.isInvincible())) {
 							
-							bomberman.setMaladie((int) (Math.random()*3));
+							bomberman.setMaladie((int) (Math.random()*3));//(int) (Math.random()*3));
 							bomberman.setSick(true);
 							bomberman.setEtatSick(0);
 						}
@@ -411,59 +422,60 @@ public class GameState {
 					}
 				}
 				
-				//Conditions gérant l'effet d'invincibilité
 				
 				if (bomberman.isInvincible())
 					if(bomberman.getEtatInv() <=20) bomberman.setEtatInv(bomberman.getEtatInv()+1);
 					else bomberman.setInvincible(false);
 				
-				//conditions gérant l'effet du skull en fonction des maladies
 				
-				if(bomberman.isSick() & bomberman.getEtatSick() <=20) {
+					if(bomberman.isSick() & bomberman.getEtatSick() <=20) {
 					
-					if (bomberman.getMaladie() == 0) {
-						if(bomberman.getNbActions() > 2)
+						if (bomberman.getMaladie() == 0 && bomberman.getNbActions() > 2) {
 							this.placeBomb(bomberman);
-					}
-						
-					bomberman.setEtatSick(bomberman.getEtatSick()+1);
-				}
-				else { 
-					if(bomberman.getMaladie() == 2 & bombermans.size() > 1) {
-						System.out.println("swap");
-						int bb;
-						do {
-							bb = (int) (Math.random()*bombermans.size());
-						}while(bb==i);
-								
-							int aux_x = bomberman.getX();
-							int aux_y = bomberman.getY();
-								
-							bomberman.setX(bombermans.get(bb).getX());
-							bomberman.setY(bombermans.get(bb).getY());
-								
-							bombermans.get(bb).setX(aux_x);
-							bombermans.get(bb).setY(aux_y);
 						}
-						bomberman.setSick(false);
-						bomberman.setMaladie(10);
 						
-				    }
+						bomberman.setEtatSick(bomberman.getEtatSick()+1);
+					}
+					else { 
+						   if(bomberman.getMaladie() == 2 && bombermans.size() > 1) {
+								System.out.println("swap");
+								int bb;
+								do {
+									bb = (int) (Math.random()*bombermans.size());
+								}while(bb==i);
+								
+								int aux_x = bomberman.getX();
+								int aux_y = bomberman.getY();
+								
+								bomberman.setX(bombermans.get(bb).getX());
+								bomberman.setY(bombermans.get(bb).getY());
+								
+								bombermans.get(bb).setX(aux_x);
+								bombermans.get(bb).setY(aux_y);
+							}
+						   bomberman.setSick(false);
+						   bomberman.setMaladie(10);
+						 }
+				
+				
 				
 
 				if (bombermanAction.getAction() < 5){
+						
 					this.moveAgent(bomberman, bombermanAction);
 					this.bombeTurn(bomberman);
+					
+//					System.out.println("après deplacement	Range -> "+ bomberman.getRange());
 				}
-				else if (bomberman.getNbActions() > 2 & (bomberman.getMaladie() != 0 || bomberman.getMaladie()  == 1)){
+				else if (bombermanAction.getAction() == 5 & (bomberman.getMaladie() != 0 )){
 						this.placeBomb(bomberman);
 						this.bombeTurn(bomberman);
+
 					 }
-				else 
-					this.bombeTurn(bomberman);
+				else this.bombeTurn(bomberman);
 				
 				
-					
+//			key_action.setKaction(bomberman.chooseAction(this,new AgentAction(Map.STOP)));
 			}
 		}
 	
@@ -478,7 +490,7 @@ public class GameState {
 			int etat_bombe = bombe.getEtat();
 			
 			if (etat_bombe >= 11) {
-				 bombExplode(bombe, bomberman);
+				bombExplode(bombe, bomberman);
 				bombs.remove(bombe);
 				bombes.remove(bombe);
 			}

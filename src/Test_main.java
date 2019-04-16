@@ -12,15 +12,14 @@ public class Test_main {
 		
 		BombermanGame BbmG = new BombermanGame();
 		try {
-			BbmG.loadFile("./layout/jeu1.lay");
+			BbmG.loadFile("./layout/alone.lay");
 			BbmG.init();
-			BbmG.launch();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		Cadre_Jeu fenetre = new Cadre_Jeu(BbmG);
 		fenetre.setVisible(true);
-
+		BbmG.launch();
 	}
 
 }
