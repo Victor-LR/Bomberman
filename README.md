@@ -54,11 +54,11 @@ L'interfaçage du score à été réglé (subsiste un petit problème de thread 
 L'implémentation des item est en progrès, nous pouvons désormais les récupérer et avoir des bonus ou malus ( augmentation de la range et diminution de celle-ci). L'explosion en chaine des bombes à été fixe et marche relatiement bien. Les boutons du menu on été ajouté à l'interface, nous pouvons désormais mettre en pause et relancer le jeu sans aucuns souis. Cependant il fallut plus de temps pour comprendre le fonctionnement du bouton restart (celui-ci nous permet de relancer le jeu). 
 De plus Victor a commencé à implementer la différenciation de couleurs pour les différents personnage du bomberman.
 
-11/04/19
+11/04/19:
 
 Finition des boutons pour la gestion du jeu. Des couleurs differentes sont attribuées à chaque bomberman lors de leur construction. Quelques bugue réglés comme le chargement de l'application qui désormais ne fait plus planter le jeu. Les scores sont différenciable pour chaque Bomberman.
 
-12/04/19
+12/04/19:
 
 Bugues persistant : 
 - 1 Certaines bombes disparraissent au lieu d'exploser lors d'une explosion en chaîne 
@@ -74,7 +74,7 @@ Fait aujourd'hui :
 - Implémentation des effets des différentes maladies du Skull.
 - Ajout d'un curseur pour régler la vitesse du jeu.
 
-15/04/19
+15/04/19:
 
 Fait:
 - Fini l'item skull (plus ou moins)
@@ -85,3 +85,14 @@ Nouveaux bugues:
 - 2 Priorité du premier bomberman construit sur un autre au moment d' un duel, renvoie au bugue 2 du 12/04/19
 - 3 Quand on intéragie avec le menu (pause,restart ...) les touches ne sont plus recconnues.
 - 4 Certaine mlaadies doient être revu 
+
+16/04/19:
+
+Compte rendu rendez-vous :
+
+- Discussion sur l'implémentation d'ia, avec possibilité du multi threads (faire differentes IA qui s'affrontent, pour voir la plus performante)
+- Régler les bugues sur les bombes (bombes qui deviennent indé lors de leur mise sur le terrain, plus d'apparetennace avec le  bbm) 
+- Revoir le focus pour la gestion du KeyListener sur le panel du jeu 
+- Lier le version automatique avec la version jouable
+- Créer l'indépendance des touches pour pouvoir jouer plusieurs Bbm en même temps
+
