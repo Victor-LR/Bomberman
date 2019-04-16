@@ -32,7 +32,7 @@ import graphics.paint_bomberman;
 import graphics.paint_score;
 import key.Keys;
 
-public class Cadre_Jeu extends JFrame implements KeyListener { 
+public class Cadre_Jeu extends JFrame { 
 	
 	private static final long serialVersionUID = 1L;
 	GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -56,17 +56,8 @@ public class Cadre_Jeu extends JFrame implements KeyListener {
 	        
 	        p_bm = new paint_bomberman(BbmG);
 	        this.add("Center",p_bm);
-	       
-	               
-	       this.addKeyListener(BbmG.etatJeu.key_action);
-	     //   test.setFocusable(true);
-	        this.addWindowListener(new WindowAdapter() {
-	        	public void windowOpened(WindowEvent e) { 
-	        	requestFocus();	
-	        	}
-	        	});
 	        
-	        //this.addKeyListener(this);
+	        
 	        this.setVisible(true);
 
 	        
@@ -74,20 +65,7 @@ public class Cadre_Jeu extends JFrame implements KeyListener {
 	        
 	}
 	
-	 @Override
-     public void keyTyped(KeyEvent ke) {
-         System.out.println(" touche "+ke.getKeyCode());
-     }
-
-     @Override
-     public void keyPressed(KeyEvent ke) {
-         System.out.println("touche "+ke.getKeyCode());
-     }
-
-     @Override
-     public void keyReleased(KeyEvent ke) {
-         System.out.println("touche"+ke.getKeyCode());
-     }
+	
 	
 	
 	//JButton choixRun;

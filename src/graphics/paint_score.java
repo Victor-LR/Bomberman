@@ -220,5 +220,6 @@ public class paint_score implements GameObserver {
 
 	public void desactiverRestart() {
 		restart.setEnabled(false);
+
 	}	
 }

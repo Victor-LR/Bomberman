@@ -3,6 +3,8 @@ package graphics;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 
@@ -77,6 +79,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 	   taille_x= this.BbmG.etatJeu.getMap().getSizeX();
 	   taille_y= this.BbmG.etatJeu.getMap().getSizeY();
 	   
+	   this.addKeyListener(BbmG.etatJeu.key_action);
 	   
 		
 	}
@@ -560,7 +563,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 	@Override
 	public void update() {
 		this.repaint();
-		
+		this.requestFocus();	
 		
 	}
 

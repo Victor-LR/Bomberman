@@ -11,19 +11,12 @@ import map.Map;
 
 public class Keys implements KeyListener{
 	
-	//private Agent_Bomberman bomberman;
-	//private GameState game;
 	private AgentAction Kaction;
-	
-//	public Keys () {
-//
-//	}
+
 	
 	public Keys () {
-		//this.bomberman = bomberman;
-		//this.game = game;
 		this.Kaction = new AgentAction(Map.STOP);
-		//addKeyListener(this);
+
 	}
 
 //	public AgentAction getKeyAction(){
