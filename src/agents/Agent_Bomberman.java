@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import objets.Objet_Bomb;
 
 import map.GameState;
-import map.Map;
 import agents.Agent;
 
 public class Agent_Bomberman extends Agent {
@@ -27,10 +26,10 @@ public class Agent_Bomberman extends Agent {
 	public Agent_Bomberman (int px, int py,int id) {
 		super(AgentType.BOMBERMAN, px, py);
 		super.setId(id);
-		this.range = 5;
+		this.range = 1;
 		this.points = 0;
 		this.bombes = new ArrayList<Objet_Bomb>();
-		this.nbBombes = 6;
+		this.nbBombes = 5;
 		
 		this.isInvincible = false;
 		this.etatInvincible = 0;
@@ -40,12 +39,16 @@ public class Agent_Bomberman extends Agent {
 		
 	}
 	
-	public AgentAction chooseAction(GameState etatjeu,AgentAction action) 
+	public AgentAction chooseAction(GameState etatjeu) 
 	{
-
-		if (etatjeu.isLegalMove(action, this) || (action.getAction() == 5)) return action;
-		else return new AgentAction(Map.STOP);
-				
+		ArrayList<AgentAction> listAction=new ArrayList<AgentAction>();
+		for(int i=0;i<=5;i++)
+		{
+			if (etatjeu.isLegalMove(new AgentAction(i), this))
+				listAction.add(new AgentAction(i));
+		}		
+		this.nbActions = listAction.size();
+		return(listAction.get((int)(Math.random()*listAction.size())));
 	}	
 	
 	public int getRange() {

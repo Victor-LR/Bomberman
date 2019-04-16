@@ -1,7 +1,6 @@
 package graphics;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -220,6 +219,5 @@ public class paint_score implements GameObserver {
 
 	public void desactiverRestart() {
 		restart.setEnabled(false);
-
 	}	
 }

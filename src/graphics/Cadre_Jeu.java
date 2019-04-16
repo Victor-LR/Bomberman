@@ -12,16 +12,9 @@ import javax.swing.SwingConstants;*/
 
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
+import javax.swing.JPanel;
 import java.awt.BorderLayout;
 
 
@@ -30,9 +23,8 @@ import java.awt.BorderLayout;
 import game.BombermanGame;
 import graphics.paint_bomberman;
 import graphics.paint_score;
-import key.Keys;
 
-public class Cadre_Jeu extends JFrame { 
+public class Cadre_Jeu extends JFrame{ 
 	
 	private static final long serialVersionUID = 1L;
 	GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -43,7 +35,7 @@ public class Cadre_Jeu extends JFrame {
     //Création de la fenêtre de jeu
 	public Cadre_Jeu(BombermanGame BbmG){
 		
-		    this.setSize(BbmG.etatJeu.getMap().getSizeX()*50, (BbmG.etatJeu.getMap().getSizeY()*50)+45);
+		    this.setSize(BbmG.etatJeu.getMap().getSizeX()*50, (BbmG.etatJeu.getMap().getSizeY()*50)+50);
 		    this.setTitle("Jeu Bomberman");
 		    this.setLocationRelativeTo(null);
 
@@ -57,15 +49,9 @@ public class Cadre_Jeu extends JFrame {
 	        p_bm = new paint_bomberman(BbmG);
 	        this.add("Center",p_bm);
 	        
-	        
-	        this.setVisible(true);
-
-	        
 	        this.getContentPane();
 	        
 	}
-	
-	
 	
 	
 	//JButton choixRun;

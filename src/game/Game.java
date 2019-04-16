@@ -8,7 +8,7 @@ public abstract class Game implements Runnable, InterfaceGame {
 	
 	private double temps = 200;
 	protected int turn;
-	protected int maxTurn = 2000;
+	protected int maxTurn = 10000;
 	
 	Thread thread;
 	
@@ -50,8 +50,13 @@ public abstract class Game implements Runnable, InterfaceGame {
 	
 	
 	//Réalise les differents tours du jeu
-	
 	public void run(){
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e1) {
+
+			e1.printStackTrace();
+		}
 		while (gameContinue() && isRunning){
 
 			nextTurn();
