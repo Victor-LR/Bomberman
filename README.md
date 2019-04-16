@@ -1,5 +1,9 @@
 # TER_Bomberman
 
+Tuto git :
+
+http://rogerdudler.github.io/git-guide/index.fr.html
+
 Journal de bord des évolutions du projet Bomberman implémenté en JAVA
 
 1/04/19:
