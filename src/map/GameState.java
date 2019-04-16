@@ -388,6 +388,7 @@ public class GameState {
 				Agent_Bomberman bomberman = bombermans.get(i);
 				//Keys key_action = new Keys();
 				AgentAction bombermanAction = bomberman.chooseAction(this,key_action.getKaction());
+				this.key_action.setKaction(new AgentAction(Map.STOP));
 				
 				System.out.println(bombermanAction.getAction());
 				//key_action.keyPressed(evt);

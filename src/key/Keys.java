@@ -64,7 +64,7 @@ public class Keys implements KeyListener{
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		setKaction(new AgentAction(Map.STOP));
+		
 	}
 
 	@Override

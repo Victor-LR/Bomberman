@@ -50,13 +50,8 @@ public abstract class Game implements Runnable, InterfaceGame {
 	
 	
 	//Réalise les differents tours du jeu
+	
 	public void run(){
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e1) {
-
-			e1.printStackTrace();
-		}
 		while (gameContinue() && isRunning){
 
 			nextTurn();
