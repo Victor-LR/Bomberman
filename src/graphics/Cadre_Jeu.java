@@ -1,11 +1,26 @@
 package graphics;
 
+/*import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.GridBagLayout;
+import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;*/
 
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import java.awt.BorderLayout;
 
@@ -15,13 +30,12 @@ import java.awt.BorderLayout;
 import game.BombermanGame;
 import graphics.paint_bomberman;
 import graphics.paint_score;
-import key.Keys;
 
 public class Cadre_Jeu extends JFrame { 
 	
 	private static final long serialVersionUID = 1L;
-	GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-    Point centerPoint = ge.getCenterPoint();
+	//GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+    //Point centerPoint = ge.getCenterPoint();
     private JPanel p_bm;
     private paint_score p_sc;
 	
@@ -46,7 +60,7 @@ public class Cadre_Jeu extends JFrame {
 	        this.setVisible(true);
 
 	        
-	        this.getContentPane();
+	       // this.getContentPane();
 	        
 	}
 	

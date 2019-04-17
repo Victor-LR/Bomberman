@@ -24,7 +24,6 @@ public class Objet_Bomb extends Objet {
 	public void setEtat(int etat) {
 		this.etat = etat;
 	}
-	
 	public int getId_bbm() {
 		return id_bbm;
 	}
@@ -33,7 +32,7 @@ public class Objet_Bomb extends Objet {
 	public void setId_bbm(int bbm) {
 		this.id_bbm = bbm;
 	}
-	
+
 	public int getRange() {
 		return range;
 	}

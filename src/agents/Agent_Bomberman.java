@@ -2,7 +2,7 @@ package agents;
 
 import java.util.ArrayList;
 
-//import objets.Objet_Bomb;
+import objets.Objet_Bomb;
 
 import map.GameState;
 import map.Map;
@@ -27,7 +27,7 @@ public class Agent_Bomberman extends Agent {
 	public Agent_Bomberman (int px, int py,int id) {
 		super(AgentType.BOMBERMAN, px, py);
 		super.setId(id);
-		this.range = 1;
+		this.range = 4;
 		this.points = 0;
 		//this.bombes = new ArrayList<Objet_Bomb>();
 		this.nbBombes = 1;
@@ -42,9 +42,21 @@ public class Agent_Bomberman extends Agent {
 	
 	public AgentAction chooseAction(GameState etatjeu,AgentAction action) 
 	{
-
-		if (etatjeu.isLegalMove(action, this) || (action.getAction() == 5)) return action;
-		else return new AgentAction(Map.STOP);
+		if (etatjeu.getMode_jeu()) {
+			
+			if (etatjeu.isLegalMove(action, this) || (action.getAction() == 5)) return action;
+			else return new AgentAction(Map.STOP);
+			
+		}else {
+			ArrayList<AgentAction> listAction=new ArrayList<AgentAction>();
+			for(int i=0;i<=5;i++)
+			{
+				if (etatjeu.isLegalMove(new AgentAction(i), this))
+					listAction.add(new AgentAction(i));
+			}		
+			nbActions = listAction.size();
+			return(listAction.get((int)(Math.random()*nbActions)));
+		}
 				
 	}	
 	

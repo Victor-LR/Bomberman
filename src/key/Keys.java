@@ -2,11 +2,11 @@ package key;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-//import java.awt.Component;
+import java.awt.Component;
 
 import agents.AgentAction;
-//import agents.Agent_Bomberman;
-//import map.GameState;
+import agents.Agent_Bomberman;
+import map.GameState;
 import map.Map;
 
 public class Keys implements KeyListener{

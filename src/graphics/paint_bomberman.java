@@ -159,16 +159,17 @@ public class paint_bomberman extends JPanel implements GameObserver{
 			}
 		}
 		
-		
 		for(int i = 0; i < ennemies.size(); i++){
 			if(!ennemies.get(i).isDead())
-				dessine_Ennemy(g,ennemies.get(i));	
+			dessine_Ennemy(g,ennemies.get(i));	
 		}
 		
 		
 		for(int i = 0; i < bombermans.size(); i++){
+
 			if(!bombermans.get(i).isDead())
 				dessine_Bomberman(g,bombermans.get(i));
+			
 		}
 		
 
@@ -558,6 +559,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		}
 		
 	}
+	
 	@Override
 	public void update() {
 		this.repaint();

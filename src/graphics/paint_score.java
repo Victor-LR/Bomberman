@@ -131,13 +131,15 @@ public class paint_score implements GameObserver {
 				desactiverRun();
 				activerStop();
 				desactiverRestart();
-				
+				boolean modej = BbmG.etatJeu.getMode_jeu();
 				try {
 					BbmG.loadFile(BbmG.getMap().getFilename());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				BbmG.restart();
+				BbmG.etatJeu.setMode_jeu(modej);
+				
 			}
 		});
 		
