@@ -99,5 +99,6 @@ Utilisation de github dans son entiereté. Réglage de ombreux bugue.
 
 17/04/19:
 
-
+KEvin après midi : 
+Lors de la mort d'un bomberman, il n efaudrait plus le le remove mais lepasser à isDead et faire les modification necésaire pour qu'il ne puyisse plus intéragir avec le jeu. Pour cela des modifications doivent etre apportés au niveau de paint_bomberman et de choosAction
 
