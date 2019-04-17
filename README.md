@@ -1,7 +1,6 @@
 # TER_Bomberman
-Bonjour
-Tuto git :
 
+Tuto git :
 http://rogerdudler.github.io/git-guide/index.fr.html
 
 Journal de bord des évolutions du projet Bomberman implémenté en JAVA
@@ -95,4 +94,10 @@ Compte rendu rendez-vous :
 - Revoir le focus pour la gestion du KeyListener sur le panel du jeu 
 - Lier le version automatique avec la version jouable
 - Créer l'indépendance des touches pour pouvoir jouer plusieurs Bbm en même temps
+
+Utilisation de github dans son entiereté. Réglage de ombreux bugue.
+
+17/04/19:
+
+
 
