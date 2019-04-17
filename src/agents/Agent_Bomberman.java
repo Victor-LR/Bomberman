@@ -2,7 +2,7 @@ package agents;
 
 import java.util.ArrayList;
 
-import objets.Objet_Bomb;
+//import objets.Objet_Bomb;
 
 import map.GameState;
 import map.Map;
@@ -12,7 +12,7 @@ public class Agent_Bomberman extends Agent {
 	
 	private int range;
 	private int points = 0;
-	private ArrayList<Objet_Bomb> bombes = null;
+	//private ArrayList<Objet_Bomb> bombes = null;
 	private int nbBombes;
 	private ColorBomberman couleur;
 	private int nbActions = 0;
@@ -27,10 +27,10 @@ public class Agent_Bomberman extends Agent {
 	public Agent_Bomberman (int px, int py,int id) {
 		super(AgentType.BOMBERMAN, px, py);
 		super.setId(id);
-		this.range = 5;
+		this.range = 1;
 		this.points = 0;
-		this.bombes = new ArrayList<Objet_Bomb>();
-		this.nbBombes = 6;
+		//this.bombes = new ArrayList<Objet_Bomb>();
+		this.nbBombes = 1;
 		
 		this.isInvincible = false;
 		this.etatInvincible = 0;
@@ -65,13 +65,13 @@ public class Agent_Bomberman extends Agent {
 		this.points = point;
 	}
 	
-	public ArrayList<Objet_Bomb> getBombes() {
-		return bombes;
-	}
-
-	public void setBombes(ArrayList<Objet_Bomb> bombes) {
-		this.bombes = bombes;
-	}
+//	public ArrayList<Objet_Bomb> getBombes() {
+//		return bombes;
+//	}
+//
+//	public void setBombes(ArrayList<Objet_Bomb> bombes) {
+//		this.bombes = bombes;
+//	}
 	
 	public int getNbBombes() {
 		return nbBombes;

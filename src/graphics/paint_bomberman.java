@@ -138,7 +138,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 			position_x+=stepx;
 		}
 		
-		//ArrayList<Objet_Bomb> bombes = Jeu_actuel.getBombes();
+		ArrayList<Objet_Bomb> bombes = BbmG.etatJeu.getBombes();
 		ArrayList<Agent_Bomberman> bombermans = BbmG.etatJeu.getBombermans();
 		
 		ArrayList<Agent> ennemies = BbmG.etatJeu.getEnnemies();
@@ -151,13 +151,13 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		}
 		
 	
-			for(int i = 0; i < bombermans.size(); i++){
-				ArrayList<Objet_Bomb> bombes_bbm = bombermans.get(i).getBombes();
-				if (bombes_bbm != null) {
-				for (int j = 0 ; j < bombes_bbm.size() ; j++)
-					dessine_Bomb(g,bombes_bbm.get(j),bombermans.get(i));
-				}
+		for(int i = 0; i < bombermans.size(); i++){
+			if (bombes != null) {
+			for (int j = 0 ; j < bombes.size() ; j++)
+				if(bombes.get(j).getId_bbm() == bombermans.get(i).getId())
+					dessine_Bomb(g,bombes.get(j));
 			}
+		}
 		
 		
 		for(int i = 0; i < ennemies.size(); i++){
@@ -425,7 +425,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 	
 	
 	
-	void dessine_Bomb(Graphics g, Objet_Bomb bomb, Agent_Bomberman agentBBM)
+	void dessine_Bomb(Graphics g, Objet_Bomb bomb)
 	{
 		int fen_x = getSize().width;
 		int fen_y = getSize().height;
@@ -478,7 +478,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 			
 			int range_limit = 1;
 			
-			range_limit = this.BbmG.etatJeu.test_range(Map.NORTH, bomb,agentBBM);
+			range_limit = this.BbmG.etatJeu.test_range(Map.NORTH, bomb);
 			
 			for (int i = 1 ; i <= py - range_limit; i++){
 				if(i != (py - range_limit)){
@@ -498,7 +498,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 				}
 			}
 			
-			range_limit = this.BbmG.etatJeu.test_range(Map.SOUTH, bomb,agentBBM);
+			range_limit = this.BbmG.etatJeu.test_range(Map.SOUTH, bomb);
 			
 			for (int i = 1 ; i <= range_limit -py  ; i++){
 				if(i != (range_limit - py)){
@@ -519,7 +519,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 			}
 			
 		
-			range_limit = this.BbmG.etatJeu.test_range(Map.WEST, bomb, agentBBM);
+			range_limit = this.BbmG.etatJeu.test_range(Map.WEST, bomb);
 			for (int i = 1 ; i <= px - range_limit; i++){
 				if(i != (px - range_limit)){
 					try {
@@ -538,7 +538,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 				}
 			}
 			
-			range_limit = this.BbmG.etatJeu.test_range(Map.EAST, bomb, agentBBM);
+			range_limit = this.BbmG.etatJeu.test_range(Map.EAST, bomb);
 			for (int i = 1 ; i <= range_limit - px  ; i++){
 				if(i != (range_limit - px)){
 					try {
@@ -559,7 +559,6 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		}
 		
 	}
-	
 	@Override
 	public void update() {
 		this.repaint();
