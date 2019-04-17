@@ -20,7 +20,7 @@ public class Test_main {
 //		}
 //		Cadre_Jeu fenetre = new Cadre_Jeu(BbmG);
 //		fenetre.setVisible(true);
-		Cadre_menu fen = new Cadre_menu("./layout/jeu1.lay");
+		Cadre_menu fen = new Cadre_menu();
 		fen.setVisible(true);
 		//BbmG.launch();
 	}
