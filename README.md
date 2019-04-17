@@ -5,6 +5,21 @@ http://rogerdudler.github.io/git-guide/index.fr.html
 
 Journal de bord des évolutions du projet Bomberman implémenté en JAVA
 
+Bugs Actuels :
+- 1 Certaines bombes disparraissent au lieu d'exploser lors d'une explosion en chaîne (+ ou -)
+- 2 Lorsqu'un Bbomberman meurt les bombes lui appartenant dissparraissent alors qu'elles devraient normalement finir leur boucle d'état (régler)
+- 3 Si un Bomberman prend un item de changement de range les bombes déjà posées sont affectés directement (régler)
+- 4 Si au moins deux bombermans prennet un malus swap en même temps PLANTAGE !!
+- 5 Manque de fluidité sur les déplacemnt (régler)
+- 6 Priorité du premier bomberman construit sur un autre au moment d' un duel, renvoie au bugue 2 du 12/04/19 (régler)
+- 7 Quand on intéragie avec le menu (pause,restart ...) les touches ne sont plus recconnues. (pause régler, restart non)
+- 8 Certaines maladies doivent être revues 
+- 9 Lors de la mort d'un bomberman si celui-ci pause une bombe à la frame de sa disparition et que la bombe pausée est prise dans une explosion en chaîne alors l'image de l'explosion freez
+- 10 Un bomberman peu encore se bloquer (probleme thread) si il décide de bouger au moment ou un bomberman vient de poser une  bombe dans la direction de son mouvement.
+PERSISTANT :
+- 11 Perte de focus au restart, pour les touches
+
+
 1/04/19:
 
 Prise en main d'ecplipse à partir du projet Pacman proposé par le professeur. Prise en main de Gitthub pour pouvoir travailler plus facilement à partir d'un espace ou tout les fichiers sont accessibles pour nous deux. Commencement du projet avec l'aide des fichiers de Pacman, insertion de la lecture de fichier pour la réalisation du plateau de jeu.
