@@ -14,6 +14,7 @@ import game.GameObserver;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -29,6 +30,7 @@ public class paint_score implements GameObserver {
 	BombermanGame BbmG;
 	//private GameState Jeu_actuel = null;
 	
+	public JFrame c_j = null;
 	public JPanel panel = null;
 	private JPanel panBoutton= null;
 	private JPanel panMenu= null;
@@ -37,10 +39,13 @@ public class paint_score implements GameObserver {
 	private JButton stop =null;
 	private JButton run =null;
 	private JButton restart =null;
+	private JButton back =null;
 	private JLabel turn = null;
 	private JSlider slider = null;
 	
-	public paint_score(BombermanGame bomberman){
+	public paint_score(JFrame cadre_jeu,BombermanGame bomberman){
+		
+		this.c_j = cadre_jeu;
 		
 		this.BbmG = bomberman;
 		
@@ -74,6 +79,9 @@ public class paint_score implements GameObserver {
 		Icon icon_restart = new ImageIcon("./image/icon_restart.png");
 		restart = new JButton(icon_restart);
 		this.panBoutton.add(this.restart);
+		
+		back = new JButton("back to menu");
+		this.panBoutton.add(this.back);
 		
 		this.panMenu.add(panBoutton);
 		
@@ -125,6 +133,18 @@ public class paint_score implements GameObserver {
 	
 	public void creer_button(){
 		restart.setFocusPainted(false);
+		
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evenement) {
+				
+				
+				Cadre_menu fen = new Cadre_menu(BbmG.getMap().getFilename());
+				fen.setVisible(true);
+				Thread.currentThread().interrupt();
+				c_j.dispose();
+			}
+		});
+		
 		restart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evenement) {
 				

@@ -50,7 +50,7 @@ public class Cadre_Jeu extends JFrame {
 	        
 	        this.setLayout(new BorderLayout());
 	        
-	        p_sc = new paint_score(BbmG);
+	        p_sc = new paint_score(this,BbmG);
 	        this.add("North",p_sc.panel);
 	        
 	        p_bm = new paint_bomberman(BbmG);

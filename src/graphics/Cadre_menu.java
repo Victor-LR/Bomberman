@@ -1,9 +1,11 @@
 package graphics;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,7 +26,7 @@ public class Cadre_menu extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setTitle("Menu Jeu Bomberman");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLayout(new BorderLayout());
+		this.setLayout(new GridLayout(2,1));
 		
 		joueur.setText("Joueur");
 		this.add("North",joueur);
