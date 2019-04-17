@@ -102,3 +102,9 @@ Utilisation de github dans son entiereté. Réglage de ombreux bugue.
 KEvin après midi : 
 Lors de la mort d'un bomberman, il n efaudrait plus le le remove mais lepasser à isDead et faire les modification necésaire pour qu'il ne puyisse plus intéragir avec le jeu. Pour cela des modifications doivent etre apportés au niveau de paint_bomberman et de choosAction
 
+Bugues du jour :
+- 1 Lors de la mort d'un bomberman si celui-ci pause une bombe à la frame de sa disparition et que la bombe pausée est prise dans une explosion en chaîne alors l'image de l'explosion freez
+- 2 Un bomberman peu encore se bloquer (probleme thread) si il décide de bouger au moment ou un bomberman vient de poser une  bombe dans la direction de son mouvement.
+PERSISTANT :
+- 3 Perte de focus au restart, pour les touches
+
