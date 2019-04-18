@@ -11,12 +11,10 @@ import agents.Agent_Bomberman;
 import agents.ColorBomberman;
 import game.BombermanGame;
 import graphics.Cadre_gagnant;
-import graphics.Cadre_menu;
 import key.Keys;
 import objets.Objet;
 import objets.Objet_Bomb;
 import objets.ObjetType;
-import graphics.Cadre_Jeu;
 
 public class GameState {
 	
@@ -32,6 +30,7 @@ public class GameState {
 	private static Random numberGenerator = new Random();
 	private int pourcentage = 25;
 	private boolean end;
+	private JFrame cadre_jeu = null;
 	
 	private boolean mode_jeu;
 	
@@ -67,18 +66,29 @@ public class GameState {
 
 	}
 	
-	//Verifie si l'action de éplacement est possible à l'état courant
+	//Verifie si l'action de déplacement est possible à l'état courant pour un agent
 	
 	public boolean isLegalMove(AgentAction action, Agent agent){
 		int x = action.getVx();
 		int y = action.getVy();
 		
-		if(map.isWall(agent.getX()+x, agent.getY()+y) || map.isBrokable_Wall(agent.getX()+x, agent.getY()+y) || isBombe(agent.getX()+x,agent.getY()+y) )
+		if(map.isWall(agent.getX()+x, agent.getY()+y) || map.isBrokable_Wall(agent.getX()+x, agent.getY()+y) || isBombe(agent.getX()+x,agent.getY()+y))
 			return false;
 		else return true;
 	}
 	
-	//Fonction qui renvoie vrai si une bombe est sous forme physiqu dans le jeu (et non sous forme d'explosion)
+	//Verifie si l'action de déplacement est possible à l'état courant pour un Bomberman
+	
+	public boolean isLegalMoveBbm(AgentAction actionbbm, Agent_Bomberman bbm){
+		int x = actionbbm.getVx();
+		int y = actionbbm.getVy();
+			
+		if(map.isWall(bbm.getX()+x, bbm.getY()+y) || map.isBrokable_Wall(bbm.getX()+x, bbm.getY()+y) || isBombe(bbm.getX()+x,bbm.getY()+y) || isBomberman(bbm.getId(),bbm.getX()+x,bbm.getY()+y) )
+			return false;
+		else return true;
+	}
+	
+	//Fonction qui renvoie vrai si une bombe est sous forme physique dans le jeu (et non sous forme d'explosion)
 	
 		public boolean isBombe(int x, int y) {
 			boolean bombeB = false;
@@ -91,7 +101,31 @@ public class GameState {
 			
 			return bombeB;
 		}
-
+	
+	//Fonction qui renvoie vrai si un bomberman se trouve sur le pochin déplacement du bomberman qui va réaliser un déplacement 
+		public boolean isBomberman(int id,int x, int y) {
+			boolean bb = false;
+			
+			ArrayList<Agent_Bomberman> bbms = this.bombermans;
+			for(int i=0; i< bbms.size(); i++) {
+				Agent_Bomberman bbm = bbms.get(i);
+				if( id!=bbm.getId() && (bbm.getX() == x & bbm.getY() == y)) bb = true;
+			}
+			
+			return bb;
+		}
+		
+		public boolean isEnnemie(int x, int y) {
+			boolean en = false;
+			
+			ArrayList<Agent> emis = this.ennemies;
+			for(int i=0; i< emis.size(); i++) {
+				Agent emi = emis.get(i);
+				if((emi.getX() == x & emi.getY() == y)) en = true;
+			}
+			
+			return en;
+		}
 	
 	//réalise le mouvement 
 	
@@ -99,7 +133,7 @@ public class GameState {
 	{
 		int x = agent.getX();
 		int y = agent.getY();
-		
+			
 	    agent.setX(x+action.getVx());
 		agent.setY(y+action.getVy());
 		
@@ -420,7 +454,9 @@ public class GameState {
 					
 					//System.out.println(bombermanAction.getAction());
 				
-				
+					if(isEnnemie(bomberman.getX(),bomberman.getY())) {
+						bomberman.setDead(true);
+					}
 				
 				for (int j = 0; j < items.size(); j++){
 					
@@ -545,6 +581,7 @@ public class GameState {
 		ArrayList<Agent_Bomberman> bombermans = this.getBombermans();
 		
 		int compte = 0;
+		int compte2 = 0;
 		int idGagnant = 0;
 		String winner;
 		int maxScore = 0;
@@ -562,7 +599,8 @@ public class GameState {
 			//System.out.println("jeu terminé");
 			System.out.println("Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant");
 			winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant";
-			Cadre_gagnant gagnant = new Cadre_gagnant(winner,idGagnant);
+			Cadre_gagnant gagnant = new Cadre_gagnant(winner,idGagnant, this.cadre_jeu);
+			game.stop();
 			gagnant.setVisible(true);
 		}
 		
@@ -579,9 +617,29 @@ public class GameState {
 					
 				}
 			}
-			winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant par score = " + maxScore ;
-			Cadre_gagnant gagnant = new Cadre_gagnant(winner,idGagnant);
-			gagnant.setVisible(true);
+			
+			for(int i = 0; i<bombermans.size(); ++i) {
+				if(!bombermans.get(i).isDead()) {
+					aux = bombermans.get(i).getPoints();
+					if(maxScore == aux) {
+						compte2 ++;
+					}
+				}
+			}
+			
+			
+			if(compte2 < 2) {
+				winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant par score = " + maxScore ;
+				Cadre_gagnant gagnant = new Cadre_gagnant(winner,idGagnant, this.cadre_jeu);
+				game.stop();
+				gagnant.setVisible(true);
+			}
+			else {
+				winner = "Il y a execo ";
+				Cadre_gagnant gagnant = new Cadre_gagnant(winner,5, this.cadre_jeu);
+				game.stop();
+				gagnant.setVisible(true);
+			}
 		}
 		
 	}
@@ -644,5 +702,9 @@ public class GameState {
 	
 	public boolean setEnd(boolean e) {
 		return end = e;
+	}
+	
+	public void setC_j(JFrame c_j) {
+		this.cadre_jeu = c_j;
 	}
 }

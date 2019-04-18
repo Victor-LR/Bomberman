@@ -42,15 +42,17 @@ public class Agent_Bomberman extends Agent {
 	{
 		if (etatjeu.getMode_jeu()) {
 			
-			if (etatjeu.isLegalMove(action, this) || (action.getAction() == 5)) return action;
+			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
 			else return new AgentAction(Map.STOP);
 			
 		}else {
 			ArrayList<AgentAction> listAction=new ArrayList<AgentAction>();
 			for(int i=0;i<=5;i++)
 			{
-				if (etatjeu.isLegalMove(new AgentAction(i), this))
+				if (etatjeu.isLegalMoveBbm(new AgentAction(i), this)) {
+					//System.out.println(i);
 					listAction.add(new AgentAction(i));
+				}
 			}		
 			nbActions = listAction.size();
 			return(listAction.get((int)(Math.random()*nbActions)));

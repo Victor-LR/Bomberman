@@ -21,6 +21,8 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.ArrayList;
+
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import agents.Agent;
@@ -55,21 +57,26 @@ public class paint_bomberman extends JPanel implements GameObserver{
 	float[] invincible = { 200, 200, 200, 1.0f };
 	float[] skull = { 0.5f, 0.5f, 0.5f, 0.75f };
 	
+	private JFrame cadre_jeu;
+	
 	private static paint_bomberman unique_instance;
 	
-	public static paint_bomberman getInstance(BombermanGame game){
+	public static paint_bomberman getInstance(JFrame c_j,BombermanGame game){
 		
 		if(unique_instance == null){
-			unique_instance = new paint_bomberman(game);
+			unique_instance = new paint_bomberman( c_j,game);
 		}
 		
 		return unique_instance;
 	}
 	
-	public paint_bomberman(BombermanGame BbmG){
+	public paint_bomberman(JFrame c_j,BombermanGame BbmG){
 		
 		this.BbmG = BbmG;
 		
+		this.cadre_jeu = c_j;
+		
+		BbmG.etatJeu.setC_j(cadre_jeu);
 
 		BbmG.addObserver((GameObserver)this);
 //		Jeu_actuel = BbmG.etatJeu;

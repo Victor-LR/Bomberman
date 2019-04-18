@@ -21,8 +21,11 @@ public class Cadre_gagnant extends JFrame {
 	
 	private JButton back = null;
 	private JLabel gagnant = null;
+	private JFrame cadre_jeu = null;
 	
-	public Cadre_gagnant(String winner,int id) {
+	public Cadre_gagnant(String winner,int id, JFrame c_j) {
+		
+		cadre_jeu = c_j;
 		
 		this.setSize(200, 100);
 		this.setLocationRelativeTo(null);
@@ -34,6 +37,9 @@ public class Cadre_gagnant extends JFrame {
 		
 			switch(id)
 	        {
+	            case 0 :
+	            	gagnant.setForeground(Color.blue);
+	                break;
 	            case 1 :
 	            	gagnant.setForeground(Color.red);
 	                break;
@@ -41,13 +47,13 @@ public class Cadre_gagnant extends JFrame {
 	            	gagnant.setForeground(Color.green);
 	                break;
 	            case 3 :
-	            	gagnant.setForeground(Color.blue);
-	                break;
-	            case 4 :
 	            	gagnant.setForeground(Color.yellow);
 	                break;
-	            case 5 :
+	            case 4 :
 	            	gagnant.setForeground(Color.white);
+	                break;
+	            case 5 :
+	            	gagnant.setForeground(Color.black);
 	                break;
 	        }
 
@@ -69,7 +75,7 @@ public class Cadre_gagnant extends JFrame {
 				
 				Cadre_menu fen = new Cadre_menu();//BbmG.getMap().getFilename());
 				fen.setVisible(true);
-				Thread.currentThread().interrupt();
+				cadre_jeu.dispose();
 				dispose();
 			}
 		});
