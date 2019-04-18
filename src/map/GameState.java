@@ -408,11 +408,11 @@ public class GameState {
 						switch (i) {
 						case 0:
 							bombermanAction = bomberman.chooseAction(this,key_action.getKaction());
-							this.key_action.setKaction(new AgentAction(Map.STOP));
+							//this.key_action.setKaction(new AgentAction(Map.STOP));
 							break;
 						case 1:
 							bombermanAction = bomberman.chooseAction(this,key_action_2.getKaction());
-							this.key_action_2.setKaction(new AgentAction(Map.STOP));
+							//this.key_action_2.setKaction(new AgentAction(Map.STOP));
 							break;
 						default:
 							bombermanAction = bomberman.chooseAction(this,null);

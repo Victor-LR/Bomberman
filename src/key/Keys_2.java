@@ -10,6 +10,11 @@ public class Keys_2 implements KeyListener{
 	
 	private AgentAction Kaction;
 
+	private boolean haut;
+	private boolean gauche;
+	private boolean bas;
+	private boolean droite;
+	private boolean bombe;
 	
 	public Keys_2() {
 		this.Kaction = new AgentAction(Map.STOP);
@@ -21,58 +26,82 @@ public class Keys_2 implements KeyListener{
 		// TODO Auto-generated method stub
 		switch(evt.getKeyCode()) {
 		case KeyEvent.VK_UP:
-			setKaction(new AgentAction(Map.NORTH));
+			haut = true;
+			bool_to_action();
 			break;
 		case KeyEvent.VK_LEFT:
-			setKaction(new AgentAction(Map.WEST));
+			gauche = true;
+			bool_to_action();
 			break;
 		case KeyEvent.VK_DOWN:
-			setKaction(new AgentAction(Map.SOUTH));
+			bas = true;
+			bool_to_action();
 			break;
 		case KeyEvent.VK_RIGHT:
-			setKaction(new AgentAction(Map.EAST));
+			droite = true;
+			bool_to_action();
 			break;
 		case KeyEvent.VK_CONTROL:
-			setKaction(new AgentAction(Map.BOMB));
+			bombe = true;
+			bool_to_action();
 			break;
 		default :
-			setKaction(new AgentAction(Map.STOP));
 			break;
 		}
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void keyReleased(KeyEvent evt) {
+		switch(evt.getKeyCode()) {
+		case KeyEvent.VK_UP:
+			haut = false;
+			bool_to_action();
+			break;
+		case KeyEvent.VK_LEFT:
+			gauche = false;
+			bool_to_action();
+			break;
+		case KeyEvent.VK_DOWN:
+			bas = false;
+			bool_to_action();
+			break;
+		case KeyEvent.VK_RIGHT:
+			droite = false;
+			bool_to_action();
+			break;
+		case KeyEvent.VK_CONTROL:
+			bombe = false;
+			bool_to_action();
+			break;
+		default :
+			break;
+		}
 	}
 
 	@Override
 	public void keyTyped(KeyEvent evt) {
-		// TODO Auto-generated method stub
 		switch(evt.getKeyCode()) {
 		case KeyEvent.VK_UP:
-			setKaction(new AgentAction(Map.NORTH));
-			System.out.println("up");
+			haut = true;
+			bool_to_action();
 			break;
 		case KeyEvent.VK_LEFT:
-			setKaction(new AgentAction(Map.WEST));
-			System.out.println("left");
+			gauche = true;
+			bool_to_action();
 			break;
 		case KeyEvent.VK_DOWN:
-			setKaction(new AgentAction(Map.SOUTH));
-			System.out.println("down");
+			bas = true;
+			bool_to_action();
 			break;
 		case KeyEvent.VK_RIGHT:
-			setKaction(new AgentAction(Map.EAST));
-			System.out.println("right");
+			droite = true;
+			bool_to_action();
 			break;
 		case KeyEvent.VK_CONTROL:
-			setKaction(new AgentAction(Map.BOMB));
-			System.out.println("ctrl");
+			bombe = true;
+			bool_to_action();
 			break;
 		default :
-			setKaction(new AgentAction(Map.STOP));
 			break;
 		}
 	}
@@ -81,6 +110,19 @@ public class Keys_2 implements KeyListener{
 		return Kaction;
 	}
 
+	public void bool_to_action() {
+		
+		if (haut) setKaction(new AgentAction(Map.NORTH));
+		if (gauche) setKaction(new AgentAction(Map.WEST));
+		if (bas) setKaction(new AgentAction(Map.SOUTH));
+		if (droite)setKaction(new AgentAction(Map.EAST));
+		
+		if (bombe) setKaction(new AgentAction(Map.BOMB));
+		
+		if (!haut & !gauche & !bas & !droite & !bombe ) setKaction(new AgentAction(Map.STOP));
+		
+	}
+	
 	public void setKaction(AgentAction kaction) {
 		Kaction = kaction;
 	}
