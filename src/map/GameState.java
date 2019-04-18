@@ -35,6 +35,8 @@ public class GameState {
 	private JFrame cadre_jeu = null;
 	
 	private boolean mode_jeu;
+
+
 	
 	//Construit l'état courant de la map
 	

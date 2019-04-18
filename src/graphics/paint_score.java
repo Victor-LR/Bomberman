@@ -136,8 +136,14 @@ public class paint_score implements GameObserver {
 		
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evenement) {
+<<<<<<< HEAD
 				
 				Cadre_menu fen = new Cadre_menu();//BbmG.getMap().getFilename());
+=======
+
+				Cadre_menu fen = new Cadre_menu();//BbmG.getMap().getFilename());
+
+>>>>>>> 1fc9d973fd37b768d0e31dc7ee3063caeec083fd
 				fen.setVisible(true);
 				Thread.currentThread().interrupt();
 				BbmG.stop();
