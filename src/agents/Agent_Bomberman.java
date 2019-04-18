@@ -25,10 +25,10 @@ public class Agent_Bomberman extends Agent {
 	public Agent_Bomberman (int px, int py,int id) {
 		super(AgentType.BOMBERMAN, px, py);
 		super.setId(id);
-		this.range = 4;
+		this.range = 1;
 		this.points = 0;
 		//this.bombes = new ArrayList<Objet_Bomb>();
-		this.nbBombes = 6;
+		this.nbBombes = 1;
 		
 		this.isInvincible = false;
 		this.etatInvincible = 0;
@@ -41,7 +41,6 @@ public class Agent_Bomberman extends Agent {
 	public AgentAction chooseAction(GameState etatjeu,AgentAction action) 
 	{
 		if (etatjeu.getMode_jeu() & action != null) {
-			
 			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
 			else return new AgentAction(Map.STOP);
 			

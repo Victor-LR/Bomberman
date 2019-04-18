@@ -546,7 +546,7 @@ public class GameState {
 					
 //					System.out.println("après deplacement	Range -> "+ bomberman.getRange());
 				}
-				else if (mode_jeu) {
+				else if (mode_jeu & i < 2) {
 						if (bombermanAction.getAction() == 5 & (bomberman.getMaladie() != 0 )){
 							this.placeBomb(bomberman);
 							this.bombeTurn(bomberman);
