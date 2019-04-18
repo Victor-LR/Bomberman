@@ -242,7 +242,7 @@ public class GameState {
 				for(int j = 0; j<bombes.size(); j++){
 					Objet_Bomb bombe = bombes.get(j);
 					if(bombe.getObjX() == i & bombe.getObjY() == y){
-						bombes.get(j).setEtat(11);
+						bombes.get(j).setEtat(10);
 					}
 				}
 				
@@ -277,7 +277,7 @@ public class GameState {
 				for(int j = 0; j<bombes.size(); j++){
 					Objet_Bomb bombe = bombes.get(j);
 					if(bombe.getObjX() == x & bombe.getObjY() == i ){
-						bombes.get(j).setEtat(11);
+						bombes.get(j).setEtat(10);
 					}
 				}
 		}
@@ -311,7 +311,7 @@ public class GameState {
 				for(int j = 0; j<bombes.size(); j++){
 					Objet_Bomb bombe = bombes.get(j);
 					if(bombe.getObjX() == i & bombe.getObjY() == y){
-						bombes.get(j).setEtat(11);
+						bombes.get(j).setEtat(10);
 					}
 				}
 		}
@@ -346,7 +346,7 @@ public class GameState {
 				for(int j = 0; j<bombes.size(); j++){
 					Objet_Bomb bombe = bombes.get(j);
 					if(bombe.getObjX() == x & bombe.getObjY() == i){
-						bombes.get(j).setEtat(11);
+						bombes.get(j).setEtat(10);
 					}
 				}
 		}
@@ -396,7 +396,9 @@ public class GameState {
 				
 				Agent_Bomberman bomberman = bombermans.get(i);
 				AgentAction bombermanAction;
+				
 				if(!bomberman.isDead()) {
+					
 					if (mode_jeu) {
 						bombermanAction = bomberman.chooseAction(this,key_action.getKaction());
 						this.key_action.setKaction(new AgentAction(Map.STOP));
@@ -496,6 +498,9 @@ public class GameState {
 				}
 				
 			}
+				
+			else this.bombeTurn(bomberman);
+				
 //			key_action.setKaction(bomberman.chooseAction(this,new AgentAction(Map.STOP)));
 			}
 		}
@@ -508,14 +513,17 @@ public class GameState {
 		for(int i = 0; i < bombs.size(); i++){
 
 			Objet_Bomb bombe = bombs.get(i);
-			int etat_bombe = bombe.getEtat();
 			
-			if (etat_bombe >= 11) {
-				bombExplode(bombe);
-				bombs.remove(bombe);
-				bombes.remove(bombe);
+			if(bombe.getId_bbm() == bomberman.getId()) {
+				int etat_bombe = bombe.getEtat();
+				
+				if (etat_bombe >= 11) {
+					bombExplode(bombe);
+					bombs.remove(bombe);
+					bombes.remove(bombe);
+				}
+				else bombe.setEtat(etat_bombe + 1);
 			}
-			else bombe.setEtat(etat_bombe + 1);
 		}
 	}
 	

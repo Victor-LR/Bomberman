@@ -2,8 +2,6 @@ package agents;
 
 import java.util.ArrayList;
 
-import objets.Objet_Bomb;
-
 import map.GameState;
 import map.Map;
 import agents.Agent;
@@ -30,7 +28,7 @@ public class Agent_Bomberman extends Agent {
 		this.range = 4;
 		this.points = 0;
 		//this.bombes = new ArrayList<Objet_Bomb>();
-		this.nbBombes = 1;
+		this.nbBombes = 6;
 		
 		this.isInvincible = false;
 		this.etatInvincible = 0;
