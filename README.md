@@ -6,7 +6,7 @@ http://rogerdudler.github.io/git-guide/index.fr.html
 Journal de bord des évolutions du projet Bomberman implémenté en JAVA
 
 Bugs Actuels :
-- 1 Certaines bombes disparraissent au lieu d'exploser lors d'une explosion en chaîne (+ ou -)
+- 1 Certaines bombes disparraissent au lieu d'exploser lors d'une explosion en chaîne (régler)
 - 2 Lorsqu'un Bbomberman meurt les bombes lui appartenant dissparraissent alors qu'elles devraient normalement finir leur boucle d'état (régler)
 - 3 Si un Bomberman prend un item de changement de range les bombes déjà posées sont affectés directement (régler)
 - 4 Si au moins deux bombermans prennet un malus swap en même temps PLANTAGE !!
@@ -18,7 +18,7 @@ Bugs Actuels :
 - 10 Un bomberman peu encore se bloquer (probleme thread) si il décide de bouger au moment ou un bomberman vient de poser une  bombe dans la direction de son mouvement.
 PERSISTANT :
 - 11 Perte de focus au restart, pour les touches
-
+- 12 Les bombes explose bcps trop rapidement vis à vis de leur implémentation. (Nous ne savons pas d'où cela pourratit provenir). Ce problème n'est arrivé que depuis la choix de stage. (régler)
 
 1/04/19:
 
