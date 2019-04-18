@@ -404,7 +404,7 @@ public class GameState {
 						bombermanAction = bomberman.chooseAction(this,null);
 					}
 					
-					System.out.println(bombermanAction.getAction());
+					//System.out.println(bombermanAction.getAction());
 				
 				
 				
