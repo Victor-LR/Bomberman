@@ -40,7 +40,7 @@ public class Agent_Bomberman extends Agent {
 	
 	public AgentAction chooseAction(GameState etatjeu,AgentAction action) 
 	{
-		if (etatjeu.getMode_jeu()) {
+		if (etatjeu.getMode_jeu() & action != null) {
 			
 			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
 			else return new AgentAction(Map.STOP);

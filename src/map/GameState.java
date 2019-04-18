@@ -12,6 +12,7 @@ import agents.ColorBomberman;
 import game.BombermanGame;
 import graphics.Cadre_gagnant;
 import key.Keys;
+import key.Keys_2;
 import objets.Objet;
 import objets.Objet_Bomb;
 import objets.ObjetType;
@@ -21,6 +22,7 @@ public class GameState {
 	Map map;
 	
 	public Keys key_action;
+	public Keys_2 key_action_2;
 	
 	private ArrayList<Agent> ennemies;
 	private ArrayList<Agent_Bomberman> bombermans;
@@ -44,6 +46,7 @@ public class GameState {
 		items = new ArrayList<Objet>();
 		
 		key_action = new Keys();
+		key_action_2 = new Keys_2();
 
 		this.map=map;
 
@@ -445,13 +448,23 @@ public class GameState {
 				
 				if(!bomberman.isDead()) {
 					
-					if (mode_jeu) {
-						bombermanAction = bomberman.chooseAction(this,key_action.getKaction());
-						this.key_action.setKaction(new AgentAction(Map.STOP));
+					if (mode_jeu ) {
+						switch (i) {
+						case 0:
+							bombermanAction = bomberman.chooseAction(this,key_action.getKaction());
+							//this.key_action.setKaction(new AgentAction(Map.STOP));
+							break;
+						case 1:
+							bombermanAction = bomberman.chooseAction(this,key_action_2.getKaction());
+							//this.key_action_2.setKaction(new AgentAction(Map.STOP));
+							break;
+						default:
+							bombermanAction = bomberman.chooseAction(this,null);
+						}
 					} else {
 						bombermanAction = bomberman.chooseAction(this,null);
 					}
-					
+										
 					//System.out.println(bombermanAction.getAction());
 				
 					if(isEnnemie(bomberman.getX(),bomberman.getY())) {
