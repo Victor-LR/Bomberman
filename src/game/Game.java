@@ -8,7 +8,7 @@ public abstract class Game implements Runnable, InterfaceGame {
 	
 	private double temps = 200;
 	protected int turn;
-	protected int maxTurn = 2000;
+	protected int maxTurn = 20;
 	
 	Thread thread;
 	
@@ -125,6 +125,10 @@ public abstract class Game implements Runnable, InterfaceGame {
 			GameObserver observateur = observers.get(i);
 			observateur.update();
 		}
+	}
+	
+	public int getMaxTurn() {
+		return maxTurn;
 	}
 
 	protected abstract void initializeGame();

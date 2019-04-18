@@ -2,16 +2,21 @@ package map;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JFrame;
 
 import agents.Agent;
 import agents.AgentAction;
 import agents.AgentType;
 import agents.Agent_Bomberman;
 import agents.ColorBomberman;
+import game.BombermanGame;
+import graphics.Cadre_gagnant;
+import graphics.Cadre_menu;
 import key.Keys;
 import objets.Objet;
 import objets.Objet_Bomb;
 import objets.ObjetType;
+import graphics.Cadre_Jeu;
 
 public class GameState {
 	
@@ -26,6 +31,7 @@ public class GameState {
 	
 	private static Random numberGenerator = new Random();
 	private int pourcentage = 25;
+	private boolean end;
 	
 	private boolean mode_jeu;
 	
@@ -42,6 +48,7 @@ public class GameState {
 
 		this.map=map;
 
+		this.end = false;
 		
 		ColorBomberman[] Couleurs= ColorBomberman.values();
 		for(int i=0;i<map.getNumber_of_bombermans();i++)
@@ -235,7 +242,7 @@ public class GameState {
 					Agent ennemie = ennemies.get(j);
 					if(ennemie.getX() == i & ennemie.getY() == y & !ennemies.get(j).isDead()){
 						ennemies.remove(j);
-						//bomberman.setPoints(bomberman.getPoints() + 100);
+						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
 					}
 				}
 			
@@ -304,7 +311,7 @@ public class GameState {
 					Agent ennemie = ennemies.get(j);
 					if(ennemie.getX() == i & ennemie.getY() == y & !ennemies.get(j).isDead()){
 						ennemies.remove(j);
-						//bomberman.setPoints(bomberman.getPoints() + 100);
+						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
 					}
 				}
 					
@@ -339,6 +346,7 @@ public class GameState {
 					Agent ennemie = ennemies.get(j);
 					if(ennemie.getX() == x & ennemie.getY() == i & !ennemies.get(j).isDead()){
 						ennemies.remove(j);
+						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
 						//bomberman.setPoints(bomberman.getPoints() + 100);
 					}
 				}
@@ -356,8 +364,10 @@ public class GameState {
 	//Réalise un tour du jeu 
 	
 	public void taketurn(){
-		bombermansTurn();
-		ennemiesTurn();
+		if(!getEnd()) {
+			bombermansTurn();
+			ennemiesTurn();
+		}
 	}	
 	
 	//Réalise le tour de l'ennemi
@@ -387,6 +397,8 @@ public class GameState {
 		public void bombermansTurn() {
 			
 			ArrayList<Agent_Bomberman> bombermans = this.getBombermans();
+			
+			
 			
 			for(int i = 0; i < bombermans.size(); i++){
 				
@@ -527,6 +539,52 @@ public class GameState {
 		}
 	}
 	
+	//Fonction permettant de mettre à terme au jeu quand l'un des bomermans à gagné.
+	
+	public void isEnd(BombermanGame game) {
+		ArrayList<Agent_Bomberman> bombermans = this.getBombermans();
+		
+		int compte = 0;
+		int idGagnant = 0;
+		String winner;
+		int maxScore = 0;
+		int aux;
+		
+		for(int i = 0; i<bombermans.size(); ++i) {
+			if(!bombermans.get(i).isDead()) {
+				compte++;
+				idGagnant = i;
+			}
+		}
+		
+		if(compte == 1 ) {
+			setEnd(true);
+			//System.out.println("jeu terminé");
+			System.out.println("Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant");
+			winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant";
+			Cadre_gagnant gagnant = new Cadre_gagnant(winner,idGagnant);
+			gagnant.setVisible(true);
+		}
+		
+		if(game.getTurn() == (game.getMaxTurn()-1) ) {
+			setEnd(true);
+			
+			for(int i = 0; i<bombermans.size(); ++i) {
+				if(!bombermans.get(i).isDead()) {
+					aux = bombermans.get(i).getPoints();
+					if(maxScore<aux) {
+						maxScore = aux;
+						idGagnant = i;
+					}
+					
+				}
+			}
+			winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant par score = " + maxScore ;
+			Cadre_gagnant gagnant = new Cadre_gagnant(winner,idGagnant);
+			gagnant.setVisible(true);
+		}
+		
+	}
 	
 
 	//Renvoie un agent en fonction d'un id 
@@ -580,4 +638,11 @@ public class GameState {
 		this.mode_jeu = mode_jeu;
 	}
 
+	public boolean getEnd() {
+		return end;
+	}
+	
+	public boolean setEnd(boolean e) {
+		return end = e;
+	}
 }
