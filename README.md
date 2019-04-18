@@ -128,3 +128,8 @@ Choses faite :
 - Réglage du problème d'appartennance des bombes vis à vis des bbm.
 - Création d'un menu permettant de choisir son mode et son stage.
 
+19/04/19:
+
+Bugs du jour : 
+- 1 Les bombes explose bcps trop rapidement vis à vis de leur impléméntation. (Nous ne savons pas d'où cela pourratit provenir). Ce problème n'est arrivé que depuis la choix de stage.
+
