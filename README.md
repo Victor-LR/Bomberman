@@ -114,7 +114,7 @@ Utilisation de github dans son entiereté. Réglage de ombreux bugue.
 
 17/04/19:
 
-KEvin après midi : 
+Kevin après midi : 
 Lors de la mort d'un bomberman, il n efaudrait plus le le remove mais lepasser à isDead et faire les modification necésaire pour qu'il ne puyisse plus intéragir avec le jeu. Pour cela des modifications doivent etre apportés au niveau de paint_bomberman et de choosAction
 
 Bugues du jour :
@@ -122,4 +122,9 @@ Bugues du jour :
 - 2 Un bomberman peu encore se bloquer (probleme thread) si il décide de bouger au moment ou un bomberman vient de poser une  bombe dans la direction de son mouvement.
 PERSISTANT :
 - 3 Perte de focus au restart, pour les touches
+
+Choses faite :
+- Fusion de la partie automatique de bbm et de la partie jouable (toujours en dévloppement).
+- Réglage du problème d'appartennance des bombes vis à vis des bbm.
+- Création d'un menu permettant de choisir son mode et son stage.
 
