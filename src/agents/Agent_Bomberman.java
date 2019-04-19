@@ -13,7 +13,7 @@ public class Agent_Bomberman extends Agent {
 	//private ArrayList<Objet_Bomb> bombes = null;
 	private int nbBombes;
 	private ColorBomberman couleur;
-	private int nbActions = 0;
+	private int nbActions = 10;
 	private int maladie = 10;
 
 	private boolean isInvincible;
@@ -28,7 +28,7 @@ public class Agent_Bomberman extends Agent {
 		this.range = 1;
 		this.points = 0;
 		//this.bombes = new ArrayList<Objet_Bomb>();
-		this.nbBombes = 1;
+		this.nbBombes = 10;
 		
 		this.isInvincible = false;
 		this.etatInvincible = 0;
@@ -41,9 +41,9 @@ public class Agent_Bomberman extends Agent {
 	public AgentAction chooseAction(GameState etatjeu,AgentAction action) 
 	{
 		if (etatjeu.getMode_jeu() & action != null) {
-			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
+//			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
 			
-			if (etatjeu.isLegalMove(action, this) || (action.getAction() == 5)) return action;
+			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
 			else return new AgentAction(Map.STOP);
 			
 		}else {

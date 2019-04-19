@@ -30,7 +30,7 @@ public class GameState {
 	private ArrayList<Objet> items;
 	
 	private static Random numberGenerator = new Random();
-	private int pourcentage = 25;
+	private int pourcentage = 100;
 	private boolean end;
 	private JFrame cadre_jeu = null;
 	
@@ -184,7 +184,7 @@ public class GameState {
 		do {
 			UnType = TypeItems[numberGenerator.nextInt(TypeItems.length)];
 		} while (UnType == ObjetType.BOMB);
-		Objet item = new Objet(UnType,itemx,itemy);
+		Objet item = new Objet(ObjetType.SKULL,itemx,itemy);
 		items.add(item);
 
 	}
@@ -490,7 +490,8 @@ public class GameState {
 							
 						}else if((item.getType() == ObjetType.SKULL & !bomberman.isInvincible())) {
 							
-							bomberman.setMaladie((int) (Math.random()*3));//(int) (Math.random()*3));
+							bomberman.setMaladie(2);//(int) (Math.random()*3));
+							System.out.println("	maladie : "+bomberman.getMaladie());
 							bomberman.setSick(true);
 							bomberman.setEtatSick(0);
 						}
@@ -505,25 +506,33 @@ public class GameState {
 					if(bomberman.getEtatInv() <=20) bomberman.setEtatInv(bomberman.getEtatInv()+1);
 					else bomberman.setInvincible(false);
 				
-				//Maladies: 0 -> Diarée
+				//Maladies: 0 -> diarrhée
 				//			1 -> Constipation
 				//			2 -> Swap
 				
 					if(bomberman.isSick() & bomberman.getEtatSick() <=20) {
 					
 						if (bomberman.getMaladie() == 0 && bomberman.getNbActions() > 2) {
+							System.out.println("diarrhée");
 							this.placeBomb(bomberman);
 						}
 						
 						bomberman.setEtatSick(bomberman.getEtatSick()+1);
 					}
 					else { 
-						   if(bomberman.getMaladie() == 2 && bombermans.size() > 1) {
+						
+						int nbDead = 0;
+						for (int nb = 0 ; nb < bombermans.size() ; nb++) {
+							if(bombermans.get(nb).isDead()) nbDead++;
+						}
+							
+							
+						   if(bomberman.getMaladie() == 2 && bombermans.size() > nbDead-1) {
 								System.out.println("swap");
 								int bb;
 								do {
 									bb = (int) (Math.random()*bombermans.size());
-								}while(bb==i);
+								}while(bb==i || bombermans.get(bb).isDead());
 								
 								int aux_x = bomberman.getX();
 								int aux_y = bomberman.getY();
@@ -549,12 +558,12 @@ public class GameState {
 //					System.out.println("après deplacement	Range -> "+ bomberman.getRange());
 				}
 				else if (mode_jeu & i < 2) {
-						if (bombermanAction.getAction() == 5 & (bomberman.getMaladie() != 0 )){
+						if (bombermanAction.getAction() == 5 & (bomberman.getMaladie() != 0 & bomberman.getMaladie() != 1)){
 							this.placeBomb(bomberman);
 							this.bombeTurn(bomberman);
 						} else this.bombeTurn(bomberman);
 				} else {
-					if (bomberman.getNbActions() > 2 & (bomberman.getMaladie() != 0 || bomberman.getMaladie() == 1)){
+					if (bomberman.getNbActions() > 2 & (bomberman.getMaladie() != 0 & bomberman.getMaladie() != 1)){
 						this.placeBomb(bomberman);
 						this.bombeTurn(bomberman);
 					} else this.bombeTurn(bomberman);
