@@ -36,8 +36,10 @@ public class Cadre_Jeu extends JFrame {
 	private static final long serialVersionUID = 1L;
 	//GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
     //Point centerPoint = ge.getCenterPoint();
-    private JPanel p_bm;
-    private paint_score p_sc;
+    public JPanel p_bm;
+
+
+	private paint_score p_sc;
 	
     //Création de la fenêtre de jeu
 	public Cadre_Jeu(BombermanGame BbmG){
@@ -64,7 +66,9 @@ public class Cadre_Jeu extends JFrame {
 	        
 	}
 	
-	
+    public JPanel getP_bm() {
+		return p_bm;
+	}
 	
 	
 	//JButton choixRun;

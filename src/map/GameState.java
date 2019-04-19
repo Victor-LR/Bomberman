@@ -454,6 +454,7 @@ public class GameState {
 						switch (i) {
 						case 0:
 							bombermanAction = bomberman.chooseAction(this,key_action.getKaction());
+							System.out.println(key_action.getKaction());
 							//this.key_action.setKaction(new AgentAction(Map.STOP));
 							break;
 						case 1:
@@ -467,7 +468,7 @@ public class GameState {
 						bombermanAction = bomberman.chooseAction(this,null);
 					}
 										
-					//System.out.println(bombermanAction.getAction());
+					System.out.println(bombermanAction.getAction());
 				
 					if(isEnnemie(bomberman.getX(),bomberman.getY())) {
 						bomberman.setDead(true);
