@@ -3,8 +3,6 @@ package graphics;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 
@@ -34,7 +32,6 @@ import objets.Objet_Bomb;
 //import game.Game;
 import game.BombermanGame;
 import game.GameObserver;
-import key.Keys;
 import map.Map;
 
 //Création graphique de la carte et des agents
