@@ -118,7 +118,7 @@ public class Keys implements KeyListener{
 
 	public void bool_to_action() {
 		
-		if (!haut & !gauche & !bas & !droite & !bombe) setKaction(new AgentAction(Map.STOP));
+		
 		
 		if (haut) setKaction(new AgentAction(Map.NORTH));
 		if (gauche) setKaction(new AgentAction(Map.WEST));
@@ -126,6 +126,7 @@ public class Keys implements KeyListener{
 		if (droite)setKaction(new AgentAction(Map.EAST));
 		
 		if (bombe) setKaction(new AgentAction(Map.BOMB));
+		
 		
 		
 		
