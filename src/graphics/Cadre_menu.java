@@ -1,23 +1,16 @@
 package graphics;
 
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import game.BombermanGame;
-import graphics.paint_bomberman;
-import graphics.paint_score;
 
 public class Cadre_menu extends JFrame{
 
@@ -117,15 +110,20 @@ public class Cadre_menu extends JFrame{
 	
 	liste_lay.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent evenement) {
+			setSize(550,500);
+			remove(review);
+			BombermanGame game = new BombermanGame();
 			try {
-				BbmG.loadFile((liste_lay.getSelectedItem().toString()));
+				game.loadFile((liste_lay.getSelectedItem().toString()));
 				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			BbmG.init();
-			review = new Review(BbmG);
+			game.init();
 			
+			review = new Review(game);
+			add(review);
+			setSize(551,500);
 			}
 		});
 	}

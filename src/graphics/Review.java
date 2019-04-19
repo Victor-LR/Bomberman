@@ -5,21 +5,16 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
-
-
 import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 import javax.swing.JPanel;
 
 import agents.Agent;
 import agents.Agent_Bomberman;
-import objets.Objet;
-import objets.ObjetType;
-import objets.Objet_Bomb;
-
 import game.BombermanGame;
 import map.Map;
 
@@ -53,16 +48,16 @@ public class Review extends JPanel {
 	public void paint(Graphics g)
 	{
 		//Taille de la fenêtre
-		int fen_x=getSize().width;
-		int fen_y=getSize().height;
+		int fen_x = this.getSize().width;
+		int fen_y = this.getSize().height;
 		
 		g.setColor(ground_Color);
 		g.fillRect(0, 0,fen_x,fen_y);
 	   // System.out.println(taille_x);
 	
-		double stepx=fen_x/(double)taille_x;
-		double stepy=fen_y/(double)taille_y;
-		double position_x=0;
+		double stepx = fen_x/(double)taille_x;
+		double stepy = fen_y/(double)taille_y;
+		double position_x = 0;
 	
 		for(int x=0; x<taille_x; x++)
 		{
@@ -208,9 +203,6 @@ public class Review extends JPanel {
             	scales = new float[]{2 ,2, 2, 1.0f };
                 break;
         }
-		
-		
-		float [] couleur = scales;
 		
 		int px = agentBBM.getX();
 		int py = agentBBM.getY();
