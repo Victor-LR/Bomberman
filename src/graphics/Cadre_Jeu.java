@@ -28,8 +28,10 @@ public class Cadre_Jeu extends JFrame {
 	private static final long serialVersionUID = 1L;
 	//GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
     //Point centerPoint = ge.getCenterPoint();
-    private JPanel p_bm;
-    private paint_score p_sc;
+    public JPanel p_bm;
+
+
+	private paint_score p_sc;
 	
     //Création de la fenêtre de jeu
 	public Cadre_Jeu(BombermanGame BbmG){
@@ -41,13 +43,12 @@ public class Cadre_Jeu extends JFrame {
 		    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);         
 	        
 	        this.setLayout(new BorderLayout());
-	        
+	     
 	        p_sc = new paint_score(this,BbmG);
 	        this.add("North",p_sc.panel);
 	        
 	        p_bm = new paint_bomberman(this,BbmG);
 	        this.add("Center",p_bm);
-	        
 	        
 	        this.setVisible(true);
 
@@ -56,7 +57,9 @@ public class Cadre_Jeu extends JFrame {
 	        
 	}
 	
-	
+    public JPanel getP_bm() {
+		return p_bm;
+	}
 	
 	
 	//JButton choixRun;

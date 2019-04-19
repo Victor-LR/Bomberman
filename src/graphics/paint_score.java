@@ -29,7 +29,7 @@ public class paint_score implements GameObserver {
 	BombermanGame BbmG;
 	//private GameState Jeu_actuel = null;
 	
-	public JFrame c_j = null;
+	public Cadre_Jeu c_j = null;
 	public JPanel panel = null;
 	private JPanel panBoutton= null;
 	private JPanel panMenu= null;
@@ -42,7 +42,7 @@ public class paint_score implements GameObserver {
 	private JLabel turn = null;
 	private JSlider slider = null;
 	
-	public paint_score(JFrame cadre_jeu,BombermanGame bomberman){
+	public paint_score(Cadre_Jeu cadre_jeu,BombermanGame bomberman){
 		
 		this.c_j = cadre_jeu;
 		
@@ -131,7 +131,7 @@ public class paint_score implements GameObserver {
 	}
 	
 	public void creer_button(){
-		restart.setFocusPainted(false);
+
 		
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evenement) {
@@ -146,6 +146,7 @@ public class paint_score implements GameObserver {
 			}
 		});
 		
+		restart.setFocusPainted(false);
 		restart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evenement) {
 				
@@ -158,8 +159,17 @@ public class paint_score implements GameObserver {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				
 				BbmG.restart();
 				BbmG.etatJeu.setMode_jeu(modej);
+				paint_bomberman PBM = new paint_bomberman(c_j,BbmG);
+		        c_j.add("Center",PBM);
+				
+				//c_j.p_bm.repaint();
+//				Cadre_Jeu fen = new Cadre_Jeu(BbmG);
+//				fen.setVisible(true);
+				//BbmG.etatJeu.setMode_jeu(modej);
+
 				
 			}
 		});

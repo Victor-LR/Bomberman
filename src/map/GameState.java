@@ -631,6 +631,10 @@ public class GameState {
 		}
 		
 		if(compteBbm == 0) {
+			setEnd(true);
+			game.etatJeu.setEnd(true);
+			System.out.println(game.etatJeu.getEnd());
+			game.etatJeu.setEnd(true);
 			winner = "GAME OVER";
 			Cadre_gagnant gagnant = new Cadre_gagnant(winner,5, this.cadre_jeu);
 			game.stop();
@@ -639,6 +643,7 @@ public class GameState {
 		
 		if(compteBbm == 1 & nbBbm == 1 & compteEnn == 0) {
 			setEnd(true);
+			game.etatJeu.setEnd(true);
 			//System.out.println("jeu terminé");
 			System.out.println("Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant Partie SOLO");
 			winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant Partie SOLO";
@@ -650,6 +655,7 @@ public class GameState {
 		
 		if(compteBbm == 1 & nbBbm != 1) {
 			setEnd(true);
+			game.etatJeu.setEnd(true);
 			//System.out.println("jeu terminé");
 			System.out.println("Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant");
 			winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant";
@@ -661,6 +667,8 @@ public class GameState {
 		
 		if(game.getTurn() == (game.getMaxTurn()) ) {
 			setEnd(true);
+			game.etatJeu.setEnd(true);
+			
 			
 			for(int i = 0; i<bombermans.size(); ++i) {
 				if(!bombermans.get(i).isDead()) {
@@ -684,6 +692,7 @@ public class GameState {
 			
 			if(nbBbm == 1) {
 				setEnd(true);
+				game.etatJeu.setEnd(true);
 				winner = "GAME OVER";
 				Cadre_gagnant gagnant = new Cadre_gagnant(winner,5, this.cadre_jeu);
 				game.stop();
