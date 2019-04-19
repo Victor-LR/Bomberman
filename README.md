@@ -123,7 +123,7 @@ Bugues du jour :
 PERSISTANT :
 - 3 Perte de focus au restart, pour les touches
 
-Choses faite :
+Choses faites :
 - Fusion de la partie automatique de bbm et de la partie jouable (toujours en dévloppement).
 - Réglage du problème d'appartennance des bombes vis à vis des bbm.
 - Création d'un menu permettant de choisir son mode et son stage.
@@ -132,4 +132,8 @@ Choses faite :
 
 Bugs du jour : 
 - 1 Les bombes explose bcps trop rapidement vis à vis de leur impléméntation. (Nous ne savons pas d'où cela pourratit provenir). Ce problème n'est arrivé que depuis la choix de stage.
+
+Choses faites :
+- Implémentation d'un deuxième joueur clavier avec les différente touche qui en suivent.
+- Création de la fin de partie avec tout les aspects (execo, fin de la parie avec le nombre de tours...). Manque simplement la partie PVE.
 
