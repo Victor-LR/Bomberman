@@ -12,7 +12,7 @@ Bugs Actuels :
 
 - 4 Si au moins deux bombermans prennent un malus swap en même temps PLANTAGE !!
 
-- 5 Manque de fluidité sur les déplacemnt (régler)
+- 5 Manque de fluidité sur les déplacemnt (régler + ou -)
 - 6 Priorité du premier bomberman construit sur un autre au moment d' un duel, renvoie au bugue 2 du 12/04/19 (régler)
 - 7 Quand on intéragie avec le menu (pause,restart ...) les touches ne sont plus recconnues. (régler)
 - 8 Certaines maladies doivent être revues (régler)
@@ -22,6 +22,7 @@ Bugs Actuels :
 
 - 11 Perte de focus au restart, pour les touches (régler)
 - 12 Les bombes explose bcps trop rapidement vis à vis de leur implémentation. (Nous ne savons pas d'où cela pourratit provenir). Ce problème n'est arrivé que depuis la choix de stage. (régler)
+- 13 perte de fludité de mouvement au moment du release des touches ( répéter une même touche rapidement).
 
 1/04/19:
 
@@ -131,12 +132,17 @@ Choses faites :
 - Réglage du problème d'appartennance des bombes vis à vis des bbm.
 - Création d'un menu permettant de choisir son mode et son stage.
 
-19/04/19:
+18/04/19:
 
 Bugs du jour : 
 - 1 Les bombes explose bcps trop rapidement vis à vis de leur impléméntation. (Nous ne savons pas d'où cela pourratit provenir). Ce problème n'est arrivé que depuis la choix de stage.
 
 Choses faites :
-- Implémentation d'un deuxième joueur clavier avec les différente touche qui en suivent.
+- Implémentation d'un deuxième joueur clavier avec les différentes touches qui en suivent.
 - Création de la fin de partie avec tout les aspects (execo, fin de la parie avec le nombre de tours...). Manque simplement la partie PVE.
+
+19/04/19:
+- Ajout de la condition de fin de partie PVE.
+- Réglement des bugs : 7,8,11.
+- Amélioration du menu avec l'ajout d'une prévisualisation de la carte sélectionnée.
 
