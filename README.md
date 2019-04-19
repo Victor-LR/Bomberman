@@ -13,7 +13,7 @@ Bugs Actuels :
 - 5 Manque de fluidité sur les déplacemnt (régler)
 - 6 Priorité du premier bomberman construit sur un autre au moment d' un duel, renvoie au bugue 2 du 12/04/19 (régler)
 - 7 Quand on intéragie avec le menu (pause,restart ...) les touches ne sont plus recconnues. (pause régler, restart non)
-- 8 Certaines maladies doivent être revues (régler)
+- 8 Certaines maladies doivent être revues 
 - 9 Lors de la mort d'un bomberman si celui-ci pause une bombe à la frame de sa disparition et que la bombe pausée est prise dans une explosion en chaîne alors l'image de l'explosion freez
 - 10 Un bomberman peu encore se bloquer (probleme thread) si il décide de bouger au moment ou un bomberman vient de poser une  bombe dans la direction de son mouvement.
 PERSISTANT :
