@@ -160,9 +160,16 @@ public class paint_score implements GameObserver {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				c_j.p_bm.getFocusTraversalKeysEnabled();
+				
 				BbmG.restart();
 				BbmG.etatJeu.setMode_jeu(modej);
+				paint_bomberman PBM = new paint_bomberman(c_j,BbmG);
+		        c_j.add("Center",PBM);
+				
+				//c_j.p_bm.repaint();
+//				Cadre_Jeu fen = new Cadre_Jeu(BbmG);
+//				fen.setVisible(true);
+				//BbmG.etatJeu.setMode_jeu(modej);
 
 				
 			}

@@ -51,13 +51,12 @@ public class Cadre_Jeu extends JFrame {
 		    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);         
 	        
 	        this.setLayout(new BorderLayout());
-	        
+	     
 	        p_sc = new paint_score(this,BbmG);
 	        this.add("North",p_sc.panel);
 	        
 	        p_bm = new paint_bomberman(this,BbmG);
 	        this.add("Center",p_bm);
-	        
 	        
 	        this.setVisible(true);
 

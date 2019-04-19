@@ -570,14 +570,11 @@ public class paint_bomberman extends JPanel implements GameObserver{
 	
 	@Override
 	public void update() {
-		
-		
 		if(!BbmG.etatJeu.getEnd()) {
 			this.repaint();
 			BbmG.etatJeu.isEnd(BbmG);
 			this.requestFocusInWindow();
 		}
-		//this.requestFocusInWindow();
 		
 	}
 

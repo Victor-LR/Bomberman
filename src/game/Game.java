@@ -6,7 +6,7 @@ public abstract class Game implements Runnable, InterfaceGame {
 	
 	protected ArrayList<GameObserver> observers = new ArrayList<GameObserver>();
 	
-	private double temps = 200;
+	private double temps = 50;
 	protected int turn;
 	protected int maxTurn = 5000;
 	
