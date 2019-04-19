@@ -9,15 +9,18 @@ Bugs Actuels :
 - 1 Certaines bombes disparraissent au lieu d'exploser lors d'une explosion en chaîne (régler)
 - 2 Lorsqu'un Bbomberman meurt les bombes lui appartenant dissparraissent alors qu'elles devraient normalement finir leur boucle d'état (régler)
 - 3 Si un Bomberman prend un item de changement de range les bombes déjà posées sont affectés directement (régler)
-- 4 Si au moins deux bombermans prennet un malus swap en même temps PLANTAGE !!
+
+- 4 Si au moins deux bombermans prennent un malus swap en même temps PLANTAGE !!
+
 - 5 Manque de fluidité sur les déplacemnt (régler)
 - 6 Priorité du premier bomberman construit sur un autre au moment d' un duel, renvoie au bugue 2 du 12/04/19 (régler)
-- 7 Quand on intéragie avec le menu (pause,restart ...) les touches ne sont plus recconnues. (pause régler, restart non)
+- 7 Quand on intéragie avec le menu (pause,restart ...) les touches ne sont plus recconnues. (régler)
 - 8 Certaines maladies doivent être revues (régler)
+
 - 9 Lors de la mort d'un bomberman si celui-ci pause une bombe à la frame de sa disparition et que la bombe pausée est prise dans une explosion en chaîne alors l'image de l'explosion freez
 - 10 Un bomberman peu encore se bloquer (probleme thread) si il décide de bouger au moment ou un bomberman vient de poser une  bombe dans la direction de son mouvement.
-PERSISTANT :
-- 11 Perte de focus au restart, pour les touches
+
+- 11 Perte de focus au restart, pour les touches (régler)
 - 12 Les bombes explose bcps trop rapidement vis à vis de leur implémentation. (Nous ne savons pas d'où cela pourratit provenir). Ce problème n'est arrivé que depuis la choix de stage. (régler)
 
 1/04/19:
