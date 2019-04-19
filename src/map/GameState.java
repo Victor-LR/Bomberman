@@ -336,7 +336,7 @@ public class GameState {
 			if ( r < pourcentage) placeItem(range_limit,y);
 		}
 		
-		for(int i = x; i > range_limit; i--){
+		for(int i = x; i >= range_limit; i--){
 			
 			for(int j = 0; j<bombermans.size(); j++){
 				Agent_Bomberman bomberman1 = bombermans.get(j);
@@ -371,7 +371,7 @@ public class GameState {
 			if ( r < pourcentage) placeItem(x,range_limit);
 		}
 		
-		for(int i = y; i > range_limit; i--){
+		for(int i = y; i >= range_limit; i--){
 			
 			for(int j = 0; j<bombermans.size(); j++){
 				Agent_Bomberman bomberman1 = bombermans.get(j);
