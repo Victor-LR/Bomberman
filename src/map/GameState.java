@@ -114,7 +114,7 @@ public class GameState {
 			ArrayList<Agent_Bomberman> bbms = this.bombermans;
 			for(int i=0; i< bbms.size(); i++) {
 				Agent_Bomberman bbm = bbms.get(i);
-				if( id!=bbm.getId() && (bbm.getX() == x & bbm.getY() == y)) bb = true;
+				if( id!=bbm.getId() && (bbm.getX() == x & bbm.getY() == y) & !bbm.isDead()) bb = true;
 			}
 			
 			return bb;
@@ -184,7 +184,7 @@ public class GameState {
 		do {
 			UnType = TypeItems[numberGenerator.nextInt(TypeItems.length)];
 		} while (UnType == ObjetType.BOMB);
-		Objet item = new Objet(ObjetType.SKULL,itemx,itemy);
+		Objet item = new Objet(UnType,itemx,itemy);
 		items.add(item);
 
 	}
@@ -490,7 +490,7 @@ public class GameState {
 							
 						}else if((item.getType() == ObjetType.SKULL & !bomberman.isInvincible())) {
 							
-							bomberman.setMaladie(2);//(int) (Math.random()*3));
+							bomberman.setMaladie((int) (Math.random()*3));//(int) (Math.random()*3));
 							System.out.println("	maladie : "+bomberman.getMaladie());
 							bomberman.setSick(true);
 							bomberman.setEtatSick(0);
@@ -603,22 +603,52 @@ public class GameState {
 	
 	public void isEnd(BombermanGame game) {
 		ArrayList<Agent_Bomberman> bombermans = this.getBombermans();
+		ArrayList<Agent> ennemies = this.getEnnemies();
 		
-		int compte = 0;
-		int compte2 = 0;
+		int nbBbm = this.getMap().getNumber_of_bombermans();
+		int compteBbm = 0;
+		int compteEnn = 0;
+		int compteExec = 0;
 		int idGagnant = 0;
 		String winner;
 		int maxScore = 0;
 		int aux;
 		
+		
+		
 		for(int i = 0; i<bombermans.size(); ++i) {
 			if(!bombermans.get(i).isDead()) {
-				compte++;
+				compteBbm++;
 				idGagnant = i;
 			}
 		}
 		
-		if(compte == 1 ) {
+		
+		for(int i = 0; i<ennemies.size(); ++i) {
+			if(!ennemies.get(i).isDead()) {
+				compteEnn++;
+			}
+		}
+		
+		if(compteBbm == 0) {
+			winner = "GAME OVER";
+			Cadre_gagnant gagnant = new Cadre_gagnant(winner,5, this.cadre_jeu);
+			game.stop();
+			gagnant.setVisible(true);
+		}
+		
+		if(compteBbm == 1 & nbBbm == 1 & compteEnn == 0) {
+			setEnd(true);
+			//System.out.println("jeu terminé");
+			System.out.println("Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant Partie SOLO");
+			winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant Partie SOLO";
+			Cadre_gagnant gagnant = new Cadre_gagnant(winner,idGagnant, this.cadre_jeu);
+			game.stop();
+			gagnant.setVisible(true);
+		}
+		
+		
+		if(compteBbm == 1 & nbBbm != 1) {
 			setEnd(true);
 			//System.out.println("jeu terminé");
 			System.out.println("Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant");
@@ -628,7 +658,8 @@ public class GameState {
 			gagnant.setVisible(true);
 		}
 		
-		if(game.getTurn() == (game.getMaxTurn()-1) ) {
+		
+		if(game.getTurn() == (game.getMaxTurn()) ) {
 			setEnd(true);
 			
 			for(int i = 0; i<bombermans.size(); ++i) {
@@ -646,13 +677,21 @@ public class GameState {
 				if(!bombermans.get(i).isDead()) {
 					aux = bombermans.get(i).getPoints();
 					if(maxScore == aux) {
-						compte2 ++;
+						compteExec ++;
 					}
 				}
 			}
 			
+			if(nbBbm == 1) {
+				setEnd(true);
+				winner = "GAME OVER";
+				Cadre_gagnant gagnant = new Cadre_gagnant(winner,5, this.cadre_jeu);
+				game.stop();
+				gagnant.setVisible(true);
+			}
 			
-			if(compte2 < 2) {
+			
+			if(compteBbm == 0 & compteExec < 2) {
 				winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant par score = " + maxScore ;
 				Cadre_gagnant gagnant = new Cadre_gagnant(winner,idGagnant, this.cadre_jeu);
 				game.stop();
@@ -666,7 +705,7 @@ public class GameState {
 			}
 		}
 		
-	}
+}
 	
 
 	//Renvoie un agent en fonction d'un id 
