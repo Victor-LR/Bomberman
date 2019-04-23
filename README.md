@@ -146,3 +146,8 @@ Choses faites :
 - Réglement des bugs : 7,8,11.
 - Amélioration du menu avec l'ajout d'une prévisualisation de la carte sélectionnée.
 
+23/04/19:
+
+Questions : 
+- Fluidité des inputs pour le jeu.
+- Mettre stop au threads est il suffisant ?
