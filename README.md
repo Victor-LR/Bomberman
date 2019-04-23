@@ -151,3 +151,19 @@ Choses faites :
 Questions : 
 - Fluidité des inputs pour le jeu.
 - Mettre stop au threads est il suffisant ?
+
+Différentes strtégies :
+- Basique 1
+   Il s'écarte des pnj étant à sa porté, pause des des bombes quand il est bloqué.
+- Basique 2
+   Reprend les aspects de Basique 1, s'écarte de l'axe de l'explosion d'une bombe ennemie quand celle-ci se trouve dans sa position.
+- Basique 3
+   Reprend les aspects de Basique 2, en modifiant l'écartement de l'axe, l'ia à désormais accès à l'information Range de la bombe qui se trouve ans son axe.
+- Avancé 1 
+   Reprend les aspects de Basique 3, lors de la découverte d'un item l'ia se dirige vers celui-ci.
+- Avancé 2
+   Reprend les aspects de Avancé 1, fait la différenciation entre les malus et les bonus.
+- Avancé 3
+   Reprend les aspects de Avancé 2, se déplace en posant des bombes quand cela est nécéssaire vers le bomberman advairse le plus proche de lui pour éssayer de le tuer.
+- Final 
+   Reprend touts les aspects précédent en implémentant la recherche du plus court chemin.
