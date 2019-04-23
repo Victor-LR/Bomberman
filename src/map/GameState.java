@@ -35,12 +35,16 @@ public class GameState {
 	private JFrame cadre_jeu = null;
 	
 	private boolean mode_jeu;
+	
+	private  BombermanGame BbmG;
 
-
+	private String winner =null;
+	private int idGagnant = 0;
 	
 	//Construit l'état courant de la map
 	
-	public GameState(Map map){
+	public GameState(Map map,BombermanGame BbmG){
+		
 		
 		ennemies = new ArrayList<Agent>();
 		bombermans = new ArrayList<Agent_Bomberman>();
@@ -51,6 +55,7 @@ public class GameState {
 		key_action_2 = new Keys_2();
 
 		this.map=map;
+		this.BbmG=BbmG;
 
 		this.end = false;
 		
@@ -62,7 +67,7 @@ public class GameState {
 			b.setCouleur(col);
 			bombermans.add(b);
 		}
-		
+
 		for(int i=0;i<map.getNumber_of_ennemies();i++)
 		{
 			Agent a = new Agent(AgentType.ENNEMY, map.getEnnemy_start_x(i), map.getEnnemy_start_y(i) );
@@ -77,7 +82,7 @@ public class GameState {
 		int x = action.getVx();
 		int y = action.getVy();
 		
-		if(map.isWall(agent.getX()+x, agent.getY()+y) || map.isBrokable_Wall(agent.getX()+x, agent.getY()+y) || isBombe(agent.getX()+x,agent.getY()+y))
+		if(map.isWall(agent.getX()+x, agent.getY()+y) || map.isBrokable_Wall(agent.getX()+x, agent.getY()+y))
 			return false;
 		else return true;
 	}
@@ -88,7 +93,7 @@ public class GameState {
 		int x = actionbbm.getVx();
 		int y = actionbbm.getVy();
 			
-		if(map.isWall(bbm.getX()+x, bbm.getY()+y) || map.isBrokable_Wall(bbm.getX()+x, bbm.getY()+y) || isBombe(bbm.getX()+x,bbm.getY()+y) || isBomberman(bbm.getId(),bbm.getX()+x,bbm.getY()+y) )
+		if(map.isWall(bbm.getX()+x, bbm.getY()+y) || map.isBrokable_Wall(bbm.getX()+x, bbm.getY()+y))
 			return false;
 		else return true;
 	}
@@ -101,7 +106,7 @@ public class GameState {
 			ArrayList<Objet_Bomb> bombes1 = this.bombes;
 			for(int i=0; i< bombes1.size(); i++) {
 				Objet_Bomb bombe1 = bombes1.get(i);
-				if((bombe1.getObjX() == x & bombe1.getObjY() == y) & (bombe1.getEtat() < 11 )) bombeB = true;
+				if((bombe1.getObjX() == x & bombe1.getObjY() == y) & (bombe1.getEtat() < 10 )) bombeB = true;
 			}
 			
 			return bombeB;
@@ -404,8 +409,11 @@ public class GameState {
 	
 	public void taketurn(){
 		if(!getEnd()) {
+			this.isEnd(BbmG);
 			bombermansTurn();
 			ennemiesTurn();
+		}else {
+			BbmG.stop();
 		}
 	}	
 	
@@ -488,13 +496,13 @@ public class GameState {
 							bomberman.setInvincible(true);
 							bomberman.setEtatInv(0);
 							
-						}else if((item.getType() == ObjetType.SKULL & !bomberman.isInvincible())) {
+						}/*else if((item.getType() == ObjetType.SKULL & !bomberman.isInvincible())) {
 							
 							bomberman.setMaladie((int) (Math.random()*3));//(int) (Math.random()*3));
-							System.out.println("	maladie : "+bomberman.getMaladie());
+//							System.out.println("	maladie : "+bomberman.getMaladie());
 							bomberman.setSick(true);
 							bomberman.setEtatSick(0);
-						}
+						}*/
 						
 						//System.out.println("	range : "+bomberman.getRange());
 						items.remove(item);
@@ -513,7 +521,7 @@ public class GameState {
 					if(bomberman.isSick() & bomberman.getEtatSick() <=20) {
 					
 						if (bomberman.getMaladie() == 0 && bomberman.getNbActions() > 2) {
-							System.out.println("diarrhée");
+//							System.out.println("diarrhée");
 							this.placeBomb(bomberman);
 						}
 						
@@ -528,7 +536,7 @@ public class GameState {
 							
 							
 						   if(bomberman.getMaladie() == 2 && bombermans.size() > nbDead-1) {
-								System.out.println("swap");
+//								System.out.println("swap");
 								int bb;
 								do {
 									bb = (int) (Math.random()*bombermans.size());
@@ -609,8 +617,6 @@ public class GameState {
 		int compteBbm = 0;
 		int compteEnn = 0;
 		int compteExec = 0;
-		int idGagnant = 0;
-		String winner;
 		int maxScore = 0;
 		int aux;
 		
@@ -619,7 +625,7 @@ public class GameState {
 		for(int i = 0; i<bombermans.size(); ++i) {
 			if(!bombermans.get(i).isDead()) {
 				compteBbm++;
-				idGagnant = i;
+				this.idGagnant = i;
 			}
 		}
 		
@@ -630,26 +636,21 @@ public class GameState {
 			}
 		}
 		
-		if(compteBbm == 0) {
+		if(compteBbm == 0  & nbBbm == 1) {
 			setEnd(true);
+//			System.out.println(game.etatJeu.getEnd());
 			game.etatJeu.setEnd(true);
-			System.out.println(game.etatJeu.getEnd());
-			game.etatJeu.setEnd(true);
-			winner = "GAME OVER";
-			Cadre_gagnant gagnant = new Cadre_gagnant(winner,5, this.cadre_jeu);
-			game.stop();
-			gagnant.setVisible(true);
+			this.winner = "GAME OVER";
+			this.idGagnant = 5;
+			//BbmG.stop();
 		}
 		
 		if(compteBbm == 1 & nbBbm == 1 & compteEnn == 0) {
 			setEnd(true);
 			game.etatJeu.setEnd(true);
-			//System.out.println("jeu terminé");
-			System.out.println("Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant Partie SOLO");
+//			System.out.println("Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant Partie SOLO");
 			winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant Partie SOLO";
-			Cadre_gagnant gagnant = new Cadre_gagnant(winner,idGagnant, this.cadre_jeu);
-			game.stop();
-			gagnant.setVisible(true);
+			//BbmG.stop();
 		}
 		
 		
@@ -657,11 +658,9 @@ public class GameState {
 			setEnd(true);
 			game.etatJeu.setEnd(true);
 			//System.out.println("jeu terminé");
-			System.out.println("Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant");
+//			System.out.println("Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant");
 			winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant";
-			Cadre_gagnant gagnant = new Cadre_gagnant(winner,idGagnant, this.cadre_jeu);
-			game.stop();
-			gagnant.setVisible(true);
+			//BbmG.stop();
 		}
 		
 		
@@ -669,56 +668,58 @@ public class GameState {
 			setEnd(true);
 			game.etatJeu.setEnd(true);
 			
-			
-			for(int i = 0; i<bombermans.size(); ++i) {
-				if(!bombermans.get(i).isDead()) {
-					aux = bombermans.get(i).getPoints();
-					if(maxScore<aux) {
-						maxScore = aux;
-						idGagnant = i;
-					}
-					
-				}
-			}
-			
-			for(int i = 0; i<bombermans.size(); ++i) {
-				if(!bombermans.get(i).isDead()) {
-					aux = bombermans.get(i).getPoints();
-					if(maxScore == aux) {
-						compteExec ++;
-					}
-				}
-			}
-			
 			if(nbBbm == 1) {
 				setEnd(true);
 				game.etatJeu.setEnd(true);
-				winner = "GAME OVER";
-				Cadre_gagnant gagnant = new Cadre_gagnant(winner,5, this.cadre_jeu);
-				game.stop();
-				gagnant.setVisible(true);
+				this.winner = "GAME OVER";
+				this.idGagnant =5;
+				//BbmG.stop();
+
+			}
+			else{
+				
+				for(int i = 0; i<bombermans.size(); ++i) {
+					if(!bombermans.get(i).isDead()) {
+						aux = bombermans.get(i).getPoints();
+						if(maxScore<aux) {
+							maxScore = aux;
+							this.idGagnant = i;
+						}
+						
+					}
+				}
+				
+				for(int i = 0; i<bombermans.size(); ++i) {
+					if(!bombermans.get(i).isDead()) {
+						aux = bombermans.get(i).getPoints();
+						if(maxScore == aux) {
+							compteExec ++;
+						}
+					}
+				}
+				
+				
+				
+				
+				if( compteExec < 2 ) {
+					this.winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant par score = " + maxScore ;
+					//BbmG.stop();
+				}
+				else {
+					this.winner = "Il y a execo ";
+					this.idGagnant =5;
+					//BbmG.stop();
+				}
 			}
 			
-			
-			if(compteBbm == 0 & compteExec < 2) {
-				winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant par score = " + maxScore ;
-				Cadre_gagnant gagnant = new Cadre_gagnant(winner,idGagnant, this.cadre_jeu);
-				game.stop();
-				gagnant.setVisible(true);
-			}
-			else {
-				winner = "Il y a execo ";
-				Cadre_gagnant gagnant = new Cadre_gagnant(winner,5, this.cadre_jeu);
-				game.stop();
-				gagnant.setVisible(true);
-			}
 		}
-		
+		if (winner != null) System.out.println(this.winner);
 }
 	
 
 	//Renvoie un agent en fonction d'un id 
 	
+
 	public Agent getAgent(GameState etat, int agentId){
 		
 		for (Agent p : etat.getEnnemies()){
@@ -778,5 +779,14 @@ public class GameState {
 	
 	public void setC_j(JFrame c_j) {
 		this.cadre_jeu = c_j;
+	}
+	
+	
+	public String getWinner() {
+		return winner;
+	}
+
+	public int getIdGagnant() {
+		return idGagnant;
 	}
 }

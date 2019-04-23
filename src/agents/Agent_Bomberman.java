@@ -57,6 +57,8 @@ public class Agent_Bomberman extends Agent {
 			}		
 			nbActions = listAction.size();
 			return(listAction.get((int)(Math.random()*nbActions)));
+			
+			//return(new AgentAction(Map.STOP));
 		}
 				
 	}	
