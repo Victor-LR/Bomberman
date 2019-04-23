@@ -23,6 +23,7 @@ Bugs Actuels :
 - 11 Perte de focus au restart, pour les touches (régler)
 - 12 Les bombes explose bcps trop rapidement vis à vis de leur implémentation. (Nous ne savons pas d'où cela pourratit provenir). Ce problème n'est arrivé que depuis la choix de stage. (régler)
 - 13 perte de fludité de mouvement au moment du release des touches ( répéter une même touche rapidement).
+- 14 Problèmes de chooseAction qui ne fonctionne pas parfaitement quand un agent choisi une direction et que la position futur est prise par un autre agent au moment du déplacement (reference au bug 10)
 
 1/04/19:
 
@@ -167,3 +168,7 @@ Différentes strtégies :
    Reprend les aspects de Avancé 2, se déplace en posant des bombes quand cela est nécéssaire vers le bomberman advairse le plus proche de lui pour éssayer de le tuer.
 - Final 
    Reprend touts les aspects précédent en implémentant la recherche du plus court chemin.
+   
+fait : 
+- Implementation du package strategie (ne reste plus qu'à devellopper des strats)
+- Multithreads ajouté dans les choix de mode
