@@ -29,7 +29,7 @@ public class Cadre_menu extends JFrame{
 	private Review review = null;
 	private JPanel choix = null;
 	
-	private int nb_threads = 100;
+	private int nb_threads = 1000;
 	
 	public Cadre_menu() {
 		
