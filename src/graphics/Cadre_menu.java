@@ -29,7 +29,7 @@ public class Cadre_menu extends JFrame{
 	private Review review = null;
 	private JPanel choix = null;
 	
-	private int nb_threads = 1000;
+	private int nb_threads = 100;
 	
 	public Cadre_menu() {
 		
@@ -120,28 +120,29 @@ public class Cadre_menu extends JFrame{
 				}
 
 				
-				int[] id_du_gagnant = new int[7];
-				for(int j = 0 ; j < L_BbmG.size(); j++){
-					id_du_gagnant[L_BbmG.get(j).etatJeu.getIdGagnant()] +=1;
-					//System.out.println("				"+L_BbmG.get(j).etatJeu.getIdGagnant());
-					
-				}
-			//	System.out.println("				"+L_BbmG.size());
-
-				System.out.println("");
-				for(int n = 0 ; n < id_du_gagnant.length; n++){
-					double pourcentage =((double)id_du_gagnant[n]/nb_threads)*100;
-					if( n <L_BbmG.get(0).getMap().getNumber_of_bombermans() ) System.out.println("Joueur "+(n+1)+" à gagner "+ pourcentage +"% du temps");
-					else if( n == 5) System.out.println("Il n'y a pas eu de gagnant "+ pourcentage +"% du temps");
-					else if( n == 6) System.out.println("Jeu à planté "+id_du_gagnant[n] +" fois");
-				}
-				System.out.println("");
+//				int[] id_du_gagnant = new int[7];
+//				for(int j = 0 ; j < L_BbmG.size(); j++){
+//					id_du_gagnant[L_BbmG.get(j).etatJeu.getIdGagnant()] +=1;
+//					//System.out.println("				"+L_BbmG.get(j).etatJeu.getIdGagnant());
+//					
+//				}
+//			//	System.out.println("				"+L_BbmG.size());
+//
+//				System.out.println("");
+//				for(int n = 0 ; n < id_du_gagnant.length; n++){
+//					double pourcentage =((double)id_du_gagnant[n]/nb_threads)*100;
+//					if( n <L_BbmG.get(0).getMap().getNumber_of_bombermans() ) System.out.println("Joueur "+(n+1)+" à gagner "+ pourcentage +"% du temps");
+//					else if( n == 5) System.out.println("Il n'y a pas eu de gagnant "+ pourcentage +"% du temps");
+//					else if( n == 6) System.out.println("Jeu à planté "+id_du_gagnant[n] +" fois");
+//				}
+//				System.out.println("");
+				
+				
+				
+				Cadre_multi c_m = new Cadre_multi(L_BbmG,nb_threads);
+				c_m.setVisible(true);
 				
 				cadre_menu.dispose();
-				
-//				Cadre_menu c_m = new Cadre_menu();
-//				c_m.setVisible(true);
-				
 			}else {
 				BombermanGame un_bbmg = new BombermanGame();
 				try {

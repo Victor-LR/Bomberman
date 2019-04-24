@@ -501,7 +501,7 @@ public class GameState {
 							
 						}else if((item.getType() == ObjetType.SKULL & !bomberman.isInvincible())) {
 							
-							bomberman.setMaladie((int) (Math.random()*3));//(int) (Math.random()*3));
+							bomberman.setMaladie((int) (Math.random()*2));//(int) (Math.random()*3));
 //							System.out.println("	maladie : "+bomberman.getMaladie());
 							bomberman.setSick(true);
 							bomberman.setEtatSick(0);
