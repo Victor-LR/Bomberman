@@ -31,9 +31,11 @@ public class Cadre_multi extends JFrame {
 		
 		int nb_bbm = L_BbmG.get(0).getMap().getNumber_of_bombermans();
 		
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
-		this.setSize(500,300);
+		this.setSize(750,300);
 		this.setLayout(new GridLayout(nb_bbm+3,1));
+		
 		
 		
 		back = new JButton("back to menu");
@@ -51,7 +53,9 @@ public class Cadre_multi extends JFrame {
 			JLabel pan_result = new JLabel();
 			if( n < nb_bbm ){
 				this.listlab.add(pan_result);
-				pan_result.setText("Joueur "+(n+1)+" à gagner "+ pourcentage +"% du temps");
+				if (L_BbmG.get(0).etatJeu.getBombermans().get(n).getStrat() == null) 
+					pan_result.setText("Joueur "+(n+1)+" à gagner "+ pourcentage +"% du temps avec strategie : aléatoire");
+				else pan_result.setText("Joueur "+(n+1)+" à gagner "+ pourcentage +"% du temps avec strategie : "+L_BbmG.get(0).etatJeu.getBombermans().get(n).getStrat().getClass().getSimpleName());
 				pan_result.setHorizontalAlignment(JLabel.CENTER);
 				this.add(pan_result);
 			}

@@ -15,7 +15,7 @@ import key.Keys;
 import key.Keys_2;
 import objets.Objet;
 import objets.Objet_Bomb;
-import strategies.Strategie_1;
+import strategies.Strategie_PVE;
 import strategies.Strategie_PVP;
 import objets.ObjetType;
 
@@ -476,10 +476,10 @@ public class GameState {
 							bombermanAction = bomberman.chooseAction(this,null,strat);
 						}
 					} else {
-						if(bomberman.getId() == 0)
-							bombermanAction = bomberman.chooseAction(this,null,strat);
-						else
+						if(bomberman.getId() == 3)
 							bombermanAction = bomberman.chooseAction(this,null,null);
+						else
+							bombermanAction = bomberman.chooseAction(this,null,strat);
 					}
 										
 					//System.out.println(bombermanAction.getAction());
@@ -625,7 +625,7 @@ public class GameState {
 		int compteEnn = 0;
 		int compteExec = 0;
 		int maxScore = 0;
-		int aux;
+		int aux ;
 		//this.idGagnant = 6;
 		
 		
@@ -645,29 +645,29 @@ public class GameState {
 		
 		if(compteBbm == 0  & nbBbm == 1) {
 			setEnd(true);
-//			System.out.println(game.etatJeu.getEnd());
 			game.etatJeu.setEnd(true);
 			this.winner = "GAME OVER";
 			this.idGagnant = 5;
-			//BbmG.stop();
 		}
 		
 		if(compteBbm == 1 & nbBbm == 1 & compteEnn == 0) {
 			setEnd(true);
 			game.etatJeu.setEnd(true);
-//			System.out.println("Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant Partie SOLO");
 			winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant Partie SOLO";
-			//BbmG.stop();
 		}
 		
 		
 		if(compteBbm == 1 & nbBbm != 1) {
 			setEnd(true);
 			game.etatJeu.setEnd(true);
-			//System.out.println("jeu terminé");
-//			System.out.println("Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant");
 			winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant";
-			//BbmG.stop();
+		}
+		
+		if(compteBbm == 0 & nbBbm != 1) {
+			setEnd(true);
+			game.etatJeu.setEnd(true);
+			winner = "GAME OVER";
+			this.idGagnant =5;
 		}
 		
 		
@@ -680,7 +680,6 @@ public class GameState {
 				game.etatJeu.setEnd(true);
 				this.winner = "GAME OVER";
 				this.idGagnant =5;
-				//BbmG.stop();
 
 			}
 			else{
@@ -710,12 +709,10 @@ public class GameState {
 				
 				if( compteExec < 2 ) {
 					this.winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant par score = " + maxScore ;
-					//BbmG.stop();
 				}
 				else {
 					this.winner = "Il y a execo ";
-					this.idGagnant =5;
-					//BbmG.stop();
+					this.idGagnant = 5;
 				}
 			}
 			

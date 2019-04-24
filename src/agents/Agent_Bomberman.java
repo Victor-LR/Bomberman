@@ -22,6 +22,8 @@ public class Agent_Bomberman extends Agent {
 	
 	private boolean isSick;
 	private int etatSick;
+	
+	private Strategie strat;
 
 	public Agent_Bomberman (int px, int py,int id) {
 		super(AgentType.BOMBERMAN, px, py);
@@ -37,10 +39,12 @@ public class Agent_Bomberman extends Agent {
 		this.isSick = false;
 		this.etatSick = 0;
 		
+		
 	}
 	
 	public AgentAction chooseAction(GameState etatjeu,AgentAction action, Strategie strat) 
 	{
+		this.strat = strat;
 		if (etatjeu.getMode_jeu() & action != null & strat == null) {
 //			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
 			
@@ -63,6 +67,10 @@ public class Agent_Bomberman extends Agent {
 				
 	}	
 	
+	public Strategie getStrat() {
+		return strat;
+	}
+
 	public int getRange() {
 		return range;
 	}
