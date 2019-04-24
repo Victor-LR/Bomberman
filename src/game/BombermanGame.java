@@ -16,7 +16,7 @@ public class BombermanGame extends Game implements InterfaceGame {
 	@Override
 	public void initializeGame() {
 		System.out.println("initialisation bombermanGame");
-		this.etatJeu = new GameState(map);
+		this.etatJeu = new GameState(map,this);
 	}
 
 

@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -65,7 +66,7 @@ public class Cadre_menu extends JFrame{
 		choixMode = new JLabel("Choix du mode de jeu : ");
 		choix.add(choixMode);
 		
-		String[] modes = {"Joueur","Auto"};
+		String[] modes = {"Joueur","Auto","Multi"};
 		mode = new JComboBox(modes);
 		choix.add(mode);
 		
@@ -107,47 +108,55 @@ public class Cadre_menu extends JFrame{
 	//joueur.setFocusPainted(false);
 	jouer.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent evenement) {
-			try {
-				BbmG.loadFile((liste_lay.getSelectedItem().toString()));
+			
+			if(mode.getSelectedItem().toString() == "Multi") {
+				String file =liste_lay.getSelectedItem().toString();
+				//ArrayList<BombermanGame> L_BbmG = null;
+				for (int i = 0 ; i < 1000 ; i++){
+					BombermanGame un_bbmg = new BombermanGame();
+					try {
+						un_bbmg.loadFile(file);
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					un_bbmg.init();
+					un_bbmg.etatJeu.setMode_jeu(false);
+					un_bbmg.setTemps(1);
+					un_bbmg.launch();
+					//L_BbmG.add(un_bbmg);
+					
+				}
 				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			BbmG.init();
-			
-			Cadre_Jeu fenetre = new Cadre_Jeu(BbmG);
-			fenetre.setVisible(true);
-			
-			if(mode.getSelectedItem().toString() == "Joueur")
-				BbmG.etatJeu.setMode_jeu(true);
-			else BbmG.etatJeu.setMode_jeu(false);
-			
-			BbmG.launch();
-			
-			cadre_menu.dispose();
+//				for(int j = 0 ; j < L_BbmG.size(); j++){
+//					L_BbmG.get(j).join_thread();
+//				}
+				cadre_menu.dispose();
+			}else {
+				BombermanGame un_bbmg = new BombermanGame();
+				try {
+					BbmG.loadFile((liste_lay.getSelectedItem().toString()));
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				BbmG.init();
+				
+				Cadre_Jeu fenetre = new Cadre_Jeu(BbmG);
+				fenetre.setVisible(true);
+				
+				if(mode.getSelectedItem().toString() == "Joueur")
+					BbmG.etatJeu.setMode_jeu(true);
+				else BbmG.etatJeu.setMode_jeu(false);
+				
+				BbmG.launch();
+				
+				cadre_menu.dispose();
+				}
 			}
 		});
-//	//auto.setFocusPainted(false);
-//	auto.addActionListener(new ActionListener() {
-//		public void actionPerformed(ActionEvent evenement) {
-//			try {
-//				BbmG.loadFile((liste_lay.getSelectedItem().toString()));
-//				
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//
-//			BbmG.init();
-//			Cadre_Jeu fenetre = new Cadre_Jeu(BbmG);
-//			
-//			fenetre.setVisible(true);
-//			BbmG.etatJeu.setMode_jeu(false);
-//			BbmG.launch();
-//			
-//			cadre_menu.dispose();
-//			}
-//		});
+
 	
 	liste_lay.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent evenement) {

@@ -6,9 +6,9 @@ public abstract class Game implements Runnable, InterfaceGame {
 	
 	protected ArrayList<GameObserver> observers = new ArrayList<GameObserver>();
 	
-	private double temps = 200;
+	private double temps = 150;
 	protected int turn;
-	protected int maxTurn = 5000;
+	protected int maxTurn = 1000;
 	
 	Thread thread;
 	
@@ -44,7 +44,22 @@ public abstract class Game implements Runnable, InterfaceGame {
 		
 		thread = new Thread(this);	
 		thread.start();
+//		try {
+//			thread.join();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 		isRunning = true;
+
+	}
+	
+	public void join_thread(){
+		
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
 	}
 	
