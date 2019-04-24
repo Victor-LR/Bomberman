@@ -44,38 +44,34 @@ public abstract class Game implements Runnable, InterfaceGame {
 		
 		thread = new Thread(this);	
 		thread.start();
-//		try {
-//			thread.join();
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
 		isRunning = true;
 
 	}
 	
-	public void join_thread(){
+	public void new_thread(){
 		
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		thread = new Thread(this);
 
 	}
 	
+
+	public Thread getThread() {
+		return thread;
+	}
 	
 	//Réalise les differents tours du jeu
 	
 	public void run(){
 		while (gameContinue() && isRunning){
-
+			
 			nextTurn();
 			
 			try {
 				Thread.sleep((long) temps);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
+			
 			}
 		}
 		
@@ -125,7 +121,16 @@ public abstract class Game implements Runnable, InterfaceGame {
 		
 	}
 	
-	//Obscure
+	
+	public boolean isRunning() {
+		return isRunning;
+	}
+
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
+	}
+	
+	//design paterns
 	
 	public void addObserver(GameObserver o) {
 		observers.add(o);	

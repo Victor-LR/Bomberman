@@ -21,19 +21,15 @@ import game.BombermanGame;
 public class Cadre_menu extends JFrame{
 
 	private static final long serialVersionUID = 1L;
-//	private JButton joueur = new JButton();
-//	private JButton auto = new JButton();
 	private JComboBox liste_lay;
 	private JLabel choixStage;
 	private JLabel choixMode;
 	private JComboBox mode;
 	private JButton jouer = null;
 	private Review review = null;
-//	private JMenuBar menu = null;
-//	private JMenu jeuType = null;
-//	private JMenuItem joueur = null;
-//	private JMenuItem auto = null;
 	private JPanel choix = null;
+	
+	private int nb_threads = 100;
 	
 	public Cadre_menu() {
 		
@@ -48,20 +44,6 @@ public class Cadre_menu extends JFrame{
 		
 		choix = new JPanel();
 		choix.setLayout(new GridLayout(3,2));
-		
-//		menu = new JMenuBar();
-//		choix.add("North",menu);
-//		
-//		jeuType = new JMenu("Mode");
-//		menu.add(jeuType);
-//		
-//		joueur = new JMenuItem("Joueur");
-//		joueur.setText("Joueur");
-//		jeuType.add(joueur);
-//		
-//		auto = new JMenuItem("Auto");
-//		auto.setText("Automatique");
-//		jeuType.add(auto);	
 		
 		choixMode = new JLabel("Choix du mode de jeu : ");
 		choix.add(choixMode);
@@ -90,7 +72,6 @@ public class Cadre_menu extends JFrame{
 		try {
 			BbmG.loadFile(content);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -107,12 +88,14 @@ public class Cadre_menu extends JFrame{
 	public void creer_button(final Cadre_menu cadre_menu, final BombermanGame BbmG){
 	//joueur.setFocusPainted(false);
 	jouer.addActionListener(new ActionListener() {
+		
+
 		public void actionPerformed(ActionEvent evenement) {
 			
 			if(mode.getSelectedItem().toString() == "Multi") {
 				String file =liste_lay.getSelectedItem().toString();
-				//ArrayList<BombermanGame> L_BbmG = null;
-				for (int i = 0 ; i < 1000 ; i++){
+				ArrayList<BombermanGame> L_BbmG = new ArrayList<BombermanGame>();
+				for (int i = 0 ; i < nb_threads ; i++){
 					BombermanGame un_bbmg = new BombermanGame();
 					try {
 						un_bbmg.loadFile(file);
@@ -123,14 +106,42 @@ public class Cadre_menu extends JFrame{
 					un_bbmg.init();
 					un_bbmg.etatJeu.setMode_jeu(false);
 					un_bbmg.setTemps(1);
-					un_bbmg.launch();
-					//L_BbmG.add(un_bbmg);
-					
+					un_bbmg.new_thread();
+					L_BbmG.add(un_bbmg);
+					un_bbmg.getThread().start();
 				}
+					
+				for(int j = 0 ; j < L_BbmG.size(); j++){
+					try {
+						L_BbmG.get(j).getThread().join();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+
 				
+//				int[] id_du_gagnant = new int[7];
 //				for(int j = 0 ; j < L_BbmG.size(); j++){
-//					L_BbmG.get(j).join_thread();
+//					id_du_gagnant[L_BbmG.get(j).etatJeu.getIdGagnant()] +=1;
+//					//System.out.println("				"+L_BbmG.get(j).etatJeu.getIdGagnant());
+//					
 //				}
+//			//	System.out.println("				"+L_BbmG.size());
+//
+//				System.out.println("");
+//				for(int n = 0 ; n < id_du_gagnant.length; n++){
+//					double pourcentage =((double)id_du_gagnant[n]/nb_threads)*100;
+//					if( n <L_BbmG.get(0).getMap().getNumber_of_bombermans() ) System.out.println("Joueur "+(n+1)+" à gagner "+ pourcentage +"% du temps");
+//					else if( n == 5) System.out.println("Il n'y a pas eu de gagnant "+ pourcentage +"% du temps");
+//					else if( n == 6) System.out.println("Jeu à planté "+id_du_gagnant[n] +" fois");
+//				}
+//				System.out.println("");
+				
+				
+				
+				Cadre_multi c_m = new Cadre_multi(L_BbmG,nb_threads);
+				c_m.setVisible(true);
+				
 				cadre_menu.dispose();
 			}else {
 				BombermanGame un_bbmg = new BombermanGame();

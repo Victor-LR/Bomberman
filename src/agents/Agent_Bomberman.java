@@ -29,7 +29,7 @@ public class Agent_Bomberman extends Agent {
 		this.range = 1;
 		this.points = 0;
 		//this.bombes = new ArrayList<Objet_Bomb>();
-		this.nbBombes = 10;
+		this.nbBombes = 1;
 		
 		this.isInvincible = false;
 		this.etatInvincible = 0;
