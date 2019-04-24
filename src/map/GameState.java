@@ -40,7 +40,7 @@ public class GameState {
 	private  BombermanGame BbmG;
 
 	private String winner =null;
-	private int idGagnant = 0;
+	private int idGagnant = 6;
 	
 	//Construit l'état courant de la map
 	
@@ -413,6 +413,7 @@ public class GameState {
 			this.isEnd(BbmG);
 			bombermansTurn();
 			ennemiesTurn();
+			
 		}else {
 			BbmG.stop();
 		}
@@ -498,13 +499,13 @@ public class GameState {
 							bomberman.setInvincible(true);
 							bomberman.setEtatInv(0);
 							
-						}/*else if((item.getType() == ObjetType.SKULL & !bomberman.isInvincible())) {
+						}else if((item.getType() == ObjetType.SKULL & !bomberman.isInvincible())) {
 							
 							bomberman.setMaladie((int) (Math.random()*3));//(int) (Math.random()*3));
 //							System.out.println("	maladie : "+bomberman.getMaladie());
 							bomberman.setSick(true);
 							bomberman.setEtatSick(0);
-						}*/
+						}
 						
 						//System.out.println("	range : "+bomberman.getRange());
 						items.remove(item);
@@ -621,7 +622,7 @@ public class GameState {
 		int compteExec = 0;
 		int maxScore = 0;
 		int aux;
-		
+		//this.idGagnant = 6;
 		
 		
 		for(int i = 0; i<bombermans.size(); ++i) {
