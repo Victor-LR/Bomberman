@@ -15,6 +15,7 @@ import key.Keys;
 import key.Keys_2;
 import objets.Objet;
 import objets.Objet_Bomb;
+import strategies.Strategie_1;
 import objets.ObjetType;
 
 public class GameState {
@@ -455,24 +456,25 @@ public class GameState {
 				
 				Agent_Bomberman bomberman = bombermans.get(i);
 				AgentAction bombermanAction;
+				Strategie_1 strat = new Strategie_1(this,bomberman);
 				
 				if(!bomberman.isDead()) {
 					
 					if (mode_jeu ) {
 						switch (i) {
 						case 0:
-							bombermanAction = bomberman.chooseAction(this,key_action.getKaction());
+							bombermanAction = bomberman.chooseAction(this,key_action.getKaction(),null);
 							//this.key_action.setKaction(new AgentAction(Map.STOP));
 							break;
 						case 1:
-							bombermanAction = bomberman.chooseAction(this,key_action_2.getKaction());
+							bombermanAction = bomberman.chooseAction(this,key_action_2.getKaction(),null);
 							//this.key_action_2.setKaction(new AgentAction(Map.STOP));
 							break;
 						default:
-							bombermanAction = bomberman.chooseAction(this,null);
+							bombermanAction = bomberman.chooseAction(this,null,null);
 						}
 					} else {
-						bombermanAction = bomberman.chooseAction(this,null);
+						bombermanAction = bomberman.chooseAction(this,null,null);
 					}
 										
 					//System.out.println(bombermanAction.getAction());

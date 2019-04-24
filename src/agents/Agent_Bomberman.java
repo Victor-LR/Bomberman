@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import map.GameState;
 import map.Map;
+import strategies.Strategie;
 import agents.Agent;
 
 public class Agent_Bomberman extends Agent {
@@ -38,28 +39,27 @@ public class Agent_Bomberman extends Agent {
 		
 	}
 	
-	public AgentAction chooseAction(GameState etatjeu,AgentAction action) 
+	public AgentAction chooseAction(GameState etatjeu,AgentAction action, Strategie strat) 
 	{
-		if (etatjeu.getMode_jeu() & action != null) {
+		if (etatjeu.getMode_jeu() & action != null & strat == null) {
 //			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
 			
 			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
 			else return new AgentAction(Map.STOP);
 			
-		}else {
-			ArrayList<AgentAction> listAction=new ArrayList<AgentAction>();
-			for(int i=0;i<=5;i++)
-			{
-				if (etatjeu.isLegalMoveBbm(new AgentAction(i), this)) {
-					//System.out.println(i);
-					listAction.add(new AgentAction(i));
-				}
-			}		
-			nbActions = listAction.size();
-			return(listAction.get((int)(Math.random()*nbActions)));
-			
-			//return(new AgentAction(Map.STOP));
-		}
+		}else if(action == null & strat == null){
+				ArrayList<AgentAction> listAction=new ArrayList<AgentAction>();
+				for(int i=0;i<=5;i++)
+				{
+					if (etatjeu.isLegalMoveBbm(new AgentAction(i), this)) {
+						//System.out.println(i);
+						listAction.add(new AgentAction(i));
+					}
+				}		
+				nbActions = listAction.size();
+				return(listAction.get((int)(Math.random()*nbActions)));
+			}
+			else return strat.action();                                
 				
 	}	
 	
