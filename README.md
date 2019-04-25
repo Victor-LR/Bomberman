@@ -172,3 +172,10 @@ Différentes strtégies :
 fait : 
 - Implementation du package strategie (ne reste plus qu'à devellopper des strats)
 - Multithreads ajouté dans les choix de mode
+
+24/04/19:
+
+- Pourcentage de victoire par joueur / stratégie implémentés sous forme de jframe à la fin du multithread (avec la mise en attente de  la fin de tout les threads)
+- Dévloppement de deux IA basique, une orienté PVE qui va se rapprocher des ennemies pour les tuer avec une bombe, et une autre plus orienté PVP  qui elle va déplacer les BBM entre eux pour qu'ils s'entretuent.
+
+25/04/19:
