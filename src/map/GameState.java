@@ -16,6 +16,7 @@ import key.Keys_2;
 import objets.Objet;
 import objets.Objet_Bomb;
 import strategies.Strategie_A;
+import strategies.Strategie_A_items;
 import strategies.Strategie_B;
 import strategies.Strategie_PVE;
 import strategies.Strategie_PVP;
@@ -34,7 +35,7 @@ public class GameState {
 	private ArrayList<Objet> items;
 	
 	private static Random numberGenerator = new Random();
-	private int pourcentage = 100;
+	private int pourcentage = 25;
 	private boolean end;
 	private JFrame cadre_jeu = null;
 	
@@ -462,6 +463,7 @@ public class GameState {
 				AgentAction bombermanAction;
 				Strategie_B strat_B = new Strategie_B(this,bomberman);
 				Strategie_A strat_A = new Strategie_A(this,bomberman);
+				Strategie_A_items strat_A_items = new Strategie_A_items(this,bomberman);
 				
 				if(!bomberman.isDead()) {
 					
@@ -472,7 +474,7 @@ public class GameState {
 							//this.key_action.setKaction(new AgentAction(Map.STOP));
 							break;
 						case 1:
-							bombermanAction = bomberman.chooseAction(this,null,strat_A);
+							bombermanAction = bomberman.chooseAction(this,null,strat_A_items);
 							//this.key_action_2.setKaction(new AgentAction(Map.STOP));
 							break;
 						default:
@@ -480,11 +482,11 @@ public class GameState {
 						}
 					} else {
 						if(bomberman.getId() == 0)
-							bombermanAction = bomberman.chooseAction(this,null,strat_A);
+							bombermanAction = bomberman.chooseAction(this,null,strat_A_items);
 						else if(bomberman.getId() == 1)
-							bombermanAction = bomberman.chooseAction(this,null,strat_B);
+							bombermanAction = bomberman.chooseAction(this,null,strat_A);
 						else
-							bombermanAction = bomberman.chooseAction(this,null,null);
+							bombermanAction = bomberman.chooseAction(this,null,strat_A);
 					}
 										
 					//System.out.println(bombermanAction.getAction());

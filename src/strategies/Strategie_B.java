@@ -47,8 +47,8 @@ public class Strategie_B extends Strategie{
 							int xb = b.getObjX();
 							int yb = b.getObjY();
 							
-							int xecb = Math.abs(xb-e.getX());
-							int yecb = Math.abs(yb-e.getY());
+							int xecb = Math.abs(xb-getAgent().getX());
+							int yecb = Math.abs(yb-getAgent().getY());
 							int becart = xecb + yecb;
 							
 							//System.out.println(becart);
