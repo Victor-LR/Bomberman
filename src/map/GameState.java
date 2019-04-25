@@ -16,6 +16,7 @@ import key.Keys_2;
 import objets.Objet;
 import objets.Objet_Bomb;
 import strategies.Strategie_A;
+import strategies.Strategie_B;
 import strategies.Strategie_PVE;
 import strategies.Strategie_PVP;
 import objets.ObjetType;
@@ -459,7 +460,7 @@ public class GameState {
 				
 				Agent_Bomberman bomberman = bombermans.get(i);
 				AgentAction bombermanAction;
-				Strategie_PVP strat = new Strategie_PVP(this,bomberman);
+				Strategie_B strat_B = new Strategie_B(this,bomberman);
 				Strategie_A strat_A = new Strategie_A(this,bomberman);
 				
 				if(!bomberman.isDead()) {
@@ -478,8 +479,10 @@ public class GameState {
 							bombermanAction = bomberman.chooseAction(this,null,null);
 						}
 					} else {
-						if(bomberman.getId() == 1)
+						if(bomberman.getId() == 0)
 							bombermanAction = bomberman.chooseAction(this,null,strat_A);
+						else if(bomberman.getId() == 1)
+							bombermanAction = bomberman.chooseAction(this,null,strat_B);
 						else
 							bombermanAction = bomberman.chooseAction(this,null,null);
 					}
