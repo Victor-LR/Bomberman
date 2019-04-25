@@ -52,30 +52,30 @@ public class Keys_2 implements KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent evt) {
-//		switch(evt.getKeyCode()) {
-//		case KeyEvent.VK_UP:
-//			haut = false;
-//			bool_to_action();
-//			break;
-//		case KeyEvent.VK_LEFT:
-//			gauche = false;
-//			bool_to_action();
-//			break;
-//		case KeyEvent.VK_DOWN:
-//			bas = false;
-//			bool_to_action();
-//			break;
-//		case KeyEvent.VK_RIGHT:
-//			droite = false;
-//			bool_to_action();
-//			break;
-//		case KeyEvent.VK_CONTROL:
-//			bombe = false;
-//			bool_to_action();
-//			break;
-//		default :
-//			break;
-//		}
+		switch(evt.getKeyCode()) {
+		case KeyEvent.VK_UP:
+			haut = false;
+			bool_to_action();
+			break;
+		case KeyEvent.VK_LEFT:
+			gauche = false;
+			bool_to_action();
+			break;
+		case KeyEvent.VK_DOWN:
+			bas = false;
+			bool_to_action();
+			break;
+		case KeyEvent.VK_RIGHT:
+			droite = false;
+			bool_to_action();
+			break;
+		case KeyEvent.VK_CONTROL:
+			bombe = false;
+			bool_to_action();
+			break;
+		default :
+			break;
+		}
 	}
 
 	@Override

@@ -465,7 +465,7 @@ public class GameState {
 					if (mode_jeu ) {
 						switch (i) {
 						case 0:
-							bombermanAction = bomberman.chooseAction(this,key_action.getKaction(),null);
+							bombermanAction = bomberman.chooseAction(this,key_action_2.getKaction(),null);
 							//this.key_action.setKaction(new AgentAction(Map.STOP));
 							break;
 						case 1:
