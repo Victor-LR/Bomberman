@@ -179,3 +179,19 @@ fait :
 - Dévloppement de deux IA basique, une orienté PVE qui va se rapprocher des ennemies pour les tuer avec une bombe, et une autre plus orienté PVP  qui elle va déplacer les BBM entre eux pour qu'ils s'entretuent.
 
 25/04/19:
+- Continuation de développement de comportements des agents Bomberman en reprenant la base de la veille. 
+   Stratégie A : Orienté sur l'évitement des bombes adverses et sur la pose de bombes a portée d'autres bombermans.
+                  Déplacement aléatoire dans les autres situations.
+   Stratégie B : Orienté sur l'élimination du bomberman le plus proche de lui tout en esquivant les bombes adverses.
+                  Pose des bombes celons certaines situations (pris entre deux briques/murs ou plus, a portée d'ennemis).
+                  Lorsque que plusieurs stratégies B sont choisies certains bombermans peuvent se bloquer entre eux tout en ne pouvant se tuer.
+   Stratégie A items : Reprend le comportement de A en rajoutant la prise d'items spécifique dans une zone autour du bomberman.
+                  (Possibilité de se bloquer lorsque qu'il doit choisir un chemin vers un item).
+   Stratégie C : Reprend le comportement de B et inclu la prise d'item. Lorsque un item est découvert et choisi la cible la plus proche entre l'item et un autre bomberman.
+   
+26/04/19:
+- Implémentation des Stratégies pour chaque bombermans de la carte sélectionnée. Marche en mode normal et en Multithreads.
+- Changement visuelle du menu.
+- Résolution de bugs engendrés par cette implémentation.
+   
+        
