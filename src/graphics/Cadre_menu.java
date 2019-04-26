@@ -104,7 +104,7 @@ public class Cadre_menu extends JFrame{
 						e.printStackTrace();
 					}
 					un_bbmg.init();
-					un_bbmg.etatJeu.setMode_jeu(false);
+//					un_bbmg.etatJeu.setMode_jeu(false);
 					un_bbmg.setTemps(1);
 					un_bbmg.new_thread();
 					L_BbmG.add(un_bbmg);

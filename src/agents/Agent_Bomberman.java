@@ -1,17 +1,26 @@
 package agents;
 
+import java.io.File;
 import java.util.ArrayList;
+
+import key.Keys;
+import key.Keys_2;
 
 import map.GameState;
 import map.Map;
 import strategies.Strategie;
+import strategies.Strategie_A;
+import strategies.Strategie_A_items;
+import strategies.Strategie_B;
+import strategies.Strategie_C;
+import strategies.Strategie_PVE;
+import strategies.Strategie_PVP;
 import agents.Agent;
 
 public class Agent_Bomberman extends Agent {
 	
 	private int range;
 	private int points = 0;
-	//private ArrayList<Objet_Bomb> bombes = null;
 	private int nbBombes;
 	private ColorBomberman couleur;
 	private int nbActions = 10;
@@ -23,11 +32,18 @@ public class Agent_Bomberman extends Agent {
 	private boolean isSick;
 	private int etatSick;
 	
-	private Strategie strat;
+	private Keys key_action = new Keys();
+	private Keys_2 key_action_2 = new Keys_2();
+	
+	private int strat;
+	private Strategie strategie;
 
-	public Agent_Bomberman (int px, int py,int id) {
+	public Agent_Bomberman (int px, int py,int id, int strat) {
 		super(AgentType.BOMBERMAN, px, py);
 		super.setId(id);
+		
+		this.strat = strat;
+		
 		this.range = 1;
 		this.points = 0;
 		this.nbBombes = 1;
@@ -41,31 +57,66 @@ public class Agent_Bomberman extends Agent {
 		
 	}
 	
-	public AgentAction chooseAction(GameState etatjeu,AgentAction action, Strategie strat) 
+	public AgentAction chooseAction(GameState etatjeu) 
 	{
-		this.strat = strat;
-		if (etatjeu.getMode_jeu() & action != null & strat == null) {
-			
+		AgentAction action ;
+		
+		switch (this.strat){
+		//Controllé par le joueur
+		case 1:
+			action = key_action.getKaction();
 			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
 			else return new AgentAction(Map.STOP);
+		
+		case 2:
+			action = key_action_2.getKaction();
+			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
+			else return new AgentAction(Map.STOP);
+		
+		//Action déterminé par une stratégie
+		case 3:
+			this.strategie = new Strategie_A_items(etatjeu,this);
+			return this.strategie.action();
+		case 4:
+			this.strategie = new Strategie_A(etatjeu,this);
+			return this.strategie.action();
+		case 5:
+			this.strategie = new Strategie_B(etatjeu,this);
+			return this.strategie.action();
+		case 6:
+			this.strategie = new Strategie_C(etatjeu,this);
+			return this.strategie.action();
+		case 7:
+			this.strategie = new Strategie_PVE(etatjeu,this);
+			return this.strategie.action();
+		case 8:
+			this.strategie = new Strategie_PVP(etatjeu,this);
+			return this.strategie.action();
 			
-		}else if(action == null & strat == null){
-				ArrayList<AgentAction> listAction=new ArrayList<AgentAction>();
-				for(int i=0;i<=5;i++)
-				{
-					if (etatjeu.isLegalMoveBbm(new AgentAction(i), this)) {
-						//System.out.println(i);
-						listAction.add(new AgentAction(i));
-					}
-				}		
-				nbActions = listAction.size();
-				return(listAction.get((int)(Math.random()*nbActions)));
-			}
-			else return strat.action();                                
+		//Comportement aléatoire
+		default:
+			this.strategie = null;
+			ArrayList<AgentAction> listAction=new ArrayList<AgentAction>();
+			for(int i=0;i<=5;i++)
+			{
+				if (etatjeu.isLegalMoveBbm(new AgentAction(i), this)) {
+					//System.out.println(i);
+					listAction.add(new AgentAction(i));
+				}
+			}		
+			this.nbActions = listAction.size();
+			return(listAction.get((int)(Math.random()*this.nbActions)));
+		}
+		
+		
 				
 	}	
 	
-	public Strategie getStrat() {
+	public Strategie getStrategie() {
+		return strategie;
+	}
+
+	public int getStrat() {
 		return strat;
 	}
 
@@ -86,13 +137,6 @@ public class Agent_Bomberman extends Agent {
 		this.points = point;
 	}
 	
-//	public ArrayList<Objet_Bomb> getBombes() {
-//		return bombes;
-//	}
-//
-//	public void setBombes(ArrayList<Objet_Bomb> bombes) {
-//		this.bombes = bombes;
-//	}
 	
 	public int getNbBombes() {
 		return nbBombes;

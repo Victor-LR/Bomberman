@@ -40,15 +40,18 @@ public class GameState {
 	private boolean end;
 	private JFrame cadre_jeu = null;
 	
-	private boolean mode_jeu;
+	//private boolean mode_jeu;
 	
 	private  BombermanGame BbmG;
 
 	private String winner =null;
 	private int idGagnant = 6;
 	
-	//Construit l'état courant de la map
+	private int[] strats = null;
 	
+	//Construit l'état courant de la map
+
+
 	public GameState(Map map,BombermanGame BbmG){
 		
 		
@@ -56,9 +59,6 @@ public class GameState {
 		bombermans = new ArrayList<Agent_Bomberman>();
 		bombes = new ArrayList<Objet_Bomb>();
 		items = new ArrayList<Objet>();
-		
-		key_action = new Keys();
-		key_action_2 = new Keys_2();
 
 		this.map=map;
 		this.BbmG=BbmG;
@@ -68,7 +68,7 @@ public class GameState {
 		ColorBomberman[] Couleurs= ColorBomberman.values();
 		for(int i=0;i<map.getNumber_of_bombermans();i++)
 		{
-			Agent_Bomberman b = new Agent_Bomberman(map.getBomberman_start_x(i), map.getBomberman_start_y(i),i );
+			Agent_Bomberman b = new Agent_Bomberman(map.getBomberman_start_x(i), map.getBomberman_start_y(i),i,this.strats[i]);
 			ColorBomberman col = Couleurs[i];
 			b.setCouleur(col);
 			bombermans.add(b);
@@ -456,40 +456,12 @@ public class GameState {
 			
 			for(int i = 0; i < bombermans.size(); i++){
 				
-//				Agent_Bomberman bomberman = bombermans.get(i);
-//				AgentAction bombermanAction = bomberman.chooseAction(this);
-					
-				
 				Agent_Bomberman bomberman = bombermans.get(i);
 				AgentAction bombermanAction;
-				Strategie_A strat_A = new Strategie_A(this,bomberman);
-				Strategie_B strat_B = new Strategie_B(this,bomberman);
-				Strategie_C strat_C = new Strategie_C(this,bomberman);
-				Strategie_A_items strat_A_items = new Strategie_A_items(this,bomberman);
 				
 				if(!bomberman.isDead()) {
 					
-					if (mode_jeu ) {
-						switch (i) {
-						case 0:
-							bombermanAction = bomberman.chooseAction(this,key_action.getKaction(),null);
-							//this.key_action.setKaction(new AgentAction(Map.STOP));
-							break;
-						case 1:
-							bombermanAction = bomberman.chooseAction(this,null,strat_A_items);
-							//this.key_action_2.setKaction(new AgentAction(Map.STOP));
-							break;
-						default:
-							bombermanAction = bomberman.chooseAction(this,null,null);
-						}
-					} else {
-						if(bomberman.getId() == 0)
-							bombermanAction = bomberman.chooseAction(this,null,strat_A_items);
-						else if(bomberman.getId() == 1)
-							bombermanAction = bomberman.chooseAction(this,null,strat_A);
-						else
-							bombermanAction = bomberman.chooseAction(this,null,strat_A);
-					}
+					bombermanAction = bomberman.chooseAction(this);
 										
 					//System.out.println(bombermanAction.getAction());
 				
@@ -520,7 +492,6 @@ public class GameState {
 							bomberman.setEtatSick(0);
 						}
 						
-						//System.out.println("	range : "+bomberman.getRange());
 						items.remove(item);
 					}
 				}
@@ -581,7 +552,7 @@ public class GameState {
 					
 //					System.out.println("après deplacement	Range -> "+ bomberman.getRange());
 				}
-				else if (mode_jeu & i < 2) {
+				else if ((bomberman.getStrat()== 0 || bomberman.getStrat()== 1) & i < 2) {
 						if (bombermanAction.getAction() == 5 & (bomberman.getMaladie() != 0 & bomberman.getMaladie() != 1)){
 							this.placeBomb(bomberman);
 							this.bombeTurn(bomberman);
@@ -597,7 +568,6 @@ public class GameState {
 				
 			else this.bombeTurn(bomberman);
 				
-//			key_action.setKaction(bomberman.chooseAction(this,new AgentAction(Map.STOP)));
 			}
 		}
 	
@@ -766,20 +736,10 @@ public class GameState {
 		return ennemies;
 	}
 	
-	//accesseur sur la map courrante 
+	//accesseur sur la map courante 
 	
 	public Map getMap(){
 		return map;
-	}
-	
-	// mode de jeu = true -> Un joueur
-	// mode de jeu = false -> Automatique
-	public boolean getMode_jeu() {
-		return mode_jeu;
-	}
-
-	public void setMode_jeu(boolean mode_jeu) {
-		this.mode_jeu = mode_jeu;
 	}
 
 	public boolean getEnd() {
@@ -801,5 +761,9 @@ public class GameState {
 
 	public int getIdGagnant() {
 		return idGagnant;
+	}
+	
+	public void setStrats(int[] strats) {
+		this.strats = strats;
 	}
 }
