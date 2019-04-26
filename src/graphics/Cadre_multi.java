@@ -53,9 +53,9 @@ public class Cadre_multi extends JFrame {
 			JLabel pan_result = new JLabel();
 			if( n < nb_bbm ){
 				this.listlab.add(pan_result);
-				if (L_BbmG.get(0).etatJeu.getBombermans().get(n).getStrat() == null) 
+				if (L_BbmG.get(0).etatJeu.getBombermans().get(n).getStrategie() == null) 
 					pan_result.setText("Joueur "+(n+1)+" à gagner "+ pourcentage +"% du temps avec strategie : aléatoire");
-				else pan_result.setText("Joueur "+(n+1)+" à gagner "+ pourcentage +"% du temps avec strategie : "+L_BbmG.get(0).etatJeu.getBombermans().get(n).getStrat().getClass().getSimpleName());
+				else pan_result.setText("Joueur "+(n+1)+" à gagner "+ pourcentage +"% du temps avec strategie : "+L_BbmG.get(0).etatJeu.getBombermans().get(n).getStrategie().getClass().getSimpleName());
 				pan_result.setHorizontalAlignment(JLabel.CENTER);
 				this.add(pan_result);
 			}

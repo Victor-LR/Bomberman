@@ -153,7 +153,7 @@ public class paint_score implements GameObserver {
 				desactiverRun();
 				activerStop();
 				desactiverRestart();
-				boolean modej = BbmG.etatJeu.getMode_jeu();
+//				boolean modej = BbmG.etatJeu.getMode_jeu();
 				try {
 					BbmG.loadFile(BbmG.getMap().getFilename());
 				} catch (Exception e) {
@@ -161,15 +161,9 @@ public class paint_score implements GameObserver {
 				}
 				
 				BbmG.restart();
-				BbmG.etatJeu.setMode_jeu(modej);
+//				BbmG.etatJeu.setMode_jeu(modej);
 				paint_bomberman PBM = new paint_bomberman(c_j,BbmG);
 		        c_j.add("Center",PBM);
-				
-				//c_j.p_bm.repaint();
-//				Cadre_Jeu fen = new Cadre_Jeu(BbmG);
-//				fen.setVisible(true);
-				//BbmG.etatJeu.setMode_jeu(modej);
-
 				
 			}
 		});
@@ -216,7 +210,6 @@ public class paint_score implements GameObserver {
 	public void update() {
 		
 		//System.out.println("scores : ");
-		//ArrayList<Agent_Bomberman> bombermans = this.BbmG.etatJeu.getBombermans();
 		
 		for(int i = 0; i < this.BbmG.etatJeu.getBombermans().size(); i++){
 			Agent_Bomberman bomberman = this.BbmG.etatJeu.getBombermans().get(i);
