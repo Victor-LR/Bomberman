@@ -32,9 +32,6 @@ public class Agent_Bomberman extends Agent {
 	private boolean isSick;
 	private int etatSick;
 	
-	private Keys key_action = new Keys();
-	private Keys_2 key_action_2 = new Keys_2();
-	
 	private int strat = 10;
 	private Strategie strategie;
 
@@ -52,7 +49,6 @@ public class Agent_Bomberman extends Agent {
 		this.isSick = false;
 		this.etatSick = 0;
 		
-		
 	}
 	
 
@@ -65,12 +61,12 @@ public class Agent_Bomberman extends Agent {
 			
 		//Controllé par le joueur
 		case 1:
-			action = key_action.getKaction();
+			action = etatjeu.getKey_action().getKaction();
 			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
 			else return new AgentAction(Map.STOP);
 		
 		case 2:
-			action = key_action_2.getKaction();
+			action = etatjeu.getKey_action_2().getKaction();
 			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
 			else return new AgentAction(Map.STOP);
 		

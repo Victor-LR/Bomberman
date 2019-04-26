@@ -30,6 +30,7 @@ public class Keys implements KeyListener{
 		case 'z':
 			haut = true;
 			bool_to_action();
+			System.out.println("touche z");
 			break;
 		case 'q':
 			gauche = true;

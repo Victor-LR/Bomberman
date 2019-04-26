@@ -27,9 +27,9 @@ public class GameState {
 	
 	Map map;
 	
-	public Keys key_action;
-	public Keys_2 key_action_2;
-	
+	private Keys key_action;
+	private Keys_2 key_action_2;
+
 	private ArrayList<Agent> ennemies;
 	private ArrayList<Agent_Bomberman> bombermans;
 	private ArrayList<Objet_Bomb> bombes;
@@ -60,6 +60,9 @@ public class GameState {
 		bombes = new ArrayList<Objet_Bomb>();
 		items = new ArrayList<Objet>();
 
+		key_action = new Keys();
+		key_action_2 = new Keys_2();
+		
 		this.map=map;
 		this.BbmG=BbmG;
 
@@ -763,9 +766,23 @@ public class GameState {
 		return idGagnant;
 	}
 	
+	
+	public Keys getKey_action() {
+		return key_action;
+	}
+
+	public Keys_2 getKey_action_2() {
+		return key_action_2;
+	}
+	
+	public int[] getStrats() {
+		return strats;
+	}
+
+	
 	public void setStrats(int[] strats) {
+		this.strats = strats;
 		for (int i = 0 ; i < this.bombermans.size() ; i++){
-			System.out.println(strats[i]+"					"+i);
 			this.bombermans.get(i).setStrat(strats[i]);
 		}
 	}

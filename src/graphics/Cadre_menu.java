@@ -121,9 +121,7 @@ public class Cadre_menu extends JFrame{
 				}
 				
 				BbmG.init();
-				
-				Cadre_Jeu fenetre = new Cadre_Jeu(BbmG);
-				fenetre.setVisible(true);
+			
 				
 				for(int i =0; i<listStrat.size();i++) {
 					System.out.println(listStrat.get(i).getSelectedItem().toString());
@@ -165,12 +163,18 @@ public class Cadre_menu extends JFrame{
 						break;
 					}
 			
+
+				}
+				
 				
 				BbmG.etatJeu.setStrats(strategies);
+				
 				BbmG.launch();
 				
+				Cadre_Jeu fenetre = new Cadre_Jeu(BbmG);
+				fenetre.setVisible(true);
+				
 				cadre_menu.dispose();
-				}
 			}
 		});
 	
@@ -261,6 +265,7 @@ public class Cadre_menu extends JFrame{
 	liste_lay.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent evenement) {
 			setSize(550,300);
+			listStrat = new ArrayList<JComboBox>();
 			remove(choixStrats);
 			choixStrats = new JPanel();
 			remove(review);
