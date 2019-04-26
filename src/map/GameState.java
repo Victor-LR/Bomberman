@@ -18,6 +18,7 @@ import objets.Objet_Bomb;
 import strategies.Strategie_A;
 import strategies.Strategie_A_items;
 import strategies.Strategie_B;
+import strategies.Strategie_C;
 import strategies.Strategie_PVE;
 import strategies.Strategie_PVP;
 import objets.ObjetType;
@@ -461,8 +462,9 @@ public class GameState {
 				
 				Agent_Bomberman bomberman = bombermans.get(i);
 				AgentAction bombermanAction;
-				Strategie_B strat_B = new Strategie_B(this,bomberman);
 				Strategie_A strat_A = new Strategie_A(this,bomberman);
+				Strategie_B strat_B = new Strategie_B(this,bomberman);
+				Strategie_C strat_C = new Strategie_C(this,bomberman);
 				Strategie_A_items strat_A_items = new Strategie_A_items(this,bomberman);
 				
 				if(!bomberman.isDead()) {
