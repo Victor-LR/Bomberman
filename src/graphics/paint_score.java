@@ -27,7 +27,6 @@ public class paint_score implements GameObserver {
 
 	
 	BombermanGame BbmG;
-	//private GameState Jeu_actuel = null;
 	
 	public Cadre_Jeu c_j = null;
 	public JPanel panel = null;
@@ -41,12 +40,16 @@ public class paint_score implements GameObserver {
 	private JButton back =null;
 	private JLabel turn = null;
 	private JSlider slider = null;
+	private int[] old_strat = new int[10];
 	
 	public paint_score(Cadre_Jeu cadre_jeu,BombermanGame bomberman){
 		
 		this.c_j = cadre_jeu;
 		
 		this.BbmG = bomberman;
+		
+		
+		
 		
 		panel = new JPanel();
 		panel.setLayout(new FlowLayout());
@@ -62,6 +65,7 @@ public class paint_score implements GameObserver {
 		
 		this.BbmG.addObserver((GameObserver)this);
 		
+		this.old_strat = bomberman.etatJeu.getStrats();
 		
 		listlab = new ArrayList<JLabel>();
 		
@@ -153,15 +157,16 @@ public class paint_score implements GameObserver {
 				desactiverRun();
 				activerStop();
 				desactiverRestart();
-//				boolean modej = BbmG.etatJeu.getMode_jeu();
 				try {
 					BbmG.loadFile(BbmG.getMap().getFilename());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				
-				BbmG.restart();
-//				BbmG.etatJeu.setMode_jeu(modej);
+				
+				BbmG.init();
+				BbmG.etatJeu.setStrats(old_strat);
+				BbmG.launch();
 				paint_bomberman PBM = new paint_bomberman(c_j,BbmG);
 		        c_j.add("Center",PBM);
 				

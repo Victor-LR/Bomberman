@@ -32,17 +32,12 @@ public class Agent_Bomberman extends Agent {
 	private boolean isSick;
 	private int etatSick;
 	
-	private Keys key_action = new Keys();
-	private Keys_2 key_action_2 = new Keys_2();
-	
-	private int strat;
+	private int strat = 10;
 	private Strategie strategie;
 
-	public Agent_Bomberman (int px, int py,int id, int strat) {
+	public Agent_Bomberman (int px, int py,int id) {
 		super(AgentType.BOMBERMAN, px, py);
 		super.setId(id);
-		
-		this.strat = strat;
 		
 		this.range = 1;
 		this.points = 0;
@@ -54,22 +49,24 @@ public class Agent_Bomberman extends Agent {
 		this.isSick = false;
 		this.etatSick = 0;
 		
-		
 	}
 	
+
+
 	public AgentAction chooseAction(GameState etatjeu) 
 	{
 		AgentAction action ;
-		
+//		System.out.println(this.strat);
 		switch (this.strat){
+			
 		//Controllé par le joueur
 		case 1:
-			action = key_action.getKaction();
+			action = etatjeu.getKey_action().getKaction();
 			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
 			else return new AgentAction(Map.STOP);
 		
 		case 2:
-			action = key_action_2.getKaction();
+			action = etatjeu.getKey_action_2().getKaction();
 			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
 			else return new AgentAction(Map.STOP);
 		
@@ -94,7 +91,7 @@ public class Agent_Bomberman extends Agent {
 			return this.strategie.action();
 			
 		//Comportement aléatoire
-		default:
+		case 0:
 			this.strategie = null;
 			ArrayList<AgentAction> listAction=new ArrayList<AgentAction>();
 			for(int i=0;i<=5;i++)
@@ -106,6 +103,8 @@ public class Agent_Bomberman extends Agent {
 			}		
 			this.nbActions = listAction.size();
 			return(listAction.get((int)(Math.random()*this.nbActions)));
+		default:
+			return new AgentAction(Map.STOP);
 		}
 		
 		
@@ -120,6 +119,10 @@ public class Agent_Bomberman extends Agent {
 		return strat;
 	}
 
+	public void setStrat(int strat) {
+		this.strat = strat;
+	}
+	
 	public int getRange() {
 		return range;
 	}

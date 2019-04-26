@@ -27,9 +27,9 @@ public class GameState {
 	
 	Map map;
 	
-	public Keys key_action;
-	public Keys_2 key_action_2;
-	
+	private Keys key_action;
+	private Keys_2 key_action_2;
+
 	private ArrayList<Agent> ennemies;
 	private ArrayList<Agent_Bomberman> bombermans;
 	private ArrayList<Objet_Bomb> bombes;
@@ -47,7 +47,7 @@ public class GameState {
 	private String winner =null;
 	private int idGagnant = 6;
 	
-	private int[] strats = null;
+	private int[] strats;
 	
 	//Construit l'état courant de la map
 
@@ -60,6 +60,9 @@ public class GameState {
 		bombes = new ArrayList<Objet_Bomb>();
 		items = new ArrayList<Objet>();
 
+		key_action = new Keys();
+		key_action_2 = new Keys_2();
+		
 		this.map=map;
 		this.BbmG=BbmG;
 
@@ -68,7 +71,7 @@ public class GameState {
 		ColorBomberman[] Couleurs= ColorBomberman.values();
 		for(int i=0;i<map.getNumber_of_bombermans();i++)
 		{
-			Agent_Bomberman b = new Agent_Bomberman(map.getBomberman_start_x(i), map.getBomberman_start_y(i),i,this.strats[i]);
+			Agent_Bomberman b = new Agent_Bomberman(map.getBomberman_start_x(i), map.getBomberman_start_y(i),i);
 			ColorBomberman col = Couleurs[i];
 			b.setCouleur(col);
 			bombermans.add(b);
@@ -763,7 +766,24 @@ public class GameState {
 		return idGagnant;
 	}
 	
+	
+	public Keys getKey_action() {
+		return key_action;
+	}
+
+	public Keys_2 getKey_action_2() {
+		return key_action_2;
+	}
+	
+	public int[] getStrats() {
+		return strats;
+	}
+
+	
 	public void setStrats(int[] strats) {
 		this.strats = strats;
+		for (int i = 0 ; i < this.bombermans.size() ; i++){
+			this.bombermans.get(i).setStrat(strats[i]);
+		}
 	}
 }

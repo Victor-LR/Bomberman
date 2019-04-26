@@ -102,11 +102,11 @@ public abstract class Game implements Runnable, InterfaceGame {
 		isRunning = false;
 	}
 	
-	public void restart(){
-		init();
-		launch();
-	}
-	
+//	public void restart(){
+//		init();
+//		launch();
+//	}
+//	
 	//Verifie si le nombre de tours courant est inferieur au nombre de tours maximum permis par le jeu
 	
 	public boolean gameContinue(){

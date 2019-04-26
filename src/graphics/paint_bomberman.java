@@ -84,8 +84,8 @@ public class paint_bomberman extends JPanel implements GameObserver{
 	   taille_x= this.BbmG.etatJeu.getMap().getSizeX();
 	   taille_y= this.BbmG.etatJeu.getMap().getSizeY();
 	   
-	   this.addKeyListener(BbmG.etatJeu.key_action);
-	   this.addKeyListener(BbmG.etatJeu.key_action_2);
+	   this.addKeyListener(BbmG.etatJeu.getKey_action());
+	   this.addKeyListener(BbmG.etatJeu.getKey_action_2());
 	   
 		
 	}
