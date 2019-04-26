@@ -15,6 +15,10 @@ import key.Keys;
 import key.Keys_2;
 import objets.Objet;
 import objets.Objet_Bomb;
+import strategies.Strategie_A;
+import strategies.Strategie_A_items;
+import strategies.Strategie_B;
+import strategies.Strategie_C;
 import strategies.Strategie_PVE;
 import strategies.Strategie_PVP;
 import objets.ObjetType;
@@ -32,7 +36,7 @@ public class GameState {
 	private ArrayList<Objet> items;
 	
 	private static Random numberGenerator = new Random();
-	private int pourcentage = 100;
+	private int pourcentage = 25;
 	private boolean end;
 	private JFrame cadre_jeu = null;
 	
@@ -458,28 +462,33 @@ public class GameState {
 				
 				Agent_Bomberman bomberman = bombermans.get(i);
 				AgentAction bombermanAction;
-				Strategie_PVP strat = new Strategie_PVP(this,bomberman);
+				Strategie_A strat_A = new Strategie_A(this,bomberman);
+				Strategie_B strat_B = new Strategie_B(this,bomberman);
+				Strategie_C strat_C = new Strategie_C(this,bomberman);
+				Strategie_A_items strat_A_items = new Strategie_A_items(this,bomberman);
 				
 				if(!bomberman.isDead()) {
 					
 					if (mode_jeu ) {
 						switch (i) {
 						case 0:
-							bombermanAction = bomberman.chooseAction(this,key_action_2.getKaction(),null);
+							bombermanAction = bomberman.chooseAction(this,key_action.getKaction(),null);
 							//this.key_action.setKaction(new AgentAction(Map.STOP));
 							break;
 						case 1:
-							bombermanAction = bomberman.chooseAction(this,null,strat);
+							bombermanAction = bomberman.chooseAction(this,null,strat_A_items);
 							//this.key_action_2.setKaction(new AgentAction(Map.STOP));
 							break;
 						default:
-							bombermanAction = bomberman.chooseAction(this,null,strat);
+							bombermanAction = bomberman.chooseAction(this,null,null);
 						}
 					} else {
-						if(bomberman.getId() == 3)
-							bombermanAction = bomberman.chooseAction(this,null,null);
+						if(bomberman.getId() == 0)
+							bombermanAction = bomberman.chooseAction(this,null,strat_A_items);
+						else if(bomberman.getId() == 1)
+							bombermanAction = bomberman.chooseAction(this,null,strat_A);
 						else
-							bombermanAction = bomberman.chooseAction(this,null,strat);
+							bombermanAction = bomberman.chooseAction(this,null,strat_A);
 					}
 										
 					//System.out.println(bombermanAction.getAction());

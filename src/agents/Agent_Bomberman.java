@@ -30,7 +30,6 @@ public class Agent_Bomberman extends Agent {
 		super.setId(id);
 		this.range = 1;
 		this.points = 0;
-		//this.bombes = new ArrayList<Objet_Bomb>();
 		this.nbBombes = 1;
 		
 		this.isInvincible = false;
@@ -46,7 +45,6 @@ public class Agent_Bomberman extends Agent {
 	{
 		this.strat = strat;
 		if (etatjeu.getMode_jeu() & action != null & strat == null) {
-//			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
 			
 			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
 			else return new AgentAction(Map.STOP);
