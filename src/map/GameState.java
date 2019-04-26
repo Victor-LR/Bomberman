@@ -47,7 +47,7 @@ public class GameState {
 	private String winner =null;
 	private int idGagnant = 6;
 	
-	private int[] strats = null;
+	private int[] strats;
 	
 	//Construit l'état courant de la map
 
@@ -68,7 +68,7 @@ public class GameState {
 		ColorBomberman[] Couleurs= ColorBomberman.values();
 		for(int i=0;i<map.getNumber_of_bombermans();i++)
 		{
-			Agent_Bomberman b = new Agent_Bomberman(map.getBomberman_start_x(i), map.getBomberman_start_y(i),i,this.strats[i]);
+			Agent_Bomberman b = new Agent_Bomberman(map.getBomberman_start_x(i), map.getBomberman_start_y(i),i);
 			ColorBomberman col = Couleurs[i];
 			b.setCouleur(col);
 			bombermans.add(b);
@@ -764,6 +764,9 @@ public class GameState {
 	}
 	
 	public void setStrats(int[] strats) {
-		this.strats = strats;
+		for (int i = 0 ; i < this.bombermans.size() ; i++){
+			System.out.println(strats[i]+"					"+i);
+			this.bombermans.get(i).setStrat(strats[i]);
+		}
 	}
 }
