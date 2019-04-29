@@ -14,6 +14,10 @@ import javax.swing.JLabel;
 public class Cadre_multi extends JFrame {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel resultat = null;
 	private ArrayList<JLabel> listlab;
 	private JButton back;
@@ -26,8 +30,8 @@ public class Cadre_multi extends JFrame {
 	
 	Cadre_multi(ArrayList<BombermanGame> L_BbmG, int nb_threads){
 		this.listlab = new ArrayList<JLabel>();
-		this.L_BbmG = L_BbmG;
-		this.nb_threads = nb_threads;
+		this.setL_BbmG(L_BbmG);
+		this.setNb_threads(nb_threads);
 		
 		int nb_bbm = L_BbmG.get(0).getMap().getNumber_of_bombermans();
 		
@@ -43,7 +47,9 @@ public class Cadre_multi extends JFrame {
 		
 		int[] id_du_gagnant = new int[7];
 		for(int j = 0 ; j < L_BbmG.size(); j++){
-			id_du_gagnant[L_BbmG.get(j).etatJeu.getIdGagnant()] +=1;
+			if(!L_BbmG.get(j).etatJeu.isPlantage())
+				id_du_gagnant[L_BbmG.get(j).etatJeu.getIdGagnant()] +=1;
+			else id_du_gagnant[6] += 1;
 			
 		}
 
@@ -90,5 +96,29 @@ public class Cadre_multi extends JFrame {
 				
 			}
 		});
+	}
+
+	public JLabel getResultat() {
+		return resultat;
+	}
+
+	public void setResultat(JLabel resultat) {
+		this.resultat = resultat;
+	}
+
+	public int getNb_threads() {
+		return nb_threads;
+	}
+
+	public void setNb_threads(int nb_threads) {
+		this.nb_threads = nb_threads;
+	}
+
+	public ArrayList<BombermanGame> getL_BbmG() {
+		return L_BbmG;
+	}
+
+	public void setL_BbmG(ArrayList<BombermanGame> l_BbmG) {
+		L_BbmG = l_BbmG;
 	}
 }

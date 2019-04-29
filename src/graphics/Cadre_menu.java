@@ -29,7 +29,7 @@ public class Cadre_menu extends JFrame{
 	
 	private int[] strategies = new int[10];
 	
-	private int nb_threads = 2000;
+	private int nb_threads = 5000;
 	
 	public Cadre_menu() {
 		
@@ -236,15 +236,21 @@ public class Cadre_menu extends JFrame{
 					un_bbmg.etatJeu.setStrats(strategies);
 					L_BbmG.add(un_bbmg);
 					un_bbmg.getThread().start();
+					
+					System.out.println("	Thread n°"+i);
 				}
 					
 				for(int j = 0 ; j < L_BbmG.size(); j++){
 					try {
 						L_BbmG.get(j).getThread().join();
+						System.out.println("	Attente Thread n°"+j);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
+						System.out.println("erreur !");
 					}
 				}
+				
+				System.out.println("			Fin multithreads");
 	
 				Cadre_multi c_m = new Cadre_multi(L_BbmG,nb_threads);
 				c_m.setVisible(true);

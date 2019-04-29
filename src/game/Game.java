@@ -8,7 +8,7 @@ public abstract class Game implements Runnable, InterfaceGame {
 	
 	private double temps = 150;
 	protected int turn;
-	protected int maxTurn = 2000;
+	protected int maxTurn = 3000;
 	
 	Thread thread;
 	

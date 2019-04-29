@@ -46,7 +46,6 @@ public class Map {
 		
 		InputStream flux =new FileInputStream(filename); 
 		InputStreamReader lecture =new InputStreamReader(flux);
-		@SuppressWarnings("resource")
 		BufferedReader tampon =new BufferedReader(lecture);
 		
 		//definition la ligne pour en claculer par la suite ça longueur
