@@ -25,7 +25,6 @@ import agents.Agent_Bomberman;
 
 public class paint_score implements GameObserver {
 
-	
 	BombermanGame BbmG;
 	
 	public Cadre_Jeu c_j = null;
@@ -47,9 +46,6 @@ public class paint_score implements GameObserver {
 		this.c_j = cadre_jeu;
 		
 		this.BbmG = bomberman;
-		
-		
-		
 		
 		panel = new JPanel();
 		panel.setLayout(new FlowLayout());

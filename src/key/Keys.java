@@ -25,7 +25,6 @@ public class Keys implements KeyListener{
 	
 	@Override
 	public void keyPressed(KeyEvent evt) {
-		// TODO Auto-generated method stub
 		switch(evt.getKeyChar()) {
 		case 'z':
 			haut = true;

@@ -23,7 +23,6 @@ public class Cadre_menu extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JComboBox liste_lay;
 	private JLabel choixStage;
-//	private JLabel choixMode;
 	private JComboBox mode;
 	private JButton jouer = null;
 	private JButton multi = null;
@@ -38,7 +37,7 @@ public class Cadre_menu extends JFrame{
 	
 	public Cadre_menu() {
 		
-		this.setSize(550, 450);
+		
 		this.setLocationRelativeTo(null);
 		this.setTitle("Menu Jeu Bomberman");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,6 +82,7 @@ public class Cadre_menu extends JFrame{
 		
 		BbmG.init();
 		review = new Review(BbmG);
+		this.setSize(550, 450);
 		
 		choixStrats.setLayout(new GridLayout(BbmG.etatJeu.getBombermans().size(),2));
 		

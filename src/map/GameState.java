@@ -40,8 +40,6 @@ public class GameState {
 	private boolean end;
 	private JFrame cadre_jeu = null;
 	
-	//private boolean mode_jeu;
-	
 	private  BombermanGame BbmG;
 
 	private String winner =null;

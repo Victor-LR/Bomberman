@@ -46,8 +46,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 	protected Color ground_Color= new Color(50,175,50);
 	
 	BombermanGame BbmG;
-//	private GameState Jeu_actuel = null;
-//	private Map m = null;
+
 	private int taille_x;
 	private int taille_y;
 	
