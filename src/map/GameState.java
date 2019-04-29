@@ -684,7 +684,7 @@ public class GameState {
 					this.winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant par score = " + maxScore ;
 				}
 				else {
-					this.winner = "Il y a execo ";
+					this.winner = "Il y a Ex aequo ";
 					this.idGagnant = 5;
 				}
 			}

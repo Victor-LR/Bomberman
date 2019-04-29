@@ -29,7 +29,7 @@ public class Cadre_menu extends JFrame{
 	
 	private int[] strategies = new int[10];
 	
-	private int nb_threads = 2000;
+	private int nb_threads = 1000;
 	
 	public Cadre_menu() {
 		
