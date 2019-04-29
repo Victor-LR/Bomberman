@@ -56,7 +56,6 @@ public class Agent_Bomberman extends Agent {
 	public AgentAction chooseAction(GameState etatjeu) 
 	{
 		AgentAction action ;
-//		System.out.println(this.strat);
 		switch (this.strat){
 			
 		//Controllé par le joueur
