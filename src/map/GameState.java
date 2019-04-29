@@ -89,7 +89,7 @@ public class GameState {
 		int x = action.getVx();
 		int y = action.getVy();
 		
-		if(map.isWall(agent.getX()+x, agent.getY()+y) || map.isBrokable_Wall(agent.getX()+x, agent.getY()+y))
+		if(map.isWall(agent.getX()+x, agent.getY()+y) || map.isBrokable_Wall(agent.getX()+x, agent.getY()+y) || isBombe(agent.getX()+x, agent.getY()+y))
 			return false;
 		else return true;
 	}
@@ -100,7 +100,7 @@ public class GameState {
 		int x = actionbbm.getVx();
 		int y = actionbbm.getVy();
 			
-		if(map.isWall(bbm.getX()+x, bbm.getY()+y) || map.isBrokable_Wall(bbm.getX()+x, bbm.getY()+y))
+		if(map.isWall(bbm.getX()+x, bbm.getY()+y) || map.isBrokable_Wall(bbm.getX()+x, bbm.getY()+y) || isBombe(bbm.getX()+x, bbm.getY()+y))
 			return false;
 		else return true;
 	}

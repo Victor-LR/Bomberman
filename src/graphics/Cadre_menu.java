@@ -11,9 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import game.BombermanGame;
@@ -21,15 +18,14 @@ import game.BombermanGame;
 public class Cadre_menu extends JFrame{
 
 	private static final long serialVersionUID = 1L;
-	private JComboBox liste_lay;
+	private JComboBox<File> liste_lay;
 	private JLabel choixStage;
-	private JComboBox mode;
 	private JButton jouer = null;
 	private JButton multi = null;
 	private Review review = null;
 	private JPanel choixStrats = null;
 	private JPanel choix = null;
-	private ArrayList<JComboBox> listStrat = null;
+	private ArrayList<JComboBox<String>> listStrat = null;
 	
 	private int[] strategies = new int[10];
 	
@@ -45,7 +41,7 @@ public class Cadre_menu extends JFrame{
 		
 		BombermanGame BbmG = new BombermanGame();
 		
-		listStrat = new ArrayList<JComboBox>();
+		listStrat = new ArrayList<JComboBox<String>>();
 		
 		choix = new JPanel();
 		choix.setLayout(new GridLayout(1,1));
@@ -61,7 +57,7 @@ public class Cadre_menu extends JFrame{
 		File repertoire = new File("./layout/");
 		File[] files=repertoire.listFiles();
 		
-		liste_lay = new JComboBox(files);
+		liste_lay = new JComboBox<File>(files);
 		panelMap.add(liste_lay);
 		
 		jouer = new JButton("Jouer");
@@ -89,7 +85,7 @@ public class Cadre_menu extends JFrame{
 		String[] nomStrat = {"Auto","Joueur1","Joueur2","A_Items","A","B","C","PVE","PVP"};
 		
 		for(int i =0; i<BbmG.etatJeu.getBombermans().size();i++) {
-			JComboBox liste =  new JComboBox(nomStrat);
+			JComboBox<String> liste =  new JComboBox<String>(nomStrat);
 			choixStrats.add(new JLabel("Joueur n°"+(int)(BbmG.etatJeu.getBombermans().get(i).getId()+1)));
 			listStrat.add(liste);
 			choixStrats.add(liste);
@@ -265,7 +261,7 @@ public class Cadre_menu extends JFrame{
 	liste_lay.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent evenement) {
 			setSize(550,300);
-			listStrat = new ArrayList<JComboBox>();
+			listStrat = new ArrayList<JComboBox<String>>();
 			remove(choixStrats);
 			choixStrats = new JPanel();
 			remove(review);
@@ -284,7 +280,7 @@ public class Cadre_menu extends JFrame{
 			
 			for(int i =0; i<game.etatJeu.getBombermans().size();i++) {
 				
-				JComboBox liste =  new JComboBox(nomStrat);
+				JComboBox<String> liste =  new JComboBox<String>(nomStrat);
 				choixStrats.add(new JLabel("Joueur n°"+(int)(BbmG.etatJeu.getBombermans().get(i).getId()+1)));
 				listStrat.add(liste);
 				choixStrats.add(liste);
