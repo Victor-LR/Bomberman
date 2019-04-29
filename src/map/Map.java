@@ -33,8 +33,6 @@ public class Map {
 	protected ArrayList<Integer> bomberman_start_x;
 	protected ArrayList<Integer> bomberman_start_y;
 	
-	/*protected ArrayList<Integer> bomb_start_x;
-	protected ArrayList<Integer> bomb_start_y;*/
 	
 	public Map(String filename) throws Exception{
 		
