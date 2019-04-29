@@ -281,7 +281,7 @@ public class Cadre_menu extends JFrame{
 			for(int i =0; i<game.etatJeu.getBombermans().size();i++) {
 				
 				JComboBox<String> liste =  new JComboBox<String>(nomStrat);
-				choixStrats.add(new JLabel("Joueur n°"+(int)(BbmG.etatJeu.getBombermans().get(i).getId()+1)));
+				choixStrats.add(new JLabel("Joueur n°"+(int)(game.etatJeu.getBombermans().get(i).getId()+1)));
 				listStrat.add(liste);
 				choixStrats.add(liste);
 			}
