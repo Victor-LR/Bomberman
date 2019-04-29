@@ -10,20 +10,27 @@ Bugs Actuels :
 - 2 Lorsqu'un Bbomberman meurt les bombes lui appartenant dissparraissent alors qu'elles devraient normalement finir leur boucle d'état (régler)
 - 3 Si un Bomberman prend un item de changement de range les bombes déjà posées sont affectés directement (régler)
 
-- 4 Si au moins deux bombermans prennent un malus swap en même temps PLANTAGE !!
+- 4 Si au moins deux bombermans prennent un malus swap en même temps PLANTAGE !! (régler)
+      Lorsque que le bomberman malade swap et qu'il prend une direction qui n'est pas "légale" dans sa nouvelle position, le jeu plante.
 
 - 5 Manque de fluidité sur les déplacemnt (régler + ou -)
 - 6 Priorité du premier bomberman construit sur un autre au moment d' un duel, renvoie au bugue 2 du 12/04/19 (régler)
 - 7 Quand on intéragie avec le menu (pause,restart ...) les touches ne sont plus recconnues. (régler)
 - 8 Certaines maladies doivent être revues (régler)
 
-- 9 Lors de la mort d'un bomberman si celui-ci pause une bombe à la frame de sa disparition et que la bombe pausée est prise dans une explosion en chaîne alors l'image de l'explosion freez
-- 10 Un bomberman peu encore se bloquer (probleme thread) si il décide de bouger au moment ou un bomberman vient de poser une  bombe dans la direction de son mouvement.
+- 9 Lors de la mort d'un bomberman si celui-ci pause une bombe à la frame de sa disparition et que la bombe pausée est prise dans une explosion en chaîne alors l'image de l'explosion freez. (régler)
+- 10 Un bomberman peu encore se bloquer (probleme thread) si il décide de bouger au moment ou un bomberman vient de poser une  bombe dans la direction de son mouvement. (régler)
 
 - 11 Perte de focus au restart, pour les touches (régler)
 - 12 Les bombes explose bcps trop rapidement vis à vis de leur implémentation. (Nous ne savons pas d'où cela pourratit provenir). Ce problème n'est arrivé que depuis la choix de stage. (régler)
 - 13 perte de fludité de mouvement au moment du release des touches ( répéter une même touche rapidement).
-- 14 Problèmes de chooseAction qui ne fonctionne pas parfaitement quand un agent choisi une direction et que la position futur est prise par un autre agent au moment du déplacement (reference au bug 10)
+- 14 Problèmes de chooseAction qui ne fonctionne pas parfaitement quand un agent choisi une direction et que la position futur est prise par un autre agent au moment du déplacement (reference au bug 10).
+
+Problème stratégies : 
+
+A_items : Quand le bomberman doit prendre un item il se positionne d'abord sur l'axe x puis se dirige vers celui des y. Si il y a un obstacle entre lui et l'item, celui répete le même mouvement (se bloque).
+B/C : Quand tout les bombermans disposent de ces stratégies le pourcentage de chance qu'ils se tuent est minime voir innexistant.
+Lorsqu'un bomberman est en danger il se met en sécurité et attend que celui disparaisse (bombe à portée d'explosion). Cette dynamique peut engendrer un blocage des bombermans, donc ex aequo
 
 1/04/19:
 
