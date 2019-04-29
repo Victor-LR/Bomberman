@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import objets.Objet_Bomb;
 import map.GameState;
 import map.Map;
-import agents.Agent;
 import agents.AgentAction;
 import agents.Agent_Bomberman;
 
@@ -18,9 +17,9 @@ public class Strategie_A extends Strategie {
 	
 	@Override
 	public AgentAction action() {
-		AgentAction Action = null;//new AgentAction(0);
+//		AgentAction Action = null;//new AgentAction(0);
 		ArrayList<AgentAction> listAction = new ArrayList<AgentAction>();
-		ArrayList<Agent> ennemies = getEtat().getEnnemies();
+//		ArrayList<Agent> ennemies = getEtat().getEnnemies();
 		ArrayList<Agent_Bomberman> bombermans = getEtat().getBombermans();
 		ArrayList<Objet_Bomb> bombes = getEtat().getBombes();
 		
@@ -88,7 +87,8 @@ public class Strategie_A extends Strategie {
 			if (getEtat().isLegalMoveBbm(new AgentAction(i), getAgent()))
 				listAction.add(new AgentAction(i));
 		}		
-		return(listAction.get((int)(Math.random()*listAction.size())));
+		if(listAction.size() == 0) return new AgentAction(Map.STOP);
+		else return(listAction.get((int)(Math.random()*listAction.size())));
 		//return new AgentAction(Map.STOP);
 	}
 

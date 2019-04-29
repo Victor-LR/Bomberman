@@ -86,6 +86,7 @@ public class Cadre_multi extends JFrame {
 				//dispose();
 				Cadre_menu fen = new Cadre_menu();//BbmG.getMap().getFilename());
 				fen.setVisible(true);
+				dispose();
 				
 			}
 		});

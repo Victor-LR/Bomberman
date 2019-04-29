@@ -101,7 +101,8 @@ public class Agent_Bomberman extends Agent {
 				}
 			}		
 			this.nbActions = listAction.size();
-			return(listAction.get((int)(Math.random()*this.nbActions)));
+			if(nbActions == 0) return  new AgentAction(Map.STOP);
+			else return(listAction.get((int)(Math.random()*this.nbActions)));
 		default:
 			return new AgentAction(Map.STOP);
 		}

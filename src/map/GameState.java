@@ -93,14 +93,14 @@ public class GameState {
 			return false;
 		else return true;
 	}
-	
+	 
 	//Verifie si l'action de déplacement est possible à l'état courant pour un Bomberman
 	
 	public boolean isLegalMoveBbm(AgentAction actionbbm, Agent_Bomberman bbm){
 		int x = actionbbm.getVx();
 		int y = actionbbm.getVy();
 			
-		if(map.isWall(bbm.getX()+x, bbm.getY()+y) || map.isBrokable_Wall(bbm.getX()+x, bbm.getY()+y) || isBombe(bbm.getX()+x, bbm.getY()+y))
+		if(map.isWall(bbm.getX()+x, bbm.getY()+y) || map.isBrokable_Wall(bbm.getX()+x, bbm.getY()+y) || isBombe(bbm.getX()+x, bbm.getY()+y) || isBomberman(bbm.getId(),bbm.getX()+x, bbm.getY()+y))
 			return false;
 		else return true;
 	}

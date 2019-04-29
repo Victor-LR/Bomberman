@@ -33,7 +33,7 @@ public class Cadre_menu extends JFrame{
 	
 	public Cadre_menu() {
 		
-		
+		this.setSize(550, 450);
 		this.setLocationRelativeTo(null);
 		this.setTitle("Menu Jeu Bomberman");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,7 +78,7 @@ public class Cadre_menu extends JFrame{
 		
 		BbmG.init();
 		review = new Review(BbmG);
-		this.setSize(550, 450);
+		
 		
 		choixStrats.setLayout(new GridLayout(BbmG.etatJeu.getBombermans().size(),2));
 		
@@ -260,7 +260,7 @@ public class Cadre_menu extends JFrame{
 	
 	liste_lay.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent evenement) {
-			setSize(550,300);
+			setSize(550,450);
 			listStrat = new ArrayList<JComboBox<String>>();
 			remove(choixStrats);
 			choixStrats = new JPanel();
@@ -289,7 +289,7 @@ public class Cadre_menu extends JFrame{
 			
 			review = new Review(game);
 			add("Center",review);
-			setSize(551,300);
+			setSize(551,450);
 			}
 		});
 	}
