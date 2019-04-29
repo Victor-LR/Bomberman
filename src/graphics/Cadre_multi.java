@@ -43,7 +43,9 @@ public class Cadre_multi extends JFrame {
 		
 		int[] id_du_gagnant = new int[7];
 		for(int j = 0 ; j < L_BbmG.size(); j++){
-			id_du_gagnant[L_BbmG.get(j).etatJeu.getIdGagnant()] +=1;
+			if(!L_BbmG.get(j).etatJeu.isPlantage())
+				id_du_gagnant[L_BbmG.get(j).etatJeu.getIdGagnant()] +=1;
+			else id_du_gagnant[6] += 1;
 			
 		}
 

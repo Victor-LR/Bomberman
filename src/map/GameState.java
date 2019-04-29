@@ -34,6 +34,7 @@ public class GameState {
 
 	private String winner =null;
 	private int idGagnant = 6;
+	private boolean plantage = true;
 	
 	private int[] strats;
 	
@@ -454,7 +455,7 @@ public class GameState {
 				
 				if(!bomberman.isDead()) {
 					
-					
+		
 										
 					//System.out.println(bombermanAction.getAction());
 				
@@ -501,7 +502,6 @@ public class GameState {
 					if(bomberman.isSick() & bomberman.getEtatSick() <=20) {
 					
 						if (bomberman.getMaladie() == 0 && bomberman.getNbActions() > 2) {
-//							System.out.println("diarrhée");
 							this.placeBomb(bomberman);
 						}
 						
@@ -516,11 +516,13 @@ public class GameState {
 							
 							
 						   if(bomberman.getMaladie() == 2 && bombermans.size() > nbDead-1 ) {
-//								System.out.println("swap");
 								int bb;
-								do {
-									bb = (int) (Math.random()*bombermans.size());
-								}while(bb==i || bombermans.get(bb).isDead());
+								ArrayList<Agent_Bomberman> legal_bbm = new ArrayList<Agent_Bomberman>() ; 
+								for(int j = 0 ; j < bombermans.size(); j++){
+									if(j != i && !bombermans.get(j).isDead())  legal_bbm.add(bombermans.get(j));
+								}
+								
+								bb = (int) (Math.random()*legal_bbm.size());
 								
 								int aux_x = bomberman.getX();
 								int aux_y = bomberman.getY();
@@ -532,12 +534,11 @@ public class GameState {
 								bombermans.get(bb).setY(aux_y);
 							}
 						   bomberman.setSick(false);
-						   //setNbSwap(0);
 						   bomberman.setMaladie(10);
 						 }
 				
 				
-				bombermanAction = bomberman.chooseAction(this);
+					bombermanAction = bomberman.chooseAction(this);
 
 				if (bombermanAction.getAction() < 5){
 						
@@ -621,12 +622,15 @@ public class GameState {
 			game.etatJeu.setEnd(true);
 			this.winner = "GAME OVER";
 			this.idGagnant = 5;
+			this.plantage = false;
 		}
 		
 		if(compteBbm == 1 & nbBbm == 1 & compteEnn == 0) {
 			setEnd(true);
 			game.etatJeu.setEnd(true);
 			winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant Partie SOLO";
+			this.plantage = false;
+			
 		}
 		
 		
@@ -634,6 +638,7 @@ public class GameState {
 			setEnd(true);
 			game.etatJeu.setEnd(true);
 			winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant";
+			this.plantage = false;
 		}
 		
 		if(compteBbm == 0 & nbBbm != 1) {
@@ -641,6 +646,7 @@ public class GameState {
 			game.etatJeu.setEnd(true);
 			winner = "GAME OVER";
 			this.idGagnant =5;
+			this.plantage = false;
 		}
 		
 		
@@ -653,6 +659,7 @@ public class GameState {
 				game.etatJeu.setEnd(true);
 				this.winner = "GAME OVER";
 				this.idGagnant =5;
+				this.plantage = false;
 
 			}
 			else{
@@ -681,21 +688,26 @@ public class GameState {
 				
 				
 				if( compteExec < 2 ) {
+					setEnd(true);
 					this.winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant par score = " + maxScore ;
+					this.plantage = false;
 				}
 				else {
+					setEnd(true);
 					this.winner = "Il y a Ex aequo ";
 					this.idGagnant = 5;
+					this.plantage = false;
 				}
 			}
 			
 		}
-		if (winner != null) System.out.println(this.winner);
+		//if (winner != null) System.out.println(this.winner);
 }
 	
 
 	//Renvoie un agent en fonction d'un id 
 	
+
 
 	public Agent getAgent(GameState etat, int agentId){
 		
@@ -766,6 +778,10 @@ public class GameState {
 		return strats;
 	}
 
+
+	public boolean isPlantage() {
+		return plantage;
+	}
 	
 	public void setStrats(int[] strats) {
 		this.strats = strats;
