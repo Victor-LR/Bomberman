@@ -2,25 +2,16 @@ package map;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.JFrame;
-
 import agents.Agent;
 import agents.AgentAction;
 import agents.AgentType;
 import agents.Agent_Bomberman;
 import agents.ColorBomberman;
 import game.BombermanGame;
-import graphics.Cadre_gagnant;
 import key.Keys;
 import key.Keys_2;
 import objets.Objet;
 import objets.Objet_Bomb;
-import strategies.Strategie_A;
-import strategies.Strategie_A_items;
-import strategies.Strategie_B;
-import strategies.Strategie_C;
-import strategies.Strategie_PVE;
-import strategies.Strategie_PVP;
 import objets.ObjetType;
 
 public class GameState {
@@ -38,7 +29,6 @@ public class GameState {
 	private static Random numberGenerator = new Random();
 	private int pourcentage = 25;
 	private boolean end;
-	private JFrame cadre_jeu = null;
 	
 	private  BombermanGame BbmG;
 
@@ -47,7 +37,9 @@ public class GameState {
 	
 	private int[] strats;
 	
+	
 	//Construit l'état courant de la map
+
 
 
 	public GameState(Map map,BombermanGame BbmG){
@@ -462,7 +454,7 @@ public class GameState {
 				
 				if(!bomberman.isDead()) {
 					
-					bombermanAction = bomberman.chooseAction(this);
+					
 										
 					//System.out.println(bombermanAction.getAction());
 				
@@ -487,7 +479,7 @@ public class GameState {
 							
 						}else if((item.getType() == ObjetType.SKULL & !bomberman.isInvincible())) {
 							
-							bomberman.setMaladie((int) (Math.random()*2));//(int) (Math.random()*3));
+							bomberman.setMaladie((int) (Math.random()*3));//(int) (Math.random()*3));
 //							System.out.println("	maladie : "+bomberman.getMaladie());
 							bomberman.setSick(true);
 							bomberman.setEtatSick(0);
@@ -523,7 +515,7 @@ public class GameState {
 						}
 							
 							
-						   if(bomberman.getMaladie() == 2 && bombermans.size() > nbDead-1) {
+						   if(bomberman.getMaladie() == 2 && bombermans.size() > nbDead-1 ) {
 //								System.out.println("swap");
 								int bb;
 								do {
@@ -540,11 +532,12 @@ public class GameState {
 								bombermans.get(bb).setY(aux_y);
 							}
 						   bomberman.setSick(false);
+						   //setNbSwap(0);
 						   bomberman.setMaladie(10);
 						 }
 				
 				
-				
+				bombermanAction = bomberman.chooseAction(this);
 
 				if (bombermanAction.getAction() < 5){
 						
@@ -751,10 +744,6 @@ public class GameState {
 		return end = e;
 	}
 	
-	public void setC_j(JFrame c_j) {
-		this.cadre_jeu = c_j;
-	}
-	
 	
 	public String getWinner() {
 		return winner;
@@ -784,4 +773,5 @@ public class GameState {
 			this.bombermans.get(i).setStrat(strats[i]);
 		}
 	}
+
 }

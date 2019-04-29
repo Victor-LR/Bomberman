@@ -32,7 +32,6 @@ import objets.Objet_Bomb;
 //import game.Game;
 import game.BombermanGame;
 import game.GameObserver;
-import map.GameState;
 import map.Map;
 
 //Création graphique de la carte et des agents
@@ -72,8 +71,6 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		this.BbmG = BbmG;
 		
 		this.cadre_jeu = c_j;
-		
-		BbmG.etatJeu.setC_j(cadre_jeu);
 
 		BbmG.addObserver((GameObserver)this);
 //		Jeu_actuel = BbmG.etatJeu;

@@ -1,10 +1,7 @@
 package agents;
 
-import java.io.File;
 import java.util.ArrayList;
 
-import key.Keys;
-import key.Keys_2;
 
 import map.GameState;
 import map.Map;
