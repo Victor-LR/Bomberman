@@ -73,6 +73,7 @@ public class GameState {
 			Agent a = new Agent(AgentType.ENNEMY, map.getEnnemy_start_x(i), map.getEnnemy_start_y(i) );
 			ennemies.add(a);
 		}
+		
 
 	}
 	
@@ -789,5 +790,6 @@ public class GameState {
 			this.bombermans.get(i).setStrat(strats[i]);
 		}
 	}
+	
 
 }

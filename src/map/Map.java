@@ -33,6 +33,8 @@ public class Map {
 	protected ArrayList<Integer> bomberman_start_x;
 	protected ArrayList<Integer> bomberman_start_y;
 	
+	private boolean stuck[][];
+	
 	
 	public Map(String filename) throws Exception{
 		
@@ -126,6 +128,15 @@ public class Map {
 		}catch (Exception e){
 			System.out.println("Erreur : "+e.getMessage());
 		}
+		
+
+		stuck = new boolean [ getSizeX()][ getSizeY()];
+		
+		for(int x = 0; x< getSizeX(); x++) {
+			for(int y = 0; y< getSizeY(); y++) {
+				stuck[x][y] = false;
+			}
+		}
 	}
 	
 	
@@ -135,7 +146,7 @@ public class Map {
 	//renvoie la hauteur de la map
 	public int getSizeY() {return(size_y);}
 	
-	//verifie à un ecoordonnée si c'est un mur ou non 
+	//verifie à une coordonnée si c'est un mur ou non 
 	public boolean isWall(int x,int y) 
 	{
 		assert((x>=0) && (x<size_x));
@@ -220,5 +231,22 @@ public class Map {
 		 bomb_start_x.add(x);
 		 bomb_start_y.add(y);
 	}*/
+	
+//////////////////////STUCK//////////////////////
+	
+	public boolean isStuck(int x,int y) 
+	{
+		assert((x>=0) && (x<getSizeX()));
+		assert((y>=0) && (y<getSizeY()));
+		return(stuck[x][y]);
+	}
+	
+	public boolean[][] getStuck() {
+		return stuck;
+	}
+
+	public void setStuck(int x, int y) {
+		this.stuck[x][y] = true;
+	}
 	
 }
