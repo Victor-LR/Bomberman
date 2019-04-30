@@ -150,13 +150,13 @@ public class Strategie_D extends Strategie{
 														
 														if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
 															listAction.add(new AgentAction(Map.NORTH ));
-														else { 
-															if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
-																listAction.add(new AgentAction(Map.SOUTH ));
-															else
-																if (getEtat().isLegalMoveBbm(new AgentAction(Map.WEST), getAgent()))
-																	listAction.add(new AgentAction(Map.WEST ));
-														}
+														if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
+															listAction.add(new AgentAction(Map.SOUTH ));
+														
+														if (!getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
+															if (getEtat().isLegalMoveBbm(new AgentAction(Map.WEST), getAgent()))
+																listAction.add(new AgentAction(Map.WEST ));
+														
 														
 														break;
 														
@@ -164,13 +164,13 @@ public class Strategie_D extends Strategie{
 														
 														if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
 															listAction.add(new AgentAction(Map.NORTH ));
-														else { 
-															if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
-																listAction.add(new AgentAction(Map.SOUTH ));
-															else
-																if (getEtat().isLegalMoveBbm(new AgentAction(Map.WEST), getAgent()))
-																	listAction.add(new AgentAction(Map.WEST ));
-														}
+														if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
+															listAction.add(new AgentAction(Map.SOUTH ));
+														
+														if (!getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
+															if (getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()))
+																listAction.add(new AgentAction(Map.EAST ));
+														
 														
 														break;
 														
@@ -178,13 +178,12 @@ public class Strategie_D extends Strategie{
 														
 														if (getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()))
 															listAction.add(new AgentAction(Map.EAST));
-														else {
-															if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
+														if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
 																listAction.add(new AgentAction( Map.WEST ));
-															else
-																if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
-																	listAction.add(new AgentAction(Map.SOUTH ));
-														}
+														
+														if (!getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.WEST ), getAgent()))
+															if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
+																listAction.add(new AgentAction(Map.SOUTH ));
 														
 														break;
 														
@@ -192,13 +191,13 @@ public class Strategie_D extends Strategie{
 														
 														if (getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()))
 															listAction.add(new AgentAction(Map.EAST));
-														else {
-															if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
-																listAction.add(new AgentAction( Map.WEST ));
-															else
-																if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH), getAgent()))
-																	listAction.add(new AgentAction(Map.NORTH ));
-														}
+														if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
+															listAction.add(new AgentAction( Map.WEST ));
+														
+														if (!getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.WEST ), getAgent()))
+															if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH), getAgent()))
+																listAction.add(new AgentAction(Map.NORTH ));
+														
 														
 														break;
 													default : listAction.add(new AgentAction( Map.STOP ));
@@ -219,13 +218,13 @@ public class Strategie_D extends Strategie{
 													
 													if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
 														listAction.add(new AgentAction(Map.NORTH ));
-													else { 
-														if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
-															listAction.add(new AgentAction(Map.SOUTH ));
-														else
-															if (getEtat().isLegalMoveBbm(new AgentAction(Map.WEST), getAgent()))
-																listAction.add(new AgentAction(Map.WEST ));
-													}
+													if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
+														listAction.add(new AgentAction(Map.SOUTH ));
+													
+													if (!getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
+														if (getEtat().isLegalMoveBbm(new AgentAction(Map.WEST), getAgent()))
+															listAction.add(new AgentAction(Map.WEST ));
+													
 													
 													break;
 													
@@ -233,13 +232,13 @@ public class Strategie_D extends Strategie{
 													
 													if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
 														listAction.add(new AgentAction(Map.NORTH ));
-													else { 
-														if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
-															listAction.add(new AgentAction(Map.SOUTH ));
-														else
-															if (getEtat().isLegalMoveBbm(new AgentAction(Map.WEST), getAgent()))
-																listAction.add(new AgentAction(Map.WEST ));
-													}
+													if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
+														listAction.add(new AgentAction(Map.SOUTH ));
+													
+													if (!getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
+														if (getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()))
+															listAction.add(new AgentAction(Map.EAST ));
+													
 													
 													break;
 													
@@ -247,13 +246,12 @@ public class Strategie_D extends Strategie{
 													
 													if (getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()))
 														listAction.add(new AgentAction(Map.EAST));
-													else {
-														if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
+													if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
 															listAction.add(new AgentAction( Map.WEST ));
-														else
-															if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
-																listAction.add(new AgentAction(Map.SOUTH ));
-													}
+													
+													if (!getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.WEST ), getAgent()))
+														if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
+															listAction.add(new AgentAction(Map.SOUTH ));
 													
 													break;
 													
@@ -261,13 +259,13 @@ public class Strategie_D extends Strategie{
 													
 													if (getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()))
 														listAction.add(new AgentAction(Map.EAST));
-													else {
-														if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
-															listAction.add(new AgentAction( Map.WEST ));
-														else
-															if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH), getAgent()))
-																listAction.add(new AgentAction(Map.NORTH ));
-													}
+													if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
+														listAction.add(new AgentAction( Map.WEST ));
+													
+													if (!getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.WEST ), getAgent()))
+														if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH), getAgent()))
+															listAction.add(new AgentAction(Map.NORTH ));
+													
 													
 													break;
 												default : listAction.add(new AgentAction( Map.STOP ));
@@ -303,13 +301,13 @@ public class Strategie_D extends Strategie{
 													
 													if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
 														listAction.add(new AgentAction(Map.NORTH ));
-													else { 
-														if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
-															listAction.add(new AgentAction(Map.SOUTH ));
-														else
-															if (getEtat().isLegalMoveBbm(new AgentAction(Map.WEST), getAgent()))
-																listAction.add(new AgentAction(Map.WEST ));
-													}
+													if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
+														listAction.add(new AgentAction(Map.SOUTH ));
+													
+													if (!getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
+														if (getEtat().isLegalMoveBbm(new AgentAction(Map.WEST), getAgent()))
+															listAction.add(new AgentAction(Map.WEST ));
+													
 													
 													break;
 													
@@ -317,13 +315,13 @@ public class Strategie_D extends Strategie{
 													
 													if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
 														listAction.add(new AgentAction(Map.NORTH ));
-													else { 
-														if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
-															listAction.add(new AgentAction(Map.SOUTH ));
-														else
-															if (getEtat().isLegalMoveBbm(new AgentAction(Map.WEST), getAgent()))
-																listAction.add(new AgentAction(Map.WEST ));
-													}
+													if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
+														listAction.add(new AgentAction(Map.SOUTH ));
+													
+													if (!getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
+														if (getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()))
+															listAction.add(new AgentAction(Map.EAST ));
+													
 													
 													break;
 													
@@ -331,13 +329,12 @@ public class Strategie_D extends Strategie{
 													
 													if (getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()))
 														listAction.add(new AgentAction(Map.EAST));
-													else {
-														if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
+													if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
 															listAction.add(new AgentAction( Map.WEST ));
-														else
-															if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
-																listAction.add(new AgentAction(Map.SOUTH ));
-													}
+													
+													if (!getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.WEST ), getAgent()))
+														if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
+															listAction.add(new AgentAction(Map.SOUTH ));
 													
 													break;
 													
@@ -345,13 +342,13 @@ public class Strategie_D extends Strategie{
 													
 													if (getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()))
 														listAction.add(new AgentAction(Map.EAST));
-													else {
-														if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
-															listAction.add(new AgentAction( Map.WEST ));
-														else
-															if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH), getAgent()))
-																listAction.add(new AgentAction(Map.NORTH ));
-													}
+													if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
+														listAction.add(new AgentAction( Map.WEST ));
+													
+													if (!getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.WEST ), getAgent()))
+														if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH), getAgent()))
+															listAction.add(new AgentAction(Map.NORTH ));
+													
 													
 													break;
 												default : listAction.add(new AgentAction( Map.STOP ));
@@ -424,13 +421,13 @@ public class Strategie_D extends Strategie{
 												
 												if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
 													listAction.add(new AgentAction(Map.NORTH ));
-												else { 
-													if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
-														listAction.add(new AgentAction(Map.SOUTH ));
-													else
-														if (getEtat().isLegalMoveBbm(new AgentAction(Map.WEST), getAgent()))
-															listAction.add(new AgentAction(Map.WEST ));
-												}
+												if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
+													listAction.add(new AgentAction(Map.SOUTH ));
+												
+												if (!getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
+													if (getEtat().isLegalMoveBbm(new AgentAction(Map.WEST), getAgent()))
+														listAction.add(new AgentAction(Map.WEST ));
+												
 												
 												break;
 												
@@ -438,13 +435,13 @@ public class Strategie_D extends Strategie{
 												
 												if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
 													listAction.add(new AgentAction(Map.NORTH ));
-												else { 
-													if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
-														listAction.add(new AgentAction(Map.SOUTH ));
-													else
-														if (getEtat().isLegalMoveBbm(new AgentAction(Map.WEST), getAgent()))
-															listAction.add(new AgentAction(Map.WEST ));
-												}
+												if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
+													listAction.add(new AgentAction(Map.SOUTH ));
+												
+												if (!getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
+													if (getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()))
+														listAction.add(new AgentAction(Map.EAST ));
+												
 												
 												break;
 												
@@ -452,13 +449,12 @@ public class Strategie_D extends Strategie{
 												
 												if (getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()))
 													listAction.add(new AgentAction(Map.EAST));
-												else {
-													if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
+												if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
 														listAction.add(new AgentAction( Map.WEST ));
-													else
-														if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
-															listAction.add(new AgentAction(Map.SOUTH ));
-												}
+												
+												if (!getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.WEST ), getAgent()))
+													if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
+														listAction.add(new AgentAction(Map.SOUTH ));
 												
 												break;
 												
@@ -466,13 +462,13 @@ public class Strategie_D extends Strategie{
 												
 												if (getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()))
 													listAction.add(new AgentAction(Map.EAST));
-												else {
-													if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
-														listAction.add(new AgentAction( Map.WEST ));
-													else
-														if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH), getAgent()))
-															listAction.add(new AgentAction(Map.NORTH ));
-												}
+												if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
+													listAction.add(new AgentAction( Map.WEST ));
+												
+												if (!getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.WEST ), getAgent()))
+													if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH), getAgent()))
+														listAction.add(new AgentAction(Map.NORTH ));
+												
 												
 												break;
 											default : listAction.add(new AgentAction( Map.STOP ));
@@ -492,13 +488,13 @@ public class Strategie_D extends Strategie{
 											
 											if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
 												listAction.add(new AgentAction(Map.NORTH ));
-											else { 
-												if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
-													listAction.add(new AgentAction(Map.SOUTH ));
-												else
-													if (getEtat().isLegalMoveBbm(new AgentAction(Map.WEST), getAgent()))
-														listAction.add(new AgentAction(Map.WEST ));
-											}
+											if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
+												listAction.add(new AgentAction(Map.SOUTH ));
+											
+											if (!getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
+												if (getEtat().isLegalMoveBbm(new AgentAction(Map.WEST), getAgent()))
+													listAction.add(new AgentAction(Map.WEST ));
+											
 											
 											break;
 											
@@ -506,13 +502,13 @@ public class Strategie_D extends Strategie{
 											
 											if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
 												listAction.add(new AgentAction(Map.NORTH ));
-											else { 
-												if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
-													listAction.add(new AgentAction(Map.SOUTH ));
-												else
-													if (getEtat().isLegalMoveBbm(new AgentAction(Map.WEST), getAgent()))
-														listAction.add(new AgentAction(Map.WEST ));
-											}
+											if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
+												listAction.add(new AgentAction(Map.SOUTH ));
+											
+											if (!getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
+												if (getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()))
+													listAction.add(new AgentAction(Map.EAST ));
+											
 											
 											break;
 											
@@ -520,13 +516,12 @@ public class Strategie_D extends Strategie{
 											
 											if (getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()))
 												listAction.add(new AgentAction(Map.EAST));
-											else {
-												if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
+											if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
 													listAction.add(new AgentAction( Map.WEST ));
-												else
-													if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
-														listAction.add(new AgentAction(Map.SOUTH ));
-											}
+											
+											if (!getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.WEST ), getAgent()))
+												if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
+													listAction.add(new AgentAction(Map.SOUTH ));
 											
 											break;
 											
@@ -534,13 +529,13 @@ public class Strategie_D extends Strategie{
 											
 											if (getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()))
 												listAction.add(new AgentAction(Map.EAST));
-											else {
-												if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
-													listAction.add(new AgentAction( Map.WEST ));
-												else
-													if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH), getAgent()))
-														listAction.add(new AgentAction(Map.NORTH ));
-											}
+											if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
+												listAction.add(new AgentAction( Map.WEST ));
+											
+											if (!getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.WEST ), getAgent()))
+												if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH), getAgent()))
+													listAction.add(new AgentAction(Map.NORTH ));
+											
 											
 											break;
 										default : listAction.add(new AgentAction( Map.STOP ));
@@ -568,6 +563,7 @@ public class Strategie_D extends Strategie{
 								listAction.add(new AgentAction(5));
 							else {
 								if(new_ec < ecart ) {
+									//System.out.println(			ecart);
 									if (getEtat().isLegalMoveBbm(new AgentAction(i), getAgent()) & !getEtat().getMap().isStuck(new AgentAction(i).getVx()+getAgent().getX(),new AgentAction(i).getVy()+getAgent().getY()))
 										listAction.add(new AgentAction(i));
 									
@@ -580,13 +576,13 @@ public class Strategie_D extends Strategie{
 											
 											if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
 												listAction.add(new AgentAction(Map.NORTH ));
-											else { 
-												if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
-													listAction.add(new AgentAction(Map.SOUTH ));
-												else
-													if (getEtat().isLegalMoveBbm(new AgentAction(Map.WEST), getAgent()))
-														listAction.add(new AgentAction(Map.WEST ));
-											}
+											if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
+												listAction.add(new AgentAction(Map.SOUTH ));
+											
+											if (!getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
+												if (getEtat().isLegalMoveBbm(new AgentAction(Map.WEST), getAgent()))
+													listAction.add(new AgentAction(Map.WEST ));
+											
 											
 											break;
 											
@@ -594,13 +590,13 @@ public class Strategie_D extends Strategie{
 											
 											if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
 												listAction.add(new AgentAction(Map.NORTH ));
-											else { 
-												if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
-													listAction.add(new AgentAction(Map.SOUTH ));
-												else
-													if (getEtat().isLegalMoveBbm(new AgentAction(Map.WEST), getAgent()))
-														listAction.add(new AgentAction(Map.WEST ));
-											}
+											if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
+												listAction.add(new AgentAction(Map.SOUTH ));
+											
+											if (!getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH ), getAgent()))
+												if (getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()))
+													listAction.add(new AgentAction(Map.EAST ));
+											
 											
 											break;
 											
@@ -608,13 +604,12 @@ public class Strategie_D extends Strategie{
 											
 											if (getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()))
 												listAction.add(new AgentAction(Map.EAST));
-											else {
-												if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
+											if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
 													listAction.add(new AgentAction( Map.WEST ));
-												else
-													if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
-														listAction.add(new AgentAction(Map.SOUTH ));
-											}
+											
+											if (!getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.WEST ), getAgent()))
+												if (getEtat().isLegalMoveBbm(new AgentAction(Map.SOUTH), getAgent()))
+													listAction.add(new AgentAction(Map.SOUTH ));
 											
 											break;
 											
@@ -622,13 +617,13 @@ public class Strategie_D extends Strategie{
 											
 											if (getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()))
 												listAction.add(new AgentAction(Map.EAST));
-											else {
-												if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
-													listAction.add(new AgentAction( Map.WEST ));
-												else
-													if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH), getAgent()))
-														listAction.add(new AgentAction(Map.NORTH ));
-											}
+											if (getEtat().isLegalMoveBbm(new AgentAction( Map.WEST), getAgent()))
+												listAction.add(new AgentAction( Map.WEST ));
+											
+											if (!getEtat().isLegalMoveBbm(new AgentAction(Map.EAST), getAgent()) & !getEtat().isLegalMoveBbm(new AgentAction(Map.WEST ), getAgent()))
+												if (getEtat().isLegalMoveBbm(new AgentAction(Map.NORTH), getAgent()))
+													listAction.add(new AgentAction(Map.NORTH ));
+											
 											
 											break;
 										default : listAction.add(new AgentAction( Map.STOP ));
