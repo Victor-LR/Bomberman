@@ -7,6 +7,7 @@ import map.GameState;
 import map.Map;
 import strategies.Strategie;
 import strategies.Strategie_A;
+import strategies.Strategie_A_PVP;
 import strategies.Strategie_A_items;
 import strategies.Strategie_B;
 import strategies.Strategie_C;
@@ -59,12 +60,18 @@ public class Agent_Bomberman extends Agent {
 		//Controllé par le joueur
 		case 1:
 			action = etatjeu.getKey_action().getKaction();
-			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
+			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)){
+				//etatjeu.getKey_action().setKaction(new AgentAction(Map.STOP));
+				return action;
+			}
 			else return new AgentAction(Map.STOP);
 		
 		case 2:
 			action = etatjeu.getKey_action_2().getKaction();
-			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)) return action;
+			if (etatjeu.isLegalMoveBbm(action, this) || (action.getAction() == 5)){
+				//etatjeu.getKey_action_2().setKaction(new AgentAction(Map.STOP));
+				return action;
+			}
 			else return new AgentAction(Map.STOP);
 		
 		//Action déterminé par une stratégie
@@ -88,6 +95,9 @@ public class Agent_Bomberman extends Agent {
 			return this.strategie.action();
 		case 9:
 			this.strategie = new Strategie_D(etatjeu,this);
+			return this.strategie.action();
+		case 10:
+			this.strategie = new Strategie_A_PVP(etatjeu,this);
 			return this.strategie.action();
 			
 		//Comportement aléatoire

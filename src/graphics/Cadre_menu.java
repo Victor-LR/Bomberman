@@ -82,7 +82,7 @@ public class Cadre_menu extends JFrame{
 		
 		choixStrats.setLayout(new GridLayout(BbmG.etatJeu.getBombermans().size(),2));
 		
-		String[] nomStrat = {"Auto","Joueur1","Joueur2","A_Items","A","B","C","PVE","PVP","D"};
+		String[] nomStrat = {"Auto","Joueur1","Joueur2","A_Items","A","B","C","PVE","PVP","D","A PVP"};
 		
 		for(int i =0; i<BbmG.etatJeu.getBombermans().size();i++) {
 			JComboBox<String> liste =  new JComboBox<String>(nomStrat);
@@ -161,6 +161,10 @@ public class Cadre_menu extends JFrame{
 						case "D":
 							strategies[i]=9;
 						break;
+						
+						case "A PVP":
+							strategies[i]=10;
+						break;
 					}
 			
 
@@ -235,6 +239,10 @@ public class Cadre_menu extends JFrame{
 							case "D":
 								strategies[j]=9;
 							break;
+							
+							case "A PVP":
+								strategies[j]=10;
+							break;
 						}
 				
 					}
@@ -290,7 +298,7 @@ public class Cadre_menu extends JFrame{
 			
 			choixStrats.setLayout(new GridLayout(game.etatJeu.getBombermans().size(),2));
 			
-			String[] nomStrat = {"Auto","Joueur1","Joueur2","A_Items","A","B","C","PVE","PVP","D"};
+			String[] nomStrat = {"Auto","Joueur1","Joueur2","A_Items","A","B","C","PVE","PVP","D","A PVP"};
 			
 			for(int i =0; i<game.etatJeu.getBombermans().size();i++) {
 				
