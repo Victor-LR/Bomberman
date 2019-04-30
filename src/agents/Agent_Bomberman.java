@@ -10,6 +10,7 @@ import strategies.Strategie_A;
 import strategies.Strategie_A_items;
 import strategies.Strategie_B;
 import strategies.Strategie_C;
+import strategies.Strategie_D;
 import strategies.Strategie_PVE;
 import strategies.Strategie_PVP;
 import agents.Agent;
@@ -84,6 +85,9 @@ public class Agent_Bomberman extends Agent {
 			return this.strategie.action();
 		case 8:
 			this.strategie = new Strategie_PVP(etatjeu,this);
+			return this.strategie.action();
+		case 9:
+			this.strategie = new Strategie_D(etatjeu,this);
 			return this.strategie.action();
 			
 		//Comportement aléatoire

@@ -27,9 +27,9 @@ public class Cadre_menu extends JFrame{
 	private JPanel choix = null;
 	private ArrayList<JComboBox<String>> listStrat = null;
 	
-	private int[] strategies = new int[10];
+	private int[] strategies = new int[100];
 	
-	private int nb_threads = 5000;
+	private int nb_threads = 1000;
 	
 	public Cadre_menu() {
 		
@@ -82,7 +82,7 @@ public class Cadre_menu extends JFrame{
 		
 		choixStrats.setLayout(new GridLayout(BbmG.etatJeu.getBombermans().size(),2));
 		
-		String[] nomStrat = {"Auto","Joueur1","Joueur2","A_Items","A","B","C","PVE","PVP"};
+		String[] nomStrat = {"Auto","Joueur1","Joueur2","A_Items","A","B","C","PVE","PVP","D"};
 		
 		for(int i =0; i<BbmG.etatJeu.getBombermans().size();i++) {
 			JComboBox<String> liste =  new JComboBox<String>(nomStrat);
@@ -157,6 +157,10 @@ public class Cadre_menu extends JFrame{
 						case "PVP":
 							strategies[i]=8;
 						break;
+							
+						case "D":
+							strategies[i]=9;
+						break;
 					}
 			
 
@@ -227,6 +231,10 @@ public class Cadre_menu extends JFrame{
 							case "PVP":
 								strategies[j]=8;
 							break;
+							
+							case "D":
+								strategies[j]=9;
+							break;
 						}
 				
 					}
@@ -282,7 +290,7 @@ public class Cadre_menu extends JFrame{
 			
 			choixStrats.setLayout(new GridLayout(game.etatJeu.getBombermans().size(),2));
 			
-			String[] nomStrat = {"Auto","Joueur1","Joueur2","A_Items","A","B","C","PVE","PVP"};
+			String[] nomStrat = {"Auto","Joueur1","Joueur2","A_Items","A","B","C","PVE","PVP","D"};
 			
 			for(int i =0; i<game.etatJeu.getBombermans().size();i++) {
 				
