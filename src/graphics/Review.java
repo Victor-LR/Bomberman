@@ -269,6 +269,14 @@ public class Review extends JPanel {
 		
 		
 	}
+
+	public int getTaille_y() {
+		return taille_y;
+	}
+
+	public int getTaille_x() {
+		return taille_x;
+	}
 	
 	
 }
