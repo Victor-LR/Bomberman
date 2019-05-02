@@ -232,5 +232,6 @@ Compte rendu rendez-vous avec Mr. Goudet:
             on chargerais une nouvelle map jusqu'à arriver à un boss et finir le jeu.
             - Après avoir tuer un autre bbm le bbm concerné gagne une vie lui permettant de resister à une 
             explosion de bombe, ceci est cumulable.
+            - Premier pas avec un réseaux neuronal (perceptron).
             
         
