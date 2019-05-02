@@ -21,6 +21,9 @@ import game.BombermanGame;
 public class Cadre_menu extends JFrame{
 
 	private static final long serialVersionUID = 1L;
+	
+	private BombermanGame BbmG = null;
+	
 	private JComboBox<File> liste_lay;
 	private JLabel choixStage;
 	private JButton jouer = null;
@@ -34,6 +37,7 @@ public class Cadre_menu extends JFrame{
 	private JMenu mode = null;
 	private JMenuItem campagne= null;
 	private JMenuItem normal = null;
+	private String content = null;
 	
 	private int[] strategies = new int[100];
 	
@@ -46,7 +50,7 @@ public class Cadre_menu extends JFrame{
 		this.setTitle("Menu Jeu Bomberman");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
-		BombermanGame BbmG = new BombermanGame();
+		BbmG = new BombermanGame();
 		
 		menu = new JMenuBar();
 		
@@ -93,7 +97,7 @@ public class Cadre_menu extends JFrame{
 		
 		choix.add(panelMap);
 		
-		String content = liste_lay.getSelectedItem().toString();
+		content = liste_lay.getSelectedItem().toString();
 		
 		try {
 			BbmG.loadFile(content);
@@ -140,6 +144,40 @@ public class Cadre_menu extends JFrame{
 			public void actionPerformed(ActionEvent evenement) {
 				panelMap.remove(choixStage);
 				panelMap.remove(liste_lay);
+				
+				listStrat = new ArrayList<JComboBox<String>>();
+				remove(choixStrats);
+				choixStrats = new JPanel();
+				remove(review);
+				
+				content = "./layout/alone.lay";
+				
+				try {
+					BbmG.loadFile(content);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				BbmG.init();
+				
+				choixStrats.setLayout(new GridLayout(BbmG.etatJeu.getBombermans().size(),2));
+				
+				String[] nomStrat = {"Auto","Joueur1","Joueur2","A_Items","A","B","C","PVE","PVP","D","A PVP"};
+				
+				for(int i =0; i<BbmG.etatJeu.getBombermans().size();i++) {
+					
+					JComboBox<String> liste =  new JComboBox<String>(nomStrat);
+					choixStrats.add(new JLabel("Joueur n°"+(int)(BbmG.etatJeu.getBombermans().get(i).getId()+1)));
+					listStrat.add(liste);
+					choixStrats.add(liste);
+				}
+				add("South",choixStrats);
+				
+				review = new Review(BbmG);
+				add("Center",review);
+				setSize(review.getTaille_x()*40, review.getTaille_y()*40+BbmG.etatJeu.getBombermans().size()*25+50);
+				setLocationRelativeTo(null);
+				
 				revalidate();
 				System.out.println("					test");
 			}
@@ -160,7 +198,7 @@ public class Cadre_menu extends JFrame{
 			public void actionPerformed(ActionEvent evenement) {
 				
 					try {
-						BbmG.loadFile((liste_lay.getSelectedItem().toString()));
+						BbmG.loadFile(content);
 						
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -235,12 +273,11 @@ public class Cadre_menu extends JFrame{
 			
 			public void actionPerformed(ActionEvent evenement) {
 				
-					String file =liste_lay.getSelectedItem().toString();
 					ArrayList<BombermanGame> L_BbmG = new ArrayList<BombermanGame>();
 					for (int i = 0 ; i < nb_threads ; i++){
 						BombermanGame un_bbmg = new BombermanGame();
 						try {
-							un_bbmg.loadFile(file);
+							un_bbmg.loadFile(content);
 	
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -335,9 +372,10 @@ public class Cadre_menu extends JFrame{
 				remove(choixStrats);
 				choixStrats = new JPanel();
 				remove(review);
+				content = liste_lay.getSelectedItem().toString();
 				BombermanGame game = new BombermanGame();
 				try {
-					game.loadFile((liste_lay.getSelectedItem().toString()));
+					game.loadFile(content);
 					
 				} catch (Exception e) {
 					e.printStackTrace();
