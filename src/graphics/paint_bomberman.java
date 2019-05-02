@@ -261,6 +261,9 @@ public class paint_bomberman extends JPanel implements GameObserver{
             case BLANC :
             	scales = new float[]{2 ,2, 2, 1.0f };
                 break;
+            case DEFAULT :
+            	scales = new float[]{1 ,1, 1, 1.0f };
+                break;
         }
 		
 		

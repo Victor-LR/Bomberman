@@ -21,7 +21,7 @@ public class Cadre_gagnant extends JFrame {
 		
 		cadre_jeu = c_j;
 		
-		this.setSize(200, 100);
+		this.setSize(300, 100);
 		this.setLocationRelativeTo(null);
 		this.setTitle("Fin du jeu");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,7 +29,7 @@ public class Cadre_gagnant extends JFrame {
 		
 		this.gagnant = new JLabel(winner);
 		
-			switch(id)
+			switch(id-2)
 	        {
 	            case 0 :
 	            	gagnant.setForeground(Color.blue);
@@ -47,6 +47,9 @@ public class Cadre_gagnant extends JFrame {
 	            	gagnant.setForeground(Color.white);
 	                break;
 	            case 5 :
+	            	gagnant.setForeground(Color.black);
+	                break;
+	            default :
 	            	gagnant.setForeground(Color.black);
 	                break;
 	        }

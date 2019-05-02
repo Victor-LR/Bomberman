@@ -36,8 +36,8 @@ public class Cadre_multi extends JFrame {
 		int nb_bbm = L_BbmG.get(0).getMap().getNumber_of_bombermans();
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(750,nb_bbm*25+75);
 		this.setLocationRelativeTo(null);
-		this.setSize(750,300);
 		this.setLayout(new GridLayout(nb_bbm+3,1));
 		
 		
@@ -45,11 +45,11 @@ public class Cadre_multi extends JFrame {
 		back = new JButton("back to menu");
 		this.add(this.back);
 		
-		int[] id_du_gagnant = new int[7];
+		int[] id_du_gagnant = new int[100];
 		for(int j = 0 ; j < L_BbmG.size(); j++){
 			if(!L_BbmG.get(j).etatJeu.isPlantage())
 				id_du_gagnant[L_BbmG.get(j).etatJeu.getIdGagnant()] +=1;
-			else id_du_gagnant[6] += 1;
+			else id_du_gagnant[0] += 1;
 			
 		}
 
@@ -57,23 +57,23 @@ public class Cadre_multi extends JFrame {
 		for(int n = 0 ; n < id_du_gagnant.length; n++){
 			double pourcentage =((double)id_du_gagnant[n]/nb_threads)*100;
 			JLabel pan_result = new JLabel();
-			if( n < nb_bbm ){
+			if( n > 1  & n < nb_bbm+2){
 				this.listlab.add(pan_result);
-				if (L_BbmG.get(0).etatJeu.getBombermans().get(n).getStrategie() == null) 
-					pan_result.setText("Joueur "+(n+1)+" à gagner "+ pourcentage +"% du temps avec strategie : aléatoire");
-				else pan_result.setText("Joueur "+(n+1)+" à gagner "+ pourcentage +"% du temps avec strategie : "+L_BbmG.get(0).etatJeu.getBombermans().get(n).getStrategie().getClass().getSimpleName());
+				if (L_BbmG.get(0).etatJeu.getBombermans().get(n-2).getStrategie() == null) 
+					pan_result.setText("Joueur "+(n+1-2)+" a gagné "+ pourcentage +"% du temps avec strategie : aléatoire");
+				else pan_result.setText("Joueur "+(n+1-2)+" a gagné "+ pourcentage +"% du temps avec strategie : "+L_BbmG.get(0).etatJeu.getBombermans().get(n-2).getStrategie().getClass().getSimpleName());
 				pan_result.setHorizontalAlignment(JLabel.CENTER);
 				this.add(pan_result);
 			}
-			else if( n == 5){
+			else if( n == 1){
 				this.listlab.add(pan_result);
 				pan_result.setText("Il n'y a pas eu de gagnant "+ pourcentage +"% du temps");
 				pan_result.setHorizontalAlignment(JLabel.CENTER);
 				this.add(pan_result);
 			}
-			else if( n == 6){
+			else if( n == 0){
 				this.listlab.add(pan_result);
-				pan_result.setText("Jeu à planté "+id_du_gagnant[n] +" fois");
+				pan_result.setText("Jeu a planté "+id_du_gagnant[n] +" fois");
 				pan_result.setHorizontalAlignment(JLabel.CENTER);
 				this.add(pan_result);
 			}

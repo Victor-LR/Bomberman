@@ -56,7 +56,8 @@ public class paint_score implements GameObserver {
 		panMenu.setLayout(new GridLayout(2,1));
 		
 		panScore = new JPanel();
-		panScore.setLayout(new FlowLayout());
+		int taille_gridlayout = bomberman.etatJeu.getBombermans().size() / 5 +1;
+		panScore.setLayout(new GridLayout(taille_gridlayout,1));
 		
 		this.BbmG.addObserver((GameObserver)this);
 		
@@ -111,6 +112,9 @@ public class paint_score implements GameObserver {
 	                break;
 	            case BLANC :
 	            	listlab.get(i).setForeground(Color.white);
+	                break;
+	            case DEFAULT :
+	            	listlab.get(i).setForeground(Color.black);
 	                break;
 	        }
 

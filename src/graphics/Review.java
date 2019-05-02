@@ -202,6 +202,9 @@ public class Review extends JPanel {
             case BLANC :
             	scales = new float[]{2 ,2, 2, 1.0f };
                 break;
+            case DEFAULT :
+            	scales = new float[]{1 ,1, 1, 1.0f };
+                break;
         }
 		
 		int px = agentBBM.getX();

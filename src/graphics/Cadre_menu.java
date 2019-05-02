@@ -173,10 +173,10 @@ public class Cadre_menu extends JFrame{
 				
 				BbmG.etatJeu.setStrats(strategies);
 				
-				BbmG.launch();
-				
 				Cadre_Jeu fenetre = new Cadre_Jeu(BbmG);
 				fenetre.setVisible(true);
+				
+				BbmG.launch();
 				
 				cadre_menu.dispose();
 			}
@@ -253,13 +253,13 @@ public class Cadre_menu extends JFrame{
 					L_BbmG.add(un_bbmg);
 					un_bbmg.getThread().start();
 					
-					System.out.println("	Thread n°"+i);
+					//System.out.println("	Thread n°"+i);
 				}
 					
 				for(int j = 0 ; j < L_BbmG.size(); j++){
 					try {
 						L_BbmG.get(j).getThread().join();
-						System.out.println("	Attente Thread n°"+j);
+						//System.out.println("	Attente Thread n°"+j);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 						System.out.println("erreur !");
