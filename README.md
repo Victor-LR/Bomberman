@@ -187,23 +187,50 @@ fait :
 
 25/04/19:
 - Continuation de développement de comportements des agents Bomberman en reprenant la base de la veille. 
-   Stratégie A : Orienté sur l'évitement des bombes adverses et sur la pose de bombes a portée d'autres bombermans.
+- Stratégie A : Orienté sur l'évitement des bombes adverses et sur la pose de bombes a portée d'autres bombermans.
                   Déplacement aléatoire dans les autres situations.
-   Stratégie B : Orienté sur l'élimination du bomberman le plus proche de lui tout en esquivant les bombes adverses.
+- Stratégie B : Orienté sur l'élimination du bomberman le plus proche de lui tout en esquivant les bombes adverses.
                   Pose des bombes celons certaines situations (pris entre deux briques/murs ou plus, a portée d'ennemis).
                   Lorsque que plusieurs stratégies B sont choisies certains bombermans peuvent se bloquer entre eux tout en ne pouvant se tuer.
-   Stratégie A items : Reprend le comportement de A en rajoutant la prise d'items spécifique dans une zone autour du bomberman.
+ - Stratégie A items : Reprend le comportement de A en rajoutant la prise d'items spécifique dans une zone autour du bomberman.
                   (Possibilité de se bloquer lorsque qu'il doit choisir un chemin vers un item).
-   Stratégie C : Reprend le comportement de B et inclu la prise d'item. Lorsque un item est découvert et choisi la cible la plus proche entre l'item et un autre bomberman.
+ - Stratégie C : Reprend le comportement de B et inclu la prise d'item. Lorsque un item est découvert et choisi la cible la plus proche entre l'item et un autre bomberman.
    
 26/04/19:
+
 - Implémentation des Stratégies pour chaque bombermans de la carte sélectionnée. Marche en mode normal et en Multithreads.
 - Changement visuelle du menu.
 - Résolution de bugs engendrés par cette implémentation.
    
 29/04/19:
--Reglage de bugs (collision) nuisant au bon fonctionnement du jeu, ainsi le bug du à la maladie swap. Pour plus d'information se rediriger vers les bugs cités au début de ce read me.
+
+- Reglage de bugs (collision) nuisant au bon fonctionnement du jeu, ainsi le bug du à la maladie swap. Pour plus d'information se rediriger vers les bugs cités au début de ce read me.
 
 30/04/29:
--Implémentation de nouvelles stratégies, visant à régler les problèmes rencontrés avec les ancienne strats. (stratégie D, stratégie A_PVP).
+
+- Implémentation de nouvelles stratégies, visant à régler les problèmes rencontrés avec les ancienne strats. (stratégie D, stratégie A_PVP).
+- La stratégie D doit pouvoir permettre à un bomberman de se diriger vers un autre bomberman/item,mais en prenant en compte les différents osbtacles. Si celui-ci est bloqué en prenant un certain chemin, il  choisira un autre chemin pour atteindre sa cible.
+- Amélioration de A_items, choisi de récupérer l'item de plus proche dans sa portée et non plus le premier apparu (évite de se bloquer).Quand un item apparait derrière l'explosion d'une bombe, le bomberman ne fonce pas directement pour aller le chercher.
+- La stratégie A_PVP reprend les comportements de A_items met en rajoutant un comportement d'approche d'un bomberman adverse sur le même princicipe que la récupération d'items. 
+
+02/04/19:
+
+Compte rendu rendez-vous avec Mr. Goudet:
+
+ - Rajouter du contenu dans les resultats du multithread, plus de statistique, plus de descriptif de victoire.
+ - Finir la stratégie D, et plus ou moins A_PVP.
+ - Revoir l'effet de vitesse sur les differents agents, une action peu par exemple prendre plus d'un tour à etre               exécuté
+      
+ - Ajout de contenue :
+      
+            - Mode coopératif, le principe serait de choisir à la maniere de la stratégie l'equipe de chaque 
+            bomberman, mise par defaut à l'ID du BBM.
+            - Ajout d'item suplémentaire, la variation de la vitesse (speed down, speed up)
+            - Ajout de nouveaux ennemie
+            - Implémentation du mode campagne, idée d'un JMenu permettant de faire le choix entre les différents 
+            mode (normal ou campagne), ce mode genererais une map la map du début, et à chaque victoir sur map,
+            on chargerais une nouvelle map jusqu'à arriver à un boss et finir le jeu.
+            - Après avoir tuer un autre bbm le bbm concerné gagne une vie lui permettant de resister à une 
+            explosion de bombe, ceci est cumulable.
+            
         
