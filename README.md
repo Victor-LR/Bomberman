@@ -212,4 +212,18 @@ fait :
 - La stratégie D doit pouvoir permettre à un bomberman de se diriger vers un autre bomberman/item,mais en prenant en compte les différents osbtacles. Si celui-ci est bloqué en prenant un certain chemin, il  choisira un autre chemin pour atteindre sa cible.
 - Amélioration de A_items, choisi de récupérer l'item de plus proche dans sa portée et non plus le premier apparu (évite de se bloquer).Quand un item apparait derrière l'explosion d'une bombe, le bomberman ne fonce pas directement pour aller le chercher.
 - La stratégie A_PVP reprend les comportements de A_items met en rajoutant un comportement d'approche d'un bomberman adverse sur le même princicipe que la récupération d'items. 
+
+02/04/19:
+
+Compte rendu rendez-vous avec Mr. Goudet:
+      - Rajouter du contenu dans les resultats du multithread, plus de statistique, plus de descriptif de victoire.
+      - Finir la stratégie D, et plus ou moins A_PVP.
+      - Revoir l'effet de vitesse sur les differents agents, une action peu par exemple prendre plus d'un tour à etre               exécuté
+      - Ajout de contenue :
+            - Mode coopératif, le principe serait de choisir à la maniere de la stratégie l'equipe de chaque bomberman, mise par defaut à l'ID du BBM.
+            - Ajout d'item suplémentaire, la variation de la vitesse (speed down, speed up)
+            - Ajout de nouveaux ennemie
+            - Implémentation du mode campagne, idée d'un JMenu permettant de faire le choix entre les différents mode (normal ou campagne), ce mode genererais une map la map du début, et à chaque victoir sur map, on chargerais une nouvelle map jusqu'à arriver à un boss et finir le jeu.
+            - Après avoir tuer un autre bbm le bbm concerné gagne une vie lui permettant de resister à une explosion de bombe, ceci est cumulable.
+            
         
