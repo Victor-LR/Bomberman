@@ -8,7 +8,7 @@ public abstract class Game implements Runnable, InterfaceGame {
 	
 	private double temps = 150;
 	protected int turn;
-	protected int maxTurn = 300;
+	protected int maxTurn = 1000;
 	
 	Thread thread;
 	
@@ -111,14 +111,11 @@ public abstract class Game implements Runnable, InterfaceGame {
 	
 	public boolean gameContinue(){
 		
-
 		if (turn < maxTurn){
 			return true;
 		} else {
 			return false;
 		}
-		
-		
 	}
 	
 	

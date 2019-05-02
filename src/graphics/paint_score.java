@@ -213,8 +213,6 @@ public class paint_score implements GameObserver {
 	@Override
 	public void update() {
 		
-		//System.out.println("scores : ");
-		
 		for(int i = 0; i < this.BbmG.etatJeu.getBombermans().size(); i++){
 			Agent_Bomberman bomberman = this.BbmG.etatJeu.getBombermans().get(i);
 			affichage_score(bomberman,bomberman.getId());

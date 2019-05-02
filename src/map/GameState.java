@@ -603,7 +603,11 @@ public class GameState {
 		int compteExec = 0;
 		int maxScore = 0;
 		int aux ;
-		//this.idGagnant = 6;
+		
+		
+		//idGagnant : 0 -> Jeu a planté
+		//idGagnant : 1 -> Ex aequo
+		//idGagnant : 2 à n -> Joueur id 0 à Joueur id n-2
 		
 		
 		for(int i = 0; i<bombermans.size(); ++i) {
@@ -709,8 +713,6 @@ public class GameState {
 	
 
 	//Renvoie un agent en fonction d'un id 
-	
-
 
 	public Agent getAgent(GameState etat, int agentId){
 		

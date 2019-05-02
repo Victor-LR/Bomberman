@@ -89,7 +89,6 @@ public class Cadre_multi extends JFrame {
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evenement) {
 				
-				//dispose();
 				Cadre_menu fen = new Cadre_menu();//BbmG.getMap().getFilename());
 				fen.setVisible(true);
 				dispose();
