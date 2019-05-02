@@ -204,7 +204,7 @@ fait :
    
 29/04/19:
 
--Reglage de bugs (collision) nuisant au bon fonctionnement du jeu, ainsi le bug du à la maladie swap. Pour plus d'information se rediriger vers les bugs cités au début de ce read me.
+- Reglage de bugs (collision) nuisant au bon fonctionnement du jeu, ainsi le bug du à la maladie swap. Pour plus d'information se rediriger vers les bugs cités au début de ce read me.
 
 30/04/29:
 
