@@ -219,7 +219,9 @@ Compte rendu rendez-vous avec Mr. Goudet:
       - Rajouter du contenu dans les resultats du multithread, plus de statistique, plus de descriptif de victoire.
       - Finir la stratégie D, et plus ou moins A_PVP.
       - Revoir l'effet de vitesse sur les differents agents, une action peu par exemple prendre plus d'un tour à etre               exécuté
+      
       - Ajout de contenue :
+      
             - Mode coopératif, le principe serait de choisir à la maniere de la stratégie l'equipe de chaque bomberman, mise par defaut à l'ID du BBM.
             - Ajout d'item suplémentaire, la variation de la vitesse (speed down, speed up)
             - Ajout de nouveaux ennemie
