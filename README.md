@@ -223,10 +223,14 @@ Compte rendu rendez-vous avec Mr. Goudet:
       
  - Ajout de contenue :
       
-            - Mode coopératif, le principe serait de choisir à la maniere de la stratégie l'equipe de chaque bomberman, mise par defaut à l'ID du BBM.
+            - Mode coopératif, le principe serait de choisir à la maniere de la stratégie l'equipe de chaque 
+            bomberman, mise par defaut à l'ID du BBM.
             - Ajout d'item suplémentaire, la variation de la vitesse (speed down, speed up)
             - Ajout de nouveaux ennemie
-            - Implémentation du mode campagne, idée d'un JMenu permettant de faire le choix entre les différents mode (normal ou campagne), ce mode genererais une map la map du début, et à chaque victoir sur map, on chargerais une nouvelle map jusqu'à arriver à un boss et finir le jeu.
-            - Après avoir tuer un autre bbm le bbm concerné gagne une vie lui permettant de resister à une explosion de bombe, ceci est cumulable.
+            - Implémentation du mode campagne, idée d'un JMenu permettant de faire le choix entre les différents 
+            mode (normal ou campagne), ce mode genererais une map la map du début, et à chaque victoir sur map,
+            on chargerais une nouvelle map jusqu'à arriver à un boss et finir le jeu.
+            - Après avoir tuer un autre bbm le bbm concerné gagne une vie lui permettant de resister à une 
+            explosion de bombe, ceci est cumulable.
             
         
