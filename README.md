@@ -206,4 +206,5 @@ fait :
 
 30/04/29:
 -Implémentation de nouvelles stratégies, visant à régler les problèmes rencontrés avec les ancienne strats. (stratégie D, stratégie A_PVP).
+-La stratégie D doit pouvoir permettre à un bomberman de se diriger vers un autre bomberman/item,mais en prenant en compte les différents osbtacles. Si celui-ci est bloqué en prenant un certain chemin, il  choisira un autre chemin pour atteindre sa cible.
         
