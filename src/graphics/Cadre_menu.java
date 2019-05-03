@@ -38,6 +38,7 @@ public class Cadre_menu extends JFrame{
 	private JMenuItem campagne= null;
 	private JMenuItem normal = null;
 	private String content = null;
+	private Boolean is_campagne = null;
 	
 	private int[] strategies = new int[100];
 	
@@ -45,7 +46,6 @@ public class Cadre_menu extends JFrame{
 	
 	public Cadre_menu() {
 		
-		//this.setSize(550, 450);
 		
 		this.setTitle("Menu Jeu Bomberman");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,6 +59,8 @@ public class Cadre_menu extends JFrame{
 		
 		campagne = new JMenuItem();
 		campagne.setText("campagne");
+		is_campagne = false;
+		
 		
 		normal = new JMenuItem();
 		normal.setText("normal");
@@ -142,6 +144,9 @@ public class Cadre_menu extends JFrame{
 		campagne.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent evenement) {
+				
+				is_campagne = true;
+				
 				panelMap.remove(choixStage);
 				panelMap.remove(liste_lay);
 				
@@ -150,7 +155,7 @@ public class Cadre_menu extends JFrame{
 				choixStrats = new JPanel();
 				remove(review);
 				
-				content = "./layout/alone.lay";
+				content = "./layout/niveau1.lay";
 				
 				try {
 					BbmG.loadFile(content);
@@ -186,6 +191,8 @@ public class Cadre_menu extends JFrame{
 		normal.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent evenement) {
+				
+				is_campagne = false;
 				panelMap.add(choixStage);
 				panelMap.add(liste_lay);
 				revalidate();
@@ -205,7 +212,12 @@ public class Cadre_menu extends JFrame{
 					}
 					
 					BbmG.init();
-				
+					
+					if(is_campagne) {
+						BbmG.etatJeu.setCampagne(true);
+						BbmG.etatJeu.setNum_niveau(1);
+					}
+					else BbmG.etatJeu.setCampagne(false);
 					
 					for(int i =0; i<listStrat.size();i++) {
 						System.out.println(listStrat.get(i).getSelectedItem().toString());
@@ -283,6 +295,12 @@ public class Cadre_menu extends JFrame{
 							e.printStackTrace();
 						}
 						un_bbmg.init();
+						
+						if(is_campagne) {
+							un_bbmg.etatJeu.setCampagne(true);
+							un_bbmg.etatJeu.setNum_niveau(1);
+						}
+						else un_bbmg.etatJeu.setCampagne(false);
 						
 						for(int j =0; j<un_bbmg.etatJeu.getBombermans().size();j++) {
 							switch(listStrat.get(j).getSelectedItem().toString()) {
