@@ -36,6 +36,16 @@ public class GameState {
 	private int idGagnant = 0;
 	private boolean plantage = true;
 	
+	public final static int PLANTAGE = 0;
+	public final static int WIN_SOLO = 1;
+	public final static int WIN_SCORE = 2;
+	public final static int WIN_SURVIE = 3;
+	public final static int EX_AEQUO = 4;
+	public final static int GAME_OVER = 5;
+	
+	
+	private int finPartie = PLANTAGE;
+	
 	private int[] strats;
 	
 	private Boolean campagne = null;
@@ -654,7 +664,7 @@ public class GameState {
 		}
 	}
 	
-	//Fonction permettant de mettre à terme au jeu quand l'un des bomermans à gagné.
+	//Fonction permettant de mettre à terme au jeu quand l'un des bombermans a gagné.
 	
 	public void isEnd(BombermanGame game) {
 		ArrayList<Agent_Bomberman> bombermans = this.getBombermans();
@@ -666,13 +676,18 @@ public class GameState {
 		int compteExec = 0;
 		int maxScore = 0;
 		int aux ;
-		//this.idGagnant = 6;
+		
+		
+		
+		//idGagnant : 0 -> Jeu a planté
+		//idGagnant : 1 -> Ex aequo
+		//idGagnant : 2 à n -> Joueur id 0 à Joueur id n-2
 		
 		
 		for(int i = 0; i<bombermans.size(); ++i) {
 			if(!bombermans.get(i).isDead()) {
 				compteBbm++;
-				this.idGagnant = i+2;
+				this.idGagnant = i;
 			}
 		}
 		
@@ -687,15 +702,14 @@ public class GameState {
 			setEnd(true);
 			game.etatJeu.setEnd(true);
 			this.winner = "GAME OVER";
-			this.idGagnant = 1;
-			this.plantage = false;
+			this.finPartie = GAME_OVER;
 		}
 		
 		if(compteBbm == 1 & nbBbm == 1 & compteEnn == 0) {
 			setEnd(true);
 			game.etatJeu.setEnd(true);
-			winner = "Le joueur "+(bombermans.get(idGagnant-2).getId()+1)+" est le gagnant Partie SOLO";
-			this.plantage = false;
+			winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant Partie SOLO";
+			this.finPartie = WIN_SOLO;
 			
 		}
 		
@@ -703,16 +717,15 @@ public class GameState {
 		if(compteBbm == 1 & nbBbm != 1) {
 			setEnd(true);
 			game.etatJeu.setEnd(true);
-			winner = "Le joueur "+(bombermans.get(idGagnant-2).getId()+1)+" est le gagnant";
-			this.plantage = false;
+			this.winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant";
+			this.finPartie = WIN_SURVIE;
 		}
 		
 		if(compteBbm == 0 & nbBbm != 1) {
 			setEnd(true);
 			game.etatJeu.setEnd(true);
-			winner = "GAME OVER";
-			this.idGagnant =1;
-			this.plantage = false;
+			this.winner = "GAME OVER";
+			this.finPartie = GAME_OVER;
 		}
 		
 		
@@ -724,8 +737,7 @@ public class GameState {
 				setEnd(true);
 				game.etatJeu.setEnd(true);
 				this.winner = "GAME OVER";
-				this.idGagnant =1;
-				this.plantage = false;
+				this.finPartie = GAME_OVER;
 
 			}
 			else{
@@ -735,7 +747,7 @@ public class GameState {
 						aux = bombermans.get(i).getPoints();
 						if(maxScore<aux) {
 							maxScore = aux;
-							this.idGagnant = i+2;
+							this.idGagnant = i;
 						}
 						
 					}
@@ -755,14 +767,13 @@ public class GameState {
 				
 				if( compteExec < 2 ) {
 					setEnd(true);
-					this.winner = "Le joueur "+(bombermans.get(idGagnant-2).getId()+1)+" est le gagnant par score = " + maxScore ;
-					this.plantage = false;
+					this.winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant par score = " + maxScore ;
+					this.finPartie = WIN_SCORE;
 				}
 				else {
 					setEnd(true);
 					this.winner = "Il y a Ex aequo ";
-					this.idGagnant = 1;
-					this.plantage = false;
+					this.finPartie = EX_AEQUO;
 				}
 			}
 			
@@ -770,6 +781,7 @@ public class GameState {
 		if (winner != null) System.out.println(this.winner);
 }
 	
+
 	//lorsque le mode de jeu choisi est un mode campagne cette methode est choisi
 	
 	public void isEndCampagne(BombermanGame game) {
@@ -914,6 +926,14 @@ public class GameState {
 			this.bombermans.get(i).setStrat(strats[i]);
 		}
 	}
+
+	public int getFinPartie() {
+		return finPartie;
+	}
+
+//	public void setFinPartie(int finPartie) {
+//		this.finPartie = finPartie;
+//	}
 	
 	//permet de savoir si le mode de jeu choisi est une campagne 
 

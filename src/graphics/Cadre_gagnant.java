@@ -29,7 +29,7 @@ public class Cadre_gagnant extends JFrame {
 		
 		this.gagnant = new JLabel(winner);
 		
-			switch(id-2)
+			switch(id)
 	        {
 	            case 0 :
 	            	gagnant.setForeground(Color.blue);

@@ -111,14 +111,11 @@ public abstract class Game implements Runnable, InterfaceGame {
 	
 	public boolean gameContinue(){
 		
-
 		if (turn < maxTurn){
 			return true;
 		} else {
 			return false;
 		}
-		
-		
 	}
 	
 	
