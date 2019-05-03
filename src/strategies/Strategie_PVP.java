@@ -19,7 +19,7 @@ public class Strategie_PVP extends Strategie{
 		
 		AgentAction Action = null;//new AgentAction(0);
 		ArrayList<AgentAction> listAction = new ArrayList<AgentAction>();
-//		ArrayList<Agent> ennemies = getEtat().getEnnemies();
+		ArrayList<Agent> ennemies = getEtat().getEnnemies();
 		ArrayList<Agent_Bomberman> bombermans = getEtat().getBombermans();
 		ArrayList<Objet_Bomb> bombes = getEtat().getBombes();
 		

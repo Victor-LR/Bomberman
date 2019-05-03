@@ -38,10 +38,14 @@ public class GameState {
 	
 	private int[] strats;
 	
+	private Boolean campagne = null;
+	
+	private int num_niveau = 0;
+
+	private BombermanGame game = new BombermanGame();
+	
 	
 	//Construit l'état courant de la map
-
-
 
 	public GameState(Map map,BombermanGame BbmG){
 		
@@ -411,16 +415,75 @@ public class GameState {
 	//Réalise un tour du jeu 
 	
 	public void taketurn(){
-		if(!getEnd()) {
-			this.isEnd(BbmG);
-			bombermansTurn();
-			ennemiesTurn();
-			
-		}else {
-			BbmG.stop();
+		if(getCampagne()) {
+
+			if(!getEnd()) {
+
+				this.isEndCampagne(BbmG);
+				bombermansTurn();
+				ennemiesTurn();
+				
+			}else {
+
+				if(BbmG.etatJeu.getNum_niveau() == 1) {
+					try {
+						game.loadFile("./layout/niveau2.lay");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					game.init();
+					
+					game.etatJeu.setCampagne(true);		
+					game.etatJeu.setNum_niveau(2);
+					game.etatJeu.setStrats(BbmG.etatJeu.getStrats());
+					game.etatJeu.getBombermans().get(0).setPoints(BbmG.etatJeu.getBombermans().get(0).getPoints());
+					
+					System.out.println(getWinner()+" stage 1");
+					
+					BbmG.stop();
+					game.launch();
+					
+				}
+					
+				if(BbmG.etatJeu.getNum_niveau() == 2) {
+					
+					try {
+						game.loadFile("./layout/niveau3.lay");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					game.init();
+					
+					game.etatJeu.setCampagne(true);		
+					game.etatJeu.setNum_niveau(3);	
+					game.etatJeu.setStrats(BbmG.etatJeu.getStrats());
+					game.etatJeu.getBombermans().get(0).setPoints(BbmG.etatJeu.getBombermans().get(0).getPoints());
+					
+					System.out.println(getWinner()+" stage 2");
+					
+					BbmG.stop();
+					game.launch();
+					
+				}
+				
+				if(BbmG.etatJeu.getNum_niveau() == 3) {
+					BbmG.stop();
+					System.out.println(getWinner()+" stage 3");
+				}
+			}
 		}
+		else if(!getEnd()) {
+				this.isEnd(BbmG);
+				bombermansTurn();
+				ennemiesTurn();
+			}else {
+
+				BbmG.stop();
+			}
 	}	
 	
+	
+
 	//Réalise le tour de l'ennemi
 	
 	public void ennemiesTurn(){
@@ -707,10 +770,65 @@ public class GameState {
 		if (winner != null) System.out.println(this.winner);
 }
 	
+	//lorsque le mode de jeu choisi est un mode campagne cette methode est choisi
+	
+	public void isEndCampagne(BombermanGame game) {
+		
+		ArrayList<Agent_Bomberman> bombermans = this.getBombermans();
+		ArrayList<Agent> ennemies = this.getEnnemies();
+		
+		int nbBbm = this.getMap().getNumber_of_bombermans();
+		int compteBbm = 0;
+		int compteEnn = 0;
+		
+		for(int i = 0; i<bombermans.size(); ++i) {
+			if(!bombermans.get(i).isDead()) {
+				compteBbm++;
+				this.idGagnant = i+2;
+			}
+		}
+		
+		for(int i = 0; i<ennemies.size(); ++i) {
+			if(!ennemies.get(i).isDead()) {
+				compteEnn++;
+			}
+		}
+		
+		if(compteBbm == 0  & nbBbm == 1) {
+			setEnd(true);
+			setNum_niveau(3);
+			game.etatJeu.setEnd(true);
+			this.winner = "GAME OVER";
+			this.idGagnant = 1;
+			this.plantage = false;
+
+		}
+		
+		if(compteBbm == 1 & nbBbm == 1 & compteEnn == 0) {
+			setEnd(true);
+			game.etatJeu.setEnd(true);
+			winner = "Le joueur "+(bombermans.get(idGagnant-2).getId()+1)+" est le gagnant Partie SOLO";
+			this.plantage = false;
+		}
+		
+		if(game.getTurn() == (game.getMaxTurn()-1) ) {
+			setEnd(true);
+			setNum_niveau(3);
+			game.etatJeu.setEnd(true);
+			
+			if(nbBbm == 1) {
+				setEnd(true);
+				game.etatJeu.setEnd(true);
+				this.winner = "GAME OVER";
+				this.idGagnant =1;
+				this.plantage = false;
+
+			}
+		}
+			
+	}
 
 	//Renvoie un agent en fonction d'un id 
-	
-
 
 	public Agent getAgent(GameState etat, int agentId){
 		
@@ -750,6 +868,8 @@ public class GameState {
 	public Map getMap(){
 		return map;
 	}
+	
+	//permet de savoir si le jeu est terminé ou non
 
 	public boolean getEnd() {
 		return end;
@@ -759,6 +879,8 @@ public class GameState {
 		return end = e;
 	}
 	
+	
+	//permet d'avoir la phrase du fin de jeu
 	
 	public String getWinner() {
 		return winner;
@@ -793,5 +915,26 @@ public class GameState {
 		}
 	}
 	
+	//permet de savoir si le mode de jeu choisi est une campagne 
+
+	public Boolean getCampagne() {
+		return campagne;
+	}
+
+	public void setCampagne(Boolean campagne) {
+		this.campagne = campagne;
+	}
+	
+	public int getNum_niveau() {
+		return num_niveau;
+	}
+
+	public void setNum_niveau(int num_niveau) {
+		this.num_niveau = num_niveau;
+	}
+	
+	public BombermanGame getGame() {
+		return game;
+	}
 
 }
