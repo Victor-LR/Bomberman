@@ -568,14 +568,49 @@ public class paint_bomberman extends JPanel implements GameObserver{
 	@Override
 	public void update() {
 		if(!BbmG.etatJeu.getEnd()) {
-			this.repaint();
-			BbmG.etatJeu.isEnd(BbmG);
-			this.requestFocusInWindow();
+			if(BbmG.etatJeu.getCampagne()) {
+				this.repaint();
+				BbmG.etatJeu.isEndCampagne(BbmG);
+				this.requestFocusInWindow();
+			}
+			else{
+				this.repaint();
+				BbmG.etatJeu.isEnd(BbmG);
+				this.requestFocusInWindow();
+			}
 		}
 		else{
-			Cadre_gagnant gagnant = new Cadre_gagnant(BbmG.etatJeu.getWinner(),BbmG.etatJeu.getIdGagnant(), this.cadre_jeu);
-			BbmG.stop();
-			gagnant.setVisible(true);
+			if(BbmG.etatJeu.getCampagne()) {
+				BbmG.etatJeu.taketurn();
+				if(BbmG.etatJeu.getNum_niveau() == 1) {
+					
+					Cadre_Jeu fenetre = new Cadre_Jeu(BbmG.etatJeu.getGame());
+					fenetre.setVisible(true);
+					BbmG.stop();
+					this.cadre_jeu.dispose();
+				}
+					
+				if(BbmG.etatJeu.getNum_niveau() == 2) {
+					
+					Cadre_Jeu fenetre2 = new Cadre_Jeu(BbmG.etatJeu.getGame());
+					fenetre2.setVisible(true);
+					BbmG.stop();
+					this.cadre_jeu.dispose();
+				}
+				
+				if(BbmG.etatJeu.getNum_niveau() == 3) {
+					Cadre_gagnant gagnant = new Cadre_gagnant(BbmG.etatJeu.getWinner(),1, this.cadre_jeu);
+					BbmG.stop();
+					gagnant.setVisible(true);
+				}
+				
+			}
+			else{
+				Cadre_gagnant gagnant = new Cadre_gagnant(BbmG.etatJeu.getWinner(),BbmG.etatJeu.getIdGagnant(), this.cadre_jeu);
+				BbmG.stop();
+				gagnant.setVisible(true);
+			}
+			
 		}
 		
 	}
