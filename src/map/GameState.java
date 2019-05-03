@@ -416,6 +416,7 @@ public class GameState {
 	
 	public void taketurn(){
 		if(getCampagne()) {
+
 			if(!getEnd()) {
 
 				this.isEndCampagne(BbmG);
@@ -423,6 +424,7 @@ public class GameState {
 				ennemiesTurn();
 				
 			}else {
+
 				if(BbmG.etatJeu.getNum_niveau() == 1) {
 					try {
 						game.loadFile("./layout/niveau2.lay");
@@ -436,10 +438,11 @@ public class GameState {
 					game.etatJeu.setStrats(BbmG.etatJeu.getStrats());
 					game.etatJeu.getBombermans().get(0).setPoints(BbmG.etatJeu.getBombermans().get(0).getPoints());
 					
-					System.out.println(" stage un atteind");
+					System.out.println(getWinner()+" stage 1");
 					
-					game.launch();
 					BbmG.stop();
+					game.launch();
+					
 				}
 					
 				if(BbmG.etatJeu.getNum_niveau() == 2) {
@@ -456,15 +459,16 @@ public class GameState {
 					game.etatJeu.setStrats(BbmG.etatJeu.getStrats());
 					game.etatJeu.getBombermans().get(0).setPoints(BbmG.etatJeu.getBombermans().get(0).getPoints());
 					
-					System.out.println(" stage deux atteind");
+					System.out.println(getWinner()+" stage 2");
 					
-					game.launch();
 					BbmG.stop();
+					game.launch();
+					
 				}
 				
 				if(BbmG.etatJeu.getNum_niveau() == 3) {
-					
-					System.out.println(" stage trois atteind");
+					BbmG.stop();
+					System.out.println(getWinner()+" stage 3");
 				}
 			}
 		}
@@ -472,8 +476,8 @@ public class GameState {
 				this.isEnd(BbmG);
 				bombermansTurn();
 				ennemiesTurn();
-				
 			}else {
+
 				BbmG.stop();
 			}
 	}	
@@ -797,6 +801,7 @@ public class GameState {
 			this.winner = "GAME OVER";
 			this.idGagnant = 1;
 			this.plantage = false;
+
 		}
 		
 		if(compteBbm == 1 & nbBbm == 1 & compteEnn == 0) {
@@ -804,7 +809,6 @@ public class GameState {
 			game.etatJeu.setEnd(true);
 			winner = "Le joueur "+(bombermans.get(idGagnant-2).getId()+1)+" est le gagnant Partie SOLO";
 			this.plantage = false;
-			
 		}
 		
 		if(game.getTurn() == (game.getMaxTurn()-1) ) {
@@ -818,6 +822,7 @@ public class GameState {
 				this.winner = "GAME OVER";
 				this.idGagnant =1;
 				this.plantage = false;
+
 			}
 		}
 			

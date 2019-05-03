@@ -133,6 +133,8 @@ public class paint_score implements GameObserver {
 		creer_button();
 	}
 	
+	
+
 	public void creer_button(){
 
 		
@@ -252,4 +254,18 @@ public class paint_score implements GameObserver {
 		restart.setEnabled(false);
 
 	}	
+	
+	public JPanel getPanBoutton() {
+		return panBoutton;
+	}
+	public void setPanBoutton(JPanel panBoutton) {
+		this.panBoutton = panBoutton;
+		
+	}public JButton getRestart() {
+		return restart;
+	}
+	
+	public void setRestart(JButton restart) {
+		this.restart = restart;
+	}
 }

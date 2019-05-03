@@ -274,6 +274,9 @@ public class Cadre_menu extends JFrame{
 					BbmG.etatJeu.setStrats(strategies);
 					
 					Cadre_Jeu fenetre = new Cadre_Jeu(BbmG);
+					if(is_campagne) {
+						fenetre.getP_sc().getPanBoutton().remove(fenetre.getP_sc().getRestart());
+					}
 					fenetre.setVisible(true);
 					
 					BbmG.launch();
@@ -284,8 +287,14 @@ public class Cadre_menu extends JFrame{
 		multi.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent evenement) {
-				
+				if(is_campagne) {
 					ArrayList<BombermanGame> L_BbmG = new ArrayList<BombermanGame>();
+					ArrayList<BombermanGame> L_BbmG2 = new ArrayList<BombermanGame>();
+					ArrayList<BombermanGame> L_BbmG3 = new ArrayList<BombermanGame>();
+					
+					int compt2 = 0;
+					int compt3 = 0;
+					
 					for (int i = 0 ; i < nb_threads ; i++){
 						BombermanGame un_bbmg = new BombermanGame();
 						try {
@@ -296,11 +305,167 @@ public class Cadre_menu extends JFrame{
 						}
 						un_bbmg.init();
 						
-						if(is_campagne) {
+						
 							un_bbmg.etatJeu.setCampagne(true);
-							un_bbmg.etatJeu.setNum_niveau(1);
+							un_bbmg.etatJeu.setNum_niveau(1);									
+						
+						
+						for(int j =0; j<un_bbmg.etatJeu.getBombermans().size();j++) {
+							switch(listStrat.get(j).getSelectedItem().toString()) {
+								case "Auto":
+									strategies[j]=0;
+								break;
+								
+								case "Joueur 1":
+									strategies[j]=1;
+								break;
+								
+								case "Joueur 2":
+									strategies[j]=2;
+								break;
+							
+								case "A_Items":
+									strategies[j]=3;
+								break;
+								
+								case "A":
+									strategies[j]=4;
+								break;
+								
+								case "B":
+									strategies[j]=5;
+								break;
+								
+								case "C":
+									strategies[j]=6;
+								break;
+								
+								case "PVE":
+									strategies[j]=7;
+								break;
+								
+								case "PVP":
+									strategies[j]=8;
+								break;
+								
+								case "D":
+									strategies[j]=9;
+								break;
+								
+								case "A PVP":
+									strategies[j]=10;
+								break;
+							}
+					
 						}
-						else un_bbmg.etatJeu.setCampagne(false);
+						
+						un_bbmg.setTemps(1);
+						un_bbmg.new_thread();
+						un_bbmg.etatJeu.setStrats(strategies);
+						L_BbmG.add(un_bbmg);
+						un_bbmg.getThread().start();
+						
+						System.out.println("	Thread n°"+i);
+					}
+						
+					for(int j = 0 ; j < L_BbmG.size(); j++){
+						try {
+							L_BbmG.get(j).getThread().join();
+							System.out.println("	Attente Thread n°"+j);
+							if(L_BbmG.get(j).etatJeu.getNum_niveau() != 3)
+								compt2++;
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+							System.out.println("erreur !");
+						}
+					}
+					
+					for (int i = 0 ; i < compt2 ; i++){
+						BombermanGame un_bbmg = new BombermanGame();
+						try {
+							un_bbmg.loadFile("./layout/niveau2.lay");
+	
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						un_bbmg.init();
+						
+						un_bbmg.etatJeu.setCampagne(true);
+						un_bbmg.etatJeu.setNum_niveau(1);		
+						
+						un_bbmg.setTemps(1);
+						un_bbmg.new_thread();
+						un_bbmg.etatJeu.setStrats(strategies);
+						L_BbmG2.add(un_bbmg);
+						un_bbmg.getThread().start();
+						
+						System.out.println("	Thread n°"+i);
+					}
+					
+					for(int j = 0 ; j < L_BbmG2.size(); j++){
+						try {
+							L_BbmG2.get(j).getThread().join();
+							System.out.println("	Attente Thread n°"+j);
+							if(L_BbmG2.get(j).etatJeu.getNum_niveau() != 3)
+								compt3++;
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+							System.out.println("erreur !");
+						}
+					}
+					
+					for (int i = 0 ; i < compt3 ; i++){
+						BombermanGame un_bbmg = new BombermanGame();
+						try {
+							un_bbmg.loadFile("./layout/niveau3.lay");
+	
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						un_bbmg.init();
+						
+						un_bbmg.etatJeu.setCampagne(true);
+						un_bbmg.etatJeu.setNum_niveau(1);		
+						
+						un_bbmg.setTemps(1);
+						un_bbmg.new_thread();
+						un_bbmg.etatJeu.setStrats(strategies);
+						L_BbmG3.add(un_bbmg);
+						un_bbmg.getThread().start();
+						
+						System.out.println("	Thread n°"+i);
+					}
+					
+					for(int j = 0 ; j < L_BbmG3.size(); j++){
+						try {
+							L_BbmG3.get(j).getThread().join();
+							System.out.println("	Attente Thread n°"+j);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+							System.out.println("erreur !");
+						}
+					}
+					
+					System.out.println("			Fin multithreads");
+		
+					Cadre_multi c_m = new Cadre_multi(L_BbmG3,nb_threads);
+					c_m.setVisible(true);
+					
+					cadre_menu.dispose();
+				}
+				else {
+					ArrayList<BombermanGame> L_BbmG = new ArrayList<BombermanGame>();
+					for (int i = 0 ; i < nb_threads ; i++){
+						BombermanGame un_bbmg = new BombermanGame();
+						try {
+							un_bbmg.loadFile(content);
+	
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						un_bbmg.init();
+														
+						un_bbmg.etatJeu.setCampagne(false);
 						
 						for(int j =0; j<un_bbmg.etatJeu.getBombermans().size();j++) {
 							switch(listStrat.get(j).getSelectedItem().toString()) {
@@ -376,10 +541,11 @@ public class Cadre_menu extends JFrame{
 					c_m.setVisible(true);
 					
 					cadre_menu.dispose();
-				
+					
+				}
 					
 					
-					}
+				}
 				
 			});
 	

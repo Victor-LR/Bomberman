@@ -57,7 +57,15 @@ public class Cadre_Jeu extends JFrame {
 	        
 	}
 	
-    public JPanel getP_bm() {
+    public paint_score getP_sc() {
+		return p_sc;
+	}
+
+	public void setP_sc(paint_score p_sc) {
+		this.p_sc = p_sc;
+	}
+
+	public JPanel getP_bm() {
 		return p_bm;
 	}
 	
