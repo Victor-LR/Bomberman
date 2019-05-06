@@ -213,7 +213,7 @@ fait :
 - Amélioration de A_items, choisi de récupérer l'item de plus proche dans sa portée et non plus le premier apparu (évite de se bloquer).Quand un item apparait derrière l'explosion d'une bombe, le bomberman ne fonce pas directement pour aller le chercher.
 - La stratégie A_PVP reprend les comportements de A_items met en rajoutant un comportement d'approche d'un bomberman adverse sur le même princicipe que la récupération d'items. 
 
-02/04/19:
+02/05/19:
 
 Compte rendu rendez-vous avec Mr. Goudet:
 
@@ -226,11 +226,24 @@ Compte rendu rendez-vous avec Mr. Goudet:
             - Mode coopératif, le principe serait de choisir à la maniere de la stratégie l'equipe de chaque 
             bomberman, mise par defaut à l'ID du BBM.
             - Ajout d'item suplémentaire, la variation de la vitesse (speed down, speed up)
-            - Ajout de nouveaux ennemie
+            - Ajout de nouveaux Nb ennemie
             - Implémentation du mode campagne, idée d'un JMenu permettant de faire le choix entre les différents 
             mode (normal ou campagne), ce mode genererais une map la map du début, et à chaque victoir sur map,
             on chargerais une nouvelle map jusqu'à arriver à un boss et finir le jeu.
             - Après avoir tuer un autre bbm le bbm concerné gagne une vie lui permettant de resister à une 
             explosion de bombe, ceci est cumulable.
+            
+03/05/19:
+ 
+- Resultat du multithreads mis à jour de façon plus optimale:
+      - pourcentage de de partie gagnées par joueur et par stratégie choisie
+      - nb de threads lancé
+      - moyenne des points gagnés par joueur (une pour quand il gagne la partie et un autre moyenne générale)
+      - nb de partie terminées sur un ex aequo
+      - pourcentage du temps ou il n'y a pas eu de gagnant (souvent du à un ex aequo)
+      - nb tour par partie lancées
+      
+- Contnuation du mode campagne en rajoutant du contenu dans cadre menu, rejout d'un JMenu participant à l'implémentation du mode campagne proposant un choix entre le mode normal et le campagne. Ce choix influ sur un bolléen permettant dans le ActionListener de ce JMenuItem de faire apparaitre et diparaitre les éléments que nous désirons (liste déroulante pour le choix du stage disparait, stage choisi par default en fonction de la première map désirée lors du mode campane. Lors de l'appuis d'un bouton (jouer / multi) le booléen permettant de savoir le mode permet de construire le jeu correspondant au choix du mode, le BombermanGame choisi est donc différent dans son gamestate pour chaque mode. Dans le gamestate un nouveau isEndCampagne est introduit permettant de faire tourner le jeu de façon campagne. Gamestate disose desormais de deux nouveaux attributs qui permettent d'une part de voir si le mode choisi actuellemnt est un mode campagne ou normal,d'autre part de savoir dans quel stage du mode campagne nous nous trouvons (avec un num_niveau). De plus le TakeTurn a été modifié, en effet désormais il fait la différence entre les deux modes, quand le mode campagne est activé et que la variable isEnd (permettant de savoir si la partie est terminée) est positive en fonctio du num_niveau soit le stage qui suit l'actuel est chargé et le JFrame est affiché, soit le partie est terminé pour le joueur et on affiche le cadre gagnant correspondant. Ces affichage sont géré dans le paint_Bomberman au niveau du update (comme précedement quand un seul mode état présent.
+Pour finir le multithread est géré à l'interieur du cadre_Menu, cela signifie qu'il n'est pas géré automatiquement dans le gamestate comme avec le choix Jouer. Dans ce cas précis un nombre de BombermanGame est lancé, on effectue une jointure et on recupere l'indice de ceux qui ont gagné le premier niveau dans un arraylist de int, les perdant sont push dans un arrayList de BombermanGame. Par la suite on lance uniquement le nombre de BombermanGame gagnant du premier niveau sur le deuxième niveau en recupérent les infoation nécéssaire sur l'AgentBomberman (nbpoints, range, nbBombes). On effetue cela autant de fois que l'on a de niveau. À la fin du dernier niveau on push les gagnant et les perdant dans l'ArrayList de BombermanGame, on dipose alors de l'intergralité des threads demandé, que l'on peur ensuite aficher dans un cadre_multi (affiche le reultat des multithreads).
             
         
