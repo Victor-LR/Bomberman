@@ -7,10 +7,15 @@ public class BombermanGame extends Game implements InterfaceGame {
 
 	Map map;
 	public GameState etatJeu;
+	private String filename = null;
 	
 	public void loadFile(String filename) throws Exception {
 		map = new Map(filename);
-
+		String sep = "/";
+		String stage[] = filename.split(sep);
+		String sep2 = ".lay";
+		String stage2[] = stage[2].split(sep2);
+		this.filename = stage2[0];
 	}
 	
 	@Override
@@ -37,4 +42,11 @@ public class BombermanGame extends Game implements InterfaceGame {
 		return map;
 	}
 
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 }

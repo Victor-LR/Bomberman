@@ -447,6 +447,8 @@ public class GameState {
 					game.etatJeu.setNum_niveau(2);
 					game.etatJeu.setStrats(BbmG.etatJeu.getStrats());
 					game.etatJeu.getBombermans().get(0).setPoints(BbmG.etatJeu.getBombermans().get(0).getPoints());
+					game.etatJeu.getBombermans().get(0).setRange(BbmG.etatJeu.getBombermans().get(0).getRange());
+					game.etatJeu.getBombermans().get(0).setNbBombes(BbmG.etatJeu.getBombermans().get(0).getNbBombes());
 					
 					System.out.println(getWinner()+" stage 1");
 					
@@ -468,6 +470,8 @@ public class GameState {
 					game.etatJeu.setNum_niveau(3);	
 					game.etatJeu.setStrats(BbmG.etatJeu.getStrats());
 					game.etatJeu.getBombermans().get(0).setPoints(BbmG.etatJeu.getBombermans().get(0).getPoints());
+					game.etatJeu.getBombermans().get(0).setRange(BbmG.etatJeu.getBombermans().get(0).getRange());
+					game.etatJeu.getBombermans().get(0).setNbBombes(BbmG.etatJeu.getBombermans().get(0).getNbBombes());
 					
 					System.out.println(getWinner()+" stage 2");
 					
