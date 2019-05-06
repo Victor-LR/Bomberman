@@ -172,7 +172,8 @@ public class paint_score implements GameObserver {
 				
 				
 				BbmG.init();
-				
+				BbmG.etatJeu.setCampagne(false);
+        
 				BbmG.etatJeu.setStrats(old_strat);
 				BbmG.etatJeu.setCampagne(old_campagne);
 				
