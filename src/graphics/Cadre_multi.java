@@ -39,19 +39,32 @@ public class Cadre_multi extends JFrame {
 		
 		this.setL_BbmG(L_BbmG);
 		this.setNb_threads(nb_threads);
-		
 		int nb_bbm = L_BbmG.get(0).getMap().getNumber_of_bombermans();
-		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(750,nb_bbm*25*5);
+		
+		
+		if(nb_bbm < 10)
+			this.setSize(750,nb_bbm*50+250);
+		else this.setSize(1000,nb_bbm*50+250);
+		
 		this.setLocationRelativeTo(null);
-		this.setLayout(new GridLayout(nb_bbm +5,2));
-		//this.setLayout(new BorderLayout());
-
 		Border border = LineBorder.createGrayLineBorder();
 		
+		//this.setLayout(new GridLayout(nb_bbm +5,2));
+		this.setLayout(new BorderLayout());
+
+
+		
+		JPanel panel_haut = new JPanel();
+		panel_haut.setLayout(new GridLayout(4,1));
+		
+		
+		JPanel panel_bas = new JPanel();
+		panel_haut.setLayout(new GridLayout(3,1));
+		this.add("South",panel_bas);
+		
 		back = new JButton("back to menu");
-		this.add(this.back);
+		panel_haut.add(this.back);
 		
 		JPanel panel_stat = new JPanel();
 		panel_stat.setLayout(new GridLayout(1,2));
@@ -66,7 +79,7 @@ public class Cadre_multi extends JFrame {
 		label_tour.setHorizontalAlignment(JLabel.CENTER);
 		panel_stat.add(label_tour);
 		
-		this.add(panel_stat);
+		panel_haut.add(panel_stat);
 		
 		int[][] id_du_gagnant = new int[100][4];
 		int[] stat_finPartie = new int[100];
@@ -124,15 +137,17 @@ public class Cadre_multi extends JFrame {
 			JLabel pan_result = new JLabel();
 			
 			if ( n == GameState.PLANTAGE ) {
-				pan_result.setText("Il y a eu "+stat_finPartie[n]+" parties qui ont plantés");
+				pan_result.setText("Il y a eu "+stat_finPartie[n]+" parties qui ont plantés"+Math.round((double)nb_bbm/2));
 				pan_result.setHorizontalAlignment(JLabel.CENTER);
-				this.add(pan_result);
+				panel_haut.add(pan_result);
 			}
 			
 			else if (n == GameState.WIN_SOLO  || n == GameState.WIN_SOLO  || n == GameState.WIN_SOLO ){
 				
 				JPanel panel_tout_joueur = new JPanel();
-				panel_tout_joueur.setLayout(new GridLayout(nb_bbm,2));
+				if(nb_bbm < 10)
+					panel_tout_joueur.setLayout(new GridLayout(nb_bbm,2));
+				else panel_tout_joueur.setLayout(new GridLayout((int)Math.round((double)nb_bbm/2),2));
 				
 				double total;
 				for(int i = 0 ; i < L_BbmG.get(0).etatJeu.getBombermans().size() ; i++){
@@ -182,22 +197,22 @@ public class Cadre_multi extends JFrame {
 					
 					panel_tout_joueur.add(panel_joueur);
 				}
-				this.add(panel_tout_joueur);
+				this.add("Center",panel_tout_joueur);
 			
 			}
 				
 			else if ( n ==  GameState.EX_AEQUO ) {
 				pan_result.setText("<html>La partie s'est finie sur un ex aequo "+ pourcentage +" du temps</html>");
 				pan_result.setHorizontalAlignment(JLabel.CENTER);
-				this.add(pan_result);
+				panel_bas.add(pan_result);
 			}
 				
 			else if ( n ==  GameState.GAME_OVER) {
 				pan_result.setText("<html>Il n'y a pas eu de gagnant "+ pourcentage +" du temps</html>");
 				pan_result.setHorizontalAlignment(JLabel.CENTER);
-				this.add(pan_result);
+				panel_bas.add(pan_result);
 			}
-			
+			this.add("North",panel_haut);
 			
 		}
 			
