@@ -7,6 +7,7 @@ import agents.AgentAction;
 import agents.AgentType;
 import agents.Agent_Bomberman;
 import agents.ColorBomberman;
+import agents.Agent_Ennemy;
 import game.BombermanGame;
 import key.Keys;
 import key.Keys_2;
@@ -21,7 +22,7 @@ public class GameState {
 	private Keys key_action;
 	private Keys_2 key_action_2;
 
-	private ArrayList<Agent> ennemies;
+	private ArrayList<Agent_Ennemy> ennemies;
 	private ArrayList<Agent_Bomberman> bombermans;
 	private ArrayList<Objet_Bomb> bombes;
 	private ArrayList<Objet> items;
@@ -60,7 +61,7 @@ public class GameState {
 	public GameState(Map map,BombermanGame BbmG){
 		
 		
-		ennemies = new ArrayList<Agent>();
+		ennemies = new ArrayList<Agent_Ennemy>();
 		bombermans = new ArrayList<Agent_Bomberman>();
 		bombes = new ArrayList<Objet_Bomb>();
 		items = new ArrayList<Objet>();
@@ -86,7 +87,7 @@ public class GameState {
 
 		for(int i=0;i<map.getNumber_of_ennemies();i++)
 		{
-			Agent a = new Agent(AgentType.ENNEMY, map.getEnnemy_start_x(i), map.getEnnemy_start_y(i) );
+			Agent_Ennemy a = new Agent_Ennemy(map.getEnnemy_start_x(i), map.getEnnemy_start_y(i),i );
 			ennemies.add(a);
 		}
 		
@@ -145,7 +146,7 @@ public class GameState {
 		public boolean isEnnemie(int x, int y) {
 			boolean en = false;
 			
-			ArrayList<Agent> emis = this.ennemies;
+			ArrayList<Agent_Ennemy> emis = this.ennemies;
 			for(int i=0; i< emis.size(); i++) {
 				Agent emi = emis.get(i);
 				if((emi.getX() == x & emi.getY() == y)) en = true;
@@ -274,7 +275,7 @@ public class GameState {
 		int x = bomb.getObjX();
 		int y = bomb.getObjY();
 		
-		ArrayList<Agent> ennemies = this.getEnnemies();
+		ArrayList<Agent_Ennemy> ennemies = this.getEnnemies();
 		ArrayList<Agent_Bomberman> bombermans = this.getBombermans();
 		
 		int range_limit;
@@ -502,7 +503,7 @@ public class GameState {
 	
 	public void ennemiesTurn(){
 
-		ArrayList<Agent> ennemies = this.getEnnemies();
+		ArrayList<Agent_Ennemy> ennemies = this.getEnnemies();
 
 		for(int i = 0; i < ennemies.size(); i++){
 
@@ -672,7 +673,7 @@ public class GameState {
 	
 	public void isEnd(BombermanGame game) {
 		ArrayList<Agent_Bomberman> bombermans = this.getBombermans();
-		ArrayList<Agent> ennemies = this.getEnnemies();
+		ArrayList<Agent_Ennemy> ennemies = this.getEnnemies();
 		
 		int nbBbm = this.getMap().getNumber_of_bombermans();
 		int compteBbm = 0;
@@ -785,7 +786,7 @@ public class GameState {
 	public void isEndCampagne(BombermanGame game) {
 		
 		ArrayList<Agent_Bomberman> bombermans = this.getBombermans();
-		ArrayList<Agent> ennemies = this.getEnnemies();
+		ArrayList<Agent_Ennemy> ennemies = this.getEnnemies();
 		
 		int nbBbm = this.getMap().getNumber_of_bombermans();
 		int compteBbm = 0;
@@ -838,9 +839,9 @@ public class GameState {
 
 	//Renvoie un agent en fonction d'un id 
 
-	public Agent getAgent(GameState etat, int agentId){
+	public Agent_Ennemy getEnnemy(GameState etat, int agentId){
 		
-		for (Agent p : etat.getEnnemies()){
+		for (Agent_Ennemy p : etat.getEnnemies()){
 			if(p.getId() == agentId){
 				return p;
 			}
@@ -867,7 +868,7 @@ public class GameState {
 	
 	//accesseur sur la liste d'enemies
 	
-	public ArrayList<Agent> getEnnemies(){
+	public ArrayList<Agent_Ennemy> getEnnemies(){
 		return ennemies;
 	}
 	

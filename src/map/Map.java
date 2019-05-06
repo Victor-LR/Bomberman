@@ -30,6 +30,9 @@ public class Map {
 	protected ArrayList<Integer> ennemy_start_x;
 	protected ArrayList<Integer> ennemy_start_y;
 	
+	protected ArrayList<Integer> bird_start_x;
+	protected ArrayList<Integer> bird_start_y;
+	
 	protected ArrayList<Integer> bomberman_start_x;
 	protected ArrayList<Integer> bomberman_start_y;
 	
@@ -104,6 +107,13 @@ public class Map {
 				if (ligne.charAt(x)=='E') {
 					ennemy_start_x.add(x);
 					ennemy_start_y.add(y);
+				}
+				
+				//On rentre les coordonnée des Birds dans differents ArrayList
+				
+				if (ligne.charAt(x)=='V') {
+					bird_start_x.add(x);
+					bird_start_y.add(y);
 				}
 				
 				//On rentre les coordonnée du / des bombermans 

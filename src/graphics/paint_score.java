@@ -40,6 +40,7 @@ public class paint_score implements GameObserver {
 	private JLabel nomNiveau = null;
 	private JSlider slider = null;
 	private int[] old_strat = new int[10];
+	private boolean old_campagne = false;
 	
 	public paint_score(Cadre_Jeu cadre_jeu,BombermanGame bomberman){
 		
@@ -63,6 +64,7 @@ public class paint_score implements GameObserver {
 		this.BbmG.addObserver((GameObserver)this);
 		
 		this.old_strat = bomberman.etatJeu.getStrats();
+		this.old_campagne = bomberman.etatJeu.getCampagne();
 		
 		listlab = new ArrayList<JLabel>();
 		
@@ -127,7 +129,7 @@ public class paint_score implements GameObserver {
 		turn = new JLabel();
 		this.panel.add(this.turn);
 		
-		nomNiveau = new JLabel("	Stage : "+BbmG.getFilename());
+		nomNiveau = new JLabel("    Stage : "+BbmG.getFilename());
 		this.panel.add(this.nomNiveau);
 		
 		activerStop();
@@ -170,7 +172,10 @@ public class paint_score implements GameObserver {
 				
 				
 				BbmG.init();
+				
 				BbmG.etatJeu.setStrats(old_strat);
+				BbmG.etatJeu.setCampagne(old_campagne);
+				
 				BbmG.launch();
 				paint_bomberman PBM = new paint_bomberman(c_j,BbmG);
 		        c_j.add("Center",PBM);
