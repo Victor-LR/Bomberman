@@ -16,6 +16,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import agents.Agent_Bomberman;
 import game.BombermanGame;
 
 public class Cadre_menu extends JFrame{
@@ -288,12 +289,13 @@ public class Cadre_menu extends JFrame{
 			
 			public void actionPerformed(ActionEvent evenement) {
 				if(is_campagne) {
+					ArrayList<Integer> index_winner = new ArrayList<Integer>();
+					ArrayList<Integer> index_winner2 = new ArrayList<Integer>();
 					ArrayList<BombermanGame> L_BbmG = new ArrayList<BombermanGame>();
 					ArrayList<BombermanGame> L_BbmG2 = new ArrayList<BombermanGame>();
 					ArrayList<BombermanGame> L_BbmG3 = new ArrayList<BombermanGame>();
 					
-					int compt2 = 0;
-					int compt3 = 0;
+					//on lance tout les threads demandé dans le mode campagne sur le premier niveau 
 					
 					for (int i = 0 ; i < nb_threads ; i++){
 						BombermanGame un_bbmg = new BombermanGame();
@@ -306,8 +308,8 @@ public class Cadre_menu extends JFrame{
 						un_bbmg.init();
 						
 						
-							un_bbmg.etatJeu.setCampagne(true);
-							un_bbmg.etatJeu.setNum_niveau(1);									
+						un_bbmg.etatJeu.setCampagne(true);
+						un_bbmg.etatJeu.setNum_niveau(1);									
 						
 						
 						for(int j =0; j<un_bbmg.etatJeu.getBombermans().size();j++) {
@@ -367,21 +369,34 @@ public class Cadre_menu extends JFrame{
 						
 						System.out.println("	Thread n°"+i);
 					}
+					
+					//verification des bomberman gagant le premier niveau e on joint les threads du premier niveau 
 						
 					for(int j = 0 ; j < L_BbmG.size(); j++){
 						try {
 							L_BbmG.get(j).getThread().join();
+							
 							System.out.println("	Attente Thread n°"+j);
-							if(L_BbmG.get(j).etatJeu.getNum_niveau() != 3)
-								compt2++;
+							
+							if(L_BbmG.get(j).etatJeu.getNum_niveau() != 3) 
+								index_winner.add(j);
+							
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 							System.out.println("erreur !");
 						}
 					}
 					
-					for (int i = 0 ; i < compt2 ; i++){
+					//on fait jouer les bomberman gagnant en reprenant leur statistique sur le niveau 2
+					
+					for (int i = 0 ; i < index_winner.size() ; i++){
 						BombermanGame un_bbmg = new BombermanGame();
+						Agent_Bomberman old_bbmg = L_BbmG.get(index_winner.get(i)).etatJeu.getBombermans().get(0);
+						
+						int bombes = old_bbmg.getNbBombes();		
+						int range = old_bbmg.getRange();
+						int points = old_bbmg.getPoints();
+						
 						try {
 							un_bbmg.loadFile("./layout/niveau2.lay");
 	
@@ -391,7 +406,10 @@ public class Cadre_menu extends JFrame{
 						un_bbmg.init();
 						
 						un_bbmg.etatJeu.setCampagne(true);
-						un_bbmg.etatJeu.setNum_niveau(1);		
+						un_bbmg.etatJeu.setNum_niveau(1);
+						un_bbmg.etatJeu.getBombermans().get(0).setPoints(points);
+						un_bbmg.etatJeu.getBombermans().get(0).setNbBombes(bombes);
+						un_bbmg.etatJeu.getBombermans().get(0).setRange(range);
 						
 						un_bbmg.setTemps(1);
 						un_bbmg.new_thread();
@@ -402,20 +420,31 @@ public class Cadre_menu extends JFrame{
 						System.out.println("	Thread n°"+i);
 					}
 					
+					
+					//on verifie les gagnant du deuxième stage et on jouin les thread du second niveau 
+					
 					for(int j = 0 ; j < L_BbmG2.size(); j++){
 						try {
 							L_BbmG2.get(j).getThread().join();
 							System.out.println("	Attente Thread n°"+j);
 							if(L_BbmG2.get(j).etatJeu.getNum_niveau() != 3)
-								compt3++;
+								index_winner2.add(j);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 							System.out.println("erreur !");
 						}
 					}
 					
-					for (int i = 0 ; i < compt3 ; i++){
+					//on fait jouer les bomberman qui on gagné le stage précédent sur le 3eme niveau
+					
+					for (int i = 0 ; i < index_winner2.size() ; i++){
 						BombermanGame un_bbmg = new BombermanGame();
+						Agent_Bomberman old_bbmg = L_BbmG.get(index_winner2.get(i)).etatJeu.getBombermans().get(0);
+						
+						int bombes = old_bbmg.getNbBombes();		
+						int range = old_bbmg.getRange();
+						int points = old_bbmg.getPoints();
+						
 						try {
 							un_bbmg.loadFile("./layout/niveau3.lay");
 	
@@ -425,7 +454,10 @@ public class Cadre_menu extends JFrame{
 						un_bbmg.init();
 						
 						un_bbmg.etatJeu.setCampagne(true);
-						un_bbmg.etatJeu.setNum_niveau(1);		
+						un_bbmg.etatJeu.setNum_niveau(1);
+						un_bbmg.etatJeu.getBombermans().get(0).setPoints(points);
+						un_bbmg.etatJeu.getBombermans().get(0).setNbBombes(bombes);
+						un_bbmg.etatJeu.getBombermans().get(0).setRange(range);
 						
 						un_bbmg.setTemps(1);
 						un_bbmg.new_thread();
@@ -448,7 +480,7 @@ public class Cadre_menu extends JFrame{
 					
 					System.out.println("			Fin multithreads");
 		
-					Cadre_multi c_m = new Cadre_multi(L_BbmG3,nb_threads);
+					Cadre_multi c_m = new Cadre_multi(L_BbmG3,L_BbmG3.size());
 					c_m.setVisible(true);
 					
 					cadre_menu.dispose();

@@ -37,6 +37,7 @@ public class paint_score implements GameObserver {
 	private JButton restart =null;
 	private JButton back =null;
 	private JLabel turn = null;
+	private JLabel nomNiveau = null;
 	private JSlider slider = null;
 	private int[] old_strat = new int[10];
 	
@@ -125,6 +126,9 @@ public class paint_score implements GameObserver {
 		
 		turn = new JLabel();
 		this.panel.add(this.turn);
+		
+		nomNiveau = new JLabel("	Stage : "+BbmG.getFilename());
+		this.panel.add(this.nomNiveau);
 		
 		activerStop();
 		desactiverRun();
@@ -222,7 +226,7 @@ public class paint_score implements GameObserver {
 			//System.out.println("		test score "+ bomberman.getPoints());
 		}
 		
-		this.turn.setText("Tour : "+this.BbmG.getTurn());
+		this.turn.setText("Tour : "+this.BbmG.getTurn()+"	");
 		
 		
 			
