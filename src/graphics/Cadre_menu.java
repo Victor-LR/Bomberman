@@ -481,6 +481,7 @@ public class Cadre_menu extends JFrame{
 					System.out.println("			Fin multithreads");
 		
 					Cadre_multi c_m = new Cadre_multi(L_BbmG3,L_BbmG3.size());
+          
 					c_m.setVisible(true);
 					
 					cadre_menu.dispose();
