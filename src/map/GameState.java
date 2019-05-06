@@ -48,7 +48,7 @@ public class GameState {
 	
 	private int[] strats;
 	
-	private Boolean campagne = null;
+	private Boolean campagne;
 	
 	private int num_niveau = 0;
 
@@ -72,6 +72,7 @@ public class GameState {
 		this.BbmG=BbmG;
 
 		this.end = false;
+		this.campagne = false;
 		
 		ColorBomberman[] Couleurs= ColorBomberman.values();
 		for(int i=0;i<map.getNumber_of_bombermans();i++)
@@ -293,17 +294,34 @@ public class GameState {
 			
 				for(int j = 0; j<bombermans.size(); j++){
 					Agent_Bomberman bomberman1 = bombermans.get(j);
-					if(bomberman1.getX() == i & bomberman1.getY() == y & bomb.getId_bbm() != bomberman1.getId() & !bomberman1.isInvincible() & !bombermans.get(j).isDead()){
-						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 500);
-						bombermans.get(j).setDead(true);
+					if(bomberman1.getX() == i & bomberman1.getY() == y & bomb.getId_bbm() != bomberman1.getId() & !bomberman1.isInvincible() & !bomberman1.isDead()){
+						
+						if (bomberman1.getLife() == 0) {
+							Agent_Bomberman bbm_bomb = bombermans.get(bomb.getId_bbm());
+							bbm_bomb.setPoints(bbm_bomb.getPoints() + 500);
+							bbm_bomb.setLife(bbm_bomb.getLife()+1);
+							bombermans.get(j).setDead(true);
+
+						}else{
+							bomberman1.setLife(bomberman1.getLife()-1);
+							System.out.println("Vie en moins !");
+						}
+							
 					}
+					
 				}
 
 				for(int j = 0; j<ennemies.size(); j++){
 					Agent ennemie = ennemies.get(j);
 					if(ennemie.getX() == i & ennemie.getY() == y & !ennemies.get(j).isDead()){
-						ennemies.remove(j);
-						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
+						
+						if (ennemie.getLife() == 0) {
+							ennemies.remove(j);
+							bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
+						}else {
+							ennemie.setLife(ennemie.getLife()-1);
+							System.out.println("Vie en moins !");
+						}
 					}
 				}
 			
@@ -329,16 +347,30 @@ public class GameState {
 			for(int j = 0; j<bombermans.size(); j++){
 				Agent_Bomberman bomberman1 = bombermans.get(j);
 				if(bomberman1.getX() == x & bomberman1.getY() == i  & bomb.getId_bbm() != bomberman1.getId() & !bomberman1.isInvincible() & !bombermans.get(j).isDead()){
-					bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 500);
-					bombermans.get(j).setDead(true);
+					
+					if (bomberman1.getLife() == 0) {
+						Agent_Bomberman bbm_bomb = bombermans.get(bomb.getId_bbm());
+						bbm_bomb.setPoints(bbm_bomb.getPoints() + 500);
+						bbm_bomb.setLife(bbm_bomb.getLife()+1);
+						bombermans.get(j).setDead(true);
+					}else{
+						bomberman1.setLife(bomberman1.getLife()-1);
+						System.out.println("Vie en moins !");
+					}
 				}
 			}
 
 				for(int j = 0; j<ennemies.size(); j++){
 					Agent ennemie = ennemies.get(j);
 					if(ennemie.getX() == x & ennemie.getY() == i & !ennemies.get(j).isDead()){
-						ennemies.remove(j);
-						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
+						
+						if (ennemie.getLife() == 0) {
+							ennemies.remove(j);
+							bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
+						}else {
+							ennemie.setLife(ennemie.getLife()-1);
+							System.out.println("Vie en moins !");
+						}
 					}
 				}
 				
@@ -363,16 +395,30 @@ public class GameState {
 			for(int j = 0; j<bombermans.size(); j++){
 				Agent_Bomberman bomberman1 = bombermans.get(j);
 				if(bomberman1.getX() == i & bomberman1.getY() == y  & bomb.getId_bbm()  != bomberman1.getId() & !bomberman1.isInvincible() & !bombermans.get(j).isDead()){
-					bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 500);
-					bombermans.get(j).setDead(true);
+					
+					if (bomberman1.getLife() == 0) {
+						Agent_Bomberman bbm_bomb = bombermans.get(bomb.getId_bbm());
+						bbm_bomb.setPoints(bbm_bomb.getPoints() + 500);
+						bbm_bomb.setLife(bbm_bomb.getLife()+1);
+						bombermans.get(j).setDead(true);
+					}else{
+						bomberman1.setLife(bomberman1.getLife()-1);
+						System.out.println("Vie en moins !");
+					}
 				}
 			}
 	
 				for(int j = 0; j<ennemies.size(); j++){
 					Agent ennemie = ennemies.get(j);
 					if(ennemie.getX() == i & ennemie.getY() == y & !ennemies.get(j).isDead()){
-						ennemies.remove(j);
-						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
+						
+						if (ennemie.getLife() == 0) {
+							ennemies.remove(j);
+							bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
+						}else {
+							ennemie.setLife(ennemie.getLife()-1);
+							System.out.println("Vie en moins !");
+						}
 					}
 				}
 					
@@ -398,17 +444,30 @@ public class GameState {
 			for(int j = 0; j<bombermans.size(); j++){
 				Agent_Bomberman bomberman1 = bombermans.get(j);
 				if(bomberman1.getX() == x & bomberman1.getY() == i  & bomb.getId_bbm()  != bomberman1.getId() & !bomberman1.isInvincible() & !bombermans.get(j).isDead()){
-					bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 500);
-					bombermans.get(j).setDead(true);
+					
+					if (bomberman1.getLife() == 0) {
+						Agent_Bomberman bbm_bomb = bombermans.get(bomb.getId_bbm());
+						bbm_bomb.setPoints(bbm_bomb.getPoints() + 500);
+						bbm_bomb.setLife(bbm_bomb.getLife()+1);
+						bombermans.get(j).setDead(true);
+					}else{
+						bomberman1.setLife(bomberman1.getLife()-1);
+						System.out.println("Vie en moins !");
+					}
 				}
 			}
 
 				for(int j = 0; j<ennemies.size(); j++){
 					Agent ennemie = ennemies.get(j);
 					if(ennemie.getX() == x & ennemie.getY() == i & !ennemies.get(j).isDead()){
-						ennemies.remove(j);
-						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
-						//bomberman.setPoints(bomberman.getPoints() + 100);
+						
+						if (ennemie.getLife() == 0) {
+							ennemies.remove(j);
+							bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
+						}else {
+							ennemie.setLife(ennemie.getLife()-1);
+							System.out.println("Vie en moins !");
+						}
 					}
 				}
 				

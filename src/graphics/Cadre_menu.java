@@ -512,7 +512,7 @@ public class Cadre_menu extends JFrame{
 						}
 						un_bbmg.init();
 														
-						un_bbmg.etatJeu.setCampagne(true);
+						un_bbmg.etatJeu.setCampagne(false);
 						
 						for(int j =0; j<un_bbmg.etatJeu.getBombermans().size();j++) {
 							switch(listStrat.get(j).getSelectedItem().toString()) {

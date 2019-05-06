@@ -50,7 +50,6 @@ public class Cadre_multi extends JFrame {
 		this.setLocationRelativeTo(null);
 		Border border = LineBorder.createGrayLineBorder();
 		
-		//this.setLayout(new GridLayout(nb_bbm +5,2));
 		this.setLayout(new BorderLayout());
 		
 		JPanel panel_haut = new JPanel();

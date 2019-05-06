@@ -170,6 +170,7 @@ public class paint_score implements GameObserver {
 				
 				
 				BbmG.init();
+				BbmG.etatJeu.setCampagne(false);
 				BbmG.etatJeu.setStrats(old_strat);
 				BbmG.launch();
 				paint_bomberman PBM = new paint_bomberman(c_j,BbmG);

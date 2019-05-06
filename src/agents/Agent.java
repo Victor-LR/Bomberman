@@ -16,6 +16,7 @@ public class Agent{
 	private int y;
 	private int id;
 	private AgentType agent;
+	private int life;
 	
 	private int direction;
 	
@@ -25,6 +26,7 @@ public class Agent{
 		this.x = px;
 		this.y = py;
 		this.id = Agent.current_Id;
+		this.setLife(0);
 		this.direction = Map.SOUTH;
 		current_Id++;
 		this.agent = ag;
@@ -81,7 +83,18 @@ public class Agent{
 		this.id = id;
 	}
 	
-	//setteur et setteur pour la direction
+
+	
+	public int getLife() {
+		return life;
+	}
+
+	public void setLife(int life) {
+		this.life = life;
+	}
+
+	
+	//setteur et getteur pour la direction
 	
 	public int getDirection() {
 		return direction;
