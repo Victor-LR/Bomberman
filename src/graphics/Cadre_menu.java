@@ -16,6 +16,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import map.GameState;
+
 import agents.Agent_Bomberman;
 import game.BombermanGame;
 
@@ -294,6 +296,7 @@ public class Cadre_menu extends JFrame{
 					ArrayList<BombermanGame> L_BbmG = new ArrayList<BombermanGame>();
 					ArrayList<BombermanGame> L_BbmG2 = new ArrayList<BombermanGame>();
 					ArrayList<BombermanGame> L_BbmG3 = new ArrayList<BombermanGame>();
+					ArrayList<BombermanGame> L_BbmAll = new ArrayList<BombermanGame>();
 					
 					//on lance tout les threads demandé dans le mode campagne sur le premier niveau 
 					
@@ -308,7 +311,7 @@ public class Cadre_menu extends JFrame{
 						un_bbmg.init();
 						
 						
-						un_bbmg.etatJeu.setCampagne(true);
+						un_bbmg.etatJeu.setCampagne(false);
 						un_bbmg.etatJeu.setNum_niveau(1);									
 						
 						
@@ -370,7 +373,7 @@ public class Cadre_menu extends JFrame{
 						System.out.println("	Thread n°"+i);
 					}
 					
-					//verification des bomberman gagant le premier niveau e on joint les threads du premier niveau 
+					//verification des bomberman gagant le premier niveau et on joint les threads du premier niveau 
 						
 					for(int j = 0 ; j < L_BbmG.size(); j++){
 						try {
@@ -378,13 +381,26 @@ public class Cadre_menu extends JFrame{
 							
 							System.out.println("	Attente Thread n°"+j);
 							
-							if(L_BbmG.get(j).etatJeu.getNum_niveau() != 3) 
-								index_winner.add(j);
+//							if(L_BbmG.get(j).etatJeu.getFinPartie() == GameState.WIN_SOLO) 
+//								index_winner.add(j);
+//							else{
+//								L_BbmAll.add(L_BbmG.get(j));
+//							}
 							
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 							System.out.println("erreur !");
 						}
+						
+						
+						if(L_BbmG.get(j).etatJeu.getFinPartie() == GameState.WIN_SOLO) 
+							index_winner.add(j);
+						else{
+							L_BbmAll.add(L_BbmG.get(j));
+						}
+						
+						
+						
 					}
 					
 					//on fait jouer les bomberman gagnant en reprenant leur statistique sur le niveau 2
@@ -405,8 +421,8 @@ public class Cadre_menu extends JFrame{
 						}
 						un_bbmg.init();
 						
-						un_bbmg.etatJeu.setCampagne(true);
-						un_bbmg.etatJeu.setNum_niveau(1);
+						un_bbmg.etatJeu.setCampagne(false);
+						un_bbmg.etatJeu.setNum_niveau(2);
 						un_bbmg.etatJeu.getBombermans().get(0).setPoints(points);
 						un_bbmg.etatJeu.getBombermans().get(0).setNbBombes(bombes);
 						un_bbmg.etatJeu.getBombermans().get(0).setRange(range);
@@ -421,18 +437,27 @@ public class Cadre_menu extends JFrame{
 					}
 					
 					
-					//on verifie les gagnant du deuxième stage et on jouin les thread du second niveau 
+					//on verifie les gagnant du deuxième stage et on joint les threads du second niveau 
 					
 					for(int j = 0 ; j < L_BbmG2.size(); j++){
 						try {
 							L_BbmG2.get(j).getThread().join();
 							System.out.println("	Attente Thread n°"+j);
-							if(L_BbmG2.get(j).etatJeu.getNum_niveau() != 3)
-								index_winner2.add(j);
+//							if(L_BbmG2.get(j).etatJeu.getFinPartie() == GameState.WIN_SOLO)
+//								index_winner2.add(j);
+//							else{
+//								L_BbmAll.add(L_BbmG2.get(j));
+//							}
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 							System.out.println("erreur !");
 						}
+						if(L_BbmG2.get(j).etatJeu.getFinPartie() == GameState.WIN_SOLO)
+							index_winner2.add(j);
+						else{
+							L_BbmAll.add(L_BbmG2.get(j));
+						}
+						System.out.println(L_BbmG2.get(j).etatJeu.getBombermans().get(0).getPoints());
 					}
 					
 					//on fait jouer les bomberman qui on gagné le stage précédent sur le 3eme niveau
@@ -453,8 +478,8 @@ public class Cadre_menu extends JFrame{
 						}
 						un_bbmg.init();
 						
-						un_bbmg.etatJeu.setCampagne(true);
-						un_bbmg.etatJeu.setNum_niveau(1);
+						un_bbmg.etatJeu.setCampagne(false);
+						un_bbmg.etatJeu.setNum_niveau(3);
 						un_bbmg.etatJeu.getBombermans().get(0).setPoints(points);
 						un_bbmg.etatJeu.getBombermans().get(0).setNbBombes(bombes);
 						un_bbmg.etatJeu.getBombermans().get(0).setRange(range);
@@ -472,15 +497,22 @@ public class Cadre_menu extends JFrame{
 						try {
 							L_BbmG3.get(j).getThread().join();
 							System.out.println("	Attente Thread n°"+j);
+						
+							
+							
+							
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 							System.out.println("erreur !");
 						}
+						L_BbmAll.add(L_BbmG3.get(j));
+						//System.out.println(L_BbmAll.get(j).etatJeu.getBombermans().get(0).getPoints());
+//						System.out.println(L_BbmG2.get(j).etatJeu.getBombermans().get(0).getPoints());
 					}
 					
 					System.out.println("			Fin multithreads");
 		
-					Cadre_multi c_m = new Cadre_multi(L_BbmG3,L_BbmG3.size());
+					Cadre_multi c_m = new Cadre_multi(L_BbmAll,L_BbmAll.size());
           
 					c_m.setVisible(true);
 					

@@ -682,12 +682,6 @@ public class GameState {
 		int aux ;
 		
 		
-		
-		//idGagnant : 0 -> Jeu a planté
-		//idGagnant : 1 -> Ex aequo
-		//idGagnant : 2 à n -> Joueur id 0 à Joueur id n-2
-		
-		
 		for(int i = 0; i<bombermans.size(); ++i) {
 			if(!bombermans.get(i).isDead()) {
 				compteBbm++;
@@ -782,7 +776,7 @@ public class GameState {
 			}
 			
 		}
-		if (winner != null) System.out.println(this.winner);
+		//if (winner != null) System.out.println(this.winner);
 }
 	
 
@@ -800,7 +794,7 @@ public class GameState {
 		for(int i = 0; i<bombermans.size(); ++i) {
 			if(!bombermans.get(i).isDead()) {
 				compteBbm++;
-				this.idGagnant = i+2;
+				this.idGagnant = i;
 			}
 		}
 		
@@ -815,16 +809,15 @@ public class GameState {
 			setNum_niveau(3);
 			game.etatJeu.setEnd(true);
 			this.winner = "GAME OVER";
-			this.idGagnant = 1;
-			this.plantage = false;
+			this.finPartie = GAME_OVER;
 
 		}
 		
 		if(compteBbm == 1 & nbBbm == 1 & compteEnn == 0) {
 			setEnd(true);
 			game.etatJeu.setEnd(true);
-			winner = "Le joueur "+(bombermans.get(idGagnant-2).getId()+1)+" est le gagnant Partie SOLO";
-			this.plantage = false;
+			winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant Partie SOLO";
+			this.finPartie = WIN_SOLO;
 		}
 		
 		if(game.getTurn() == (game.getMaxTurn()-1) ) {
@@ -836,8 +829,7 @@ public class GameState {
 				setEnd(true);
 				game.etatJeu.setEnd(true);
 				this.winner = "GAME OVER";
-				this.idGagnant =1;
-				this.plantage = false;
+				this.finPartie = GAME_OVER;
 
 			}
 		}

@@ -61,7 +61,7 @@ public class Cadre_multi extends JFrame {
 		
 		JPanel panel_bas = new JPanel();
 		panel_haut.setLayout(new GridLayout(3,1));
-		this.add("South",panel_bas);
+		
 		
 		back = new JButton("back to menu");
 		panel_haut.add(this.back);
@@ -88,6 +88,7 @@ public class Cadre_multi extends JFrame {
 		for(int j = 0 ; j < L_BbmG.size(); j++){
 			
 			typeFin = L_BbmG.get(j).etatJeu.getFinPartie();
+			//System.out.println(j+"				"+typeFin);
 			int point_gagnant = L_BbmG.get(j).etatJeu.getBombermans().get(L_BbmG.get(j).etatJeu.getIdGagnant()).getPoints();
 			
 			for(int i = 0; i < nb_bbm; i++){
@@ -137,7 +138,7 @@ public class Cadre_multi extends JFrame {
 			JLabel pan_result = new JLabel();
 			
 			if ( n == GameState.PLANTAGE ) {
-				pan_result.setText("Il y a eu "+stat_finPartie[n]+" parties qui ont plantés"+Math.round((double)nb_bbm/2));
+				pan_result.setText("Il y a eu "+stat_finPartie[n]+" parties qui ont plantés");
 				pan_result.setHorizontalAlignment(JLabel.CENTER);
 				panel_haut.add(pan_result);
 			}
@@ -213,6 +214,7 @@ public class Cadre_multi extends JFrame {
 				panel_bas.add(pan_result);
 			}
 			this.add("North",panel_haut);
+			this.add("South",panel_bas);
 			
 		}
 			
