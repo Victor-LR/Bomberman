@@ -52,15 +52,15 @@ public class Cadre_multi extends JFrame {
 		
 		//this.setLayout(new GridLayout(nb_bbm +5,2));
 		this.setLayout(new BorderLayout());
-
-
 		
 		JPanel panel_haut = new JPanel();
-		panel_haut.setLayout(new GridLayout(4,1));
-		
+		panel_haut.setLayout(new GridLayout(3,1));
 		
 		JPanel panel_bas = new JPanel();
-		panel_haut.setLayout(new GridLayout(3,1));
+		panel_bas.setLayout(new GridLayout(2,1));
+		
+		this.add("North",panel_haut);
+		this.add("South",panel_bas);
 		
 		
 		back = new JButton("back to menu");
@@ -142,7 +142,6 @@ public class Cadre_multi extends JFrame {
 				pan_result.setHorizontalAlignment(JLabel.CENTER);
 				panel_haut.add(pan_result);
 			}
-			
 			else if (n == GameState.WIN_SOLO  || n == GameState.WIN_SOLO  || n == GameState.WIN_SOLO ){
 				
 				JPanel panel_tout_joueur = new JPanel();
@@ -213,8 +212,7 @@ public class Cadre_multi extends JFrame {
 				pan_result.setHorizontalAlignment(JLabel.CENTER);
 				panel_bas.add(pan_result);
 			}
-			this.add("North",panel_haut);
-			this.add("South",panel_bas);
+
 			
 		}
 			
