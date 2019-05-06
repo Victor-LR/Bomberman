@@ -5,7 +5,9 @@ import java.util.Random;
 import agents.Agent;
 import agents.AgentAction;
 import agents.AgentType;
+import agents.Agent_Bird;
 import agents.Agent_Bomberman;
+import agents.Agent_Tower;
 import agents.ColorBomberman;
 import agents.Agent_Ennemy;
 import game.BombermanGame;
@@ -26,6 +28,8 @@ public class GameState {
 	private ArrayList<Agent_Bomberman> bombermans;
 	private ArrayList<Objet_Bomb> bombes;
 	private ArrayList<Objet> items;
+	
+	private Agent_Tower tower;
 	
 	private static Random numberGenerator = new Random();
 	private int pourcentage = 25;
@@ -92,6 +96,10 @@ public class GameState {
 			ennemies.add(a);
 		}
 		
+		if(map.tower_x != 0 & map.tower_y != 0)
+			this.setTower(new Agent_Tower(map.tower_x,map.tower_y,0));
+		
+			
 
 	}
 	
@@ -1011,6 +1019,14 @@ public class GameState {
 	
 	public BombermanGame getGame() {
 		return game;
+	}
+
+	public Agent_Tower getTower() {
+		return tower;
+	}
+
+	public void setTower(Agent_Tower agent_Tower) {
+		this.tower = agent_Tower;
 	}
 
 }

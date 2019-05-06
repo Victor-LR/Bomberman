@@ -24,8 +24,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import agents.Agent;
+import agents.Agent_Bird;
 import agents.Agent_Bomberman;
 import agents.Agent_Ennemy;
+import agents.Agent_Tower;
 import objets.Objet;
 import objets.ObjetType;
 import objets.Objet_Bomb;
@@ -146,6 +148,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		
 		ArrayList<Agent_Ennemy> ennemies = BbmG.etatJeu.getEnnemies();
 		ArrayList<Objet> items = BbmG.etatJeu.getItems();
+		Agent_Tower tower = BbmG.etatJeu.getTower();
 		
 		if (items != null) {
 			for(int i = 0; i < items.size(); i++){
@@ -175,7 +178,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 			
 		}
 		
-
+		if (tower != null) dessine_Tower(g,tower);
 		
 	}
 	
@@ -362,6 +365,29 @@ public class paint_bomberman extends JPanel implements GameObserver{
 			}
 		}
 		
+		
+	}
+	
+	void dessine_Tower(Graphics g, Agent_Tower tower){
+		
+		int fen_x = getSize().width;
+		int fen_y = getSize().height;
+
+		double stepx = fen_x/(double)taille_x;
+		double stepy = fen_y/(double)taille_y;
+		
+		int px = tower.getX();
+		int py = tower.getY();
+		
+		double pos_x=px*stepx-stepx;
+		double pos_y=py*stepy-stepy;
+		
+		try {
+			Image img = ImageIO.read(new File("./image/RadioTower.png"));
+			g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx*3, (int)stepy*3, this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
