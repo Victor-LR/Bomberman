@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import agents.Agent;
 import agents.AgentAction;
 import agents.Agent_Bomberman;
+import agents.Agent_Ennemy;
 import map.GameState;
 
 public class Strategie_PVE extends Strategie{
@@ -18,7 +19,7 @@ public class Strategie_PVE extends Strategie{
 		
 		AgentAction Action = null;//new AgentAction(0);
 		ArrayList<AgentAction> listAction = new ArrayList<AgentAction>();
-		ArrayList<Agent> ennemies = getEtat().getEnnemies();
+		ArrayList<Agent_Ennemy> ennemies = getEtat().getEnnemies();
 		
 		int x = getAgent().getX();
 		int y = getAgent().getY();
