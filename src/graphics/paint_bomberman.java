@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 
 import agents.Agent;
 import agents.Agent_Bomberman;
+import agents.Agent_Ennemy;
 import objets.Objet;
 import objets.ObjetType;
 import objets.Objet_Bomb;
@@ -143,7 +144,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		ArrayList<Objet_Bomb> bombes = BbmG.etatJeu.getBombes();
 		ArrayList<Agent_Bomberman> bombermans = BbmG.etatJeu.getBombermans();
 		
-		ArrayList<Agent> ennemies = BbmG.etatJeu.getEnnemies();
+		ArrayList<Agent_Ennemy> ennemies = BbmG.etatJeu.getEnnemies();
 		ArrayList<Objet> items = BbmG.etatJeu.getItems();
 		
 		if (items != null) {

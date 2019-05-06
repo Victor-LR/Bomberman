@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import agents.Agent;
 import agents.Agent_Bomberman;
+import agents.Agent_Ennemy;
 import game.BombermanGame;
 import map.Map;
 
@@ -99,7 +100,7 @@ public class Review extends JPanel {
 		
 		ArrayList<Agent_Bomberman> bombermans = BbmG.etatJeu.getBombermans();
 		
-		ArrayList<Agent> ennemies = BbmG.etatJeu.getEnnemies();
+		ArrayList<Agent_Ennemy> ennemies = BbmG.etatJeu.getEnnemies();
 		
 		
 		for(int i = 0; i < ennemies.size(); i++){
