@@ -1,5 +1,6 @@
 package strategies;
 
+import agents.Agent;
 import agents.AgentAction;
 import agents.Agent_Bomberman;
 import map.GameState;
@@ -7,9 +8,9 @@ import map.GameState;
 public abstract class Strategie {
 	
 	private GameState etat = null;
-	private Agent_Bomberman agent = null;
+	private Agent agent = null;
 	
-	public Strategie (GameState et, Agent_Bomberman ag) {
+	public Strategie (GameState et, Agent ag) {
 		this.etat = et;
 		this.agent = ag;
 	}
@@ -21,7 +22,4 @@ public abstract class Strategie {
 		return this.etat;
 	}
 	
-	public Agent_Bomberman getAgent() {
-		return this.agent;
-	}
 }

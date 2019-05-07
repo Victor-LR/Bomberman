@@ -14,8 +14,11 @@ import agents.Agent_Bomberman;
 
 public class Strategie_A_PVP extends Strategie {
 
-	public Strategie_A_PVP(GameState et, Agent_Bomberman ag) {
-		super(et, ag);
+	private Agent_Bomberman agent = null;
+	
+	public Strategie_A_PVP(GameState etat, Agent_Bomberman agent) {
+		super(etat, agent);
+		this.agent = agent;
 	}
 
 	//empêche de rentrer dans la portée d'explosion d'une bombe
@@ -286,5 +289,8 @@ public class Strategie_A_PVP extends Strategie {
 		else return(listAction.get((int)(Math.random()*listAction.size())));
 		//return new AgentAction(Map.STOP);
 	}
-
+	
+	public Agent_Bomberman getAgent() {
+		return this.agent;
+	}
 }

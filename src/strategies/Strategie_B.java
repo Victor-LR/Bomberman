@@ -11,8 +11,11 @@ import objets.Objet_Bomb;
 
 public class Strategie_B extends Strategie{
 	
+	private Agent_Bomberman agent = null;
+	
 	public Strategie_B(GameState etat, Agent_Bomberman agent) {
 		super(etat, agent);
+		this.agent = agent;
 	}
 	
 	@Override
@@ -148,6 +151,10 @@ public class Strategie_B extends Strategie{
 				else return new AgentAction(4);
 			}
 		}
+	}
+	
+	public Agent_Bomberman getAgent() {
+		return this.agent;
 	}
 
 }

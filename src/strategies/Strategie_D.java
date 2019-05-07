@@ -13,9 +13,11 @@ import objets.Objet_Bomb;
 public class Strategie_D extends Strategie{
 	
 	
+	private Agent_Bomberman agent = null;
 	
 	public Strategie_D(GameState etat, Agent_Bomberman agent) {
 		super(etat, agent);
+		this.agent = agent;
 	}
 
 	
@@ -654,6 +656,10 @@ public class Strategie_D extends Strategie{
 				else return new AgentAction(5);
 			}
 		}
+	}
+	
+	public Agent_Bomberman getAgent() {
+		return this.agent;
 	}
 
 
