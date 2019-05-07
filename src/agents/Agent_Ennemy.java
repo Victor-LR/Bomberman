@@ -10,8 +10,8 @@ public class Agent_Ennemy extends Agent {
 		super.setId(id);
 	}
 	
-	public AgentAction chooseAction(GameState etatjeu) {
-		return new AgentAction(Map.STOP);
-	}
+//	public AgentAction chooseAction(GameState etatjeu) {
+//		return new AgentAction(Map.STOP);
+//	}
 	
 }
