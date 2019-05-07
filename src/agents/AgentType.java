@@ -4,6 +4,7 @@ public enum AgentType {
 	ENNEMY,
 	BOMBERMAN,
 	BIRD,
-	TOWER
+	TOWER,
+	RAJION
 
 }
