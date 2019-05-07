@@ -19,6 +19,7 @@ public class Map {
 	public static int EAST = 2;
 	public static int WEST = 3;
 	public static int STOP = 4;
+	public static int STOP_BIRD = 6;
 	public static int BOMB = 5;
 
 	private String filename;
@@ -81,6 +82,9 @@ public class Map {
 		
 		bomberman_start_x = new  ArrayList<Integer>();
 		bomberman_start_y = new  ArrayList<Integer>();
+		
+		bird_start_x = new  ArrayList<Integer>();
+		bird_start_y = new  ArrayList<Integer>();
 		
 		flux = new FileInputStream(filename); 
 		lecture = new InputStreamReader(flux);
@@ -259,4 +263,19 @@ public class Map {
 		this.stuck[x][y] = true;
 	}
 	
+/////////////////////BIRDS/////////////////////
+	//Renvoie le nb de bird
+	public int getNumber_of_birds(){
+		return bird_start_x.size();
+	}
+		
+	//Renvoie la position x du bird voulu
+	public int getBird_start_x(int i){
+		return bird_start_x.get(i);
+	}
+		
+	//Renvoie la position y du bird voulu
+	public int getBird_start_y(int i){
+		return bird_start_y.get(i);
+	}
 }

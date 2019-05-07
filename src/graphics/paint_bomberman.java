@@ -24,6 +24,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import agents.Agent;
+import agents.Agent_Bird;
 import agents.Agent_Bomberman;
 import agents.Agent_Ennemy;
 import objets.Objet;
@@ -143,7 +144,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		
 		ArrayList<Objet_Bomb> bombes = BbmG.etatJeu.getBombes();
 		ArrayList<Agent_Bomberman> bombermans = BbmG.etatJeu.getBombermans();
-		
+		ArrayList<Agent_Bird> birds = BbmG.etatJeu.getBirds();
 		ArrayList<Agent_Ennemy> ennemies = BbmG.etatJeu.getEnnemies();
 		ArrayList<Objet> items = BbmG.etatJeu.getItems();
 		
@@ -167,6 +168,10 @@ public class paint_bomberman extends JPanel implements GameObserver{
 			dessine_Ennemy(g,ennemies.get(i));	
 		}
 		
+		for(int i = 0; i < birds.size(); i++){
+			if(!birds.get(i).isDead())
+			dessine_Bird(g,birds.get(i));	
+		}
 		
 		for(int i = 0; i < bombermans.size(); i++){
 
@@ -179,7 +184,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		
 	}
 	
-	void dessine_Ennemy(Graphics g, Agent agent)
+	void dessine_Ennemy(Graphics g, Agent_Ennemy agent)
 	{
 		int fen_x = getSize().width;
 		int fen_y = getSize().height;
@@ -234,6 +239,143 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		
 	}
 	
+	void dessine_Bird(Graphics g, Agent_Bird agent)
+	{
+		int fen_x = getSize().width;
+		int fen_y = getSize().height;
+
+		double stepx = fen_x/(double)taille_x;
+		double stepy = fen_y/(double)taille_y;
+
+		int px = agent.getX();
+		int py = agent.getY();
+		
+		double pos_x=px*stepx;
+		double pos_y=py*stepy;
+		
+		int direc_en = agent.getDirection();
+		
+		if(direc_en==Map.STOP_BIRD) {
+			try {
+				Image img = ImageIO.read(new File("./image/bird_STOP.png"));
+				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if (direc_en==Map.NORTH){
+			
+			if(BbmG.getTurn() % 2 == 0) {
+				try {
+					Image img = ImageIO.read(new File("./image/bird_SOUTH1.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else if(BbmG.getTurn() % 3 == 0) {
+				try {
+					Image img = ImageIO.read(new File("./image/bird_SOUTH2.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				try {
+					Image img = ImageIO.read(new File("./image/bird_SOUTH3.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		if (direc_en==Map.SOUTH){
+			
+			if(BbmG.getTurn() % 2 == 0) {
+				try {
+					Image img = ImageIO.read(new File("./image/bird_NRTH1.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else if (BbmG.getTurn() % 3 == 0){
+				try {
+					Image img = ImageIO.read(new File("./image/bird_NRTH2.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				try {
+					Image img = ImageIO.read(new File("./image/bird_NRTH3.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		if (direc_en==Map.EAST){
+			
+			if(BbmG.getTurn() % 2 == 0) {
+				try {
+					Image img = ImageIO.read(new File("./image/bird_WEST1.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else if (BbmG.getTurn() % 3 == 0){
+				try {
+					Image img = ImageIO.read(new File("./image/bird_WEST2.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				try {
+					Image img = ImageIO.read(new File("./image/bird_WEST3.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		if (direc_en==Map.WEST){
+			
+			if(BbmG.getTurn() % 2 == 0) {
+				try {
+					Image img = ImageIO.read(new File("./image/bird_EAST1.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else if (BbmG.getTurn() %  3 == 0){
+				try {
+					Image img = ImageIO.read(new File("./image/bird_EAST2.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				try {
+					Image img = ImageIO.read(new File("./image/bird_EAST3.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		
+	}
 	
 	void dessine_Bomberman(Graphics g, Agent_Bomberman agentBBM)
 	{

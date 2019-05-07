@@ -27,6 +27,12 @@ public class AgentAction {
 			vy=0;
 		}
 		else
+		if (action==Map.STOP_BIRD)
+		{
+			vx=0;
+			vy=0;
+		}
+		else
 		if (action==Map.NORTH)
 		{
 			vx=0;

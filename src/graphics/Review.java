@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import agents.Agent;
+import agents.Agent_Bird;
 import agents.Agent_Bomberman;
 import agents.Agent_Ennemy;
 import game.BombermanGame;
@@ -101,11 +102,16 @@ public class Review extends JPanel {
 		ArrayList<Agent_Bomberman> bombermans = BbmG.etatJeu.getBombermans();
 		
 		ArrayList<Agent_Ennemy> ennemies = BbmG.etatJeu.getEnnemies();
-		
+		ArrayList<Agent_Bird> birds = BbmG.etatJeu.getBirds();
 		
 		for(int i = 0; i < ennemies.size(); i++){
 			if(!ennemies.get(i).isDead())
 			dessine_Ennemy(g,ennemies.get(i));	
+		}
+		
+		for(int i = 0; i < birds.size(); i++){
+			if(!birds.get(i).isDead())
+			dessine_Bird(g,birds.get(i));	
 		}
 		
 		
@@ -166,6 +172,61 @@ public class Review extends JPanel {
 			
 			try {
 				Image img = ImageIO.read(new File("./image/ennemy_West.png"));
+				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+	}
+	
+	void dessine_Bird(Graphics g, Agent_Bird agent)
+	{
+		int fen_x = getSize().width;
+		int fen_y = getSize().height;
+
+		double stepx = fen_x/(double)taille_x;
+		double stepy = fen_y/(double)taille_y;
+
+		int px = agent.getX();
+		int py = agent.getY();
+		
+		double pos_x=px*stepx;
+		double pos_y=py*stepy;
+		
+		int direc_en = agent.getDirection();
+		if (direc_en==Map.NORTH){
+			
+			try {
+				Image img = ImageIO.read(new File("./image/bird_NRTH1.png"));
+				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (direc_en==Map.SOUTH){
+			
+			try {
+				Image img = ImageIO.read(new File("./image/bird_SOUTH1.png"));
+				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (direc_en==Map.EAST){
+			
+			try {
+				Image img = ImageIO.read(new File("./image/bird_EAST1.png"));
+				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (direc_en==Map.WEST){
+			
+			try {
+				Image img = ImageIO.read(new File("./image/bird_WEST1.png"));
 				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
 			} catch (IOException e) {
 				e.printStackTrace();

@@ -10,9 +10,11 @@ import agents.Agent_Bomberman;
 
 public class Strategie_A extends Strategie {
 
-	public Strategie_A(GameState et, Agent_Bomberman ag) {
-		super(et, ag);
-
+	private Agent_Bomberman agent = null;
+	
+	public Strategie_A(GameState etat, Agent_Bomberman agent) {
+		super(etat, agent);
+		this.agent = agent;
 	}
 	
 	@Override
@@ -90,6 +92,10 @@ public class Strategie_A extends Strategie {
 		if(listAction.size() == 0) return new AgentAction(Map.STOP);
 		else return(listAction.get((int)(Math.random()*listAction.size())));
 		//return new AgentAction(Map.STOP);
+	}
+	
+	public Agent_Bomberman getAgent() {
+		return this.agent;
 	}
 
 }

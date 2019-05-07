@@ -4,7 +4,7 @@ import java.util.Random;
 
 import agents.Agent;
 import agents.AgentAction;
-import agents.AgentType;
+import agents.Agent_Bird;
 import agents.Agent_Bomberman;
 import agents.ColorBomberman;
 import agents.Agent_Ennemy;
@@ -23,6 +23,7 @@ public class GameState {
 	private Keys_2 key_action_2;
 
 	private ArrayList<Agent_Ennemy> ennemies;
+	private ArrayList<Agent_Bird> birds;
 	private ArrayList<Agent_Bomberman> bombermans;
 	private ArrayList<Objet_Bomb> bombes;
 	private ArrayList<Objet> items;
@@ -49,7 +50,7 @@ public class GameState {
 	
 	private int[] strats;
 	
-	private Boolean campagne;
+	private Boolean campagne = null;
 	
 	private int num_niveau = 0;
 
@@ -64,6 +65,7 @@ public class GameState {
 		ennemies = new ArrayList<Agent_Ennemy>();
 		bombermans = new ArrayList<Agent_Bomberman>();
 		bombes = new ArrayList<Objet_Bomb>();
+		birds = new ArrayList<Agent_Bird>();
 		items = new ArrayList<Objet>();
 
 		key_action = new Keys();
@@ -73,7 +75,6 @@ public class GameState {
 		this.BbmG=BbmG;
 
 		this.end = false;
-		this.campagne = false;
 		
 		ColorBomberman[] Couleurs= ColorBomberman.values();
 		for(int i=0;i<map.getNumber_of_bombermans();i++)
@@ -90,6 +91,12 @@ public class GameState {
 		{
 			Agent_Ennemy a = new Agent_Ennemy(map.getEnnemy_start_x(i), map.getEnnemy_start_y(i),i );
 			ennemies.add(a);
+		}
+		
+		for(int i=0;i<map.getNumber_of_birds();i++)
+		{
+			Agent_Bird a = new Agent_Bird(map.getBird_start_x(i), map.getBird_start_y(i),i );
+			birds.add(a);
 		}
 		
 
@@ -117,19 +124,30 @@ public class GameState {
 		else return true;
 	}
 	
+	//Verifie si l'action de déplacement est possible à l'état courant pour un Bomberman
+	
+	public boolean isLegalMoveBird(AgentAction actionbird, Agent_Bird bird){
+		int x = actionbird.getVx();
+		int y = actionbird.getVy();
+				
+		if(map.isWall(bird.getX()+x, bird.getY()+y) || isBombe(bird.getX()+x, bird.getY()+y) || isBombe(bird.getX()+x, bird.getY()+y))
+			return false;
+		else return true;
+	}
+	
 	//Fonction qui renvoie vrai si une bombe est sous forme physique dans le jeu (et non sous forme d'explosion)
 	
-		public boolean isBombe(int x, int y) {
-			boolean bombeB = false;
-			//System.out.println("nb bombes :"+bombes1.size());
-			ArrayList<Objet_Bomb> bombes1 = this.bombes;
-			for(int i=0; i< bombes1.size(); i++) {
-				Objet_Bomb bombe1 = bombes1.get(i);
-				if((bombe1.getObjX() == x & bombe1.getObjY() == y) & (bombe1.getEtat() < 10 )) bombeB = true;
-			}
-			
-			return bombeB;
+	public boolean isBombe(int x, int y) {
+		boolean bombeB = false;
+		//System.out.println("nb bombes :"+bombes1.size());
+		ArrayList<Objet_Bomb> bombes1 = this.bombes;
+		for(int i=0; i< bombes1.size(); i++) {
+			Objet_Bomb bombe1 = bombes1.get(i);
+			if((bombe1.getObjX() == x & bombe1.getObjY() == y) & (bombe1.getEtat() < 10 )) bombeB = true;
 		}
+			
+		return bombeB;
+	}
 	
 	//Fonction qui renvoie vrai si un bomberman se trouve sur le pochin déplacement du bomberman qui va réaliser un déplacement 
 		public boolean isBomberman(int id,int x, int y) {
@@ -151,6 +169,18 @@ public class GameState {
 			for(int i=0; i< emis.size(); i++) {
 				Agent emi = emis.get(i);
 				if((emi.getX() == x & emi.getY() == y)) en = true;
+			}
+			
+			return en;
+		}
+		
+		public boolean isBird(int x, int y) {
+			boolean en = false;
+			
+			ArrayList<Agent_Bird> birds = this.birds;
+			for(int i=0; i< birds.size(); i++) {
+				Agent_Bird bird = birds.get(i);
+				if((bird.getX() == x & bird.getY() == y)) en = true;
 			}
 			
 			return en;
@@ -277,6 +307,7 @@ public class GameState {
 		int y = bomb.getObjY();
 		
 		ArrayList<Agent_Ennemy> ennemies = this.getEnnemies();
+		ArrayList<Agent_Bird> birds = this.getBirds();
 		ArrayList<Agent_Bomberman> bombermans = this.getBombermans();
 		
 		int range_limit;
@@ -295,34 +326,25 @@ public class GameState {
 			
 				for(int j = 0; j<bombermans.size(); j++){
 					Agent_Bomberman bomberman1 = bombermans.get(j);
-					if(bomberman1.getX() == i & bomberman1.getY() == y & bomb.getId_bbm() != bomberman1.getId() & !bomberman1.isInvincible() & !bomberman1.isDead()){
-						
-						if (bomberman1.getLife() == 0) {
-							Agent_Bomberman bbm_bomb = bombermans.get(bomb.getId_bbm());
-							bbm_bomb.setPoints(bbm_bomb.getPoints() + 500);
-							bbm_bomb.setLife(bbm_bomb.getLife()+1);
-							bombermans.get(j).setDead(true);
-
-						}else{
-							bomberman1.setLife(bomberman1.getLife()-1);
-							System.out.println("Vie en moins !");
-						}
-							
+					if(bomberman1.getX() == i & bomberman1.getY() == y & bomb.getId_bbm() != bomberman1.getId() & !bomberman1.isInvincible() & !bombermans.get(j).isDead()){
+						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 500);
+						bombermans.get(j).setDead(true);
 					}
-					
 				}
 
 				for(int j = 0; j<ennemies.size(); j++){
-					Agent ennemie = ennemies.get(j);
+					Agent_Ennemy ennemie = ennemies.get(j);
 					if(ennemie.getX() == i & ennemie.getY() == y & !ennemies.get(j).isDead()){
-						
-						if (ennemie.getLife() == 0) {
-							ennemies.remove(j);
-							bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
-						}else {
-							ennemie.setLife(ennemie.getLife()-1);
-							System.out.println("Vie en moins !");
-						}
+						ennemies.remove(j);
+						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
+					}
+				}
+				
+				for(int j = 0; j<birds.size(); j++){
+					Agent_Bird bird = birds.get(j);
+					if(bird.getX() == i & bird.getY() == y & !bird.isDead()){
+						birds.remove(j);
+						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 200);
 					}
 				}
 			
@@ -348,32 +370,26 @@ public class GameState {
 			for(int j = 0; j<bombermans.size(); j++){
 				Agent_Bomberman bomberman1 = bombermans.get(j);
 				if(bomberman1.getX() == x & bomberman1.getY() == i  & bomb.getId_bbm() != bomberman1.getId() & !bomberman1.isInvincible() & !bombermans.get(j).isDead()){
-					
-					if (bomberman1.getLife() == 0) {
-						Agent_Bomberman bbm_bomb = bombermans.get(bomb.getId_bbm());
-						bbm_bomb.setPoints(bbm_bomb.getPoints() + 500);
-						bbm_bomb.setLife(bbm_bomb.getLife()+1);
-						bombermans.get(j).setDead(true);
-					}else{
-						bomberman1.setLife(bomberman1.getLife()-1);
-						System.out.println("Vie en moins !");
-					}
+					bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 500);
+					bombermans.get(j).setDead(true);
 				}
 			}
 
-				for(int j = 0; j<ennemies.size(); j++){
-					Agent ennemie = ennemies.get(j);
-					if(ennemie.getX() == x & ennemie.getY() == i & !ennemies.get(j).isDead()){
-						
-						if (ennemie.getLife() == 0) {
-							ennemies.remove(j);
-							bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
-						}else {
-							ennemie.setLife(ennemie.getLife()-1);
-							System.out.println("Vie en moins !");
-						}
-					}
+			for(int j = 0; j<ennemies.size(); j++){
+				Agent_Ennemy ennemie = ennemies.get(j);
+				if(ennemie.getX() == i & ennemie.getY() == y & !ennemies.get(j).isDead()){
+					ennemies.remove(j);
+					bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
 				}
+			}
+			
+			for(int j = 0; j<birds.size(); j++){
+				Agent_Bird bird = birds.get(j);
+				if(bird.getX() == i & bird.getY() == y & !bird.isDead()){
+					birds.remove(j);
+					bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 200);
+				}
+			}
 				
 				for(int j = 0; j<bombes.size(); j++){
 					Objet_Bomb bombe = bombes.get(j);
@@ -396,32 +412,26 @@ public class GameState {
 			for(int j = 0; j<bombermans.size(); j++){
 				Agent_Bomberman bomberman1 = bombermans.get(j);
 				if(bomberman1.getX() == i & bomberman1.getY() == y  & bomb.getId_bbm()  != bomberman1.getId() & !bomberman1.isInvincible() & !bombermans.get(j).isDead()){
-					
-					if (bomberman1.getLife() == 0) {
-						Agent_Bomberman bbm_bomb = bombermans.get(bomb.getId_bbm());
-						bbm_bomb.setPoints(bbm_bomb.getPoints() + 500);
-						bbm_bomb.setLife(bbm_bomb.getLife()+1);
-						bombermans.get(j).setDead(true);
-					}else{
-						bomberman1.setLife(bomberman1.getLife()-1);
-						System.out.println("Vie en moins !");
-					}
+					bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 500);
+					bombermans.get(j).setDead(true);
 				}
 			}
 	
-				for(int j = 0; j<ennemies.size(); j++){
-					Agent ennemie = ennemies.get(j);
-					if(ennemie.getX() == i & ennemie.getY() == y & !ennemies.get(j).isDead()){
-						
-						if (ennemie.getLife() == 0) {
-							ennemies.remove(j);
-							bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
-						}else {
-							ennemie.setLife(ennemie.getLife()-1);
-							System.out.println("Vie en moins !");
-						}
-					}
+			for(int j = 0; j<ennemies.size(); j++){
+				Agent_Ennemy ennemie = ennemies.get(j);
+				if(ennemie.getX() == i & ennemie.getY() == y & !ennemies.get(j).isDead()){
+					ennemies.remove(j);
+					bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
 				}
+			}
+			
+			for(int j = 0; j<birds.size(); j++){
+				Agent_Bird bird = birds.get(j);
+				if(bird.getX() == i & bird.getY() == y & !bird.isDead()){
+					birds.remove(j);
+					bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 200);
+				}
+			}
 					
 				for(int j = 0; j<bombes.size(); j++){
 					Objet_Bomb bombe = bombes.get(j);
@@ -445,32 +455,26 @@ public class GameState {
 			for(int j = 0; j<bombermans.size(); j++){
 				Agent_Bomberman bomberman1 = bombermans.get(j);
 				if(bomberman1.getX() == x & bomberman1.getY() == i  & bomb.getId_bbm()  != bomberman1.getId() & !bomberman1.isInvincible() & !bombermans.get(j).isDead()){
-					
-					if (bomberman1.getLife() == 0) {
-						Agent_Bomberman bbm_bomb = bombermans.get(bomb.getId_bbm());
-						bbm_bomb.setPoints(bbm_bomb.getPoints() + 500);
-						bbm_bomb.setLife(bbm_bomb.getLife()+1);
-						bombermans.get(j).setDead(true);
-					}else{
-						bomberman1.setLife(bomberman1.getLife()-1);
-						System.out.println("Vie en moins !");
-					}
+					bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 500);
+					bombermans.get(j).setDead(true);
 				}
 			}
 
-				for(int j = 0; j<ennemies.size(); j++){
-					Agent ennemie = ennemies.get(j);
-					if(ennemie.getX() == x & ennemie.getY() == i & !ennemies.get(j).isDead()){
-						
-						if (ennemie.getLife() == 0) {
-							ennemies.remove(j);
-							bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
-						}else {
-							ennemie.setLife(ennemie.getLife()-1);
-							System.out.println("Vie en moins !");
-						}
-					}
+			for(int j = 0; j<ennemies.size(); j++){
+				Agent_Ennemy ennemie = ennemies.get(j);
+				if(ennemie.getX() == i & ennemie.getY() == y & !ennemies.get(j).isDead()){
+					ennemies.remove(j);
+					bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
 				}
+			}
+			
+			for(int j = 0; j<birds.size(); j++){
+				Agent_Bird bird = birds.get(j);
+				if(bird.getX() == i & bird.getY() == y & !bird.isDead()){
+					birds.remove(j);
+					bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 200);
+				}
+			}
 				
 				for(int j = 0; j<bombes.size(); j++){
 					Objet_Bomb bombe = bombes.get(j);
@@ -492,6 +496,7 @@ public class GameState {
 				this.isEndCampagne(BbmG);
 				bombermansTurn();
 				ennemiesTurn();
+				birdsTurn();
 				
 			}else {
 
@@ -550,6 +555,7 @@ public class GameState {
 				this.isEnd(BbmG);
 				bombermansTurn();
 				ennemiesTurn();
+				birdsTurn();
 			}else {
 
 				BbmG.stop();
@@ -579,6 +585,30 @@ public class GameState {
 		}
 	}
 	
+	//Réalise le tour de l'ennemi
+	
+	public void birdsTurn(){
+
+		ArrayList<Agent_Bird> birds = this.getBirds();
+		
+		if(BbmG.getTurn() % 4 == 0) {
+
+			for(int i = 0; i < birds.size(); i++){
+	
+				Agent bird = birds.get(i);
+					
+				AgentAction birdAction = bird.chooseAction(this);
+					
+	
+				if (birdAction != null){
+						
+					this.moveAgent(bird, birdAction);
+				}
+					
+			}
+		}
+	}
+	
 	
 	//Réalise le tour des bombermans
 	
@@ -600,6 +630,10 @@ public class GameState {
 					//System.out.println(bombermanAction.getAction());
 				
 					if(isEnnemie(bomberman.getX(),bomberman.getY())) {
+						bomberman.setDead(true);
+					}
+					
+					if(isBird(bomberman.getX(),bomberman.getY())) {
 						bomberman.setDead(true);
 					}
 				
@@ -733,6 +767,7 @@ public class GameState {
 	public void isEnd(BombermanGame game) {
 		ArrayList<Agent_Bomberman> bombermans = this.getBombermans();
 		ArrayList<Agent_Ennemy> ennemies = this.getEnnemies();
+		ArrayList<Agent_Bird> birds = this.getBirds();
 		
 		int nbBbm = this.getMap().getNumber_of_bombermans();
 		int compteBbm = 0;
@@ -752,6 +787,12 @@ public class GameState {
 		
 		for(int i = 0; i<ennemies.size(); ++i) {
 			if(!ennemies.get(i).isDead()) {
+				compteEnn++;
+			}
+		}
+		
+		for(int i = 0; i<birds.size(); ++i) {
+			if(!birds.get(i).isDead()) {
 				compteEnn++;
 			}
 		}
@@ -914,6 +955,13 @@ public class GameState {
 	public ArrayList<Agent_Bomberman> getBombermans(){
 		return bombermans;
 	}
+	
+	//accesseur sur la liste de birds
+	
+	public ArrayList<Agent_Bird> getBirds(){
+		return birds;
+	}
+		
 	
 	public ArrayList<Objet_Bomb> getBombes(){
 		return bombes;
