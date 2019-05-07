@@ -246,11 +246,16 @@ Compte rendu rendez-vous avec Mr. Goudet:
 - Contnuation du mode campagne en rajoutant du contenu dans cadre menu, rejout d'un JMenu participant à l'implémentation du mode campagne proposant un choix entre le mode normal et le campagne. Ce choix influ sur un bolléen permettant dans le ActionListener de ce JMenuItem de faire apparaitre et diparaitre les éléments que nous désirons (liste déroulante pour le choix du stage disparait, stage choisi par default en fonction de la première map désirée lors du mode campane. Lors de l'appuis d'un bouton (jouer / multi) le booléen permettant de savoir le mode permet de construire le jeu correspondant au choix du mode, le BombermanGame choisi est donc différent dans son gamestate pour chaque mode. Dans le gamestate un nouveau isEndCampagne est introduit permettant de faire tourner le jeu de façon campagne. Gamestate disose desormais de deux nouveaux attributs qui permettent d'une part de voir si le mode choisi actuellemnt est un mode campagne ou normal,d'autre part de savoir dans quel stage du mode campagne nous nous trouvons (avec un num_niveau). De plus le TakeTurn a été modifié, en effet désormais il fait la différence entre les deux modes, quand le mode campagne est activé et que la variable isEnd (permettant de savoir si la partie est terminée) est positive en fonctio du num_niveau soit le stage qui suit l'actuel est chargé et le JFrame est affiché, soit le partie est terminé pour le joueur et on affiche le cadre gagnant correspondant. Ces affichage sont géré dans le paint_Bomberman au niveau du update (comme précedement quand un seul mode état présent.
 Pour finir le multithread est géré à l'interieur du cadre_Menu, cela signifie qu'il n'est pas géré automatiquement dans le gamestate comme avec le choix Jouer. Dans ce cas précis un nombre de BombermanGame est lancé, on effectue une jointure et on recupere l'indice de ceux qui ont gagné le premier niveau dans un arraylist de int, les perdant sont push dans un arrayList de BombermanGame. Par la suite on lance uniquement le nombre de BombermanGame gagnant du premier niveau sur le deuxième niveau en recupérent les infoation nécéssaire sur l'AgentBomberman (nbpoints, range, nbBombes). On effetue cela autant de fois que l'on a de niveau. À la fin du dernier niveau on push les gagnant et les perdant dans l'ArrayList de BombermanGame, on dipose alors de l'intergralité des threads demandé, que l'on peur ensuite aficher dans un cadre_multi (affiche le reultat des multithreads).
 
+06/05/19:
+
+- Correction des différents bugs duent la mise en commun du nouveau multi-threads et du mode campagne.
+
 07/05/19 - 06/05/19 :
 
 - Developpement de nouveaux ennemies :
       - Bird : equivalent d'une chauve-souris, elle peut passer à travers les mur destructible pour se diriger vvers sa cible (un bomberman). Celle-ci se reveil quand un Bomberman se rapproche d'elle dans un certain rayon. Ensuite elle part à la poursuite de ce dernier, jusqu'à sa mort ou la sienne ou quand le Bomberman s'écarte trop d'elle. Dans cette derniere possibilité Bird retourne dans son état de départ.
-      - 
+      - RadioTower : La tour radio est un batiment qui doit être détruit pour finir le niveau. Elle a quatre pilliers destructible qui ont 4 vies chacun. Lorque qu'ils sont détruits la tour "meure". Tant qu'elle est vie elle fait apparaître des ennemies (rajion), jusqu'à un maximum de 4.
+      - Rajion : IA pas encore modéliser, but : se déplace vers le bomberman.
 
 
             
