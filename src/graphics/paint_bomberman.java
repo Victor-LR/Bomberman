@@ -6,15 +6,6 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 
-/*import java.awt.Dimension;
-import java.awt.GraphicsEnvironment;
-import java.awt.GridBagLayout;
-import java.awt.Point;
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;*/
-
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -27,6 +18,7 @@ import agents.Agent;
 import agents.Agent_Bird;
 import agents.Agent_Bomberman;
 import agents.Agent_Ennemy;
+import agents.Agent_Rajion;
 import agents.Agent_Tower;
 import objets.Objet;
 import objets.ObjetType;
@@ -39,9 +31,7 @@ import map.Map;
 
 //Création graphique de la carte et des agents
 public class paint_bomberman extends JPanel implements GameObserver{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	protected Color wallColor=Color.GRAY;
 	protected Color brokable_walls_Color=Color.lightGray;
@@ -76,8 +66,6 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		this.cadre_jeu = c_j;
 
 		BbmG.addObserver((GameObserver)this);
-//		Jeu_actuel = BbmG.etatJeu;
-//		m = this.BbmG.etatJeu.getMap();;
 		
 		//Taille de la carte
 	   taille_x= this.BbmG.etatJeu.getMap().getSizeX();
@@ -97,7 +85,6 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		
 		g.setColor(ground_Color);
 		g.fillRect(0, 0,fen_x,fen_y);
-	   // System.out.println(taille_x);
 	
 		double stepx=fen_x/(double)taille_x;
 		double stepy=fen_y/(double)taille_y;
@@ -120,9 +107,6 @@ public class paint_bomberman extends JPanel implements GameObserver{
 				
 				//Création des briques destructibles
 				else if (this.BbmG.etatJeu.getMap().isBrokable_Wall(x, y)){
-					//g.setColor(brokable_walls_Color);
-					//g.fillRect((int)position_x, (int)position_y, (int)(stepx+1),(int)(stepy+1));
-					//g.fillRoundRect((int)position_x, (int)position_y, (int)(stepx+1),(int)(stepy+1),5,5);
 					try {
 						Image img = ImageIO.read(new File("./image/brique_2.png"));
 						g.drawImage(img, (int)position_x, (int)position_y, (int)stepx, (int)stepy, this);
@@ -147,6 +131,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		ArrayList<Agent_Bomberman> bombermans = BbmG.etatJeu.getBombermans();
 		ArrayList<Agent_Bird> birds = BbmG.etatJeu.getBirds();
 		ArrayList<Agent_Ennemy> ennemies = BbmG.etatJeu.getEnnemies();
+		ArrayList<Agent_Rajion> rajions = BbmG.etatJeu.getRajions();
 		ArrayList<Objet> items = BbmG.etatJeu.getItems();
 		Agent_Tower tower = BbmG.etatJeu.getTower();
 		
@@ -170,6 +155,11 @@ public class paint_bomberman extends JPanel implements GameObserver{
 			dessine_Ennemy(g,ennemies.get(i));	
 		}
 		
+		for(int i = 0; i < rajions.size(); i++){
+			if(!rajions.get(i).isDead())
+			dessine_Rajion(g,rajions.get(i));	
+		}
+		
 		for(int i = 0; i < birds.size(); i++){
 			if(!birds.get(i).isDead())
 			dessine_Bird(g,birds.get(i));	
@@ -182,7 +172,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 			
 		}
 		
-		//if ( !tower.isDead()) dessine_Tower(g,tower);
+		if( tower != null) dessine_Tower(g,tower);
 		
 	}
 	
@@ -377,6 +367,61 @@ public class paint_bomberman extends JPanel implements GameObserver{
 				}
 			}
 			
+		}
+		
+		
+	}
+	
+	void dessine_Rajion(Graphics g, Agent_Rajion agent)
+	{
+		int fen_x = getSize().width;
+		int fen_y = getSize().height;
+
+		double stepx = fen_x/(double)taille_x;
+		double stepy = fen_y/(double)taille_y;
+
+		int px = agent.getX();
+		int py = agent.getY();
+		
+		double pos_x=px*stepx;
+		double pos_y=py*stepy;
+		
+		int direc_en = agent.getDirection();
+		if (direc_en==Map.NORTH){
+			
+			try {
+				Image img = ImageIO.read(new File("./image/ennemy_North.png"));
+				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (direc_en==Map.SOUTH){
+			
+			try {
+				Image img = ImageIO.read(new File("./image/ennemy_South.png"));
+				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (direc_en==Map.EAST){
+			
+			try {
+				Image img = ImageIO.read(new File("./image/ennemy_East.png"));
+				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (direc_en==Map.WEST){
+			
+			try {
+				Image img = ImageIO.read(new File("./image/ennemy_West.png"));
+				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		

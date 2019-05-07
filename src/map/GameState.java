@@ -9,6 +9,7 @@ import agents.AgentType;
 
 import agents.Agent_Bird;
 import agents.Agent_Bomberman;
+import agents.Agent_Rajion;
 import agents.Agent_Tower;
 import agents.ColorBomberman;
 import agents.Agent_Ennemy;
@@ -28,11 +29,12 @@ public class GameState {
 
 	private ArrayList<Agent_Ennemy> ennemies;
 	private ArrayList<Agent_Bird> birds;
+	private ArrayList<Agent_Rajion> rajions;
 	private ArrayList<Agent_Bomberman> bombermans;
 	private ArrayList<Objet_Bomb> bombes;
 	private ArrayList<Objet> items;
-	
-	private Agent_Tower tower = null;
+	private Agent_Tower tower;
+
 	
 	private static Random numberGenerator = new Random();
 	private int pourcentage = 25;
@@ -72,8 +74,10 @@ public class GameState {
 		bombermans = new ArrayList<Agent_Bomberman>();
 		bombes = new ArrayList<Objet_Bomb>();
 		birds = new ArrayList<Agent_Bird>();
+		rajions = new ArrayList<Agent_Rajion>();
 		items = new ArrayList<Objet>();
-
+		tower = null;
+		
 		key_action = new Keys();
 		key_action_2 = new Keys_2();
 		
@@ -81,6 +85,7 @@ public class GameState {
 		
 		this.map=map;
 		this.BbmG=BbmG;
+		this.campagne = false;
 
 		this.end = false;
 		
@@ -107,6 +112,11 @@ public class GameState {
 			birds.add(a);
 		}
 		
+		for(int i=0;i<map.getNumber_of_rajions();i++)
+		{
+			Agent_Rajion r = new Agent_Rajion(map.getRajion_start_x(i), map.getRajion_start_y(i),i );
+			rajions.add(r);
+		}
 
 		if(map.tower_x != 0 & map.tower_y != 0)
 			this.setTower(new Agent_Tower(map.tower_x,map.tower_y,0));
@@ -122,7 +132,7 @@ public class GameState {
 		int x = action.getVx();
 		int y = action.getVy();
 		
-		if(map.isWall(agent.getX()+x, agent.getY()+y) || map.isBrokable_Wall(agent.getX()+x, agent.getY()+y) || isBombe(agent.getX()+x, agent.getY()+y))
+		if(map.isWall(agent.getX()+x, agent.getY()+y) || map.isBrokable_Wall(agent.getX()+x, agent.getY()+y) || isBombe(agent.getX()+x, agent.getY()+y) || isTower(agent.getX()+x, agent.getY()+y))
 			return false;
 		else return true;
 	}
@@ -133,18 +143,18 @@ public class GameState {
 		int x = actionbbm.getVx();
 		int y = actionbbm.getVy();
 			
-		if(map.isWall(bbm.getX()+x, bbm.getY()+y) || map.isBrokable_Wall(bbm.getX()+x, bbm.getY()+y) || isBombe(bbm.getX()+x, bbm.getY()+y) || isBomberman(bbm.getId(),bbm.getX()+x, bbm.getY()+y))
+		if(map.isWall(bbm.getX()+x, bbm.getY()+y) || map.isBrokable_Wall(bbm.getX()+x, bbm.getY()+y) || isBombe(bbm.getX()+x, bbm.getY()+y) || isBomberman(bbm.getId(),bbm.getX()+x, bbm.getY()+y) || isTower(bbm.getX()+x, bbm.getY()+y))
 			return false;
 		else return true;
 	}
 	
-	//Verifie si l'action de déplacement est possible à l'état courant pour un Bomberman
+	//Verifie si l'action de déplacement est possible à l'état courant pour un Bird
 	
 	public boolean isLegalMoveBird(AgentAction actionbird, Agent_Bird bird){
 		int x = actionbird.getVx();
 		int y = actionbird.getVy();
 				
-		if(map.isWall(bird.getX()+x, bird.getY()+y) || isBombe(bird.getX()+x, bird.getY()+y) || isBombe(bird.getX()+x, bird.getY()+y))
+		if(map.isWall(bird.getX()+x, bird.getY()+y) || isBombe(bird.getX()+x, bird.getY()+y) || isBombe(bird.getX()+x, bird.getY()+y) || isTower(bird.getX()+x, bird.getY()+y))
 			return false;
 		else return true;
 	}
@@ -153,7 +163,6 @@ public class GameState {
 	
 	public boolean isBombe(int x, int y) {
 		boolean bombeB = false;
-		//System.out.println("nb bombes :"+bombes1.size());
 		ArrayList<Objet_Bomb> bombes1 = this.bombes;
 		for(int i=0; i< bombes1.size(); i++) {
 			Objet_Bomb bombe1 = bombes1.get(i);
@@ -163,7 +172,7 @@ public class GameState {
 		return bombeB;
 	}
 	
-	//Fonction qui renvoie vrai si un bomberman se trouve sur le pochin déplacement du bomberman qui va réaliser un déplacement 
+	//Fonction qui renvoie vrai si un bomberman se trouve sur le prochain déplacement du bomberman qui va réaliser un déplacement 
 		public boolean isBomberman(int id,int x, int y) {
 			boolean bb = false;
 			
@@ -199,6 +208,26 @@ public class GameState {
 			
 			return en;
 		}
+		
+		public boolean isRajion(int x, int y) {
+			boolean en = false;
+			
+			ArrayList<Agent_Rajion> rajions = this.rajions;
+			for(int i=0; i< rajions.size(); i++) {
+				Agent_Rajion rajion = rajions.get(i);
+				if((rajion.getX() == x & rajion.getY() == y)) en = true;
+			}
+			
+			return en;
+		}
+		
+		public boolean isTower(int x, int y) {
+
+			for (int i= 0; i < 4 ; i++) {
+				if(x == tower.getCoord_pilliers()[i][0] & y == tower.getCoord_pilliers()[i][1]) return true;
+			}
+			return false;
+		}
 	
 	//réalise le mouvement 
 	
@@ -218,7 +247,6 @@ public class GameState {
 	
 	public void placeBomb(Agent_Bomberman agent)
 	{
-		//bombs = new ArrayList<Objet>();
 		int x = agent.getX();
 		int y = agent.getY();
 		int compte = 0;
@@ -231,18 +259,11 @@ public class GameState {
 		
 		if(compte < agent.getNbBombes()){
 			Objet_Bomb bomb = new Objet_Bomb(ObjetType.BOMB,x,y,agent.getId(),agent.getRange());
-			//System.out.println("action bombe");
 			bombes.add(bomb);
-			//agent.getBombes().add(bomb);
 		}
-		//else //System.out.println("		NON action bombe");
 			
 	}
 
-	//
-	/*public <T> T randomElement(T[] elements){
-	  return elements[numberGenerator.nextInt(elements.length)];
-	}*/
 	
 	//Place un item
 	public void placeItem(int itemx, int itemy)
@@ -322,6 +343,7 @@ public class GameState {
 		
 		ArrayList<Agent_Ennemy> ennemies = this.getEnnemies();
 		ArrayList<Agent_Bird> birds = this.getBirds();
+		ArrayList<Agent_Rajion> rajions = this.getRajions();
 		ArrayList<Agent_Bomberman> bombermans = this.getBombermans();
 		
 		int range_limit;
@@ -348,7 +370,7 @@ public class GameState {
 
 				for(int j = 0; j<ennemies.size(); j++){
 					Agent_Ennemy ennemie = ennemies.get(j);
-					if(ennemie.getX() == i & ennemie.getY() == y & !ennemies.get(j).isDead()){
+					if(ennemie.getX() == i & ennemie.getY() == y & !ennemie.isDead()){
 						ennemies.remove(j);
 						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
 					}
@@ -361,6 +383,14 @@ public class GameState {
 						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 200);
 					}
 				}
+				
+				for(int j = 0; j<rajions.size(); j++){
+					Agent_Rajion rajion = rajions.get(j);
+					if(rajion.getX() == i & rajion.getY() == y & !rajion.isDead()){
+						rajions.remove(j);
+						//bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
+					}
+				}
 			
 				for(int j = 0; j<bombes.size(); j++){
 					Objet_Bomb bombe = bombes.get(j);
@@ -369,23 +399,26 @@ public class GameState {
 					}
 				}
 				
-				if(tower != null)
-					if (!tower.isDead()){
-						
-						for(int j = 0; j < 4; j++){
-							if(tower.getCoord_pilliers()[j][0] == i & tower.getCoord_pilliers()[j][1] == y)
-								
-								if(tower.getCoord_pilliers()[j][2] == 0){
-									tower.setPill_detruit(j, true);
-								}else{ 
-									tower.setPill_life(j, tower.getPill_life(j)-1);
-									tower.setHurt(true);
-								}
-						}
-						
-						if(tower.getPill_detruit(0) & tower.getPill_detruit(1) & tower.getPill_detruit(2) & tower.getPill_detruit(3))
-							tower.setDead(true);
+				if (tower != null )
+				if (!tower.isDead()){
+					
+					for(int j = 0; j < 4; j++){
+						if(tower.getCoord_pilliers()[j][0] == i & tower.getCoord_pilliers()[j][1] == y)
+							
+							if(tower.getCoord_pilliers()[j][2] == 0){
+								tower.setPill_detruit(j, true);
+							}else{ 
+								tower.setPill_life(j, tower.getPill_life(j)-1);
+								tower.setHurt(true);
+							}
 					}
+					
+					if(tower.getPill_detruit(0) & tower.getPill_detruit(1) & tower.getPill_detruit(2) & tower.getPill_detruit(3)){
+						tower.setDead(true);
+						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 1000);
+					}
+						
+				}
 		}
 		
 		range_limit = test_range(Map.SOUTH,bomb);
@@ -421,6 +454,14 @@ public class GameState {
 					bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 200);
 				}
 			}
+			
+			for(int j = 0; j<rajions.size(); j++){
+				Agent_Rajion rajion = rajions.get(j);
+				if(rajion.getX() == x & rajion.getY() == i & !rajion.isDead()){
+					rajions.remove(j);
+					//bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
+				}
+			}
 				
 				for(int j = 0; j<bombes.size(); j++){
 					Objet_Bomb bombe = bombes.get(j);
@@ -429,11 +470,12 @@ public class GameState {
 					}
 				}
 				
+
 			if(tower != null)	
 				if (!tower.isDead()){
 					
 					for(int j = 0; j < 4; j++){
-						if(tower.getCoord_pilliers()[j][0] == x & tower.getCoord_pilliers()[j][1] == y)
+						if(tower.getCoord_pilliers()[j][0] == x & tower.getCoord_pilliers()[j][1] == i)
 							
 							if(tower.getCoord_pilliers()[j][2] == 0){
 								tower.setPill_detruit(j, true);
@@ -443,8 +485,10 @@ public class GameState {
 							}
 					}
 					
-					if(tower.getPill_detruit(0) & tower.getPill_detruit(1) & tower.getPill_detruit(2) & tower.getPill_detruit(3))
+					if(tower.getPill_detruit(0) & tower.getPill_detruit(1) & tower.getPill_detruit(2) & tower.getPill_detruit(3)){
 						tower.setDead(true);
+						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 1000);
+					}
 				}
 				
 				
@@ -491,6 +535,15 @@ public class GameState {
 					}
 				}
 				
+				for(int j = 0; j<rajions.size(); j++){
+					Agent_Rajion rajion = rajions.get(j);
+					if(rajion.getX() == i & rajion.getY() == y & !rajion.isDead()){
+						rajions.remove(j);
+						//bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
+					}
+				}
+				
+
 			if(tower != null)	
 				if (!tower.isDead()){
 					
@@ -505,8 +558,10 @@ public class GameState {
 							}
 					}
 					
-					if(tower.getPill_detruit(0) & tower.getPill_detruit(1) & tower.getPill_detruit(2) & tower.getPill_detruit(3))
+					if(tower.getPill_detruit(0) & tower.getPill_detruit(1) & tower.getPill_detruit(2) & tower.getPill_detruit(3)){
 						tower.setDead(true);
+						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 1000);
+					}
 				}
 		}
 		
@@ -552,6 +607,14 @@ public class GameState {
 					}
 				}
 				
+				for(int j = 0; j<rajions.size(); j++){
+					Agent_Rajion rajion = rajions.get(j);
+					if(rajion.getX() == x & rajion.getY() == i & !rajion.isDead()){
+						rajions.remove(j);
+						//bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
+					}
+				}
+
 			if(tower != null)
 				if (!tower.isDead()){
 					
@@ -568,7 +631,7 @@ public class GameState {
 					
 					if(tower.getPill_detruit(0) & tower.getPill_detruit(1) & tower.getPill_detruit(2) & tower.getPill_detruit(3)){
 						tower.setDead(true);
-						System.out.println("mort tour");
+						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 1000);
 					}
 				}
 		}
@@ -586,6 +649,7 @@ public class GameState {
 				bombermansTurn();
 				ennemiesTurn();
 				birdsTurn();
+				rajionsTurn();
 				towerTurn();
 
 				
@@ -647,6 +711,7 @@ public class GameState {
 				bombermansTurn();
 				ennemiesTurn();
 				birdsTurn();
+				rajionsTurn();
 				towerTurn();
 			}else {
 
@@ -706,6 +771,24 @@ public class GameState {
 		}
 	}
 	
+	//Réalise le tour des ennemies rajions
+	
+	public void rajionsTurn(){
+
+		ArrayList<Agent_Rajion> rajions = this.getRajions();
+		
+		if(BbmG.getTurn() % 4 == 0) {
+			
+			for(int i = 0; i < rajions.size(); i++){
+				
+				Agent rajion = rajions.get(i);
+				AgentAction rajionAction = rajion.chooseAction(this);
+				if (rajionAction != null) this.moveAgent(rajion, rajionAction);
+					
+			}
+		}
+	}
+	
 	
 	//Réalise le tour des bombermans
 	
@@ -714,18 +797,33 @@ public class GameState {
 			ArrayList<Agent_Bomberman> bombermans = this.getBombermans();
 			
 			if(BbmG.getTurn() % 2 == 0) {
-			
-				for(int i = 0; i < bombermans.size(); i++){
+
+			for(int i = 0; i < bombermans.size(); i++){
+				
+				Agent_Bomberman bomberman = bombermans.get(i);
+				AgentAction bombermanAction;
+				
+				if(!bomberman.isDead()) {
 					
-					Agent_Bomberman bomberman = bombermans.get(i);
-					AgentAction bombermanAction;
-					
-					if(!bomberman.isDead()) {
+		
+										
+					//System.out.println(bombermanAction.getAction());
+					if (!bomberman.isInvincible()){
+						if(isEnnemie(bomberman.getX(),bomberman.getY())) {
+							bomberman.setDead(true);
+						}
 						
-			
-											
-						//System.out.println(bombermanAction.getAction());
-					
+						if(isBird(bomberman.getX(),bomberman.getY())) {
+							bomberman.setDead(true);
+						}
+						
+						if(isRajion(bomberman.getX(),bomberman.getY())) {
+							bomberman.setDead(true);
+						}
+					}
+				
+				for (int j = 0; j < items.size(); j++){
+          
 						if(isEnnemie(bomberman.getX(),bomberman.getY())) {
 							bomberman.setDead(true);
 						}
@@ -843,6 +941,7 @@ public class GameState {
 		if (tower != null) {
 			
 			if (tower.isHurt()){
+				
 				tower.setEtat(tower.getEtat()+1);
 				if(tower.getEtat() == 6){
 					tower.setHurt(false);
@@ -850,6 +949,10 @@ public class GameState {
 				}
 			}
 			
+			if (!tower.isDead() & getRajions().size() < 4){
+				Agent_Rajion r = new Agent_Rajion(tower.getX(), tower.getY()+1 ,getRajions().size()+1 );
+				rajions.add(r);
+			}
 		}
 	}
 		
@@ -882,6 +985,7 @@ public class GameState {
 		ArrayList<Agent_Bomberman> bombermans = this.getBombermans();
 		ArrayList<Agent_Ennemy> ennemies = this.getEnnemies();
 		ArrayList<Agent_Bird> birds = this.getBirds();
+		ArrayList<Agent_Rajion> rajions = this.getRajions();
 		
 		int nbBbm = this.getMap().getNumber_of_bombermans();
 		int compteBbm = 0;
@@ -903,7 +1007,19 @@ public class GameState {
 			if(!ennemies.get(i).isDead()) {
 				compteEnn++;
 			}
+			
+		}for(int i = 0; i<birds.size(); ++i) {
+			if(!birds.get(i).isDead()) {
+				compteEnn++;
+			}
 		}
+		
+		for(int i = 0; i<rajions.size(); ++i) {
+			if(!rajions.get(i).isDead()) {
+				compteEnn++;
+			}
+		}
+		
 		
 		for(int i = 0; i<birds.size(); ++i) {
 			if(!birds.get(i).isDead()) {
@@ -1093,6 +1209,10 @@ public class GameState {
 	}
 		
 	
+	public ArrayList<Agent_Rajion> getRajions() {
+		return rajions;
+	}
+
 	public ArrayList<Objet_Bomb> getBombes(){
 		return bombes;
 	}
@@ -1170,7 +1290,17 @@ public class GameState {
 //	}
 	
 	//permet de savoir si le mode de jeu choisi est une campagne 
-
+						if(isEnnemie(bomberman.getX(),bomberman.getY())) {
+							bomberman.setDead(true);
+						}
+						
+						if(isBird(bomberman.getX(),bomberman.getY())) {
+							bomberman.setDead(true);
+						}
+						
+						if(isRajion(bomberman.getX(),bomberman.getY())) {
+							bomberman.setDead(true);
+						}
 	public Boolean getCampagne() {
 		return campagne;
 	}

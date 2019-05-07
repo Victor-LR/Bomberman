@@ -38,11 +38,11 @@ public class Agent_Bomberman extends Agent {
 		super(AgentType.BOMBERMAN, px, py);
 		super.setId(id);
 		
-		this.range = 1;
+		this.range = 5;
 		this.points = 0;
-		this.nbBombes = 1;
+		this.nbBombes = 3;
 		
-		this.isInvincible = false;
+		this.isInvincible = true;
 		this.etatInvincible = 0;
 		
 		this.isSick = false;
