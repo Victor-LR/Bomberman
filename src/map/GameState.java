@@ -4,8 +4,12 @@ import java.util.Random;
 
 import agents.Agent;
 import agents.AgentAction;
+
+import agents.AgentType;
+
 import agents.Agent_Bird;
 import agents.Agent_Bomberman;
+import agents.Agent_Tower;
 import agents.ColorBomberman;
 import agents.Agent_Ennemy;
 import game.BombermanGame;
@@ -27,6 +31,8 @@ public class GameState {
 	private ArrayList<Agent_Bomberman> bombermans;
 	private ArrayList<Objet_Bomb> bombes;
 	private ArrayList<Objet> items;
+	
+	private Agent_Tower tower;
 	
 	private static Random numberGenerator = new Random();
 	private int pourcentage = 25;
@@ -99,6 +105,11 @@ public class GameState {
 			birds.add(a);
 		}
 		
+
+		if(map.tower_x != 0 & map.tower_y != 0)
+			this.setTower(new Agent_Tower(map.tower_x,map.tower_y,0));
+		
+
 
 	}
 	
@@ -355,6 +366,22 @@ public class GameState {
 					}
 				}
 				
+				if (!tower.isDead()){
+					
+					for(int j = 0; j < 4; j++){
+						if(tower.getCoord_pilliers()[j][0] == i & tower.getCoord_pilliers()[j][1] == y)
+							
+							if(tower.getCoord_pilliers()[j][2] == 0){
+								tower.setPill_detruit(j, true);
+							}else{ 
+								tower.setPill_life(j, tower.getPill_life(j)-1);
+								tower.setHurt(true);
+							}
+					}
+					
+					if(tower.getPill_detruit(0) & tower.getPill_detruit(1) & tower.getPill_detruit(2) & tower.getPill_detruit(3))
+						tower.setDead(true);
+				}
 		}
 		
 		range_limit = test_range(Map.SOUTH,bomb);
@@ -397,6 +424,25 @@ public class GameState {
 						bombes.get(j).setEtat(10);
 					}
 				}
+				
+				if (!tower.isDead()){
+					
+					for(int j = 0; j < 4; j++){
+						if(tower.getCoord_pilliers()[j][0] == x & tower.getCoord_pilliers()[j][1] == y)
+							
+							if(tower.getCoord_pilliers()[j][2] == 0){
+								tower.setPill_detruit(j, true);
+							}else{
+								tower.setPill_life(j, tower.getPill_life(j)-1);
+								tower.setHurt(true);
+							}
+					}
+					
+					if(tower.getPill_detruit(0) & tower.getPill_detruit(1) & tower.getPill_detruit(2) & tower.getPill_detruit(3))
+						tower.setDead(true);
+				}
+				
+				
 		}
 			
 		range_limit = test_range(Map.WEST,bomb);
@@ -438,6 +484,23 @@ public class GameState {
 					if(bombe.getObjX() == i & bombe.getObjY() == y){
 						bombes.get(j).setEtat(10);
 					}
+				}
+				
+				if (!tower.isDead()){
+					
+					for(int j = 0; j < 4; j++){
+						if(tower.getCoord_pilliers()[j][0] == i & tower.getCoord_pilliers()[j][1] == y)
+							
+							if(tower.getCoord_pilliers()[j][2] == 0){
+								tower.setPill_detruit(j, true);
+							}else {
+								tower.setPill_life(j, tower.getPill_life(j)-1);
+								tower.setHurt(true);
+							}
+					}
+					
+					if(tower.getPill_detruit(0) & tower.getPill_detruit(1) & tower.getPill_detruit(2) & tower.getPill_detruit(3))
+						tower.setDead(true);
 				}
 		}
 		
@@ -482,8 +545,29 @@ public class GameState {
 						bombes.get(j).setEtat(10);
 					}
 				}
+				
+				if (!tower.isDead()){
+					
+					for(int j = 0; j < 4; j++){
+						if(tower.getCoord_pilliers()[j][0] == x & tower.getCoord_pilliers()[j][1] == i)
+							
+							if(tower.getCoord_pilliers()[j][2] == 0){
+								tower.setPill_detruit(j, true);
+							}else {
+								tower.setPill_life(j, tower.getPill_life(j)-1);
+								tower.setHurt(true);
+							}
+					}
+					
+					if(tower.getPill_detruit(0) & tower.getPill_detruit(1) & tower.getPill_detruit(2) & tower.getPill_detruit(3)){
+						tower.setDead(true);
+						System.out.println("mort tour");
+					}
+				}
 		}
 
+		System.out.println(tower.isDead());
+		
 	}
 	
 	//Réalise un tour du jeu 
@@ -497,6 +581,8 @@ public class GameState {
 				bombermansTurn();
 				ennemiesTurn();
 				birdsTurn();
+				towerTurn();
+
 				
 			}else {
 
@@ -556,6 +642,7 @@ public class GameState {
 				bombermansTurn();
 				ennemiesTurn();
 				birdsTurn();
+				towerTurn();
 			}else {
 
 				BbmG.stop();
@@ -584,6 +671,7 @@ public class GameState {
 			
 		}
 	}
+
 	
 	//Réalise le tour de l'ennemi
 	
@@ -739,6 +827,22 @@ public class GameState {
 				
 			}
 		}
+		
+		
+	public void towerTurn(){
+		if (tower != null) {
+			
+			if (tower.isHurt()){
+				tower.setEtat(tower.getEtat()+1);
+				if(tower.getEtat() == 6){
+					tower.setHurt(false);
+					tower.setEtat(0);
+				}
+			}
+			
+		}
+	}
+		
 	
 	public void bombeTurn(Agent_Bomberman bomberman){
 
@@ -1059,6 +1163,14 @@ public class GameState {
 	
 	public BombermanGame getGame() {
 		return game;
+	}
+
+	public Agent_Tower getTower() {
+		return tower;
+	}
+
+	public void setTower(Agent_Tower agent_Tower) {
+		this.tower = agent_Tower;
 	}
 
 }
