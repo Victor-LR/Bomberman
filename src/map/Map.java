@@ -36,6 +36,9 @@ public class Map {
 	protected ArrayList<Integer> bomberman_start_x;
 	protected ArrayList<Integer> bomberman_start_y;
 	
+	protected int tower_x = 0;
+	protected int tower_y = 0;
+	
 	private boolean stuck[][];
 	
 	
@@ -79,6 +82,8 @@ public class Map {
 		ennemy_start_x = new  ArrayList<Integer>();
 		ennemy_start_y = new  ArrayList<Integer>();
 		
+		 
+		
 		bomberman_start_x = new  ArrayList<Integer>();
 		bomberman_start_y = new  ArrayList<Integer>();
 		
@@ -121,6 +126,11 @@ public class Map {
 				if (ligne.charAt(x)=='B') {
 					bomberman_start_x.add(x);
 					bomberman_start_y.add(y);
+				}
+				
+				if (ligne.charAt(x)=='T') {
+					tower_x = x;
+					tower_y = y;
 				}
 			}
 			y++;
