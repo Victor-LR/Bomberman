@@ -90,6 +90,7 @@ public class Map {
 		
 		bird_start_x = new  ArrayList<Integer>();
 		bird_start_y = new  ArrayList<Integer>();
+
 		
 		flux = new FileInputStream(filename); 
 		lecture = new InputStreamReader(flux);

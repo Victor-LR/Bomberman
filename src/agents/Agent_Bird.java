@@ -1,9 +1,7 @@
 package agents;
 
-import java.util.ArrayList;
 
 import map.GameState;
-import map.Map;
 import strategies.Strategie_Bird;
 
 public class Agent_Bird extends Agent {
@@ -21,9 +19,9 @@ public class Agent_Bird extends Agent {
 	public AgentAction chooseAction(GameState etatjeu) 
 	{
 		
-//		Strategie_Bird str = new Strategie_Bird(etatjeu, this);
+		Strategie_Bird str = new Strategie_Bird(etatjeu, this);
 //		
-//		return str.action();
+		return str.action();
 ////		ArrayList<AgentAction> listAction=new ArrayList<AgentAction>();
 ////		for(int i=0;i<5;i++)
 ////		{
@@ -31,7 +29,7 @@ public class Agent_Bird extends Agent {
 ////				listAction.add(new AgentAction(i));
 ////		}		
 ////		return(listAction.get((int)(Math.random()*listAction.size())));
-		return new AgentAction(Map.STOP_BIRD);
+		//return new AgentAction(Map.STOP_BIRD);
 	}
 	
 	public int getEtat() {
