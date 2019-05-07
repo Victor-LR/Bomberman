@@ -92,6 +92,7 @@ public class Map {
 		
 		bird_start_x = new  ArrayList<Integer>();
 		bird_start_y = new  ArrayList<Integer>();
+
 		
 		rajion_start_x = new  ArrayList<Integer>();
 		rajion_start_y = new  ArrayList<Integer>();

@@ -257,6 +257,34 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		}
 		
 		if (direc_en==Map.NORTH){
+			if(BbmG.getTurn() % 2 == 0) {
+				try {
+					Image img = ImageIO.read(new File("./image/bird_NORTH1.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else if (BbmG.getTurn() % 3 == 0){
+				try {
+					Image img = ImageIO.read(new File("./image/bird_NORTH2.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				try {
+					Image img = ImageIO.read(new File("./image/bird_NORTH3.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		
+		if (direc_en==Map.SOUTH){
 			
 			if(BbmG.getTurn() % 2 == 0) {
 				try {
@@ -282,21 +310,21 @@ public class paint_bomberman extends JPanel implements GameObserver{
 					e.printStackTrace();
 				}
 			}
-		}
-		
-		if (direc_en==Map.SOUTH){
 			
+		}
+		if (direc_en==Map.EAST){
+
 			if(BbmG.getTurn() % 2 == 0) {
 				try {
-					Image img = ImageIO.read(new File("./image/bird_NRTH1.png"));
+					Image img = ImageIO.read(new File("./image/bird_EAST1.png"));
 					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-			else if (BbmG.getTurn() % 3 == 0){
+			else if (BbmG.getTurn() %  3 == 0){
 				try {
-					Image img = ImageIO.read(new File("./image/bird_NRTH2.png"));
+					Image img = ImageIO.read(new File("./image/bird_EAST2.png"));
 					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -304,14 +332,15 @@ public class paint_bomberman extends JPanel implements GameObserver{
 			}
 			else {
 				try {
-					Image img = ImageIO.read(new File("./image/bird_NRTH3.png"));
+					Image img = ImageIO.read(new File("./image/bird_EAST3.png"));
 					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
+			
 		}
-		if (direc_en==Map.EAST){
+		if (direc_en==Map.WEST){
 			
 			if(BbmG.getTurn() % 2 == 0) {
 				try {
@@ -337,33 +366,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 					e.printStackTrace();
 				}
 			}
-		}
-		if (direc_en==Map.WEST){
 			
-			if(BbmG.getTurn() % 2 == 0) {
-				try {
-					Image img = ImageIO.read(new File("./image/bird_EAST1.png"));
-					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			else if (BbmG.getTurn() %  3 == 0){
-				try {
-					Image img = ImageIO.read(new File("./image/bird_EAST2.png"));
-					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			else {
-				try {
-					Image img = ImageIO.read(new File("./image/bird_EAST3.png"));
-					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 		
 		

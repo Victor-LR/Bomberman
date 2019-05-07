@@ -23,5 +23,7 @@ public class Agent_Ennemy extends Agent {
 		return(listAction.get((int)(Math.random()*listAction.size())));
 		//return new AgentAction(Map.STOP);
 	}
+
+
 	
 }
