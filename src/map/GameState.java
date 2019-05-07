@@ -132,7 +132,7 @@ public class GameState {
 		int x = action.getVx();
 		int y = action.getVy();
 		
-		if(map.isWall(agent.getX()+x, agent.getY()+y) || map.isBrokable_Wall(agent.getX()+x, agent.getY()+y) || isBombe(agent.getX()+x, agent.getY()+y) || isTower(agent.getX()+x, agent.getY()+y))
+		if(map.isWall(agent.getX()+x, agent.getY()+y) || map.isBrokable_Wall(agent.getX()+x, agent.getY()+y) || isBombe(agent.getX()+x, agent.getY()+y) )
 			return false;
 		else return true;
 	}
@@ -143,7 +143,7 @@ public class GameState {
 		int x = actionbbm.getVx();
 		int y = actionbbm.getVy();
 			
-		if(map.isWall(bbm.getX()+x, bbm.getY()+y) || map.isBrokable_Wall(bbm.getX()+x, bbm.getY()+y) || isBombe(bbm.getX()+x, bbm.getY()+y) || isBomberman(bbm.getId(),bbm.getX()+x, bbm.getY()+y) || isTower(bbm.getX()+x, bbm.getY()+y))
+		if(map.isWall(bbm.getX()+x, bbm.getY()+y) || map.isBrokable_Wall(bbm.getX()+x, bbm.getY()+y) || isBombe(bbm.getX()+x, bbm.getY()+y) || isBomberman(bbm.getId(),bbm.getX()+x, bbm.getY()+y) )
 			return false;
 		else return true;
 	}
@@ -154,7 +154,7 @@ public class GameState {
 		int x = actionbird.getVx();
 		int y = actionbird.getVy();
 				
-		if(map.isWall(bird.getX()+x, bird.getY()+y) || isBombe(bird.getX()+x, bird.getY()+y) || isBombe(bird.getX()+x, bird.getY()+y) || isTower(bird.getX()+x, bird.getY()+y))
+		if(map.isWall(bird.getX()+x, bird.getY()+y) || isBombe(bird.getX()+x, bird.getY()+y) || isBombe(bird.getX()+x, bird.getY()+y) )
 			return false;
 		else return true;
 	}
@@ -222,7 +222,6 @@ public class GameState {
 		}
 		
 		public boolean isTower(int x, int y) {
-
 			for (int i= 0; i < 4 ; i++) {
 				if(x == tower.getCoord_pilliers()[i][0] & y == tower.getCoord_pilliers()[i][1]) return true;
 			}
@@ -821,16 +820,6 @@ public class GameState {
 							bomberman.setDead(true);
 						}
 					}
-				
-				for (int j = 0; j < items.size(); j++){
-          
-						if(isEnnemie(bomberman.getX(),bomberman.getY())) {
-							bomberman.setDead(true);
-						}
-						
-						if(isBird(bomberman.getX(),bomberman.getY())) {
-							bomberman.setDead(true);
-						}
 					
 					for (int j = 0; j < items.size(); j++){
 						
@@ -934,6 +923,7 @@ public class GameState {
 					
 				}
 			}
+			
 		}
 		
 		
@@ -1290,17 +1280,7 @@ public class GameState {
 //	}
 	
 	//permet de savoir si le mode de jeu choisi est une campagne 
-						if(isEnnemie(bomberman.getX(),bomberman.getY())) {
-							bomberman.setDead(true);
-						}
 						
-						if(isBird(bomberman.getX(),bomberman.getY())) {
-							bomberman.setDead(true);
-						}
-						
-						if(isRajion(bomberman.getX(),bomberman.getY())) {
-							bomberman.setDead(true);
-						}
 	public Boolean getCampagne() {
 		return campagne;
 	}
