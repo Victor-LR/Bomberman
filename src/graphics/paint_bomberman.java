@@ -178,7 +178,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 			
 		}
 		
-		if (tower != null) dessine_Tower(g,tower);
+		if ( !tower.isDead()) dessine_Tower(g,tower);
 		
 	}
 	
@@ -368,29 +368,6 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		
 	}
 	
-	void dessine_Tower(Graphics g, Agent_Tower tower){
-		
-		int fen_x = getSize().width;
-		int fen_y = getSize().height;
-
-		double stepx = fen_x/(double)taille_x;
-		double stepy = fen_y/(double)taille_y;
-		
-		int px = tower.getX();
-		int py = tower.getY();
-		
-		double pos_x=px*stepx-stepx;
-		double pos_y=py*stepy-stepy;
-		
-		try {
-			Image img = ImageIO.read(new File("./image/RadioTower.png"));
-			g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx*3, (int)stepy*3, this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-	}
-	
 	void dessine_Items(Graphics g, Objet item){
 		
 		int fen_x = getSize().width;
@@ -455,7 +432,40 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		}
 	}
 	
-	
+	void dessine_Tower(Graphics g, Agent_Tower tower){
+		
+		int fen_x = getSize().width;
+		int fen_y = getSize().height;
+
+		double stepx = fen_x/(double)taille_x;
+		double stepy = fen_y/(double)taille_y;
+		
+		int px = tower.getX();
+		int py = tower.getY();
+		
+		double pos_x=px*stepx-stepx;
+		double pos_y=py*stepy-4*stepy;
+		
+		
+		if(tower.getEtat() % 2 != 0){
+			contraste = invincible;
+		}else contraste = new float[]{ 0, 0, 0, 1.0f };
+		
+			try {
+				BufferedImage img = ImageIO.read(new File("./image/RadioTower.png"));
+				
+				
+				float[] scales = new float[]{1 ,1, 1, 1.0f };
+				
+				RescaleOp op1 = new RescaleOp(scales, contraste, null);
+				BufferedImage resultat2 = op1.filter(img, null);
+				Image img_result = resultat2;
+				
+				g.drawImage(img_result, (int)pos_x, (int)pos_y, (int)stepx*3, (int)stepy*6, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	}
 	
 	void dessine_Bomb(Graphics g, Objet_Bomb bomb)
 	{
