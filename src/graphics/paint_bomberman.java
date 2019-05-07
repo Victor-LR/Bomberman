@@ -178,7 +178,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 			
 		}
 		
-		if ( !tower.isDead()) dessine_Tower(g,tower);
+		//if ( !tower.isDead()) dessine_Tower(g,tower);
 		
 	}
 	
