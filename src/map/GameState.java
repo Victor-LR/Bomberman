@@ -5,7 +5,6 @@ import java.util.Random;
 import agents.Agent;
 import agents.AgentAction;
 
-import agents.AgentType;
 
 import agents.Agent_Bird;
 import agents.Agent_Bomberman;
@@ -132,7 +131,7 @@ public class GameState {
 		int x = action.getVx();
 		int y = action.getVy();
 		
-		if(map.isWall(agent.getX()+x, agent.getY()+y) || map.isBrokable_Wall(agent.getX()+x, agent.getY()+y) || isBombe(agent.getX()+x, agent.getY()+y) || isTower(agent.getX()+x, agent.getY()+y))
+		if(map.isWall(agent.getX()+x, agent.getY()+y) || map.isBrokable_Wall(agent.getX()+x, agent.getY()+y) || isBombe(agent.getX()+x, agent.getY()+y) || isTower(agent.getX()+x, agent.getY()+y) || isRajion(agent.getX()+x, agent.getY()+y))
 			return false;
 		else return true;
 	}
@@ -1203,6 +1202,10 @@ public class GameState {
 		
 		for(int i=0; i < getBirds().size(); i++) {
 			allEnnemies.add(getBirds().get(i));
+		}
+		
+		for(int i=0; i < getRajions().size(); i++) {
+			allEnnemies.add(getRajions().get(i));
 		}
 		
 		return allEnnemies;
