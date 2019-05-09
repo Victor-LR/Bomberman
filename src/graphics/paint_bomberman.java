@@ -191,41 +191,127 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		double pos_y=py*stepy;
 		
 		int direc_en = agent.getDirection();
-		if (direc_en==Map.NORTH){
-			
-			try {
-				Image img = ImageIO.read(new File("./image/ennemy_North.png"));
-				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		
+		if (direc_en==Map.STOP){
+				try {
+					Image img = ImageIO.read(new File("./image/ennemy_North.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 		}
+		
+		if (direc_en==Map.NORTH){
+			if(BbmG.getTurn() % 2 == 0) {
+				try {
+					Image img = ImageIO.read(new File("./image/ennemy_North.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else if (BbmG.getTurn() % 3 == 0){
+				try {
+					Image img = ImageIO.read(new File("./image/ennemy_North1.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				try {
+					Image img = ImageIO.read(new File("./image/ennemy_North2.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		
 		if (direc_en==Map.SOUTH){
 			
-			try {
-				Image img = ImageIO.read(new File("./image/ennemy_South.png"));
-				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
-			} catch (IOException e) {
-				e.printStackTrace();
+			if(BbmG.getTurn() % 2 == 0) {
+				try {
+					Image img = ImageIO.read(new File("./image/ennemy_South.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
+			else if(BbmG.getTurn() % 3 == 0) {
+				try { 
+					Image img = ImageIO.read(new File("./image/ennemy_South1.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				try {
+					Image img = ImageIO.read(new File("./image/ennemy_South2.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
 		}
 		if (direc_en==Map.EAST){
-			
-			try {
-				Image img = ImageIO.read(new File("./image/ennemy_East.png"));
-				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
-			} catch (IOException e) {
-				e.printStackTrace();
+
+			if(BbmG.getTurn() % 2 == 0) {
+				try {
+					Image img = ImageIO.read(new File("./image/ennemy_East.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
+			else if (BbmG.getTurn() %  3 == 0){
+				try {
+					Image img = ImageIO.read(new File("./image/ennemy_East1.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				try {
+					Image img = ImageIO.read(new File("./image/ennemy_East2.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
 		}
 		if (direc_en==Map.WEST){
 			
-			try {
-				Image img = ImageIO.read(new File("./image/ennemy_West.png"));
-				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
-			} catch (IOException e) {
-				e.printStackTrace();
+			if(BbmG.getTurn() % 2 == 0) {
+				try {
+					Image img = ImageIO.read(new File("./image/ennemy_West.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
+			else if (BbmG.getTurn() % 3 == 0){
+				try {
+					Image img = ImageIO.read(new File("./image/ennemy_West1.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				try {
+					Image img = ImageIO.read(new File("./image/ennemy_West2.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
 		}
 		
 		
@@ -469,11 +555,31 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		double pos_y=py*stepy;
 		
 		int direc_en = agentBBM.getDirection();
-		if (direc_en==Map.NORTH){
-			
+		
+		if (direc_en==Map.STOP){
 			try {
 				BufferedImage img = ImageIO.read(new File("./image/bomberman_NORTH.png"));
+				if (agentBBM.isInvincible() & agentBBM.getEtatInv() % 2 == 0)
+					contraste = invincible;
+				else contraste = new float[]{ 0, 0, 0, 1.0f };
 				
+				if (agentBBM.isSick() & agentBBM.getEtatSick() % 2 == 0)
+					scales = skull;
+				else scales = couleur;
+				
+				RescaleOp op = new RescaleOp(scales, contraste, null);
+				BufferedImage resultat = op.filter( img, null);
+				Image img_result = resultat;
+				g.drawImage(img_result, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	}
+	
+	if (direc_en==Map.NORTH){
+		if(BbmG.getTurn() % 2 == 0) {
+			try {
+				BufferedImage img = ImageIO.read(new File("./image/bomberman_NORTH.png"));
 				if (agentBBM.isInvincible() & agentBBM.getEtatInv() % 2 == 0)
 					contraste = invincible;
 				else contraste = new float[]{ 0, 0, 0, 1.0f };
@@ -490,11 +596,52 @@ public class paint_bomberman extends JPanel implements GameObserver{
 				e.printStackTrace();
 			}
 		}
-		if (direc_en==Map.SOUTH){
-			
+		else if (BbmG.getTurn() % 3 == 0){
+			try {
+				BufferedImage img = ImageIO.read(new File("./image/bomberman_NORTH1.png"));
+				if (agentBBM.isInvincible() & agentBBM.getEtatInv() % 2 == 0)
+					contraste = invincible;
+				else contraste = new float[]{ 0, 0, 0, 1.0f };
+				
+				if (agentBBM.isSick() & agentBBM.getEtatSick() % 2 == 0)
+					scales = skull;
+				else scales = couleur;
+				
+				RescaleOp op = new RescaleOp(scales, contraste, null);
+				BufferedImage resultat = op.filter(img, null);
+				Image img_result = resultat;
+				g.drawImage(img_result, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			try {
+				BufferedImage img = ImageIO.read(new File("./image/bomberman_NORTH2.png"));
+				if (agentBBM.isInvincible() & agentBBM.getEtatInv() % 2 == 0)
+					contraste = invincible;
+				else contraste = new float[]{ 0, 0, 0, 1.0f };
+				
+				if (agentBBM.isSick() & agentBBM.getEtatSick() % 2 == 0)
+					scales = skull;
+				else scales = couleur;
+				
+				RescaleOp op = new RescaleOp(scales, contraste, null);
+				BufferedImage resultat = op.filter(img, null);
+				Image img_result = resultat;
+				g.drawImage(img_result, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	if (direc_en==Map.SOUTH){
+		
+		if(BbmG.getTurn() % 2 == 0) {
 			try {
 				BufferedImage img = ImageIO.read(new File("./image/bomberman_SOUTH.png"));
-				
 				if (agentBBM.isInvincible() & agentBBM.getEtatInv() % 2 == 0)
 					contraste = invincible;
 				else contraste = new float[]{ 0, 0, 0, 1.0f };
@@ -503,7 +650,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 					scales = skull;
 				else scales = couleur;
 				
-			    RescaleOp op = new RescaleOp(scales, contraste, null);
+				RescaleOp op = new RescaleOp(scales, contraste, null);
 				BufferedImage resultat = op.filter(img, null);
 				Image img_result = resultat;
 				g.drawImage(img_result, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
@@ -511,11 +658,51 @@ public class paint_bomberman extends JPanel implements GameObserver{
 				e.printStackTrace();
 			}
 		}
-		if (direc_en==Map.EAST){
-			
+		else if(BbmG.getTurn() % 3 == 0) {
+			try { 
+				BufferedImage img = ImageIO.read(new File("./image/bomberman_SOUTH1.png"));
+				if (agentBBM.isInvincible() & agentBBM.getEtatInv() % 2 == 0)
+					contraste = invincible;
+				else contraste = new float[]{ 0, 0, 0, 1.0f };
+				
+				if (agentBBM.isSick() & agentBBM.getEtatSick() % 2 == 0)
+					scales = skull;
+				else scales = couleur;
+				
+				RescaleOp op = new RescaleOp(scales, contraste, null);
+				BufferedImage resultat = op.filter(img, null);
+				Image img_result = resultat;
+				g.drawImage(img_result, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			try {
+				BufferedImage img = ImageIO.read(new File("./image/bomberman_SOUTH2.png"));
+				if (agentBBM.isInvincible() & agentBBM.getEtatInv() % 2 == 0)
+					contraste = invincible;
+				else contraste = new float[]{ 0, 0, 0, 1.0f };
+				
+				if (agentBBM.isSick() & agentBBM.getEtatSick() % 2 == 0)
+					scales = skull;
+				else scales = couleur;
+				
+				RescaleOp op = new RescaleOp(scales, contraste, null);
+				BufferedImage resultat = op.filter(img, null);
+				Image img_result = resultat;
+				g.drawImage(img_result, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	if (direc_en==Map.EAST){
+
+		if(BbmG.getTurn() % 2 == 0) {
 			try {
 				BufferedImage img = ImageIO.read(new File("./image/bomberman_EAST.png"));
-				
 				if (agentBBM.isInvincible() & agentBBM.getEtatInv() % 2 == 0)
 					contraste = invincible;
 				else contraste = new float[]{ 0, 0, 0, 1.0f };
@@ -524,7 +711,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 					scales = skull;
 				else scales = couleur;
 				
-			    RescaleOp op = new RescaleOp(scales, contraste, null);
+				RescaleOp op = new RescaleOp(scales, contraste, null);
 				BufferedImage resultat = op.filter(img, null);
 				Image img_result = resultat;
 				g.drawImage(img_result, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
@@ -532,11 +719,51 @@ public class paint_bomberman extends JPanel implements GameObserver{
 				e.printStackTrace();
 			}
 		}
-		if (direc_en==Map.WEST){
-			
+		else if (BbmG.getTurn() %  3 == 0){
+			try {
+				BufferedImage img = ImageIO.read(new File("./image/bomberman_EAST1.png"));
+				if (agentBBM.isInvincible() & agentBBM.getEtatInv() % 2 == 0)
+					contraste = invincible;
+				else contraste = new float[]{ 0, 0, 0, 1.0f };
+				
+				if (agentBBM.isSick() & agentBBM.getEtatSick() % 2 == 0)
+					scales = skull;
+				else scales = couleur;
+				
+				RescaleOp op = new RescaleOp(scales, contraste, null);
+				BufferedImage resultat = op.filter(img, null);
+				Image img_result = resultat;
+				g.drawImage(img_result, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			try {
+				BufferedImage img = ImageIO.read(new File("./image/bomberman_EAST2.png"));
+				if (agentBBM.isInvincible() & agentBBM.getEtatInv() % 2 == 0)
+					contraste = invincible;
+				else contraste = new float[]{ 0, 0, 0, 1.0f };
+				
+				if (agentBBM.isSick() & agentBBM.getEtatSick() % 2 == 0)
+					scales = skull;
+				else scales = couleur;
+				
+				RescaleOp op = new RescaleOp(scales, contraste, null);
+				BufferedImage resultat = op.filter(img, null);
+				Image img_result = resultat;
+				g.drawImage(img_result, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	if (direc_en==Map.WEST){
+		
+		if(BbmG.getTurn() % 2 == 0) {
 			try {
 				BufferedImage img = ImageIO.read(new File("./image/bomberman_WEST.png"));
-				
 				if (agentBBM.isInvincible() & agentBBM.getEtatInv() % 2 == 0)
 					contraste = invincible;
 				else contraste = new float[]{ 0, 0, 0, 1.0f };
@@ -545,7 +772,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 					scales = skull;
 				else scales = couleur;
 				
-			    RescaleOp op = new RescaleOp(scales, contraste, null);
+				RescaleOp op = new RescaleOp(scales, contraste, null);
 				BufferedImage resultat = op.filter(img, null);
 				Image img_result = resultat;
 				g.drawImage(img_result, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
@@ -553,9 +780,50 @@ public class paint_bomberman extends JPanel implements GameObserver{
 				e.printStackTrace();
 			}
 		}
+		else if (BbmG.getTurn() % 3 == 0){
+			try {
+				BufferedImage img = ImageIO.read(new File("./image/bomberman_WEST1.png"));
+				if (agentBBM.isInvincible() & agentBBM.getEtatInv() % 2 == 0)
+					contraste = invincible;
+				else contraste = new float[]{ 0, 0, 0, 1.0f };
+				
+				if (agentBBM.isSick() & agentBBM.getEtatSick() % 2 == 0)
+					scales = skull;
+				else scales = couleur;
+				
+				RescaleOp op = new RescaleOp(scales, contraste, null);
+				BufferedImage resultat = op.filter(img, null);
+				Image img_result = resultat;
+				g.drawImage(img_result, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			try {
+				BufferedImage img = ImageIO.read(new File("./image/bomberman_WEST2.png"));
+				if (agentBBM.isInvincible() & agentBBM.getEtatInv() % 2 == 0)
+					contraste = invincible;
+				else contraste = new float[]{ 0, 0, 0, 1.0f };
+				
+				if (agentBBM.isSick() & agentBBM.getEtatSick() % 2 == 0)
+					scales = skull;
+				else scales = couleur;
+				
+				RescaleOp op = new RescaleOp(scales, contraste, null);
+				BufferedImage resultat = op.filter(img, null);
+				Image img_result = resultat;
+				g.drawImage(img_result, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
 		
 		
 	}
+
 	
 	void dessine_Items(Graphics g, Objet item){
 		

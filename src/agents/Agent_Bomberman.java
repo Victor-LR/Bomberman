@@ -38,7 +38,7 @@ public class Agent_Bomberman extends Agent {
 		super(AgentType.BOMBERMAN, px, py);
 		super.setId(id);
 		
-		this.range = 5;
+		this.range = 1;
 		this.points = 0;
 		this.nbBombes = 3;
 		

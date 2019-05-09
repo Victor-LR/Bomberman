@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import agents.Agent;
 import agents.AgentAction;
 import agents.Agent_Bomberman;
-import agents.Agent_Ennemy;
 import map.GameState;
 
 public class Strategie_PVE extends Strategie{
@@ -29,6 +28,7 @@ public class Strategie_PVE extends Strategie{
 		int comptBW = 0;
 		int comptW = 0; 
 		int nb_bombes_bbm = 0;
+		
 		for(int i=0;i<5;i++)
 		{
 			Action = new AgentAction(i);
@@ -60,7 +60,7 @@ public class Strategie_PVE extends Strategie{
 						if(getEtat().getBombes().get(k).getId_bbm() == getAgent().getId()) 
 							nb_bombes_bbm++;
 					}
-					if(nb_bombes_bbm == 0)
+					if(nb_bombes_bbm == 0 || getAgent().getNbBombes() > 1)
 						listAction.add(new AgentAction(5));
 					else {
 						if(new_ec > ecart) {
@@ -83,7 +83,7 @@ public class Strategie_PVE extends Strategie{
 				if(getEtat().getBombes().get(k).getId_bbm() == getAgent().getId()) 
 					nb_bombes_bbm++;
 			}
-			if(nb_bombes_bbm == 0)
+			if(nb_bombes_bbm == 0 || getAgent().getNbBombes() > 1)
 				return (new AgentAction(5));
 			else {
 				if  (listAction.size() > 0) return (listAction.get((int)(Math.random()*listAction.size())));
@@ -96,7 +96,7 @@ public class Strategie_PVE extends Strategie{
 					if(getEtat().getBombes().get(k).getId_bbm() == getAgent().getId()) 
 						nb_bombes_bbm++;
 				}
-				if(nb_bombes_bbm == 0)
+				if(nb_bombes_bbm == 0 || getAgent().getNbBombes() != 1)
 						return (new AgentAction(5));
 				else {
 					if  (listAction.size() > 0) return (listAction.get((int)(Math.random()*listAction.size())));
