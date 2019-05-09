@@ -387,43 +387,83 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		double pos_y=py*stepy;
 		
 		int direc_en = agent.getDirection();
-		if (direc_en==Map.NORTH){
+		if(BbmG.getTurn() % 2 == 0) {
+			if (direc_en==Map.NORTH){
+				
+				try {
+					Image img = ImageIO.read(new File("./image/rajion_NORTH.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (direc_en==Map.SOUTH){
+				
+				try {
+					Image img = ImageIO.read(new File("./image/rajion_SOUTH.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (direc_en==Map.EAST){
+				
+				try {
+					Image img = ImageIO.read(new File("./image/rajion_EAST.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (direc_en==Map.WEST){
+				
+				try {
+					Image img = ImageIO.read(new File("./image/rajion_WEST.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 			
-			try {
-				Image img = ImageIO.read(new File("./image/ennemy_North.png"));
-				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
-			} catch (IOException e) {
-				e.printStackTrace();
+		}else {
+			
+			if (direc_en==Map.NORTH){
+			
+				try {
+					Image img = ImageIO.read(new File("./image/rajion_NORTH_2.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)(stepx), (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (direc_en==Map.SOUTH){
+				
+				try {
+					Image img = ImageIO.read(new File("./image/rajion_SOUTH_2.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (direc_en==Map.EAST){
+				
+				try {
+					Image img = ImageIO.read(new File("./image/rajion_EAST_2.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (direc_en==Map.WEST){
+				
+				try {
+					Image img = ImageIO.read(new File("./image/rajion_WEST_2.png"));
+					g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
-		if (direc_en==Map.SOUTH){
-			
-			try {
-				Image img = ImageIO.read(new File("./image/ennemy_South.png"));
-				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		if (direc_en==Map.EAST){
-			
-			try {
-				Image img = ImageIO.read(new File("./image/ennemy_East.png"));
-				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		if (direc_en==Map.WEST){
-			
-			try {
-				Image img = ImageIO.read(new File("./image/ennemy_West.png"));
-				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
 		
 	}
 	

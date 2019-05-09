@@ -262,7 +262,7 @@ public class Review extends JPanel {
 		if (direc_en==Map.NORTH){
 			
 			try {
-				Image img = ImageIO.read(new File("./image/ennemy_North.png"));
+				Image img = ImageIO.read(new File("./image/rajion_NORTH.png"));
 				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -271,7 +271,7 @@ public class Review extends JPanel {
 		if (direc_en==Map.SOUTH){
 			
 			try {
-				Image img = ImageIO.read(new File("./image/ennemy_South.png"));
+				Image img = ImageIO.read(new File("./image/rajion_SOUTH.png"));
 				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -280,7 +280,7 @@ public class Review extends JPanel {
 		if (direc_en==Map.EAST){
 			
 			try {
-				Image img = ImageIO.read(new File("./image/ennemy_East.png"));
+				Image img = ImageIO.read(new File("./image/rajion_EAST.png"));
 				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -289,7 +289,7 @@ public class Review extends JPanel {
 		if (direc_en==Map.WEST){
 			
 			try {
-				Image img = ImageIO.read(new File("./image/ennemy_West.png"));
+				Image img = ImageIO.read(new File("./image/rajion_WEST.png"));
 				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
 			} catch (IOException e) {
 				e.printStackTrace();
