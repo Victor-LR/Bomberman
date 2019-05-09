@@ -256,7 +256,7 @@ Pour finir le multithread est géré à l'interieur du cadre_Menu, cela signifie
 
 - Bird : equivalent d'une chauve-souris, elle peut passer à travers les mur destructible pour se diriger vvers sa cible (un bomberman). Celle-ci se reveil quand un Bomberman se rapproche d'elle dans un certain rayon. Ensuite elle part à la poursuite de ce dernier, jusqu'à sa mort ou la sienne ou quand le Bomberman s'écarte trop d'elle. Dans cette derniere possibilité Bird retourne dans son état de départ.
 - RadioTower : La tour radio est un batiment qui doit être détruit pour finir le niveau. Elle a quatre pilliers destructible qui ont 4 vies chacun. Lorque qu'ils sont détruits la tour "meure". Tant qu'elle est vie elle fait apparaître des ennemies (rajion), jusqu'à un maximum de 4.
-- Rajion : IA pas encore modéliser, but : se déplace vers le bomberman.
+- Rajion : IA pas encore modéliser, comportement: se déplace vers le bomberman.
 
 
             
