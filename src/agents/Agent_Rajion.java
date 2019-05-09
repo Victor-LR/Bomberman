@@ -19,8 +19,9 @@ public class Agent_Rajion extends Agent {
 		{
 			if (etatjeu.isLegalMove(new AgentAction(i), this))
 				listAction.add(new AgentAction(i));
-		}		
-		return(listAction.get((int)(Math.random()*listAction.size())));
+		}
+		if(listAction.size() == 0) return new AgentAction(Map.STOP);
+		else return(listAction.get((int)(Math.random()*listAction.size())));
 		
 		//return new AgentAction(Map.STOP);
 	}
