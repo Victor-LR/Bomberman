@@ -20,10 +20,9 @@ public class Agent_Ennemy extends Agent {
 			if (etatjeu.isLegalMove(new AgentAction(i), this))
 				listAction.add(new AgentAction(i));
 		}		
-		if(listAction.size() != 0) {
-			return(listAction.get((int)(Math.random()*listAction.size())));
-		}
-		else return new AgentAction(Map.STOP);
+
+		if(listAction.size() == 0) return new AgentAction(Map.STOP);
+		else return(listAction.get((int)(Math.random()*listAction.size())));
 	}
 
 

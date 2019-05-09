@@ -19,9 +19,7 @@ public class Strategie_A extends Strategie {
 	
 	@Override
 	public AgentAction action() {
-//		AgentAction Action = null;//new AgentAction(0);
 		ArrayList<AgentAction> listAction = new ArrayList<AgentAction>();
-//		ArrayList<Agent> ennemies = getEtat().getEnnemies();
 		ArrayList<Agent_Bomberman> bombermans = getEtat().getBombermans();
 		ArrayList<Objet_Bomb> bombes = getEtat().getBombes();
 		

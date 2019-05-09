@@ -258,6 +258,11 @@ Pour finir le multithread est géré à l'interieur du cadre_Menu, cela signifie
 - RadioTower : La tour radio est un batiment qui doit être détruit pour finir le niveau. Elle a quatre pilliers destructible qui ont 4 vies chacun. Lorque qu'ils sont détruits la tour "meure". Tant qu'elle est vie elle fait apparaître des ennemies (rajion), jusqu'à un maximum de 4.
 - Rajion : IA pas encore modéliser, comportement: se déplace vers le bomberman.
 
+09/05/19:
+
+- Compte rendu rendez-vous :
+      - Le but maintenant est de développer l'ia à partir d'un perceptron, on doit reprendre le travail de Ludovic Denoyer sur le pacman pour ensuite l'adapter sur notre projet Bomberman. La tache consiste à faire apprendre à un agent Bomberman les meilleurs choix possible à l'aide d'une fonction de récompense qui évalura les les action prise par celui-ci.
+
 
             
         
