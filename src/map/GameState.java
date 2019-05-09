@@ -999,7 +999,9 @@ public class GameState {
 				compteEnn++;
 			}
 			
-		}for(int i = 0; i<birds.size(); ++i) {
+		}
+		
+		for(int i = 0; i<birds.size(); ++i) {
 			if(!birds.get(i).isDead()) {
 				compteEnn++;
 			}
@@ -1012,11 +1014,6 @@ public class GameState {
 		}
 		
 		
-		for(int i = 0; i<birds.size(); ++i) {
-			if(!birds.get(i).isDead()) {
-				compteEnn++;
-			}
-		}
 		
 		if(compteBbm == 0  & nbBbm == 1) {
 			setEnd(true);
@@ -1122,6 +1119,18 @@ public class GameState {
 		
 		for(int i = 0; i<ennemies.size(); ++i) {
 			if(!ennemies.get(i).isDead()) {
+				compteEnn++;
+			}
+		}
+		
+		for(int i = 0; i<birds.size(); ++i) {
+			if(!birds.get(i).isDead()) {
+				compteEnn++;
+			}
+		}
+		
+		for(int i = 0; i<rajions.size(); ++i) {
+			if(!rajions.get(i).isDead()) {
 				compteEnn++;
 			}
 		}
