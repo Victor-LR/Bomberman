@@ -17,6 +17,8 @@ import agents.Agent;
 import agents.Agent_Bird;
 import agents.Agent_Bomberman;
 import agents.Agent_Ennemy;
+import agents.Agent_Rajion;
+import agents.Agent_Tower;
 import game.BombermanGame;
 import map.Map;
 
@@ -100,9 +102,10 @@ public class Review extends JPanel {
 		
 		
 		ArrayList<Agent_Bomberman> bombermans = BbmG.etatJeu.getBombermans();
-		
+		ArrayList<Agent_Rajion> rajions = BbmG.etatJeu.getRajions();
 		ArrayList<Agent_Ennemy> ennemies = BbmG.etatJeu.getEnnemies();
 		ArrayList<Agent_Bird> birds = BbmG.etatJeu.getBirds();
+		Agent_Tower tower = BbmG.etatJeu.getTower();
 		
 		for(int i = 0; i < ennemies.size(); i++){
 			if(!ennemies.get(i).isDead())
@@ -114,6 +117,11 @@ public class Review extends JPanel {
 			dessine_Bird(g,birds.get(i));	
 		}
 		
+		for(int i = 0; i < rajions.size(); i++){
+			if(!rajions.get(i).isDead())
+			dessine_Rajion(g,rajions.get(i));	
+		}
+		
 		
 		for(int i = 0; i < bombermans.size(); i++){
 
@@ -122,7 +130,7 @@ public class Review extends JPanel {
 			
 		}
 		
-
+		if( tower != null) dessine_Tower(g,tower);
 		
 	}
 	
@@ -236,6 +244,93 @@ public class Review extends JPanel {
 		
 	}
 	
+	void dessine_Rajion(Graphics g, Agent_Rajion agent)
+	{
+		int fen_x = getSize().width;
+		int fen_y = getSize().height;
+
+		double stepx = fen_x/(double)taille_x;
+		double stepy = fen_y/(double)taille_y;
+
+		int px = agent.getX();
+		int py = agent.getY();
+		
+		double pos_x=px*stepx;
+		double pos_y=py*stepy;
+		
+		int direc_en = agent.getDirection();
+		if (direc_en==Map.NORTH){
+			
+			try {
+				Image img = ImageIO.read(new File("./image/ennemy_North.png"));
+				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (direc_en==Map.SOUTH){
+			
+			try {
+				Image img = ImageIO.read(new File("./image/ennemy_South.png"));
+				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (direc_en==Map.EAST){
+			
+			try {
+				Image img = ImageIO.read(new File("./image/ennemy_East.png"));
+				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		if (direc_en==Map.WEST){
+			
+			try {
+				Image img = ImageIO.read(new File("./image/ennemy_West.png"));
+				g.drawImage(img, (int)pos_x, (int)pos_y, (int)stepx, (int)stepy, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+	}
+	
+void dessine_Tower(Graphics g, Agent_Tower tower){
+		
+		int fen_x = getSize().width;
+		int fen_y = getSize().height;
+
+		double stepx = fen_x/(double)taille_x;
+		double stepy = fen_y/(double)taille_y;
+		
+		int px = tower.getX();
+		int py = tower.getY();
+		
+		double pos_x=px*stepx-stepx;
+		double pos_y=py*stepy-4*stepy;
+		
+		
+		contraste = new float[]{ 0, 0, 0, 1.0f };
+		
+			try {
+				BufferedImage img = ImageIO.read(new File("./image/RadioTower.png"));
+				
+				
+				float[] scales = new float[]{1 ,1, 1, 1.0f };
+				
+				RescaleOp op1 = new RescaleOp(scales, contraste, null);
+				BufferedImage resultat2 = op1.filter(img, null);
+				Image img_result = resultat2;
+				
+				g.drawImage(img_result, (int)pos_x, (int)pos_y, (int)stepx*3, (int)stepy*6, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	}
 	
 	void dessine_Bomberman(Graphics g, Agent_Bomberman agentBBM)
 	{
