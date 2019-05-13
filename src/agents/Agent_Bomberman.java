@@ -24,6 +24,7 @@ public class Agent_Bomberman extends Agent {
 	private ColorBomberman couleur;
 	private int nbActions = 10;
 	private int maladie = 10;
+//	private int life;
 
 	private boolean isInvincible;
 	private int etatInvincible;

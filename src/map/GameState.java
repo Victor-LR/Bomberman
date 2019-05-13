@@ -61,7 +61,7 @@ public class GameState {
 	
 	private int num_niveau = 0;
 
-	private BombermanGame game = new BombermanGame();
+	
 	
 	
 	//Construit l'état courant de la map
@@ -640,6 +640,7 @@ public class GameState {
 	//Réalise un tour du jeu 
 	
 	public void taketurn(){
+		
 		if(getCampagne()) {
 
 			if(!getEnd()) {
@@ -653,7 +654,7 @@ public class GameState {
 
 				
 			}else {
-
+				BombermanGame game = new BombermanGame();
 				if(BbmG.etatJeu.getNum_niveau() == 1) {
 					try {
 						game.loadFile("./layout/niveau2.lay");
@@ -1310,8 +1311,13 @@ public class GameState {
 		this.num_niveau = num_niveau;
 	}
 	
-	public BombermanGame getGame() {
-		return game;
+
+	public BombermanGame getBbmG() {
+		return BbmG;
+	}
+
+	public void setBbmG(BombermanGame bbmG) {
+		BbmG = bbmG;
 	}
 
 	public Agent_Tower getTower() {
