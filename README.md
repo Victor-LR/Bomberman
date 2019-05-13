@@ -264,5 +264,11 @@ Pour finir le multithread est géré à l'interieur du cadre_Menu, cela signifie
       - Le but maintenant est de développer l'ia à partir d'un perceptron, on doit reprendre le travail de Ludovic Denoyer sur le pacman pour ensuite l'adapter sur notre projet Bomberman. La tache consiste à faire apprendre à un agent Bomberman les meilleurs choix possible à l'aide d'une fonction de récompense qui évalura les les action prise par celui-ci.
 
 
-            
+10/05/19:
+
+- Début de la rédaction du rapport. Séparation des parties à rédiger.
+
+13/05/19:
+
+- Phase de recherche pour l'implémentation d'un perceptron. Observation d'un comportement qui semble innaproprié pour l'ia du jeu Pacman utilisant un perceptron. En effet malgré l'utilisation de celui-ci, l'ia du pacman boucle dans son déplacement à partir d'un moment, ne cherche pas à gagner ou avoir plus de points.
         
