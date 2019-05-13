@@ -1321,5 +1321,17 @@ public class GameState {
 	public void setTower(Agent_Tower agent_Tower) {
 		this.tower = agent_Tower;
 	}
+	
+	//compte le nombre de brokable walls sur la map
+	
+	public int getBrokableWals() {
+		int nb = 0;
+		for(int i = 0; i< map.getSizeX(); i++) {
+			for(int j = 0; j< map.getSizeY(); j++) {
+				if(map.isBrokable_Wall(i, j)) nb++;
+			}
+		}
+		return nb;
+	}
 
 }
