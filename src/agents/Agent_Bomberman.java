@@ -105,7 +105,7 @@ public class Agent_Bomberman extends Agent {
 		case 0:
 			this.strategie = null;
 			ArrayList<AgentAction> listAction=new ArrayList<AgentAction>();
-			for(int i=0;i<=5;i++)
+			for(int i=0;i<5;i++)
 			{
 				if (etatjeu.isLegalMoveBbm(new AgentAction(i), this)) {
 					//System.out.println(i);

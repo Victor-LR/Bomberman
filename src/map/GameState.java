@@ -61,7 +61,7 @@ public class GameState {
 	
 	private int num_niveau = 0;
 
-	
+	private BombermanGame game = new BombermanGame();
 	
 	
 	//Construit l'état courant de la map
@@ -350,8 +350,9 @@ public class GameState {
 		int r = 100;
 		
 		range_limit = test_range(Map.EAST,bomb);
+		System.out.println(this.getMap().isBrokable_Wall(range_limit, y));
 		
-		if(map.isBrokable_Wall(range_limit, y)) {
+		if(this.getMap().isBrokable_Wall(range_limit, y)) {
 			map.setBrokable_Wall(range_limit,y,false);
 			r =(int)(Math.random()*100);
 			if ( r < pourcentage) placeItem(range_limit,y);
@@ -654,7 +655,6 @@ public class GameState {
 
 				
 			}else {
-				BombermanGame game = new BombermanGame();
 				if(BbmG.etatJeu.getNum_niveau() == 1) {
 					try {
 						game.loadFile("./layout/niveau2.lay");
@@ -1017,14 +1017,14 @@ public class GameState {
 		
 		if(compteBbm == 0  & nbBbm == 1) {
 			setEnd(true);
-			game.etatJeu.setEnd(true);
+//			game.etatJeu.setEnd(true);
 			this.winner = "GAME OVER";
 			this.finPartie = GAME_OVER;
 		}
 		
 		if(compteBbm == 1 & nbBbm == 1 & compteEnn == 0) {
 			setEnd(true);
-			game.etatJeu.setEnd(true);
+//			game.etatJeu.setEnd(true);
 			winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant Partie SOLO";
 			this.finPartie = WIN_SOLO;
 			
@@ -1033,68 +1033,68 @@ public class GameState {
 		
 		if(compteBbm == 1 & nbBbm != 1) {
 			setEnd(true);
-			game.etatJeu.setEnd(true);
+//			game.etatJeu.setEnd(true);
 			this.winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant";
 			this.finPartie = WIN_SURVIE;
 		}
 		
 		if(compteBbm == 0 & nbBbm != 1) {
 			setEnd(true);
-			game.etatJeu.setEnd(true);
+//			game.etatJeu.setEnd(true);
 			this.winner = "GAME OVER";
 			this.finPartie = GAME_OVER;
 		}
 		
 		
-		if(game.getTurn() == (game.getMaxTurn()-1) ) {
-			setEnd(true);
-			game.etatJeu.setEnd(true);
+//		if(game.getTurn() == (game.getMaxTurn()-1) ) {
+//			setEnd(true);
+//			game.etatJeu.setEnd(true);
+//			
+//			if(nbBbm == 1) {
+//				setEnd(true);
+//				game.etatJeu.setEnd(true);
+//				this.winner = "GAME OVER";
+//				this.finPartie = GAME_OVER;
+//
+//			}
+//			else{
+//				
+//				for(int i = 0; i<bombermans.size(); ++i) {
+//					if(!bombermans.get(i).isDead()) {
+//						aux = bombermans.get(i).getPoints();
+//						if(maxScore<aux) {
+//							maxScore = aux;
+//							this.idGagnant = i;
+//						}
+//						
+//					}
+//				}
+//				
+//				for(int i = 0; i<bombermans.size(); ++i) {
+//					if(!bombermans.get(i).isDead()) {
+//						aux = bombermans.get(i).getPoints();
+//						if(maxScore == aux) {
+//							compteExec ++;
+//						}
+//					}
+//				}
+//				
+//				
+//				
+//				
+//				if( compteExec < 2 ) {
+//					setEnd(true);
+//					this.winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant par score = " + maxScore ;
+//					this.finPartie = WIN_SCORE;
+//				}
+//				else {
+//					setEnd(true);
+//					this.winner = "Il y a Ex aequo ";
+//					this.finPartie = EX_AEQUO;
+//				}
+//			}
 			
-			if(nbBbm == 1) {
-				setEnd(true);
-				game.etatJeu.setEnd(true);
-				this.winner = "GAME OVER";
-				this.finPartie = GAME_OVER;
-
-			}
-			else{
-				
-				for(int i = 0; i<bombermans.size(); ++i) {
-					if(!bombermans.get(i).isDead()) {
-						aux = bombermans.get(i).getPoints();
-						if(maxScore<aux) {
-							maxScore = aux;
-							this.idGagnant = i;
-						}
-						
-					}
-				}
-				
-				for(int i = 0; i<bombermans.size(); ++i) {
-					if(!bombermans.get(i).isDead()) {
-						aux = bombermans.get(i).getPoints();
-						if(maxScore == aux) {
-							compteExec ++;
-						}
-					}
-				}
-				
-				
-				
-				
-				if( compteExec < 2 ) {
-					setEnd(true);
-					this.winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant par score = " + maxScore ;
-					this.finPartie = WIN_SCORE;
-				}
-				else {
-					setEnd(true);
-					this.winner = "Il y a Ex aequo ";
-					this.finPartie = EX_AEQUO;
-				}
-			}
-			
-		}
+//		}
 		//if (winner != null) System.out.println(this.winner);
 }
 	
@@ -1318,6 +1318,10 @@ public class GameState {
 
 	public void setBbmG(BombermanGame bbmG) {
 		BbmG = bbmG;
+	}
+
+	public BombermanGame getGame() {
+		return game;
 	}
 
 	public Agent_Tower getTower() {

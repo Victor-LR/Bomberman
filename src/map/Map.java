@@ -198,6 +198,7 @@ public class Map {
 	{
 		assert((x>=0) && (x<size_x));
 		assert((y>=0) && (y<size_y));
+		//System.out.println(brokable_walls[x][y]);
 		return(brokable_walls[x][y]);
 	}
 	

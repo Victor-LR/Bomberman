@@ -18,6 +18,7 @@ public class NextGameState extends GameState {
 	
 	//Réalise un tour du jeu 
 		public void taketurn(AgentAction action, int id_bbm){
+			BombermanGame game = this.getGame();
 			BombermanGame BbmG = this.getBbmG();
 			if(getCampagne()) {
 
@@ -32,7 +33,7 @@ public class NextGameState extends GameState {
 
 					
 				}else {
-					BombermanGame game = new BombermanGame();
+					
 					if(BbmG.etatJeu.getNum_niveau() == 1) {
 						try {
 							game.loadFile("./layout/niveau2.lay");
