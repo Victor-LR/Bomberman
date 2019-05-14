@@ -10,6 +10,7 @@ public class SimpleReward implements Reward {
 			return 100;
 		if (to.getFinPartie() == GameState.GAME_OVER)
 			return -1;
+//		System.out.println(to.getBrokableWals() +"		"+	from.getBrokableWals());
 		if (to.getBrokableWals() == from.getBrokableWals()) //tout les mur de "to" sont resté intacte
 			return 0;
 		else //des murs de "to" on été detruit dans "from"

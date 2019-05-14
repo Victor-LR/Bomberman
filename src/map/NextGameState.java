@@ -12,7 +12,8 @@ public class NextGameState extends GameState {
 
 	public NextGameState(GameState AncienGS) {
 		super(AncienGS.getMap(), AncienGS.getBbmG());
-		// TODO Auto-generated constructor stub
+		this.setStrats(AncienGS.getStrats());
+		this.setCampagne(AncienGS.getCampagne());
 	}
 	
 	
@@ -111,6 +112,8 @@ public class NextGameState extends GameState {
 					Agent_Bomberman bomberman = bombermans.get(i);
 					AgentAction bombermanAction;
 					
+					//System.out.println("	Position bomberman ("+bomberman.getX()+","+bomberman.getY()+")");
+					
 					if(!bomberman.isDead()) {
 						
 			
@@ -204,7 +207,11 @@ public class NextGameState extends GameState {
 								   bomberman.setMaladie(10);
 								 }
 						
-							if( i == id_bbm)  bombermanAction = action;
+							if( i == 0){
+								bombermanAction = action;
+//								if(this.isLegalMoveBbm(action, bomberman)) bombermanAction = action;
+//								else bombermanAction = new AgentAction(Map.STOP);
+							}
 							else bombermanAction = bomberman.chooseAction(this);
 		
 						if (bombermanAction.getAction() < 5){

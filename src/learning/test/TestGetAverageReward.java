@@ -46,7 +46,7 @@ public class TestGetAverageReward {
 			
 			Reward rew = new SimpleReward();
 			for (int i=1; i<=10; i++)
-				System.out.println(i+" : "+RewardTools.getAverageReward(game, bomberman, ennemies, rew, 100, 100));
+				System.out.println(i+" : "+RewardTools.getAverageReward(game, bomberman, ennemies, rew, 15, 1));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

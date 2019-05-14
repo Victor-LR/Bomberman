@@ -26,7 +26,7 @@ public class Map {
 	private int size_x;
 	private int size_y;
 	private boolean walls[][];
-	private boolean brokable_walls[][];
+	private boolean start_brokable_walls[][];
 	
 	protected ArrayList<Integer> ennemy_start_x;
 	protected ArrayList<Integer> ennemy_start_y;
@@ -82,7 +82,7 @@ public class Map {
 		size_y = nbY;
 		
 		walls = new boolean [size_x][size_y];
-		brokable_walls  = new boolean [size_x][size_y];
+		start_brokable_walls  = new boolean [size_x][size_y];
 		
 		ennemy_start_x = new  ArrayList<Integer>();
 		ennemy_start_y = new  ArrayList<Integer>();
@@ -114,8 +114,8 @@ public class Map {
 				else walls[x][y]=false;
 				
 				if (ligne.charAt(x)=='$') 
-					brokable_walls[x][y]=true; 
-				else brokable_walls[x][y]=false;
+					start_brokable_walls[x][y]=true; 
+				else start_brokable_walls[x][y]=false;
 				
 				//On rentre les coordonnée des ennemies dans differents ArrayList
 				
@@ -194,20 +194,20 @@ public class Map {
 	}
 	
 	//verifie à une coordonnée si c'est un mur destructible ou non 
-	public boolean isBrokable_Wall(int x,int y) 
-	{
-		assert((x>=0) && (x<size_x));
-		assert((y>=0) && (y<size_y));
-		//System.out.println(brokable_walls[x][y]);
-		return(brokable_walls[x][y]);
-	}
-	
-	//Setteur d'un brokable wall pour soit en créer unsoit en faire disparaitre un
-	
-	public void setBrokable_Wall(int x,int y, boolean bool) 
-	{
-		this.brokable_walls[x][y] = bool;
-	}
+//	public boolean isBrokable_Wall(int x,int y) 
+//	{
+//		assert((x>=0) && (x<size_x));
+//		assert((y>=0) && (y<size_y));
+//		//System.out.println(brokable_walls[x][y]);
+//		return(brokable_walls[x][y]);
+//	}
+//	
+//	//Setteur d'un brokable wall pour soit en créer unsoit en faire disparaitre un
+//	
+//	public void setBrokable_Wall(int x,int y, boolean bool) 
+//	{
+//		this.brokable_walls[x][y] = bool;
+//	}
 	
 	//Recupère le nom du fichier 
 	public String getFilename(){
@@ -216,6 +216,11 @@ public class Map {
 
 ////////////////////////////////BOMBERMAN/////////////////////////////////
 	
+	public boolean[][] getStart_brokable_walls() {
+		return start_brokable_walls;
+	}
+
+
 	//Renvoie le nb de bomberman
 	public int getNumber_of_bombermans(){
 		return bomberman_start_x.size();
