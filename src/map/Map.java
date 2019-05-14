@@ -51,7 +51,7 @@ public class Map {
 		this.filename = filename;
 		
 		try{
-			System.out.println("Le fichier chargé : "+filename);
+//			System.out.println("Le fichier chargé : "+filename);
 		//On lit le fichier pour determiner les différents éléments de la map
 		
 		InputStream flux =new FileInputStream(filename); 
@@ -74,7 +74,7 @@ public class Map {
 			nbY++;
 		}			
 		tampon.close(); 
-		System.out.println("### Taille de la map "+nbX+" ; "+nbY);
+//		System.out.println("### Taille de la map "+nbX+" ; "+nbY);
 		
 		//implémentation des différentes valeurs dans les variable correspondante
 		
@@ -161,7 +161,7 @@ public class Map {
 		for(int x=0;x<size_x;x++) if (!walls[x][size_y-1]) throw new Exception("Mauvais format du fichier: la carte doit etre close");
 		for(y=0;y<size_y;y++) if (!walls[0][y]) throw new Exception("Mauvais format du fichier: la carte doit etre close");
 		for(y=0;y<size_y;y++) if (!walls[size_x-1][y]) throw new Exception("Mauvais format du fichier: la carte doit etre close");
-		System.out.println("### Carte chargée.");
+//		System.out.println("### Carte chargée.");
 		
 		
 		}catch (Exception e){
@@ -178,6 +178,16 @@ public class Map {
 		}
 	}
 	
+	public Map copy() {
+		try {
+			Map m = new Map(this.filename);
+			return m;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+}
 	
 	//renvoie la largeur de la map
 	public int getSizeX() {return(size_x);}

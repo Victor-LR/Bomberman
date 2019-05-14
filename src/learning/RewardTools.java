@@ -19,12 +19,12 @@ public class RewardTools {
 		boolean flag=true;		
 		while(flag)
 		{
-			NextGameState iv = next_game;
-			bomberman_agent = (Agent_Bomberman) next_game.getBombermans().get(0);
+			GameState iv = next_game.copy();
+			bomberman_agent = next_game.getBombermans().get(0);
 			AgentAction action = bomberman_agent.chooseAction(next_game);
 			next_game.taketurn(action, bomberman_agent.getId());
 			
-			System.out.println(bomberman_agent.getX() +"		"+	bomberman_agent.getY());
+			//System.out.println(bomberman_agent.getX() +"		"+	bomberman_agent.getY());
 			
 			//System.out.println(iv.getBrokableWals() +"		"+	next_game.getBrokableWals());
 			

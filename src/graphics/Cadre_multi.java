@@ -90,11 +90,11 @@ public class Cadre_multi extends JFrame {
 			
 			typeFin = L_BbmG.get(j).etatJeu.getFinPartie();
 			
-			Agent_Bomberman bbm =(Agent_Bomberman) L_BbmG.get(j).etatJeu.getBombermans().get(L_BbmG.get(j).etatJeu.getIdGagnant());
+			Agent_Bomberman bbm = L_BbmG.get(j).etatJeu.getBombermans().get(L_BbmG.get(j).etatJeu.getIdGagnant());
 			int point_gagnant = bbm.getPoints();
 			
 			for(int i = 0; i < nb_bbm; i++){
-				point_joueur[i] +=  ((Agent_Bomberman) L_BbmG.get(j).etatJeu.getBombermans().get(i)).getPoints();
+				point_joueur[i] +=  ( L_BbmG.get(j).etatJeu.getBombermans().get(i)).getPoints();
 			}
 			
 			switch(typeFin){
@@ -162,9 +162,9 @@ public class Cadre_multi extends JFrame {
 					String joueur = "<font color = #009FFF >Joueur "+(i+1)+"</font>";
 					String pourcent_joueur = "<font color = #39B835 >"+ df.format((total/nb_threads)*100)+"%</font>";
 					
-					if (((Agent_Bomberman) L_BbmG.get(0).etatJeu.getBombermans().get(i)).getStrategie() == null) 
+					if (( L_BbmG.get(0).etatJeu.getBombermans().get(i)).getStrategie() == null) 
 						pan_result2.setText("<html>"+ joueur +" a gagné "+pourcent_joueur+" du temps avec la strategie <font color = #C90F0F >aléatoire</font>, dont :</html>");
-					else pan_result2.setText("<html>"+ joueur +" a gagné "+ pourcent_joueur +"% du temps avec strategie <font color = #C90F0F >"+((Agent_Bomberman) L_BbmG.get(0).etatJeu.getBombermans().get(i)).getStrategie().getClass().getSimpleName()+"</font>, dont :</html>");
+					else pan_result2.setText("<html>"+ joueur +" a gagné "+ pourcent_joueur +"% du temps avec strategie <font color = #C90F0F >"+( L_BbmG.get(0).etatJeu.getBombermans().get(i)).getStrategie().getClass().getSimpleName()+"</font>, dont :</html>");
 					pan_result2.setHorizontalAlignment(JLabel.CENTER);
 					panel_joueur.add(pan_result2);
 					

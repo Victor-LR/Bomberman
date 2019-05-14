@@ -19,7 +19,7 @@ import objets.Objet;
 import objets.Objet_Bomb;
 import objets.ObjetType;
 
-public class GameState<brokable_walls> {
+public class GameState{
 	
 	Map map;
 	
@@ -670,9 +670,9 @@ public class GameState<brokable_walls> {
 					game.etatJeu.setCampagne(true);		
 					game.etatJeu.setNum_niveau(2);
 					game.etatJeu.setStrats(BbmG.etatJeu.getStrats());
-					((Agent_Bomberman) game.etatJeu.getBombermans().get(0)).setPoints(((Agent_Bomberman) BbmG.etatJeu.getBombermans().get(0)).getPoints());
-					((Agent_Bomberman) game.etatJeu.getBombermans().get(0)).setRange(((Agent_Bomberman) BbmG.etatJeu.getBombermans().get(0)).getRange());
-					((Agent_Bomberman) game.etatJeu.getBombermans().get(0)).setNbBombes(((Agent_Bomberman) BbmG.etatJeu.getBombermans().get(0)).getNbBombes());
+					(game.etatJeu.getBombermans().get(0)).setPoints(( BbmG.etatJeu.getBombermans().get(0)).getPoints());
+					(game.etatJeu.getBombermans().get(0)).setRange(( BbmG.etatJeu.getBombermans().get(0)).getRange());
+					( game.etatJeu.getBombermans().get(0)).setNbBombes(( BbmG.etatJeu.getBombermans().get(0)).getNbBombes());
 					
 					System.out.println(getWinner()+" stage 1");
 					
@@ -693,9 +693,9 @@ public class GameState<brokable_walls> {
 					game.etatJeu.setCampagne(true);		
 					game.etatJeu.setNum_niveau(3);	
 					game.etatJeu.setStrats(BbmG.etatJeu.getStrats());
-					((Agent_Bomberman) game.etatJeu.getBombermans().get(0)).setPoints(((Agent_Bomberman) BbmG.etatJeu.getBombermans().get(0)).getPoints());
-					((Agent_Bomberman) game.etatJeu.getBombermans().get(0)).setRange(((Agent_Bomberman) BbmG.etatJeu.getBombermans().get(0)).getRange());
-					((Agent_Bomberman) game.etatJeu.getBombermans().get(0)).setNbBombes(((Agent_Bomberman) BbmG.etatJeu.getBombermans().get(0)).getNbBombes());
+					( game.etatJeu.getBombermans().get(0)).setPoints(( BbmG.etatJeu.getBombermans().get(0)).getPoints());
+					( game.etatJeu.getBombermans().get(0)).setRange(( BbmG.etatJeu.getBombermans().get(0)).getRange());
+					( game.etatJeu.getBombermans().get(0)).setNbBombes(( BbmG.etatJeu.getBombermans().get(0)).getNbBombes());
 					
 					System.out.println(getWinner()+" stage 2");
 					

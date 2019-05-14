@@ -17,6 +17,26 @@ public class NextGameState extends GameState {
 	}
 	
 	
+	public GameState copy(){
+		
+		BombermanGame BG = new BombermanGame();
+		BG = getBbmG();
+		GameState GS = new GameState(this.getMap().copy(),BG);
+		
+		for(int i = 0; i< this.map.getSizeX(); i++) {
+			for(int j = 0; j< this.map.getSizeY(); j++) {
+				if(isBrokable_Wall(i, j)) 
+					GS.setBrokable_Wall(i, j, true); 
+				else GS.setBrokable_Wall(i, j, false);
+			}
+}
+		
+		GS.setStrats(this.getStrats());
+		GS.setCampagne(this.getCampagne());
+		//NextGameState NGS = new NextGameState(GS);
+		return GS;
+	}
+	
 	//Réalise un tour du jeu 
 		public void taketurn(AgentAction action, int id_bbm){
 			BombermanGame game = this.getGame();
