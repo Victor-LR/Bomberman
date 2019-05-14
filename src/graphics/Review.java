@@ -79,7 +79,7 @@ public class Review extends JPanel {
 				}
 				
 				//Création des briques destructibles
-				else if (this.BbmG.etatJeu.getMap().isBrokable_Wall(x, y)){
+				else if (this.BbmG.etatJeu.isBrokable_Wall(x, y)){
 					try {
 						Image img = ImageIO.read(new File("./image/brique_2.png"));
 						g.drawImage(img, (int)position_x, (int)position_y, (int)stepx, (int)stepy, this);

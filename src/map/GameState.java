@@ -1050,55 +1050,55 @@ public class GameState<brokable_walls> {
 		}
 		
 		
-//		if(game.getTurn() == (game.getMaxTurn()-1) ) {
-//			setEnd(true);
-//			game.etatJeu.setEnd(true);
-//			
-//			if(nbBbm == 1) {
-//				setEnd(true);
-//				game.etatJeu.setEnd(true);
-//				this.winner = "GAME OVER";
-//				this.finPartie = GAME_OVER;
-//
-//			}
-//			else{
-//				
-//				for(int i = 0; i<bombermans.size(); ++i) {
-//					if(!bombermans.get(i).isDead()) {
-//						aux = bombermans.get(i).getPoints();
-//						if(maxScore<aux) {
-//							maxScore = aux;
-//							this.idGagnant = i;
-//						}
-//						
-//					}
-//				}
-//				
-//				for(int i = 0; i<bombermans.size(); ++i) {
-//					if(!bombermans.get(i).isDead()) {
-//						aux = bombermans.get(i).getPoints();
-//						if(maxScore == aux) {
-//							compteExec ++;
-//						}
-//					}
-//				}
-//				
-//				
-//				
-//				
-//				if( compteExec < 2 ) {
-//					setEnd(true);
-//					this.winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant par score = " + maxScore ;
-//					this.finPartie = WIN_SCORE;
-//				}
-//				else {
-//					setEnd(true);
-//					this.winner = "Il y a Ex aequo ";
-//					this.finPartie = EX_AEQUO;
-//				}
-//			}
+		if(game.getTurn() == (game.getMaxTurn()-1) ) {
+			setEnd(true);
+			game.etatJeu.setEnd(true);
 			
-//		}
+			if(nbBbm == 1) {
+				setEnd(true);
+				game.etatJeu.setEnd(true);
+				this.winner = "GAME OVER";
+				this.finPartie = GAME_OVER;
+
+			}
+			else{
+				
+				for(int i = 0; i<bombermans.size(); ++i) {
+					if(!bombermans.get(i).isDead()) {
+						aux = bombermans.get(i).getPoints();
+						if(maxScore<aux) {
+							maxScore = aux;
+							this.idGagnant = i;
+						}
+						
+					}
+				}
+				
+				for(int i = 0; i<bombermans.size(); ++i) {
+					if(!bombermans.get(i).isDead()) {
+						aux = bombermans.get(i).getPoints();
+						if(maxScore == aux) {
+							compteExec ++;
+						}
+					}
+				}
+				
+				
+				
+				
+				if( compteExec < 2 ) {
+					setEnd(true);
+					this.winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant par score = " + maxScore ;
+					this.finPartie = WIN_SCORE;
+				}
+				else {
+					setEnd(true);
+					this.winner = "Il y a Ex aequo ";
+					this.finPartie = EX_AEQUO;
+				}
+			}
+			
+		}
 		//if (winner != null) System.out.println(this.winner);
 }
 	

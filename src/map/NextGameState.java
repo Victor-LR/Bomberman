@@ -46,9 +46,9 @@ public class NextGameState extends GameState {
 						game.etatJeu.setCampagne(true);		
 						game.etatJeu.setNum_niveau(2);
 						game.etatJeu.setStrats(BbmG.etatJeu.getStrats());
-						game.etatJeu.getBombermans().get(0).setPoints(BbmG.etatJeu.getBombermans().get(0).getPoints());
-						game.etatJeu.getBombermans().get(0).setRange(BbmG.etatJeu.getBombermans().get(0).getRange());
-						game.etatJeu.getBombermans().get(0).setNbBombes(BbmG.etatJeu.getBombermans().get(0).getNbBombes());
+						((Agent_Bomberman) game.etatJeu.getBombermans().get(0)).setPoints(((Agent_Bomberman) BbmG.etatJeu.getBombermans().get(0)).getPoints());
+						((Agent_Bomberman) game.etatJeu.getBombermans().get(0)).setRange(((Agent_Bomberman) BbmG.etatJeu.getBombermans().get(0)).getRange());
+						((Agent_Bomberman) game.etatJeu.getBombermans().get(0)).setNbBombes(((Agent_Bomberman) BbmG.etatJeu.getBombermans().get(0)).getNbBombes());
 						
 						System.out.println(getWinner()+" stage 1");
 						
@@ -69,9 +69,9 @@ public class NextGameState extends GameState {
 						game.etatJeu.setCampagne(true);		
 						game.etatJeu.setNum_niveau(3);	
 						game.etatJeu.setStrats(BbmG.etatJeu.getStrats());
-						game.etatJeu.getBombermans().get(0).setPoints(BbmG.etatJeu.getBombermans().get(0).getPoints());
-						game.etatJeu.getBombermans().get(0).setRange(BbmG.etatJeu.getBombermans().get(0).getRange());
-						game.etatJeu.getBombermans().get(0).setNbBombes(BbmG.etatJeu.getBombermans().get(0).getNbBombes());
+						((Agent_Bomberman) game.etatJeu.getBombermans().get(0)).setPoints(((Agent_Bomberman) BbmG.etatJeu.getBombermans().get(0)).getPoints());
+						((Agent_Bomberman) game.etatJeu.getBombermans().get(0)).setRange(((Agent_Bomberman) BbmG.etatJeu.getBombermans().get(0)).getRange());
+						((Agent_Bomberman) game.etatJeu.getBombermans().get(0)).setNbBombes(((Agent_Bomberman) BbmG.etatJeu.getBombermans().get(0)).getNbBombes());
 						
 						System.out.println(getWinner()+" stage 2");
 						
@@ -136,7 +136,7 @@ public class NextGameState extends GameState {
 						for (int j = 0; j < this.getItems().size(); j++){
 							
 							//Boucle permettant de gérer les effets des différents items récupéré par les bombermans
-							Objet item = this.getItems().get(j);
+							Objet item = (Objet) this.getItems().get(j);
 							
 							if ( (bomberman.getX() == item.getObjX()) && (bomberman.getY() == item.getObjY()) ){
 								

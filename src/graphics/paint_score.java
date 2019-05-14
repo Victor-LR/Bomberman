@@ -226,7 +226,7 @@ public class paint_score implements GameObserver {
 	public void update() {
 		
 		for(int i = 0; i < this.BbmG.etatJeu.getBombermans().size(); i++){
-			Agent_Bomberman bomberman = this.BbmG.etatJeu.getBombermans().get(i);
+			Agent_Bomberman bomberman = (Agent_Bomberman) this.BbmG.etatJeu.getBombermans().get(i);
 			affichage_score(bomberman,bomberman.getId());
 			
 			//System.out.println("		test score "+ bomberman.getPoints());

@@ -41,7 +41,7 @@ public class TestGetAverageReward {
 			int strat[] = {0};
 			game.setStrats(strat);
 			game.setCampagne(false);
-			Agent_Bomberman bomberman = game.getBombermans().get(0);
+			Agent_Bomberman bomberman = (Agent_Bomberman) game.getBombermans().get(0);
 			ArrayList<Agent_Ennemy> ennemies =new ArrayList<Agent_Ennemy>();
 			
 			Reward rew = new SimpleReward();

@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 
 import map.GameState;
 
+import agents.Agent;
 import agents.Agent_Bomberman;
 import game.BombermanGame;
 
@@ -120,7 +121,7 @@ public class Cadre_menu extends JFrame{
 		
 		for(int i =0; i<BbmG.etatJeu.getBombermans().size();i++) {
 			JComboBox<String> liste =  new JComboBox<String>(nomStrat);
-			choixStrats.add(new JLabel("Joueur n°"+(int)(BbmG.etatJeu.getBombermans().get(i).getId()+1)));
+			choixStrats.add(new JLabel("Joueur n°"+(int)(((Agent_Bomberman) BbmG.etatJeu.getBombermans().get(i)).getId()+1)));
 			listStrat.add(liste);
 			choixStrats.add(liste);
 			
@@ -175,7 +176,7 @@ public class Cadre_menu extends JFrame{
 				for(int i =0; i<BbmG.etatJeu.getBombermans().size();i++) {
 					
 					JComboBox<String> liste =  new JComboBox<String>(nomStrat);
-					choixStrats.add(new JLabel("Joueur n°"+(int)(BbmG.etatJeu.getBombermans().get(i).getId()+1)));
+					choixStrats.add(new JLabel("Joueur n°"+(int)(((Agent_Bomberman) BbmG.etatJeu.getBombermans().get(i)).getId()+1)));
 					listStrat.add(liste);
 					choixStrats.add(liste);
 				}
@@ -399,7 +400,7 @@ public class Cadre_menu extends JFrame{
 					
 					for (int i = 0 ; i < index_winner.size() ; i++){
 						BombermanGame un_bbmg = new BombermanGame();
-						Agent_Bomberman old_bbmg = L_BbmG.get(index_winner.get(i)).etatJeu.getBombermans().get(0);
+						Agent_Bomberman old_bbmg = (Agent_Bomberman) L_BbmG.get(index_winner.get(i)).etatJeu.getBombermans().get(0);
 						
 						int bombes = old_bbmg.getNbBombes();		
 						int range = old_bbmg.getRange();
@@ -415,9 +416,9 @@ public class Cadre_menu extends JFrame{
 						
 						un_bbmg.etatJeu.setCampagne(true);
 						un_bbmg.etatJeu.setNum_niveau(2);
-						un_bbmg.etatJeu.getBombermans().get(0).setPoints(points);
-						un_bbmg.etatJeu.getBombermans().get(0).setNbBombes(bombes);
-						un_bbmg.etatJeu.getBombermans().get(0).setRange(range);
+						((Agent_Bomberman) un_bbmg.etatJeu.getBombermans().get(0)).setPoints(points);
+						((Agent_Bomberman) un_bbmg.etatJeu.getBombermans().get(0)).setNbBombes(bombes);
+						((Agent_Bomberman) un_bbmg.etatJeu.getBombermans().get(0)).setRange(range);
 						
 						un_bbmg.setTemps(1);
 						un_bbmg.new_thread();
@@ -450,7 +451,7 @@ public class Cadre_menu extends JFrame{
 					
 					for (int i = 0 ; i < index_winner2.size() ; i++){
 						BombermanGame un_bbmg = new BombermanGame();
-						Agent_Bomberman old_bbmg = L_BbmG2.get(index_winner2.get(i)).etatJeu.getBombermans().get(0);
+						Agent_Bomberman old_bbmg = (Agent_Bomberman) L_BbmG2.get(index_winner2.get(i)).etatJeu.getBombermans().get(0);
 						
 						int bombes = old_bbmg.getNbBombes();		
 						int range = old_bbmg.getRange();
@@ -466,9 +467,9 @@ public class Cadre_menu extends JFrame{
 						
 						un_bbmg.etatJeu.setCampagne(true);
 						un_bbmg.etatJeu.setNum_niveau(3);
-						un_bbmg.etatJeu.getBombermans().get(0).setPoints(points);
-						un_bbmg.etatJeu.getBombermans().get(0).setNbBombes(bombes);
-						un_bbmg.etatJeu.getBombermans().get(0).setRange(range);
+						((Agent_Bomberman) un_bbmg.etatJeu.getBombermans().get(0)).setPoints(points);
+						((Agent_Bomberman) un_bbmg.etatJeu.getBombermans().get(0)).setNbBombes(bombes);
+						((Agent_Bomberman) un_bbmg.etatJeu.getBombermans().get(0)).setRange(range);
 						
 						un_bbmg.setTemps(1);
 						un_bbmg.new_thread();
@@ -620,7 +621,7 @@ public class Cadre_menu extends JFrame{
 				for(int i =0; i<game.etatJeu.getBombermans().size();i++) {
 					
 					JComboBox<String> liste =  new JComboBox<String>(nomStrat);
-					choixStrats.add(new JLabel("Joueur n°"+(int)(game.etatJeu.getBombermans().get(i).getId()+1)));
+					choixStrats.add(new JLabel("Joueur n°"+(int)(((Agent_Bomberman) game.etatJeu.getBombermans().get(i)).getId()+1)));
 					listStrat.add(liste);
 					choixStrats.add(liste);
 				}
