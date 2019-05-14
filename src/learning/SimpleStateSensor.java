@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import learning.perceptron.SparseVector;
 import map.GameState;
 
-public class SimpleStateSenseur implements StateSensor	{
+public class SimpleStateSensor implements StateSensor	{
 
 	private int n;
 	private SparseVector vector;
 	
 	
-	public SimpleStateSenseur(int n){
+	public SimpleStateSensor(int n){
 		this.n=n;
 		vector=new SparseVector(n*n* 3);
 	}
@@ -94,24 +94,4 @@ public class SimpleStateSenseur implements StateSensor	{
 		
 	}
 	
-/*
-	public static void main(String args[]) throws MazeException
-	{
-		MazeWritable maze=new MazeWritable("layouts/bigSafeSearch.lay");
-		GameStateWritable state=new GameStateWritable(maze);
-		
-	
-		
-		Agent pac=new RandomAgent();
-		ArrayList<Agent> ghosts_agents=new ArrayList<Agent>();
-		Reward r= new SimpleReward();	
-		for(int i=0;i<state.getNumberOfGhosts();i++)
-			ghosts_agents.add(new IntelligentGhost_Agent2(0.1));
-		StateSensor s=new SimpleStateSenseur(3);
-		SparseVector v= s.getVector(state);
-		
-		Sensor  sensor= new Sensor(s);
-		System.out.println(" "+sensor.getVector(state, new AgentAction(1)));
-	}
-	*/
 }

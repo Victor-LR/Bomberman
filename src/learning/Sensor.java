@@ -21,14 +21,15 @@ public class Sensor
 	{
 		SparseVector vec1 = new SparseVector(size());
 		SparseVector vec2 =state_sensor.getVector(GS);
+		
 		vec1.setValue(0,1.0);
-		int pos = action.getDirection() * state_sensor.size()+1;
+		int pos = action.getAction() * state_sensor.size()+1;
 		
 		System.out.println("vec2");
 		System.out.println(vec2);
 		
 		for(int f : vec2){
-			r.setValue(pos+f,vec2.getValue(f));
+			vec2.setValue(pos+f,vec2.getValue(f));
 		}
 		
 		System.out.println("vec1");
