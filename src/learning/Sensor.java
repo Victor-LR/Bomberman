@@ -29,7 +29,7 @@ public class Sensor
 		System.out.println(vec2);
 		
 		for(int f : vec2){
-			vec2.setValue(pos+f,vec2.getValue(f));
+			vec1.setValue(pos+f,vec2.getValue(f));
 		}
 		
 		System.out.println("vec1");
