@@ -6,15 +6,21 @@ import graphics.Cadre_Jeu;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+
 import agents.AgentAction;
+import agents.Agent_B;
 import agents.Agent_Bomberman;
 import agents.Agent_Ennemy;
+import game.Game;
 import map.GameState;
 import map.NextGameState;
 
 public class RewardTools {
 
-	public static double getReward(GameState initial_state,Agent_Bomberman bomberman_agent,Reward reward,int size_max_trajectory)
+
+	public static double getReward(GameState initial_state,Agent_B bomberman_agent,Reward reward,int size_max_trajectory)
+
 	{
 		NextGameState next_game = new NextGameState(initial_state);
 		double rs=0;
@@ -52,8 +58,9 @@ public class RewardTools {
 		 
 		return(rs);
 	}	
-	
-	public static double getAverageReward(GameState initial_state,Agent_Bomberman bomberman_agent,Reward reward,int size_max_trajectory,int nb_trajectories)
+
+	public static double getAverageReward(GameState initial_state,Agent_B bomberman_agentReward reward,int size_max_trajectory,int nb_trajectories)
+
 	{
 		double cpt=0;
 		for(int i=0;i<nb_trajectories;i++){
@@ -70,8 +77,9 @@ public class RewardTools {
 	 * @param reward
 	 * @param timestep
 	 */
+
 	
-	public static void vizualize(GameState initial_state,Agent_Bomberman bomberman_agent,Reward reward,int size_max_trajectory,int timestep)
+	public static void vizualize(GameState initial_state,Agent_B bomberman_agent,Reward reward,int size_max_trajectory,int timestep)
 	{
 		
 		BombermanGame BbmG = new BombermanGame(initial_state, initial_state.getMap());

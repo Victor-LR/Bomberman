@@ -11,6 +11,7 @@ import learning.RewardTools;
 import learning.SimpleReward;
 import map.GameState;
 import map.Map;
+import agents.Agent_B;
 import agents.Agent_Bomberman;
 import agents.Agent_Ennemy;
 
@@ -32,8 +33,8 @@ public class TestGetAverageReward {
 				int strat[] = {0};
 				game.setStrats(strat);
 				game.setCampagne(false);
-				Agent_Bomberman bomberman = (Agent_Bomberman) game.getBombermans().get(0);
-				
+				Agent_B bomberman = (Agent_Bomberman) game.getBombermans().get(0);
+        
 				Reward rew = new SimpleReward();
 				System.out.println(i+" : "+RewardTools.getAverageReward(game, bomberman, rew, 50, 1));
 				RewardTools.vizualize(game,bomberman,rew,100,100);
