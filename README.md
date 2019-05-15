@@ -281,5 +281,5 @@ Pour finir le multithread est géré à l'interieur du cadre_Menu, cela signifie
 
 - Nous sommes en train d'impléméneter le perceptron_0 dans notre Bomberman pour permttre l'utilistation d'une ia. Cependant on se rend compte petit à petit que le choix desstratégie au niveau de Gamestate pose probleme. En effet nous avons du réaliser une interface qui s'implemente dans les classe deffinissant un agaent Bomberman. Cette inteface deffini la methode choose action, hors c'est dans cette méthode qu'est choisi les stratégie du gamstate. De plus notre gameState charge des Agent_Bomberman et non pas des Agent_B (interface) dans le jeu, de ce fait la methode choisi pour chooseAction correspond toujours à celle d'Agent_Bomberman et non de celle que nous rediffinnissant dans certaine classe qui elle même implémente Agent_B, comme perceptronAgent.
 
-- 
+- Solutions choisi par Victor et Kevin, pour eviter le problème du au choix des stratégie, au lieu de passer par une interface comme Agent_B nous prenons dle choix que toutes les classe redeffinissant la methode chooseAction extend de Agent_Bomberman.
         
