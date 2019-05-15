@@ -12,27 +12,29 @@ import agents.AgentAction;
 import agents.Agent_B;
 import agents.Agent_Bomberman;
 import agents.Agent_Ennemy;
+import agents.ColorBomberman;
 import game.Game;
+import learning.perceptron.PerceptronAgent;
 import map.GameState;
 import map.NextGameState;
 
 public class RewardTools {
 
 
-	public static double getReward(GameState initial_state,Agent_B bomberman_agent,Reward reward,int size_max_trajectory)
+	public static double getReward(GameState initial_state, Agent_Bomberman bomberman_agent,Reward reward,int size_max_trajectory)
 
 	{
 		NextGameState next_game = new NextGameState(initial_state);
-		bomberman_agent = next_game.getBombermans().get(0);
+		//bomberman_agent = next_game.getBombermans().get(0);
 		double rs=0;
 		int time=0;
 		boolean flag=true;		
 		while(flag)
 		{
 			GameState iv = next_game.copy();
-
-			AgentAction action = bomberman_agent.chooseAction(next_game);
-			next_game.taketurn(action, bomberman_agent.getId());
+		//	bomberman_agent = next_game.getBombermans().get(0);
+			AgentAction action = next_game.getBombermans().get(0).chooseAction(next_game);
+			next_game.taketurn(action, next_game.getBombermans().get(0).getId());
 			
 			//System.out.println(bomberman_agent.getX() +"		"+	bomberman_agent.getY());
 			
@@ -60,7 +62,7 @@ public class RewardTools {
 		return(rs);
 	}	
 
-	public static double getAverageReward(GameState initial_state,Agent_B bomberman_agent, Reward reward,int size_max_trajectory,int nb_trajectories)
+	public static double getAverageReward(GameState initial_state,Agent_Bomberman bomberman_agent, Reward reward,int size_max_trajectory,int nb_trajectories)
 
 	{
 		double cpt=0;
@@ -80,7 +82,7 @@ public class RewardTools {
 	 */
 
 	
-	public static void vizualize(GameState initial_state,Agent_B bomberman_agent,Reward reward,int size_max_trajectory,int timestep)
+	public static void vizualize(GameState initial_state, PerceptronAgent bomberman_agent,Reward reward,int size_max_trajectory,int timestep)
 	{
 		
 		BombermanGame BbmG = new BombermanGame(initial_state, initial_state.getMap());
@@ -88,7 +90,19 @@ public class RewardTools {
 		BbmG.setMaxTurn(size_max_trajectory);
 		BbmG.init();
 		
+		
+		BbmG.etatJeu.setStrats(initial_state.getStrats());
+		BbmG.etatJeu.setCampagne(initial_state.getCampagne());
+		
+		
 		Cadre_Jeu fenetre = new Cadre_Jeu(BbmG);
+		
+		bomberman_agent.setCouleur(ColorBomberman.DEFAULT);
+		BbmG.etatJeu.setBomberman(0, bomberman_agent);
+		
+		System.out.println(initial_state.getBombermans().get(0).getClass().getName());
+		
+		System.out.println(BbmG.etatJeu.getBombermans().get(0).getClass().getName());
 		
 		fenetre.setVisible(true);
 		BbmG.launch();

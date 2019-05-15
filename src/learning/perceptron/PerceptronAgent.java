@@ -13,8 +13,9 @@ public class PerceptronAgent extends Agent_Bomberman {
 	private Perceptron p;
 	
 	
-	public PerceptronAgent(Sensor senseur,Perceptron perce)
+	public PerceptronAgent(Agent_Bomberman ag_bbm, Sensor senseur, Perceptron perce)
 	{
+		super(ag_bbm.getX(),ag_bbm.getY(),ag_bbm.getId());
 		p=perce;
 		s=senseur;
 		
@@ -22,11 +23,13 @@ public class PerceptronAgent extends Agent_Bomberman {
 	
 	@Override
 	public AgentAction chooseAction( GameState state) {
+		//System.out.println("Dans PerceptronAgent");
+		
 		ArrayList<AgentAction> aa =new ArrayList<AgentAction>();
 		Agent_Bomberman as = state.getBombermans().get(0);
 		double scoreMax=Double.NEGATIVE_INFINITY;
 		int ind=0;
-		for(int i=0 ; i<4 ;i++){
+		for(int i=0 ; i<=5 ;i++){
 			if(state.isLegalMoveBbm(new AgentAction(i), as))
 				aa.add(new AgentAction(i));
 		}

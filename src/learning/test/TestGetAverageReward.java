@@ -29,14 +29,14 @@ public class TestGetAverageReward {
 
 			for (int i=1; i<=10; i++){
 				map = new Map("./layout/perceptron.lay");
-				GameState game  = new GameState(map,BbmG);
+				GameState initial_state  = new GameState(map,BbmG);
 				int strat[] = {0};
-				game.setStrats(strat);
-				game.setCampagne(false);
-				Agent_B bomberman = (Agent_B) game.getBombermans().get(0);
+				initial_state.setStrats(strat);
+				initial_state.setCampagne(false);
+				Agent_Bomberman bomberman = initial_state.getBombermans().get(0);
         
 				Reward rew = new SimpleReward();
-				System.out.println(i+" : "+RewardTools.getAverageReward(game, bomberman, rew, 150, 100));
+				System.out.println(i+" : "+RewardTools.getAverageReward(initial_state, bomberman, rew, 150, 100));
 				//RewardTools.vizualize(game,bomberman,rew,100,100);
 			}
 			

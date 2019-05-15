@@ -7,14 +7,16 @@ public class SimpleReward implements Reward {
 	@Override
 	public double getReward(GameState from, GameState to) {
 		if (to.getFinPartie() == GameState.WIN_SOLO || to.getFinPartie() == GameState.WIN_SCORE)
-			return 10000;
+			return  100;
 		if (to.getFinPartie() == GameState.GAME_OVER)
-			return 0;
+			return 1000;
+		if (to.getFinPartie() == GameState.FIN_TOUR)
+			return -1000;
 //		System.out.println(to.getBrokableWals() +"		"+	from.getBrokableWals());
 		if (to.getBrokableWals() == from.getBrokableWals()) //tout les mur de "to" sont resté intacte
-			return 0;
+			return -10;
 		else //des murs de "to" on été detruit dans "from"
-			return 100;
+			return 1000000;
 	}
 
 }

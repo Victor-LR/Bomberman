@@ -53,6 +53,7 @@ public class GameState{
 	public final static int WIN_SURVIE = 3;
 	public final static int EX_AEQUO = 4;
 	public final static int GAME_OVER = 5;
+	public final static int FIN_TOUR = 6;
 	
 	
 	private int finPartie = PLANTAGE;
@@ -67,9 +68,6 @@ public class GameState{
 	
 	
 	//Construit l'état courant de la map
-
-	public GameState(){
-	}
 	
 	public GameState(Map map,BombermanGame BbmG){
 		
@@ -1060,8 +1058,8 @@ public class GameState{
 			if(nbBbm == 1) {
 				setEnd(true);
 				game.etatJeu.setEnd(true);
-				this.winner = "GAME OVER";
-				this.finPartie = GAME_OVER;
+				this.winner = "FIN_TOUR";
+				this.finPartie = FIN_TOUR;
 
 			}
 			else{
@@ -1211,6 +1209,11 @@ public class GameState{
 	
 	public ArrayList<Agent_Bomberman> getBombermans(){
 		return bombermans;
+	}
+	
+	public void setBomberman(int id, Agent_Bomberman abbm){
+		this.bombermans.remove(id);
+		this.bombermans.add(id, abbm);
 	}
 	
 	//accesseur sur la liste de birds

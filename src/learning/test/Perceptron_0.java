@@ -14,6 +14,7 @@ import learning.perceptron.Perceptron;
 import learning.perceptron.PerceptronAgent;
 import agents.Agent;
 import agents.Agent_B;
+import agents.Agent_Bomberman;
 import game.BombermanGame;
 import game.Game;
 import map.NextGameState;
@@ -34,22 +35,30 @@ public class Perceptron_0 {
 			map = new Map("./layout/perceptron.lay");
 			GameState GameS  = new GameState(map,BG);
 			int strat[] = {0};
-			GameS .setStrats(strat);
-			GameS .setCampagne(false);
+			GameS.setStrats(strat);
+			GameS.setCampagne(false);
+//			
+//			System.out.println("		Strat GameS:"+GameS.getStrats()[0]);
 			
-			NextGameState state = new NextGameState(GameS);
+			NextGameState state_b = new NextGameState(GameS);
+			
 
-			BombermanGame BbmG = new BombermanGame(state,state.getMap());
 			
-			int taille =1;
+			GameState state = state_b.copy();
+
+
+			
+			//BombermanGame BbmG = new BombermanGame(state,state.getMap());
+			
+			int taille =3;
 			Sensor s = new Sensor(new SimpleStateSensor(taille));
 			Reward r = new SimpleReward();
 	
 			LabeledSet train = new LabeledSet(s.size());
 			
 			for (int i = 0; i < 250; i++) {
-				AgentFitted agent_f = new AgentFitted();
-	 			RewardTools.getReward(state, agent_f,r,500);
+				AgentFitted agent_f = new AgentFitted(state.getBombermans().get(0));
+	 			RewardTools.getReward(state, agent_f,r,100);
 				for (Quadruplet f : agent_f.getList()) {
 					train.addExample(f.getAtteint(), f.getR_obtenu());
 				}
@@ -59,9 +68,13 @@ public class Perceptron_0 {
 			//System.out.println("Nombre d'échantillon : " + train.size());
 			p.setNb_iteration(1); //150 iterations
 			p.train(train);
-			Agent_B agent_bomberman = new PerceptronAgent(s, p);
-			//System.out.println(RewardTools.getAverageReward(state, agent_pacman, ghost, r, 100, 300));
-			RewardTools.vizualize(state, agent_bomberman, r, 100,100);
+			PerceptronAgent agent_bomberman = new PerceptronAgent(state.getBombermans().get(0),s, p);
+			state_b.setBomberman(0, agent_bomberman);
+			
+			//System.out.println(RewardTools.getAverageReward(state_b, agent_bomberman, r, 150, 1));
+			
+			System.out.println(state_b.getBombermans().get(0).getClass().getName());
+			RewardTools.vizualize(state_b, agent_bomberman, r, 100,150);
 		
 		} catch (Exception e) {
 			e.printStackTrace();

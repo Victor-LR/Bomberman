@@ -18,7 +18,6 @@ import agents.Agent;
 
 public class Agent_Bomberman extends Agent {
 	
-	private int id;
 	private int range;
 	private int points = 0;
 	private int nbBombes;
@@ -56,7 +55,6 @@ public class Agent_Bomberman extends Agent {
 	}
 	
 
-	@Override
 	public AgentAction chooseAction(GameState etatjeu) 
 	{
 		AgentAction action ;
@@ -101,11 +99,8 @@ public class Agent_Bomberman extends Agent {
 		case 9:
 			this.strategie = new Strategie_D(etatjeu,this);
 			return this.strategie.action();
-//		case 10:
-//			this.strategie = new Strategie_A_PVP(etatjeu,this);
-//			return this.strategie.action();
-		
-			case 10:
+
+		case 10:
 			this.strategie = new Strategie_A_PVP(etatjeu,this);
 			return this.strategie.action();
 			
@@ -124,7 +119,9 @@ public class Agent_Bomberman extends Agent {
 			if(nbActions == 0) return  new AgentAction(Map.STOP);
 			else return(listAction.get((int)(Math.random()*this.nbActions)));
 		default:
+			System.out.println("Dans default ");
 			return new AgentAction(Map.STOP);
+			
 		}
 		
 		

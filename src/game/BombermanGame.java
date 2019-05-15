@@ -22,8 +22,10 @@ public class BombermanGame extends Game implements InterfaceGame {
 
 	}
 	
-	public BombermanGame (GameState etatJeu, Map map){
-		this.etatJeu = etatJeu;
+	public BombermanGame (GameState etatJ, Map map){
+		this.etatJeu = etatJ;
+//		this.etatJeu.setStrats(etatJ.getStrats());
+//		this.etatJeu.setCampagne(etatJ.getCampagne());
 		this.map = map;
 	}
 	
