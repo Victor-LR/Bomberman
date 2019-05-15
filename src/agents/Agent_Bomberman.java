@@ -16,14 +16,16 @@ import strategies.Strategie_PVE;
 import strategies.Strategie_PVP;
 import agents.Agent;
 
-public class Agent_Bomberman extends Agent implements Agent_B {
+public class Agent_Bomberman extends Agent {
 	
+	private int id;
 	private int range;
 	private int points = 0;
 	private int nbBombes;
 	private ColorBomberman couleur;
 	private int nbActions = 10;
 	private int maladie = 10;
+	
 //	private int life;
 
 	private boolean isInvincible;
@@ -32,12 +34,13 @@ public class Agent_Bomberman extends Agent implements Agent_B {
 	private boolean isSick;
 	private int etatSick;
 	
-	private int strat = 10;
+	private int strat = -1;
 	private Strategie strategie;
 
 	public Agent_Bomberman (int px, int py,int id) {
 		super(AgentType.BOMBERMAN, px, py);
 		super.setId(id);
+		
 		
 		this.range = 1;
 		this.points = 0;
@@ -49,6 +52,7 @@ public class Agent_Bomberman extends Agent implements Agent_B {
 		this.isSick = false;
 		this.etatSick = 0;
 		
+		//this.id = id;
 	}
 	
 
@@ -97,7 +101,11 @@ public class Agent_Bomberman extends Agent implements Agent_B {
 		case 9:
 			this.strategie = new Strategie_D(etatjeu,this);
 			return this.strategie.action();
-		case 10:
+//		case 10:
+//			this.strategie = new Strategie_A_PVP(etatjeu,this);
+//			return this.strategie.action();
+		
+			case 10:
 			this.strategie = new Strategie_A_PVP(etatjeu,this);
 			return this.strategie.action();
 			
@@ -219,8 +227,8 @@ public class Agent_Bomberman extends Agent implements Agent_B {
 		this.maladie = mal;
 	}
 	
-	@Override
-	public int getId() {
-		return this.getId();
-	}
+//	@Override
+//	public int getId() {
+//		return this.id;
+//	}
 }

@@ -68,6 +68,9 @@ public class GameState{
 	
 	//Construit l'état courant de la map
 
+	public GameState(){
+	}
+	
 	public GameState(Map map,BombermanGame BbmG){
 		
 		

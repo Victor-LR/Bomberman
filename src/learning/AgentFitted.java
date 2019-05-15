@@ -9,27 +9,28 @@ import learning.perceptron.SparseVector;
 import map.GameState;
 import map.NextGameState;
 
-public class AgentFitted implements Agent_B {
+public class AgentFitted extends Agent_Bomberman {
 
-		private Agent_B agent ;
+		//private Agent_B agent ;
 	 	private ArrayList<Quadruplet> lis;
 	 	
-	 	public AgentFitted() {
+	 	public AgentFitted(Agent_Bomberman ag_bbm) {
+	 		super(ag_bbm.getX(),ag_bbm.getY(),ag_bbm.getId());
 			this.lis= new ArrayList<>();
 		}
-	@Override
+
 	public AgentAction chooseAction( GameState state) {
-		// TODO Auto-generated method stub
 		
-		agent = state.getBombermans().get(0);
+//		agent = state.getBombermans().get(0);
+		
 		NextGameState aux_state = new NextGameState(state);
 		Sensor s = new Sensor(new SimpleStateSensor(4));
 		
-		AgentAction aa = agent.chooseAction(state);
+		AgentAction aa = this.chooseAction(state);
 		SparseVector init = s.getVector(state, aa);
 		
 		GameState game = aux_state.copy();
-		aux_state.taketurn(aa,agent.getId());
+		aux_state.taketurn(aa,this.getId());
 		
 		SparseVector atteint = s.getVector(aux_state, aa);
 		Reward rw = new SimpleReward();
@@ -45,10 +46,6 @@ public class AgentFitted implements Agent_B {
 	}
 
 
-	@Override
-	public int getId() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 }

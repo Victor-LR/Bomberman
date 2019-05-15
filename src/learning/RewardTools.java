@@ -23,13 +23,14 @@ public class RewardTools {
 
 	{
 		NextGameState next_game = new NextGameState(initial_state);
+		bomberman_agent = next_game.getBombermans().get(0);
 		double rs=0;
 		int time=0;
 		boolean flag=true;		
 		while(flag)
 		{
 			GameState iv = next_game.copy();
-			bomberman_agent = next_game.getBombermans().get(0);
+
 			AgentAction action = bomberman_agent.chooseAction(next_game);
 			next_game.taketurn(action, bomberman_agent.getId());
 			
@@ -59,7 +60,7 @@ public class RewardTools {
 		return(rs);
 	}	
 
-	public static double getAverageReward(GameState initial_state,Agent_B bomberman_agentReward reward,int size_max_trajectory,int nb_trajectories)
+	public static double getAverageReward(GameState initial_state,Agent_B bomberman_agent, Reward reward,int size_max_trajectory,int nb_trajectories)
 
 	{
 		double cpt=0;
@@ -84,12 +85,13 @@ public class RewardTools {
 		
 		BombermanGame BbmG = new BombermanGame(initial_state, initial_state.getMap());
 		BbmG.setTemps(timestep);
-		//BbmG.init();
+		BbmG.setMaxTurn(size_max_trajectory);
+		BbmG.init();
 		
 		Cadre_Jeu fenetre = new Cadre_Jeu(BbmG);
 		
 		fenetre.setVisible(true);
-	//	BbmG.launch();
+		BbmG.launch();
 //		GameState fstate=game.runUntilEnd(timestep,size_max_trajectory);				
 	}	
 

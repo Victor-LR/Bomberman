@@ -7,7 +7,7 @@ import agents.Agent_Bomberman;
 import learning.Sensor;
 import map.GameState;
 
-public class PerceptronAgent implements Agent_B {
+public class PerceptronAgent extends Agent_Bomberman {
 
 	private Sensor s;
 	private Perceptron p;

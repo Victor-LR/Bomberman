@@ -58,4 +58,9 @@ public class BombermanGame extends Game implements InterfaceGame {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
+
+	public void setMaxTurn(int maxT) {
+		this.maxTurn = maxT;
+		
+	}
 }
