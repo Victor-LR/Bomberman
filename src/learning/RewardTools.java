@@ -54,7 +54,7 @@ public class RewardTools {
 		return(rs);
 	}	
 	
-	public static double getAverageReward(GameState initial_state,Agent_Bomberman bomberman_agent,ArrayList<Agent_Ennemy> ennemy_agents,Reward reward,int size_max_trajectory,int nb_trajectories)
+	public static double getAverageReward(GameState initial_state,Agent_B bomberman_agent,ArrayList<Agent_Ennemy> ennemy_agents,Reward reward,int size_max_trajectory,int nb_trajectories)
 	{
 		double cpt=0;
 		for(int i=0;i<nb_trajectories;i++){
