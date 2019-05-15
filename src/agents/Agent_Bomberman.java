@@ -16,7 +16,7 @@ import strategies.Strategie_PVE;
 import strategies.Strategie_PVP;
 import agents.Agent;
 
-public class Agent_Bomberman extends Agent {
+public class Agent_Bomberman extends Agent implements Agent_B {
 	
 	private int range;
 	private int points = 0;
@@ -52,7 +52,7 @@ public class Agent_Bomberman extends Agent {
 	}
 	
 
-
+	@Override
 	public AgentAction chooseAction(GameState etatjeu) 
 	{
 		AgentAction action ;
@@ -217,5 +217,10 @@ public class Agent_Bomberman extends Agent {
 
 	public void setMaladie(int mal) {
 		this.maladie = mal;
+	}
+	
+	@Override
+	public int getId() {
+		return this.getId();
 	}
 }
