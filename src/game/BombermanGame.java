@@ -18,6 +18,15 @@ public class BombermanGame extends Game implements InterfaceGame {
 		this.filename = stage2[0];
 	}
 	
+	public BombermanGame () {
+
+	}
+	
+	public BombermanGame (GameState etatJeu, Map map){
+		this.etatJeu = etatJeu;
+		this.map = map;
+	}
+	
 	@Override
 	public void initializeGame() {
 		System.out.println("initialisation bombermanGame");

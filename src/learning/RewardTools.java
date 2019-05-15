@@ -1,5 +1,8 @@
 package learning;
 
+import game.BombermanGame;
+import graphics.Cadre_Jeu;
+
 import java.awt.Dimension;
 import java.util.ArrayList;
 
@@ -11,7 +14,7 @@ import map.NextGameState;
 
 public class RewardTools {
 
-	public static double getReward(GameState initial_state,Agent_Bomberman bomberman_agent,ArrayList<Agent_Ennemy> ennemy_agents,Reward reward,int size_max_trajectory)
+	public static double getReward(GameState initial_state,Agent_Bomberman bomberman_agent,Reward reward,int size_max_trajectory)
 	{
 		NextGameState next_game = new NextGameState(initial_state);
 		double rs=0;
@@ -50,11 +53,11 @@ public class RewardTools {
 		return(rs);
 	}	
 	
-	public static double getAverageReward(GameState initial_state,Agent_Bomberman bomberman_agent,ArrayList<Agent_Ennemy> ennemy_agents,Reward reward,int size_max_trajectory,int nb_trajectories)
+	public static double getAverageReward(GameState initial_state,Agent_Bomberman bomberman_agent,Reward reward,int size_max_trajectory,int nb_trajectories)
 	{
 		double cpt=0;
 		for(int i=0;i<nb_trajectories;i++){
-			cpt+=getReward(initial_state, bomberman_agent, ennemy_agents, reward, size_max_trajectory);
+			cpt+=getReward(initial_state, bomberman_agent, reward, size_max_trajectory);
 		}
 		return( cpt/nb_trajectories);
 	}
@@ -67,23 +70,19 @@ public class RewardTools {
 	 * @param reward
 	 * @param timestep
 	 */
-	/*public static void vizualize(GameState initial_state,Agent pacman_agent,ArrayList<Agent> ghosts_agents,Reward reward,int size_max_trajectory,int timestep)
+	
+	public static void vizualize(GameState initial_state,Agent_Bomberman bomberman_agent,Reward reward,int size_max_trajectory,int timestep)
 	{
-		Game game=new Game(initial_state);
-		game.addPacmanAgent(pacman_agent);
-				
-		for(Agent a:ghosts_agents)
-			game.addGhostAgent(a);	
 		
-		GamePanel panel=new GamePanel(initial_state);
-		game.addObserver(panel);			
-		JFrame frame = new JFrame("FrameDemo");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setPreferredSize(new Dimension(640,480));
-		frame.add(panel);
-		frame.pack();
-		frame.setVisible(true);
-		GameState fstate=game.runUntilEnd(timestep,size_max_trajectory);				
-	}	*/
+		BombermanGame BbmG = new BombermanGame(initial_state, initial_state.getMap());
+		BbmG.setTemps(timestep);
+		//BbmG.init();
+		
+		Cadre_Jeu fenetre = new Cadre_Jeu(BbmG);
+		
+		fenetre.setVisible(true);
+	//	BbmG.launch();
+//		GameState fstate=game.runUntilEnd(timestep,size_max_trajectory);				
+	}	
 
 }
