@@ -1115,7 +1115,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		}
 		else{
 			if(BbmG.etatJeu.getCampagne()) {
-				BbmG.etatJeu.taketurn();
+				BbmG.etatJeu.taketurn(null,-1);
 				if(BbmG.etatJeu.getNum_niveau() == 1) {
 					
 					Cadre_Jeu fenetre = new Cadre_Jeu(BbmG.etatJeu.getGame());

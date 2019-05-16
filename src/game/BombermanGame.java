@@ -42,7 +42,7 @@ public class BombermanGame extends Game implements InterfaceGame, Serializable {
 	@Override
 	public void taketurn() {
 		if(!etatJeu.getEnd())
-			etatJeu.taketurn();	
+			etatJeu.taketurn(null,-1);	
 		
 	}
 	

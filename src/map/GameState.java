@@ -23,7 +23,12 @@ import objets.ObjetType;
 
 public class GameState implements Serializable{
 	
-	Map map;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	transient Map map;
 	
 	transient private Keys key_action;
 	transient private Keys_2 key_action_2;
@@ -648,82 +653,83 @@ public class GameState implements Serializable{
 	//Réalise un tour du jeu 
 	
 	public void taketurn(AgentAction action, int id_bbm){
+
+			if(getCampagne()) {
+	
+				if(!getEnd()) {
+	
+					this.isEndCampagne(BbmG);
+					bombermansTurn(action,id_bbm);
+					ennemiesTurn();
+					birdsTurn();
+					rajionsTurn();
+					towerTurn();
+	
+					
+				}else {
+					if(BbmG.etatJeu.getNum_niveau() == 1) {
+						try {
+							game.loadFile("./layout/niveau2.lay");
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						game.init();
+						
+						game.etatJeu.setCampagne(true);		
+						game.etatJeu.setNum_niveau(2);
+						game.etatJeu.setStrats(BbmG.etatJeu.getStrats());
+						(game.etatJeu.getBombermans().get(0)).setPoints(( BbmG.etatJeu.getBombermans().get(0)).getPoints());
+						(game.etatJeu.getBombermans().get(0)).setRange(( BbmG.etatJeu.getBombermans().get(0)).getRange());
+						( game.etatJeu.getBombermans().get(0)).setNbBombes(( BbmG.etatJeu.getBombermans().get(0)).getNbBombes());
+						
+						System.out.println(getWinner()+" stage 1");
+						
+						BbmG.stop();
+						game.launch();
+						
+					}
+						
+					if(BbmG.etatJeu.getNum_niveau() == 2) {
+						
+						try {
+							game.loadFile("./layout/niveau3.lay");
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						game.init();
+						
+						game.etatJeu.setCampagne(true);		
+						game.etatJeu.setNum_niveau(3);	
+						game.etatJeu.setStrats(BbmG.etatJeu.getStrats());
+						( game.etatJeu.getBombermans().get(0)).setPoints(( BbmG.etatJeu.getBombermans().get(0)).getPoints());
+						( game.etatJeu.getBombermans().get(0)).setRange(( BbmG.etatJeu.getBombermans().get(0)).getRange());
+						( game.etatJeu.getBombermans().get(0)).setNbBombes(( BbmG.etatJeu.getBombermans().get(0)).getNbBombes());
+						
+						System.out.println(getWinner()+" stage 2");
+						
+						BbmG.stop();
+						game.launch();
+						
+					}
+					
+					if(BbmG.etatJeu.getNum_niveau() == 3) {
+						BbmG.stop();
+						System.out.println(getWinner()+" stage 3");
+					}
+				}
+			}
+			else if(!getEnd()) {
+					this.isEnd(BbmG);
+					bombermansTurn(action,id_bbm);
+					ennemiesTurn();
+					birdsTurn();
+					rajionsTurn();
+					towerTurn();
+				}else {
+	
+					BbmG.stop();
+				}
 		
-		if(getCampagne()) {
-
-			if(!getEnd()) {
-
-				this.isEndCampagne(BbmG);
-				bombermansTurn();
-				ennemiesTurn();
-				birdsTurn();
-				rajionsTurn();
-				towerTurn();
-
-				
-			}else {
-				if(BbmG.etatJeu.getNum_niveau() == 1) {
-					try {
-						game.loadFile("./layout/niveau2.lay");
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					game.init();
-					
-					game.etatJeu.setCampagne(true);		
-					game.etatJeu.setNum_niveau(2);
-					game.etatJeu.setStrats(BbmG.etatJeu.getStrats());
-					(game.etatJeu.getBombermans().get(0)).setPoints(( BbmG.etatJeu.getBombermans().get(0)).getPoints());
-					(game.etatJeu.getBombermans().get(0)).setRange(( BbmG.etatJeu.getBombermans().get(0)).getRange());
-					( game.etatJeu.getBombermans().get(0)).setNbBombes(( BbmG.etatJeu.getBombermans().get(0)).getNbBombes());
-					
-					System.out.println(getWinner()+" stage 1");
-					
-					BbmG.stop();
-					game.launch();
-					
-				}
-					
-				if(BbmG.etatJeu.getNum_niveau() == 2) {
-					
-					try {
-						game.loadFile("./layout/niveau3.lay");
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					game.init();
-					
-					game.etatJeu.setCampagne(true);		
-					game.etatJeu.setNum_niveau(3);	
-					game.etatJeu.setStrats(BbmG.etatJeu.getStrats());
-					( game.etatJeu.getBombermans().get(0)).setPoints(( BbmG.etatJeu.getBombermans().get(0)).getPoints());
-					( game.etatJeu.getBombermans().get(0)).setRange(( BbmG.etatJeu.getBombermans().get(0)).getRange());
-					( game.etatJeu.getBombermans().get(0)).setNbBombes(( BbmG.etatJeu.getBombermans().get(0)).getNbBombes());
-					
-					System.out.println(getWinner()+" stage 2");
-					
-					BbmG.stop();
-					game.launch();
-					
-				}
-				
-				if(BbmG.etatJeu.getNum_niveau() == 3) {
-					BbmG.stop();
-					System.out.println(getWinner()+" stage 3");
-				}
-			}
-		}
-		else if(!getEnd()) {
-				this.isEnd(BbmG);
-				bombermansTurn();
-				ennemiesTurn();
-				birdsTurn();
-				rajionsTurn();
-				towerTurn();
-			}else {
-
-				BbmG.stop();
-			}
 	}	
 	
 	
@@ -799,7 +805,7 @@ public class GameState implements Serializable{
 	
 	//Réalise le tour des bombermans
 	
-		public void bombermansTurn() {
+		public void bombermansTurn(AgentAction action, int id_bbm ) {
 			
 			ArrayList<Agent_Bomberman> bombermans = this.getBombermans();
 			
@@ -904,7 +910,10 @@ public class GameState implements Serializable{
 							 }
 					
 					
-						bombermanAction = bomberman.chooseAction(this);
+						if( i == id_bbm){
+							bombermanAction = action;
+						}
+						else bombermanAction = bomberman.chooseAction(this);
 	
 					if (bombermanAction.getAction() < 5){
 							
