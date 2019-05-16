@@ -1,5 +1,7 @@
 # TER_Bomberman
 
+Soutenance 4 juin 10h
+
 Tuto git :
 http://rogerdudler.github.io/git-guide/index.fr.html
 
