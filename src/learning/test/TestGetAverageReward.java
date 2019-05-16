@@ -35,7 +35,7 @@ public class TestGetAverageReward {
 				Agent_Bomberman bomberman = initial_state.getBombermans().get(0);
         
 				Reward rew = new SimpleReward();
-				System.out.println(i+" : "+RewardTools.getAverageReward(initial_state, bomberman, rew, 150, 100));
+				System.out.println(i+" : "+RewardTools.getAverageReward(initial_state, bomberman, rew, 1500, 1000));
 				//RewardTools.vizualize(game,bomberman,rew,100,100);
 			}
 			

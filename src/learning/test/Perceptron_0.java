@@ -51,7 +51,7 @@ public class Perceptron_0 {
 				AgentFitted agent_f = new AgentFitted(state.getBombermans().get(0));
 				
 				//state.setBomberman(0, agent_f);
-	 			RewardTools.getReward(state, agent_f,r,1000);
+	 			RewardTools.getReward(state, agent_f,r,250);
 	 			
 	 			System.out.println(state.getBombermans().get(0).getClass().getName());
 	 			
