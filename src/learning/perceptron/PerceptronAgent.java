@@ -2,7 +2,6 @@ package learning.perceptron;
 
 import java.util.ArrayList;
 import agents.AgentAction;
-import agents.Agent_B;
 import agents.Agent_Bomberman;
 import learning.Sensor;
 import map.GameState;

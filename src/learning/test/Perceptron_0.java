@@ -13,7 +13,6 @@ import learning.perceptron.LabeledSet;
 import learning.perceptron.Perceptron;
 import learning.perceptron.PerceptronAgent;
 import agents.Agent;
-import agents.Agent_B;
 import agents.Agent_Bomberman;
 import game.BombermanGame;
 import game.Game;

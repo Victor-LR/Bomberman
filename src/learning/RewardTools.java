@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import agents.AgentAction;
-import agents.Agent_B;
 import agents.Agent_Bomberman;
 import agents.Agent_Ennemy;
 import agents.ColorBomberman;

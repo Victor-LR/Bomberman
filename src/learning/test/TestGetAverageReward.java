@@ -11,7 +11,6 @@ import learning.RewardTools;
 import learning.SimpleReward;
 import map.GameState;
 import map.Map;
-import agents.Agent_B;
 import agents.Agent_Bomberman;
 import agents.Agent_Ennemy;
 

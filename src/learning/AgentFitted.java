@@ -3,7 +3,6 @@ package learning;
 import java.util.ArrayList;
 
 import agents.AgentAction;
-import agents.Agent_B;
 import agents.Agent_Bomberman;
 import learning.perceptron.SparseVector;
 import map.GameState;
