@@ -9,10 +9,13 @@ import agents.AgentAction;
 import agents.Agent_Bomberman;
 import learning.perceptron.SparseVector;
 import map.GameState;
-import map.NextGameState;
 
 public class AgentFitted extends Agent_Bomberman {
 
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 		//private Agent_B agent ;
 	 	private ArrayList<Quadruplet> lis;
 	 	

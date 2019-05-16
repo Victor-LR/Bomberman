@@ -28,7 +28,7 @@ public class GameState implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	transient Map map;
+	 Map map;
 	
 	transient private Keys key_action;
 	transient private Keys_2 key_action_2;
