@@ -2,6 +2,8 @@ package learning;
 
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.SerializationUtils;
+
 import agents.AgentAction;
 
 import agents.Agent_Bomberman;
@@ -23,25 +25,27 @@ public class AgentFitted extends Agent_Bomberman {
 		
 //		agent = state.getBombermans().get(0);
 		
-		NextGameState aux_state = new NextGameState(state);
+//		NextGameState aux_state = new NextGameState(state);
 		
 		SimpleStateSensor s_init =  new SimpleStateSensor(3);
 		s_init.getVector(state);
 		
-		
+		Sensor s = new Sensor(s_init);
 		
 		
 		AgentAction aa = super.chooseAction(state);
 		SparseVector init = s.getVector(state, aa);
 		
-		//GameState game = aux_state.copy();
+		GameState game = SerializationUtils.clone(state);
 		
-		state.taketurn(aa,this.getId());
+		int nb_murs = game.getBrokableWals();
 		
-		SparseVector atteint = s.getVector(aux_state, aa);
+		game.taketurn(aa,this.getId());
+		
+		SparseVector atteint = s.getVector(game, aa);
 		Reward rw = new SimpleReward();
 	
-		double score = rw.getReward(game, aux_state);
+		double score = rw.getReward(game, nb_murs);
 		
 		lis.add(new Quadruplet(init, aa, atteint, score));
 		return aa;

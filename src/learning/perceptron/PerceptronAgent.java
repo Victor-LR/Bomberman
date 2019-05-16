@@ -8,15 +8,15 @@ import map.GameState;
 
 public class PerceptronAgent extends Agent_Bomberman {
 
-	private Sensor s;
-	private Perceptron p;
+	private Sensor senseur;
+	private Perceptron perce;
 	
 	
 	public PerceptronAgent(Agent_Bomberman ag_bbm, Sensor senseur, Perceptron perce)
 	{
 		super(ag_bbm.getX(),ag_bbm.getY(),ag_bbm.getId());
-		p=perce;
-		s=senseur;
+		this.perce = perce;
+		this.senseur = senseur;
 		
 	}
 	
@@ -33,9 +33,9 @@ public class PerceptronAgent extends Agent_Bomberman {
 				aa.add(new AgentAction(i));
 		}
 		for(int i=0;i<aa.size();i++){
-			SparseVector v= s.getVector(state, aa.get(i));
-			if(scoreMax<p.getScore(v)){
-				scoreMax=p.getScore(v);
+			SparseVector v = senseur.getVector(state, aa.get(i));
+			if(scoreMax < perce.getScore(v)){
+				scoreMax = perce.getScore(v);
 				ind=i;
 			}
 		}

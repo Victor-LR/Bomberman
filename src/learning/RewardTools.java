@@ -15,7 +15,6 @@ import agents.ColorBomberman;
 import game.Game;
 import learning.perceptron.PerceptronAgent;
 import map.GameState;
-import map.NextGameState;
 
 
 import org.apache.commons.lang3.SerializationUtils;
@@ -49,12 +48,12 @@ public class RewardTools {
 			
 			if (next_game.getFinPartie() != GameState.GAME_OVER & next_game.getFinPartie() != GameState.WIN_SOLO)
 			{
-				double r = reward.getReward(iv,next_game);
+				double r = reward.getReward(next_game, nbmurs);
 				rs+=r;
 			}
 			else
 			{
-				double r=reward.getReward(iv, next_game);
+				double r=reward.getReward(next_game, nbmurs);
 				rs+=r;
 				flag=false;
 			}
