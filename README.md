@@ -271,4 +271,6 @@ Pour finir le multithread est géré à l'interieur du cadre_Menu, cela signifie
 13/05/19:
 
 - Phase de recherche pour l'implémentation d'un perceptron. Observation d'un comportement qui semble innaproprié pour l'ia du jeu Pacman utilisant un perceptron. En effet malgré l'utilisation de celui-ci, l'ia du pacman boucle dans son déplacement à partir d'un moment, ne cherche pas à gagner ou avoir plus de points.
+
+
         
