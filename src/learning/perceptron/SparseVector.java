@@ -1,9 +1,10 @@
 package learning.perceptron;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 
-	public class SparseVector implements Iterable<Integer>
+	public class SparseVector implements Iterable<Integer>, Serializable
 	{
 		protected HashMap<Integer,Double> values;
 		protected int size;

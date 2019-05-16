@@ -1,10 +1,16 @@
 package learning;
 
+import java.io.Serializable;
+
 import agents.AgentAction;
 import learning.perceptron.SparseVector;
 
-public class Quadruplet {
+public class Quadruplet implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private SparseVector etat, atteint;
 	private AgentAction action;
 	private double r_obtenu;

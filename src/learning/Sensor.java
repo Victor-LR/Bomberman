@@ -25,15 +25,15 @@ public class Sensor
 		vec1.setValue(0,1.0);
 		int pos = action.getAction() * state_sensor.size()+1;
 		
-		System.out.println("vec2");
-		System.out.println(vec2);
+//		System.out.println("vec2");
+//		System.out.println(vec2);
 		
 		for(int f : vec2){
 			vec1.setValue(pos+f,vec2.getValue(f));
 		}
 		
-		System.out.println("vec1");
-		System.out.println(vec1);
+//		System.out.println("vec1");
+//		System.out.println(vec1);
 		
 		return(vec1);
 	}

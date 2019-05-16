@@ -1,9 +1,15 @@
 package agents;
 
+import java.io.Serializable;
+
 import map.Map;
 
-public class AgentAction {
+public class AgentAction implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int vx;
 	private int vy;
 	

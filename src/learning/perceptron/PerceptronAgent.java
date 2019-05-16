@@ -3,6 +3,7 @@ package learning.perceptron;
 import java.util.ArrayList;
 import agents.AgentAction;
 import agents.Agent_Bomberman;
+import learning.Quadruplet;
 import learning.Sensor;
 import map.GameState;
 
@@ -40,12 +41,6 @@ public class PerceptronAgent extends Agent_Bomberman {
 			}
 		}
 		return aa.get(ind);
-	}
-
-	@Override
-	public int getId() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	
