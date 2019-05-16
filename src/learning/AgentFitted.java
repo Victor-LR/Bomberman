@@ -3,6 +3,7 @@ package learning;
 import java.util.ArrayList;
 
 import agents.AgentAction;
+
 import agents.Agent_Bomberman;
 import learning.perceptron.SparseVector;
 import map.GameState;
@@ -23,13 +24,19 @@ public class AgentFitted extends Agent_Bomberman {
 //		agent = state.getBombermans().get(0);
 		
 		NextGameState aux_state = new NextGameState(state);
-		Sensor s = new Sensor(new SimpleStateSensor(4));
 		
-		AgentAction aa = this.chooseAction(state);
+		SimpleStateSensor s_init =  new SimpleStateSensor(3);
+		s_init.getVector(state);
+		
+		
+		
+		
+		AgentAction aa = super.chooseAction(state);
 		SparseVector init = s.getVector(state, aa);
 		
-		GameState game = aux_state.copy();
-		aux_state.taketurn(aa,this.getId());
+		//GameState game = aux_state.copy();
+		
+		state.taketurn(aa,this.getId());
 		
 		SparseVector atteint = s.getVector(aux_state, aa);
 		Reward rw = new SimpleReward();

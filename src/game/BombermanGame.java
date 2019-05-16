@@ -1,9 +1,11 @@
 package game;
 
+import java.io.Serializable;
+
 import map.GameState;
 import map.Map;
 
-public class BombermanGame extends Game implements InterfaceGame {
+public class BombermanGame extends Game implements InterfaceGame, Serializable {
 
 	Map map;
 	public GameState etatJeu;

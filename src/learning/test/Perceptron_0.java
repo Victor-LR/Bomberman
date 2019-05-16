@@ -40,13 +40,9 @@ public class Perceptron_0 {
 //			System.out.println("		Strat GameS:"+GameS.getStrats()[0]);
 			
 			NextGameState state_b = new NextGameState(GameS);
-			
 
-			
 			GameState state = state_b.copy();
 
-
-			
 			//BombermanGame BbmG = new BombermanGame(state,state.getMap());
 			
 			int taille =3;
@@ -57,14 +53,19 @@ public class Perceptron_0 {
 			
 			for (int i = 0; i < 250; i++) {
 				AgentFitted agent_f = new AgentFitted(state.getBombermans().get(0));
+				//System.out.println(state_b.getBombermans().get(0).getClass().getName());
+				state.setBomberman(0, agent_f);
+				
 	 			RewardTools.getReward(state, agent_f,r,100);
+	 			
 				for (Quadruplet f : agent_f.getList()) {
+					System.out.println("			D");
 					train.addExample(f.getAtteint(), f.getR_obtenu());
 				}
 			}
 			
 			Perceptron p = new Perceptron(0.02,taille);  // epsilone=0.02
-			//System.out.println("Nombre d'échantillon : " + train.size());
+			System.out.println("Nombre d'échantillon : " + train.size());
 			p.setNb_iteration(1); //150 iterations
 			p.train(train);
 			PerceptronAgent agent_bomberman = new PerceptronAgent(state.getBombermans().get(0),s, p);
@@ -72,7 +73,8 @@ public class Perceptron_0 {
 			
 			//System.out.println(RewardTools.getAverageReward(state_b, agent_bomberman, r, 150, 1));
 			
-			System.out.println(state_b.getBombermans().get(0).getClass().getName());
+			//System.out.println(state_b.getBombermans().get(0).getClass().getName());
+			
 			RewardTools.vizualize(state_b, agent_bomberman, r, 100,150);
 		
 		} catch (Exception e) {

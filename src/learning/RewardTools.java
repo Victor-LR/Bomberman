@@ -17,22 +17,30 @@ import learning.perceptron.PerceptronAgent;
 import map.GameState;
 import map.NextGameState;
 
+
+import org.apache.commons.lang3.SerializationUtils;
+
+
 public class RewardTools {
 
 
 	public static double getReward(GameState initial_state, Agent_Bomberman bomberman_agent,Reward reward,int size_max_trajectory)
 
 	{
-		NextGameState next_game = new NextGameState(initial_state);
+		GameState next_game = (GameState)SerializationUtils.clone(initial_state);
+		
 		//bomberman_agent = next_game.getBombermans().get(0);
 		double rs=0;
 		int time=0;
 		boolean flag=true;		
 		while(flag)
 		{
-			GameState iv = next_game.copy();
+	
 		//	bomberman_agent = next_game.getBombermans().get(0);
 			AgentAction action = next_game.getBombermans().get(0).chooseAction(next_game);
+			
+			int nbmurs = next_game.getBrokableWals();
+					
 			next_game.taketurn(action, next_game.getBombermans().get(0).getId());
 			
 			//System.out.println(bomberman_agent.getX() +"		"+	bomberman_agent.getY());
@@ -98,10 +106,6 @@ public class RewardTools {
 		
 		bomberman_agent.setCouleur(ColorBomberman.DEFAULT);
 		BbmG.etatJeu.setBomberman(0, bomberman_agent);
-		
-		System.out.println(initial_state.getBombermans().get(0).getClass().getName());
-		
-		System.out.println(BbmG.etatJeu.getBombermans().get(0).getClass().getName());
 		
 		fenetre.setVisible(true);
 		BbmG.launch();

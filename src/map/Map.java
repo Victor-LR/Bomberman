@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 //import java.io.BufferedReader;
 //import java.io.File;
 //import java.io.FileInputStream;
@@ -12,7 +13,7 @@ import java.io.InputStreamReader;
 //import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Map {
+public class Map implements Serializable {
 	
 	public static int NORTH = 0;
 	public static int SOUTH = 1;

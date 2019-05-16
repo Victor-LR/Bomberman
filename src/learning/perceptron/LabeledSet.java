@@ -32,8 +32,10 @@ public class LabeledSet {
 	
 	public void addExample(SparseVector v, Double l)
 	{
+		
 		vectors.add(v);
 		labels.add(l);
+
 	}
 	
 	public int size() 

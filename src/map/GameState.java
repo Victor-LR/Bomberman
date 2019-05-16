@@ -1,4 +1,5 @@
 package map;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -19,12 +20,13 @@ import objets.Objet;
 import objets.Objet_Bomb;
 import objets.ObjetType;
 
-public class GameState{
+
+public class GameState implements Serializable{
 	
 	Map map;
 	
-	private Keys key_action;
-	private Keys_2 key_action_2;
+	transient private Keys key_action;
+	transient private Keys_2 key_action_2;
 
 	private boolean brokable_walls[][];
 	
@@ -645,7 +647,7 @@ public class GameState{
 	
 	//Réalise un tour du jeu 
 	
-	public void taketurn(){
+	public void taketurn(AgentAction action, int id_bbm){
 		
 		if(getCampagne()) {
 

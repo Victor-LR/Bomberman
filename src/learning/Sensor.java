@@ -17,10 +17,10 @@ public class Sensor
 		return(state_sensor.size()*4+1);
 	}
 	
-	public SparseVector getVector(GameState GS, AgentAction action)
+	public SparseVector getVector(StateSensor ss, AgentAction action)
 	{
 		SparseVector vec1 = new SparseVector(size());
-		SparseVector vec2 =state_sensor.getVector(GS);
+		SparseVector vec2 = ss.
 		
 		vec1.setValue(0,1.0);
 		int pos = action.getAction() * state_sensor.size()+1;
