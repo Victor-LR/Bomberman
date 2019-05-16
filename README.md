@@ -1,7 +1,5 @@
 # TER_Bomberman
 
-Soutenance le à 4 juin 10h
-
 Tuto git :
 http://rogerdudler.github.io/git-guide/index.fr.html
 
@@ -286,5 +284,8 @@ Pour finir le multithread est géré à l'interieur du cadre_Menu, cela signifie
 - Solutions choisi par Victor et Kevin, pour eviter le problème du au choix des stratégie, au lieu de passer par une interface comme Agent_B nous prenons dle choix que toutes les classe redeffinissant la methode chooseAction extend de Agent_Bomberman.
 
 - La manoeuvre est plus ou moins réussie, le chooseAction choisi par le Bomberman correspond bien au perceptron quand celui-ci est demandé. À partir de là nous avons pus lancer la partie apprentissage puis avoir le resultat sur un jeu Bomberman avec interface graphique. Cependant nous observons, comme pour le Pacman que ce dernier rentre dans un état de boucle ou il va de haut en bas sans aucuns but. Le problème n'est pas claire et nous n'avons pas encore de réponse.
+        
+16/05/19
 
+- Apres la reunion fors insctructive de ce matin. Nous avons pu arranger grace a une deep copy les problemes de liaison entre les gameState. Avec quelques modification au niveau du gamestate, de agentFitted, rewardtools nous obtenons peut etre en théorie un agent Bomberman qui choisi ses actions en fonction d'un training fait au préalable. Cependant le résultat n'est toujours ne semble convaincant vis à vis des stratégie que nous avions dévelloppées auparavant.
 
