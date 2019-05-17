@@ -922,7 +922,7 @@ public class GameState implements Serializable{
 						
 	//					System.out.println("après deplacement	Range -> "+ bomberman.getRange());
 					}
-					else if ((bomberman.getStrat()== 0 || bomberman.getStrat()== 1) & i < 2) {
+					else if ((bomberman.getStrat()== 1 || bomberman.getStrat()== 2) & i < 2) {
 							if (bombermanAction.getAction() == 5 & (bomberman.getMaladie() != 0 & bomberman.getMaladie() != 1)){
 								this.placeBomb(bomberman);
 								this.bombeTurn(bomberman);

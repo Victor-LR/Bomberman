@@ -120,19 +120,7 @@ public class Agent_Bomberman extends Agent {
 			if(nbActions == 0) return  new AgentAction(Map.STOP);
 			else return(listAction.get((int)(Math.random()*this.nbActions)));
 		default:
-			//System.out.println("Dans default ");
-			this.strategie = null;
-			ArrayList<AgentAction> listAction2=new ArrayList<AgentAction>();
-			for(int i=0;i<=5;i++)
-			{
-				if (etatjeu.isLegalMoveBbm(new AgentAction(i), this)) {
-					//System.out.println(i);
-					listAction2.add(new AgentAction(i));
-				}
-			}		
-			this.nbActions = listAction2.size();
-			if(nbActions == 0) return  new AgentAction(Map.STOP);
-			else return(listAction2.get((int)(Math.random()*this.nbActions)));
+			return new AgentAction(Map.STOP);
 			
 		}
 		
