@@ -842,7 +842,7 @@ public class GameState implements Serializable{
 						
 						if ( (bomberman.getX() == item.getObjX()) && (bomberman.getY() == item.getObjY()) ){
 							
-							if(item.getType() == ObjetType.FIRE_UP & !bomberman.isInvincible()) bomberman.setRange(bomberman.getRange()+1);
+							if(item.getType() == ObjetType.FIRE_UP ) bomberman.setRange(bomberman.getRange()+1);
 							else if((item.getType() == ObjetType.FIRE_DOWN & !bomberman.isInvincible() ) && bomberman.getRange() > 1) bomberman.setRange(bomberman.getRange()-1);
 							else if((item.getType() == ObjetType.BOMB_UP)) bomberman.setNbBombes(bomberman.getNbBombes()+1);
 							else if((item.getType() == ObjetType.BOMB_DOWN & !bomberman.isInvincible()) && bomberman.getNbBombes() > 1) bomberman.setNbBombes(bomberman.getNbBombes()-1);
