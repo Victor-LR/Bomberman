@@ -25,7 +25,7 @@ import map.Map;
 //Création graphique de la carte et des agents
 public class Review extends JPanel {
 	/**
-	 * 
+	 * Réalise la même chose que paint bombrman mais excluant les animations
 	 */
 	private static final long serialVersionUID = 1L;
 	protected Color wallColor=Color.GRAY;
@@ -45,8 +45,6 @@ public class Review extends JPanel {
 		//Taille de la carte
 	   taille_x= this.BbmG.etatJeu.getMap().getSizeX();
 	   taille_y= this.BbmG.etatJeu.getMap().getSizeY();
-	   
-		
 	}
 	
 	public void paint(Graphics g)
@@ -57,7 +55,6 @@ public class Review extends JPanel {
 		
 		g.setColor(ground_Color);
 		g.fillRect(0, 0,fen_x,fen_y);
-	   // System.out.println(taille_x);
 	
 		double stepx = fen_x/(double)taille_x;
 		double stepy = fen_y/(double)taille_y;
@@ -100,7 +97,6 @@ public class Review extends JPanel {
 			position_x+=stepx;
 		}
 		
-		
 		ArrayList<Agent_Bomberman> bombermans = BbmG.etatJeu.getBombermans();
 		ArrayList<Agent_Rajion> rajions = BbmG.etatJeu.getRajions();
 		ArrayList<Agent_Ennemy> ennemies = BbmG.etatJeu.getEnnemies();
@@ -122,12 +118,10 @@ public class Review extends JPanel {
 			dessine_Rajion(g,rajions.get(i));	
 		}
 		
-		
 		for(int i = 0; i < bombermans.size(); i++){
 
 			if(!bombermans.get(i).isDead())
 				dessine_Bomberman(g,bombermans.get(i));
-			
 		}
 		
 		if( tower != null) dessine_Tower(g,tower);
@@ -185,8 +179,6 @@ public class Review extends JPanel {
 				e.printStackTrace();
 			}
 		}
-		
-		
 	}
 	
 	void dessine_Bird(Graphics g, Agent_Bird agent)
@@ -240,8 +232,6 @@ public class Review extends JPanel {
 				e.printStackTrace();
 			}
 		}
-		
-		
 	}
 	
 	void dessine_Rajion(Graphics g, Agent_Rajion agent)
@@ -295,11 +285,9 @@ public class Review extends JPanel {
 				e.printStackTrace();
 			}
 		}
-		
-		
 	}
 	
-void dessine_Tower(Graphics g, Agent_Tower tower){
+	void dessine_Tower(Graphics g, Agent_Tower tower){
 		
 		int fen_x = getSize().width;
 		int fen_y = getSize().height;
@@ -423,8 +411,6 @@ void dessine_Tower(Graphics g, Agent_Tower tower){
 				e.printStackTrace();
 			}
 		}
-		
-		
 	}
 
 	public int getTaille_y() {
@@ -434,6 +420,4 @@ void dessine_Tower(Graphics g, Agent_Tower tower){
 	public int getTaille_x() {
 		return taille_x;
 	}
-	
-	
 }

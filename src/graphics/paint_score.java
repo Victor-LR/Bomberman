@@ -23,22 +23,35 @@ import agents.Agent_Bomberman;
 
 
 public class paint_score implements GameObserver {
-
+	/*Paint score renvoie un JPanel construit à partir des informations du jeu récupérées grâce au GameObserver
+	 * deispose aussi d'un mini menu intéragissant avec le jeu : play, pause, restart, back to menu ...
+	 */
 	BombermanGame BbmG;
 	
-	public Cadre_Jeu c_j = null;
-	public JPanel panel = null;
+	//cadre jeu dans lequel il est impléméenté
+	private Cadre_Jeu c_j = null;
+	private JPanel panel = null;
+
+	//Japanels construisant paint score
 	private JPanel panBoutton= null;
 	private JPanel panMenu= null;
 	private JPanel panScore = null;
+	
+	//liste de label recupérant les différents score des bombermans présents sur le jeu
 	public ArrayList<JLabel> listlab;
+	
+	//bouton du mini menu
 	private JButton stop =null;
 	private JButton run =null;
 	private JButton restart =null;
 	private JButton back =null;
+	private JSlider slider = null;
+	
+	//information sur le jeu 
 	private JLabel turn = null;
 	private JLabel nomNiveau = null;
-	private JSlider slider = null;
+	
+	//permet de reconstruire un BombermanGame avec restart
 	private int[] old_strat = new int[10];
 	private boolean old_campagne = false;
 	
@@ -68,8 +81,6 @@ public class paint_score implements GameObserver {
 		
 		listlab = new ArrayList<JLabel>();
 		
-		
-		
 		Icon icon_pause = new ImageIcon("./image/icon_pause.png");
 		stop = new JButton(icon_pause);
 		this.panBoutton.add(this.stop);
@@ -96,6 +107,7 @@ public class paint_score implements GameObserver {
 		panMenu.add(slider);
 		panel.add(panMenu);
 		
+		//attribution des couleurs pour les score en fonction des couleurs des bombermans
 		ArrayList<Agent_Bomberman> bombermans = this.BbmG.etatJeu.getBombermans();
 		for(int i = 0; i < bombermans.size(); i++){
 			this.listlab.add(new JLabel());
@@ -120,7 +132,6 @@ public class paint_score implements GameObserver {
 	            	listlab.get(i).setForeground(Color.black);
 	                break;
 	        }
-
 			panScore.add(listlab.get(i));
 		}
 		
@@ -139,11 +150,8 @@ public class paint_score implements GameObserver {
 		creer_button();
 	}
 	
-	
-
 	public void creer_button(){
-
-		
+		//action de back to menu
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evenement) {
 				
@@ -157,6 +165,7 @@ public class paint_score implements GameObserver {
 			}
 		});
 		
+		//action du bouton restart
 		restart.setFocusPainted(false);
 		restart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evenement) {
@@ -170,7 +179,6 @@ public class paint_score implements GameObserver {
 					e.printStackTrace();
 				}
 				
-				
 				BbmG.init();
 				BbmG.etatJeu.setCampagne(false);
         
@@ -180,10 +188,10 @@ public class paint_score implements GameObserver {
 				BbmG.launch();
 				paint_bomberman PBM = new paint_bomberman(c_j,BbmG);
 		        c_j.add("Center",PBM);
-				
 			}
 		});
 		
+		//action du bouton play
 		run.setFocusPainted(false);
 		run.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evenement) {
@@ -195,6 +203,7 @@ public class paint_score implements GameObserver {
 			}
 		});
 		
+		//action du bouton pause
 		stop.setFocusPainted(false);
 		stop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evenement) {
@@ -207,8 +216,7 @@ public class paint_score implements GameObserver {
 			}
 		});
 		
-		
-		
+		//action du slider (change la vitesse du jeu)
 		slider.addChangeListener(new ChangeListener() {
 			double temps_start = BbmG.getTemps();
 		    public void stateChanged(ChangeEvent event) {
@@ -216,15 +224,14 @@ public class paint_score implements GameObserver {
 		        BbmG.setTemps(1.0/value*temps_start);
 		      }
 		 });
-		
-		
 	}
-	 
+	
+	//actualise le score pour les différents bombermans
 	public void affichage_score(Agent_Bomberman ag,int i){
 		listlab.get(i).setText("N°"+(i+1)+" score : "+ag.getPoints()+"    ");
 	}
 
-
+	//appel de la fonction update qui permet à chaque tpour de changer les information nécéssaire dans paint score (score, nb tour, action du menuu...)
 	@Override
 	public void update() {
 		
@@ -234,11 +241,8 @@ public class paint_score implements GameObserver {
 			
 			//System.out.println("		test score "+ bomberman.getPoints());
 		}
-		
 		this.turn.setText("Tour : "+this.BbmG.getTurn()+"	");
 		
-		
-			
 	}
 	
 	public void activerStop() {
@@ -278,5 +282,13 @@ public class paint_score implements GameObserver {
 	
 	public void setRestart(JButton restart) {
 		this.restart = restart;
+	}
+	
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public void setPanel(JPanel panel) {
+		this.panel = panel;
 	}
 }

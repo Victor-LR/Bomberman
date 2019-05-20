@@ -14,7 +14,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Map implements Serializable {
-	
+	/**
+	 * Permet de lire un layout et d'en retirer les informations (placement des murs 
+	 */
+	private static final long serialVersionUID = 1L;
+	//variable pour les diférentes actions des agents
 	public static int NORTH = 0;
 	public static int SOUTH = 1;
 	public static int EAST = 2;
@@ -46,13 +50,11 @@ public class Map implements Serializable {
 	
 	private boolean stuck[][];
 	
-	
 	public Map(String filename) throws Exception{
 		
 		this.filename = filename;
 		
 		try{
-//			System.out.println("Le fichier chargé : "+filename);
 		//On lit le fichier pour determiner les différents éléments de la map
 		
 		InputStream flux =new FileInputStream(filename); 
@@ -75,7 +77,6 @@ public class Map implements Serializable {
 			nbY++;
 		}			
 		tampon.close(); 
-//		System.out.println("### Taille de la map "+nbX+" ; "+nbY);
 		
 		//implémentation des différentes valeurs dans les variable correspondante
 		
@@ -162,13 +163,10 @@ public class Map implements Serializable {
 		for(int x=0;x<size_x;x++) if (!walls[x][size_y-1]) throw new Exception("Mauvais format du fichier: la carte doit etre close");
 		for(y=0;y<size_y;y++) if (!walls[0][y]) throw new Exception("Mauvais format du fichier: la carte doit etre close");
 		for(y=0;y<size_y;y++) if (!walls[size_x-1][y]) throw new Exception("Mauvais format du fichier: la carte doit etre close");
-//		System.out.println("### Carte chargée.");
-		
 		
 		}catch (Exception e){
 			System.out.println("Erreur : "+e.getMessage());
 		}
-		
 
 		stuck = new boolean [ getSizeX()][ getSizeY()];
 		
@@ -188,7 +186,7 @@ public class Map implements Serializable {
 			e.printStackTrace();
 		}
 		return null;
-}
+	}
 	
 	//renvoie la largeur de la map
 	public int getSizeX() {return(size_x);}
@@ -203,22 +201,6 @@ public class Map implements Serializable {
 		assert((y>=0) && (y<size_y));
 		return(walls[x][y]);
 	}
-	
-	//verifie à une coordonnée si c'est un mur destructible ou non 
-//	public boolean isBrokable_Wall(int x,int y) 
-//	{
-//		assert((x>=0) && (x<size_x));
-//		assert((y>=0) && (y<size_y));
-//		//System.out.println(brokable_walls[x][y]);
-//		return(brokable_walls[x][y]);
-//	}
-//	
-//	//Setteur d'un brokable wall pour soit en créer unsoit en faire disparaitre un
-//	
-//	public void setBrokable_Wall(int x,int y, boolean bool) 
-//	{
-//		this.brokable_walls[x][y] = bool;
-//	}
 	
 	//Recupère le nom du fichier 
 	public String getFilename(){
@@ -264,31 +246,8 @@ public class Map implements Serializable {
 	public int getEnnemy_start_y(int i){
 		return ennemy_start_y.get(i);
 	}
-	
-////////////////////////////////BOMB/////////////////////////////////
-	
-	/*//Renvoie le nb de bomb
-	public int getNumber_of_bombs(){
-		return ennemy_start_x.size();
-	}
-		
-	//Renvoie la position x de la bomb choisi
-	public int getBomb_start_x(int i){
-		return bomb_start_x.get(i);
-	}
-		
-	//Renvoie la position y de la bomb choisi
-	public int getBomb_start_y(int i){
-		return bomb_start_y.get(i);
-	}
-	
-	//Insert une bomb
-	public void AddBomb(int x, int y){
-		 bomb_start_x.add(x);
-		 bomb_start_y.add(y);
-	}*/
-	
-//////////////////////STUCK//////////////////////
+
+//////////////////////STUCK : ne sert que dans certaines stratégies//////////////////////
 	
 	public boolean isStuck(int x,int y) 
 	{
@@ -335,7 +294,5 @@ public class Map implements Serializable {
 	public int getRajion_start_y(int i){
 	return rajion_start_y.get(i);
 	}
-
-
 	
 }
