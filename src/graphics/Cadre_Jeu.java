@@ -1,16 +1,4 @@
 package graphics;
-
-/*import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.GridBagLayout;
-import java.util.ArrayList;
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;*/
-
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -25,15 +13,14 @@ import graphics.paint_score;
 
 public class Cadre_Jeu extends JFrame { 
 	
+	//JFrame composé de deux JPanel : les scores et le jeu en lui même
+	
 	private static final long serialVersionUID = 1L;
-	//GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-    //Point centerPoint = ge.getCenterPoint();
-    public JPanel p_bm;
-
-
+    private JPanel p_bm;
 	private paint_score p_sc;
 	
     //Création de la fenêtre de jeu
+	
 	public Cadre_Jeu(BombermanGame BbmG){
 		
 		    this.setSize(BbmG.etatJeu.getMap().getSizeX()*50, (BbmG.etatJeu.getMap().getSizeY()*50)+45);
@@ -45,16 +32,12 @@ public class Cadre_Jeu extends JFrame {
 	        this.setLayout(new BorderLayout());
 	     
 	        p_sc = new paint_score(this,BbmG);
-	        this.add("North",p_sc.panel);
+	        this.add("North",p_sc.getPanel());
 	        
 	        p_bm = new paint_bomberman(this,BbmG);
 	        this.add("Center",p_bm);
 	        
 	        this.setVisible(true);
-
-	        
-	       // this.getContentPane();
-	        
 	}
 	
     public paint_score getP_sc() {
@@ -68,7 +51,4 @@ public class Cadre_Jeu extends JFrame {
 	public JPanel getP_bm() {
 		return p_bm;
 	}
-	
-	
-	//JButton choixRun;
 }

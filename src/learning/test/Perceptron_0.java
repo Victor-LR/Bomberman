@@ -66,10 +66,6 @@ public class Perceptron_0 {
 			PerceptronAgent agent_bomberman = new PerceptronAgent(state.getBombermans().get(0),s, p);
 			GameS.setBomberman(0, agent_bomberman);
 			
-			//System.out.println(RewardTools.getAverageReward(state_b, agent_bomberman, r, 150, 1));
-			
-			//System.out.println(state_b.getBombermans().get(0).getClass().getName());
-			
 			RewardTools.vizualize(GameS, agent_bomberman, r, 1000,20);
 		
 		} catch (Exception e) {

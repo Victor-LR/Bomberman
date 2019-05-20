@@ -10,12 +10,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class Cadre_gagnant extends JFrame {
+	
+	//S'afiche quand le jeu est terminé qu'il soit gagné ou perdu
 
 	private static final long serialVersionUID = 1L;
 	
 	private JButton back = null;
 	private JLabel gagnant = null;
 	private JFrame cadre_jeu = null;
+	
+	//Récupère la phrase de fin de jeu "Game Over" "Gagnant par point" ...
 	
 	public Cadre_gagnant(String winner,int id, JFrame c_j) {
 		
@@ -28,6 +32,8 @@ public class Cadre_gagnant extends JFrame {
 		this.setLayout(new GridLayout(2,1));
 		
 		this.gagnant = new JLabel(winner);
+		
+		//Applique la bonne couleur en fonction du gagnat sur le String 
 		
 			switch(id)
 	        {
@@ -65,7 +71,7 @@ public class Cadre_gagnant extends JFrame {
 	}
 	
 	public void creer_button(){
-		
+		//action du bouton back to menu
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evenement) {
 				

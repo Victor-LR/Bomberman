@@ -20,7 +20,6 @@ import org.apache.commons.lang3.SerializationUtils;
 
 import map.GameState;
 import map.Map;
-import agents.Agent;
 import agents.Agent_Bomberman;
 import game.BombermanGame;
 import learning.AgentFitted;
@@ -37,36 +36,51 @@ import learning.perceptron.RechercheAleatoire;
 
 public class Cadre_menu extends JFrame{
 
+	//JFrame menu principal : permet de choisir entre les différents modes 
+	//et le différentes façon de lancer le jeu avec les stratégie adressée au bombermans
+	
 	private static final long serialVersionUID = 1L;
 	
 	private BombermanGame BbmG = null;
 	
+	//choix du stage
 	private JComboBox<File> liste_lay;
 	private JLabel choixStage;
+	
+	//choix de la fonçon dont on lance le jeu : normal ou multithreads
 	private JButton jouer = null;
 	private JButton multi = null;
+	
+	//Prevu du niveau choisi
 	private Review review = null;
+	
 	private JPanel panelMap = null;
 	private JPanel choixStrats = null;
 	private JPanel choix = null;
+	
+	//Liste adaptée au nombre de bombermens sur la map : crée les listes déroulantes pour les choix des tratégies
 	private ArrayList<JComboBox<String>> listStrat = null;
+	
+	//JMenu pour les modes
 	private JMenuBar menu = null;
 	private JMenu mode = null;
 	private JMenuItem campagne= null;
 	private JMenuItem normal = null;
 	private JMenuItem perceptron_0 = null;
 	private JMenuItem testAlgoAlea = null;
+	
+	//nom du stage choisi
 	private String content = null;
+	
+	//booléen pour le choix du mode 
 	private Boolean is_campagne = null;
 	private Boolean is_perceptron = null;
 	private Boolean is_testAlgo = null;
 	
 	private int[] strategies = new int[100];
-	
 	private int nb_threads = 10000;
 	
 	public Cadre_menu() {
-		
 		
 		this.setTitle("Menu Jeu Bomberman");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -141,7 +155,6 @@ public class Cadre_menu extends JFrame{
 		BbmG.init();
 		review = new Review(BbmG);
 		
-		
 		choixStrats.setLayout(new GridLayout(BbmG.etatJeu.getBombermans().size(),2));
 		
 		String[] nomStrat = {"Auto","Joueur1","Joueur2","A_Items","A","B","C","PVE","PVP","D","A PVP"};
@@ -153,29 +166,23 @@ public class Cadre_menu extends JFrame{
 			choixStrats.add(liste);
 			
 		}
-		
-		
 		this.add("South",choixStrats);
 		this.add("North",choix);
 		this.add("Center",review);
 		
-		System.out.println(review.getTaille_x());
-		
+		//taille de la prévu adaptée a la taille du niveau choisi
 		this.setSize(review.getTaille_x()*40, review.getTaille_y()*40+BbmG.etatJeu.getBombermans().size()*25+50);
 		this.setLocationRelativeTo(null);
 
 		creer_button(this,BbmG);
-		
-		System.out.println(content);
 	}
 	
 	
 	public void creer_button(final Cadre_menu cadre_menu, final BombermanGame BbmG){
-
+		//action du mode campagne
 		campagne.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent evenement) {
-				
 				is_campagne = true;
 				is_perceptron = false;
 				is_testAlgo = false;
@@ -203,7 +210,6 @@ public class Cadre_menu extends JFrame{
 				String[] nomStrat = {"Auto","Joueur1","Joueur2","A_Items","A","B","C","PVE","PVP","D","A PVP"};
 				
 				for(int i =0; i<BbmG.etatJeu.getBombermans().size();i++) {
-					
 					JComboBox<String> liste =  new JComboBox<String>(nomStrat);
 					choixStrats.add(new JLabel("Joueur n°"+(int)(( BbmG.etatJeu.getBombermans().get(i)).getId()+1)));
 					listStrat.add(liste);
@@ -215,14 +221,13 @@ public class Cadre_menu extends JFrame{
 				add("Center",review);
 				setSize(review.getTaille_x()*40, review.getTaille_y()*40+BbmG.etatJeu.getBombermans().size()*25+50);
 				setLocationRelativeTo(null);
-				
 				revalidate();
 			}
 		});
 		
 		
 		normal.addActionListener(new ActionListener() {
-			
+			//action du mode normal
 			public void actionPerformed(ActionEvent evenement) {
 				
 				is_campagne = false;
@@ -236,7 +241,7 @@ public class Cadre_menu extends JFrame{
 		});
 		
 		perceptron_0.addActionListener(new ActionListener() {
-			
+			//action du mode perceptron
 			public void actionPerformed(ActionEvent evenement) {
 				
 				is_campagne = false;
@@ -271,7 +276,7 @@ public class Cadre_menu extends JFrame{
 		});
 		
 		testAlgoAlea.addActionListener(new ActionListener() {
-			
+			//action du mode test algo
 			public void actionPerformed(ActionEvent evenement) {
 				
 				is_campagne = false;
@@ -306,8 +311,12 @@ public class Cadre_menu extends JFrame{
 		});
 	
 		jouer.addActionListener(new ActionListener() {
-			
+			/*action du bouton jouer
+			 * Change en fonction du mode choisi
+			 * reconnais le mode choisi en fonctio des booléen de ces derniers
+			 */
 			public void actionPerformed(ActionEvent evenement) {
+				////////////////////////////////////////////Perceptron///////////////////////////////////////////
 				if(is_perceptron) {
 					BombermanGame BG = new BombermanGame();
 					
@@ -320,7 +329,6 @@ public class Cadre_menu extends JFrame{
 						GameS.setCampagne(false);
 						
 						GameState state = SerializationUtils.clone(GameS);
-
 						
 						int taille =3;
 						Sensor s = new Sensor(new SimpleStateSensor(taille));
@@ -356,7 +364,7 @@ public class Cadre_menu extends JFrame{
 						e.printStackTrace();
 					}
 				}
-				
+				////////////////////////////////////////////testAlgo///////////////////////////////////////////
 				else if(is_testAlgo) {
 					BombermanGame BG = new BombermanGame();
 					
@@ -390,6 +398,7 @@ public class Cadre_menu extends JFrame{
 						e.printStackTrace();
 					}
 				}
+				////////////////////////////////////////////normal et campagne///////////////////////////////////////////
 				else{
 					try {
 						BbmG.loadFile(content);
@@ -453,11 +462,7 @@ public class Cadre_menu extends JFrame{
 								strategies[i]=10;
 							break;
 						}
-				
-	
 					}
-					
-					
 					BbmG.etatJeu.setStrats(strategies);
 					
 					Cadre_Jeu fenetre = new Cadre_Jeu(BbmG);
@@ -473,8 +478,15 @@ public class Cadre_menu extends JFrame{
 		});
 		
 		multi.addActionListener(new ActionListener() {
-			
+			/* Basiquement la meme chose que Jouer mais lance en multithreads
+			 * Multithread sur le sperceptrons : basiquement la même chose qu'un perceptrons normal,
+			 * tout en en prenant en compte que la serialization n'est certainement pas la meilleurs chose pour le gain de performance.
+			 * 
+			 * Quand le mod choisi est le mode campagne : le multithreds differt on lance le nb thread une fois
+			 * on recupere ensuite le nb de gagna tque l'on relance un deuxieme fois ainsi de suite suivant lae nombre de niveau de la campagne.
+			 */
 			public void actionPerformed(ActionEvent evenement) {
+				////////////////////////////////////////////perceptron///////////////////////////////////////////
 				if(is_perceptron) {
 					BombermanGame BG = new BombermanGame();
 					
@@ -499,10 +511,6 @@ public class Cadre_menu extends JFrame{
 							AgentFitted agent_f = new AgentFitted(state.getBombermans().get(0));
 							
 				 			RewardTools.getReward(state, agent_f,r,250);
-//				 			
-//				 			System.out.println(state.getBombermans().get(0).getClass().getName());
-//				 			
-//				 			System.out.println("			: "+agent_f.getList().size());
 				 			
 							for (Quadruplet f : agent_f.getList()) {
 								
@@ -563,7 +571,7 @@ public class Cadre_menu extends JFrame{
 						e.printStackTrace();
 					}
 				}
-				
+				////////////////////////////////////////////testAlgoALea///////////////////////////////////////////
 				else if(is_testAlgo) {
 					BombermanGame BG = new BombermanGame();
 					
@@ -637,6 +645,7 @@ public class Cadre_menu extends JFrame{
 						e.printStackTrace();
 					}
 				}
+				////////////////////////////////////////////mode campagne///////////////////////////////////////////
 				else if(is_campagne) {
 					ArrayList<Integer> index_winner = new ArrayList<Integer>();
 					ArrayList<Integer> index_winner2 = new ArrayList<Integer>();
@@ -708,9 +717,7 @@ public class Cadre_menu extends JFrame{
 									strategies[j]=10;
 								break;
 							}
-					
 						}
-						
 						un_bbmg.setTemps(1);
 						un_bbmg.new_thread();
 						un_bbmg.etatJeu.setStrats(strategies);
@@ -739,9 +746,6 @@ public class Cadre_menu extends JFrame{
 						else{
 							L_BbmAll.add(L_BbmG.get(j));
 						}
-				
-//						System.out.println("niv 1  "+L_BbmG.get(j).etatJeu.getBombermans().get(0).getPoints());
-						
 					}
 					
 					//on fait jouer les bomberman gagnant en reprenant leur statistique sur le niveau 2
@@ -781,7 +785,6 @@ public class Cadre_menu extends JFrame{
 					for(int j = 0 ; j < L_BbmG2.size(); j++){
 						try {
 							L_BbmG2.get(j).getThread().join();
-//							System.out.println("	Attente Thread n°"+j);
 
 						} catch (InterruptedException e) {
 							e.printStackTrace();
@@ -792,7 +795,6 @@ public class Cadre_menu extends JFrame{
 						else{
 							L_BbmAll.add(L_BbmG2.get(j));
 						}
-//						System.out.println("niv 2 "+L_BbmG2.get(j).etatJeu.getBombermans().get(0).getPoints());
 					}
 					
 					//on fait jouer les bomberman qui on gagné le stage précédent sur le 3eme niveau
@@ -838,7 +840,6 @@ public class Cadre_menu extends JFrame{
 							System.out.println("erreur !");
 						}
 						L_BbmAll.add(L_BbmG3.get(j));
-//						System.out.println("niv 3 "+L_BbmG3.get(j).etatJeu.getBombermans().get(0).getPoints());
 					}
 					
 					System.out.println("			Fin multithreads");
@@ -849,6 +850,7 @@ public class Cadre_menu extends JFrame{
 					
 					cadre_menu.dispose();
 				}
+				////////////////////////////////////////////mode normal///////////////////////////////////////////
 				else {
 					ArrayList<BombermanGame> L_BbmG = new ArrayList<BombermanGame>();
 					for (int i = 0 ; i < nb_threads ; i++){
@@ -945,7 +947,7 @@ public class Cadre_menu extends JFrame{
 				
 			});
 	
-		
+		//action lors du choix de niveau : avec le changement de la preview
 		liste_lay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evenement) {
 				listStrat = new ArrayList<JComboBox<String>>();
