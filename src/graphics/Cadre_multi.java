@@ -124,6 +124,10 @@ public class Cadre_multi extends JFrame {
 					stat_finPartie[GameState.EX_AEQUO] +=1;
 					break;
 					
+				case GameState.FIN_TOUR :
+					stat_finPartie[GameState.GAME_OVER] +=1;
+					break;
+					
 				case GameState.GAME_OVER :
 					stat_finPartie[GameState.GAME_OVER] +=1;
 					break;
