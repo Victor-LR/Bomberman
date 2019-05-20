@@ -207,10 +207,13 @@ public class paint_score implements GameObserver {
 			}
 		});
 		
+		
+		
 		slider.addChangeListener(new ChangeListener() {
-		      public void stateChanged(ChangeEvent event) {
+			double temps_start = BbmG.getTemps();
+		    public void stateChanged(ChangeEvent event) {
 		        int value = slider.getValue();
-		        BbmG.setTemps(1.0/value*1000);
+		        BbmG.setTemps(1.0/value*temps_start);
 		      }
 		 });
 		
