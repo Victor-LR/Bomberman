@@ -1,8 +1,11 @@
 package learning.test;
 
+import java.util.ArrayList;
+
 import org.apache.commons.lang3.SerializationUtils;
 
 import game.BombermanGame;
+import graphics.Cadre_multi;
 import learning.Reward;
 import learning.RewardTools;
 import learning.Sensor;
@@ -42,10 +45,53 @@ public class TestAlgoAlea {
 			Perceptron perceptron = ra.getMeilleur();
 			PerceptronAgent agent_bomberman = new PerceptronAgent(state.getBombermans().get(0),sens, perceptron);
 			
-			System.out.println(RewardTools.getAverageReward(state, agent_bomberman, r, 100, 100));
 			GameS.setBomberman(0, agent_bomberman);
 			
-			RewardTools.vizualize(GameS, agent_bomberman, r, 1000, 150);
+			//System.out.println(RewardTools.getAverageReward(GameS, agent_bomberman, r, 100, 100));
+			
+			
+			ArrayList<BombermanGame> L_BbmG = new ArrayList<BombermanGame>();
+			for (int i = 0 ; i < 500 ; i++){
+				PerceptronAgent agent_b = new PerceptronAgent(agent_bomberman,sens, perceptron);
+				BombermanGame un_bbmg = new BombermanGame();
+				
+				try {
+					un_bbmg.loadFile("./layout/perceptron.lay");
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				
+				un_bbmg.init();
+				un_bbmg.etatJeu.setCampagne(false);
+				un_bbmg.etatJeu.setStrats(strat);
+				un_bbmg.etatJeu.setBomberman(0, agent_b);
+				
+				un_bbmg.setTemps(1);
+				un_bbmg.new_thread();
+				L_BbmG.add(un_bbmg);
+				un_bbmg.getThread().start();
+					
+				System.out.println("	Thread n°"+i);
+				
+			}
+				
+			for(int j = 0 ; j < L_BbmG.size(); j++){
+				try {
+					L_BbmG.get(j).getThread().join();
+					System.out.println("	Attente Thread n°"+j);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+					System.out.println("erreur !");
+				}
+			}
+			
+			System.out.println("			Fin multithreads");
+
+			Cadre_multi c_m = new Cadre_multi(L_BbmG,500);
+			c_m.setVisible(true);
+			
 		}
 		catch (Exception e) {
 			e.printStackTrace();

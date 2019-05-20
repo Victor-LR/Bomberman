@@ -1,11 +1,12 @@
 package learning;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import learning.perceptron.SparseVector;
 import map.GameState;
 
-public class SimpleStateSensor implements StateSensor	{
+public class SimpleStateSensor implements StateSensor, Serializable	{
 
 	private int n;
 	private SparseVector vector;
