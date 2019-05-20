@@ -35,7 +35,7 @@ public class SimpleStateSensor implements StateSensor	{
 		int or2;
 		int N=n/2;
 		int x=s.getBombermans().get(0).getX();
-		int y=s.getBombermans().get(0).getX();;
+		int y=s.getBombermans().get(0).getY();;
 		
 		if (x-N <0){
 			ab1=0;
