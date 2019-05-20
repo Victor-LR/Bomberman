@@ -16,11 +16,24 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import map.GameState;
+import org.apache.commons.lang3.SerializationUtils;
 
+import map.GameState;
+import map.Map;
 import agents.Agent;
 import agents.Agent_Bomberman;
 import game.BombermanGame;
+import learning.AgentFitted;
+import learning.Quadruplet;
+import learning.Reward;
+import learning.RewardTools;
+import learning.Sensor;
+import learning.SimpleReward;
+import learning.SimpleStateSensor;
+import learning.perceptron.LabeledSet;
+import learning.perceptron.Perceptron;
+import learning.perceptron.PerceptronAgent;
+import learning.perceptron.RechercheAleatoire;
 
 public class Cadre_menu extends JFrame{
 
@@ -41,8 +54,12 @@ public class Cadre_menu extends JFrame{
 	private JMenu mode = null;
 	private JMenuItem campagne= null;
 	private JMenuItem normal = null;
+	private JMenuItem perceptron_0 = null;
+	private JMenuItem testAlgoAlea = null;
 	private String content = null;
 	private Boolean is_campagne = null;
+	private Boolean is_perceptron = null;
+	private Boolean is_testAlgo = null;
 	
 	private int[] strategies = new int[100];
 	
@@ -61,16 +78,26 @@ public class Cadre_menu extends JFrame{
 		mode = new JMenu();
 		mode.setText("Mode");
 		
+		is_campagne = false;
+		is_perceptron = false;
+		is_testAlgo = false;
+		
 		campagne = new JMenuItem();
 		campagne.setText("campagne");
-		is_campagne = false;
-		
 		
 		normal = new JMenuItem();
 		normal.setText("normal");
 		
+		perceptron_0 = new JMenuItem();
+		perceptron_0.setText("perceptron_0");
+		
+		testAlgoAlea = new JMenuItem();
+		testAlgoAlea.setText("testAlgoAlea");
+		
 		mode.add(campagne);
 		mode.add(normal);
+		mode.add(testAlgoAlea);
+		mode.add(perceptron_0);
 		
 		menu.add(mode);
 		
@@ -150,6 +177,8 @@ public class Cadre_menu extends JFrame{
 			public void actionPerformed(ActionEvent evenement) {
 				
 				is_campagne = true;
+				is_perceptron = false;
+				is_testAlgo = false;
 				
 				panelMap.remove(choixStage);
 				panelMap.remove(liste_lay);
@@ -191,13 +220,87 @@ public class Cadre_menu extends JFrame{
 			}
 		});
 		
+		
 		normal.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent evenement) {
 				
 				is_campagne = false;
+				is_perceptron = false;
+				is_testAlgo = false;
+				
 				panelMap.add(choixStage);
 				panelMap.add(liste_lay);
+				revalidate();
+			}
+		});
+		
+		perceptron_0.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent evenement) {
+				
+				is_campagne = false;
+				is_perceptron = true;
+				is_testAlgo = false;
+				
+				panelMap.remove(choixStage);
+				panelMap.remove(liste_lay);
+				
+				listStrat = new ArrayList<JComboBox<String>>();
+				remove(choixStrats);
+				choixStrats = new JPanel();
+				remove(review);
+				
+				content = "./layout/perceptron.lay";
+				
+				try {
+					BbmG.loadFile(content);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				BbmG.init();
+				
+				review = new Review(BbmG);
+				add("Center",review);
+				setSize(review.getTaille_x()*40, review.getTaille_y()*40+BbmG.etatJeu.getBombermans().size()*25+50);
+				setLocationRelativeTo(null);
+				
+				revalidate();
+			}
+		});
+		
+		testAlgoAlea.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent evenement) {
+				
+				is_campagne = false;
+				is_perceptron = false;
+				is_testAlgo = true;
+				
+				panelMap.remove(choixStage);
+				panelMap.remove(liste_lay);
+				
+				listStrat = new ArrayList<JComboBox<String>>();
+				remove(choixStrats);
+				choixStrats = new JPanel();
+				remove(review);
+				
+				content = "./layout/perceptron.lay";
+				
+				try {
+					BbmG.loadFile(content);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				BbmG.init();
+				
+				review = new Review(BbmG);
+				add("Center",review);
+				setSize(review.getTaille_x()*40, review.getTaille_y()*40+BbmG.etatJeu.getBombermans().size()*25+50);
+				setLocationRelativeTo(null);
+				
 				revalidate();
 			}
 		});
@@ -205,7 +308,89 @@ public class Cadre_menu extends JFrame{
 		jouer.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent evenement) {
+				if(is_perceptron) {
+					BombermanGame BG = new BombermanGame();
+					
+					Map map;
+					try {
+						map = new Map("./layout/perceptron.lay");
+						GameState GameS  = new GameState(map,BG);
+						int strat[] = {0};
+						GameS.setStrats(strat);
+						GameS.setCampagne(false);
+						
+						GameState state = SerializationUtils.clone(GameS);
+
+						
+						int taille =3;
+						Sensor s = new Sensor(new SimpleStateSensor(taille));
+						Reward r = new SimpleReward();
 				
+						LabeledSet train = new LabeledSet(s.size());
+						
+						for (int i = 0; i < 250; i++) {
+							AgentFitted agent_f = new AgentFitted(state.getBombermans().get(0));
+							
+				 			RewardTools.getReward(state, agent_f,r,250);
+				 			
+				 			System.out.println(state.getBombermans().get(0).getClass().getName());
+				 			
+				 			System.out.println("			: "+agent_f.getList().size());
+				 			
+							for (Quadruplet f : agent_f.getList()) {
+								
+								train.addExample(f.getAtteint(), f.getR_obtenu());
+							}
+						}
+						
+						Perceptron p = new Perceptron(0.02,taille);  // epsilone=0.02
+						System.out.println("Nombre d'échantillon : " + train.size());
+						p.setNb_iteration(1); //150 iterations
+						p.train(train);
+						PerceptronAgent agent_bomberman = new PerceptronAgent(state.getBombermans().get(0),s, p);
+						GameS.setBomberman(0, agent_bomberman);
+						
+						RewardTools.vizualize(GameS, agent_bomberman, r, 1000,20);
+					
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				
+				else if(is_testAlgo) {
+					BombermanGame BG = new BombermanGame();
+					
+					Map map;
+					try {
+						map = new Map("./layout/perceptron.lay");
+						GameState GameS  = new GameState(map,BG);
+						int strat[] = {0};
+						GameS.setStrats(strat);
+						GameS.setCampagne(false);
+						
+						GameState state = SerializationUtils.clone(GameS);
+
+						
+						int taille =3;
+						Sensor sens = new Sensor(new SimpleStateSensor(taille));
+						Reward r = new SimpleReward();
+						
+						RechercheAleatoire ra = new RechercheAleatoire(50, 40, Math.random()*0.2-0.1, state,r, sens);
+						for(int i=0;i<10; i++){
+							ra.evoluer();
+						}
+						Perceptron perceptron = ra.getMeilleur();
+						PerceptronAgent agent_bomberman = new PerceptronAgent(state.getBombermans().get(0),sens, perceptron);
+						
+						GameS.setBomberman(0, agent_bomberman);
+						
+						RewardTools.vizualize(GameS, agent_bomberman, r, 1000, 100);
+		
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				else{
 					try {
 						BbmG.loadFile(content);
 						
@@ -284,12 +469,175 @@ public class Cadre_menu extends JFrame{
 					BbmG.launch();
 					cadre_menu.dispose();
 				}
-			});
+			}
+		});
 		
 		multi.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent evenement) {
-				if(is_campagne) {
+				if(is_perceptron) {
+					BombermanGame BG = new BombermanGame();
+					
+					Map map;
+					try {
+						map = new Map("./layout/perceptron.lay");
+						GameState GameS  = new GameState(map,BG);
+						int strat[] = {0};
+						GameS.setStrats(strat);
+						GameS.setCampagne(false);
+						
+						GameState state = SerializationUtils.clone(GameS);
+
+						
+						int taille =3;
+						Sensor s = new Sensor(new SimpleStateSensor(taille));
+						Reward r = new SimpleReward();
+				
+						LabeledSet train = new LabeledSet(s.size());
+						
+						for (int i = 0; i < 250; i++) {
+							AgentFitted agent_f = new AgentFitted(state.getBombermans().get(0));
+							
+				 			RewardTools.getReward(state, agent_f,r,250);
+//				 			
+//				 			System.out.println(state.getBombermans().get(0).getClass().getName());
+//				 			
+//				 			System.out.println("			: "+agent_f.getList().size());
+				 			
+							for (Quadruplet f : agent_f.getList()) {
+								
+								train.addExample(f.getAtteint(), f.getR_obtenu());
+							}
+						}
+						
+						Perceptron p = new Perceptron(0.02,taille);  // epsilone=0.02
+						System.out.println("Nombre d'échantillon : " + train.size());
+						p.setNb_iteration(1); //150 iterations
+						p.train(train);
+						PerceptronAgent agent_bomberman = new PerceptronAgent(state.getBombermans().get(0),s, p);
+						GameS.setBomberman(0, agent_bomberman);
+						
+						ArrayList<BombermanGame> L_BbmG = new ArrayList<BombermanGame>();
+						for (int i = 0 ; i < 500 ; i++){
+							PerceptronAgent agent_b = SerializationUtils.clone(agent_bomberman);
+							BombermanGame un_bbmg = new BombermanGame();
+							
+							try {
+								un_bbmg.loadFile("./layout/perceptron.lay");
+
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							
+							
+							un_bbmg.init();
+							un_bbmg.etatJeu.setCampagne(false);
+							un_bbmg.etatJeu.setStrats(strat);
+							un_bbmg.etatJeu.setBomberman(0, agent_b);
+							
+							un_bbmg.setTemps(1);
+							un_bbmg.new_thread();
+							L_BbmG.add(un_bbmg);
+							un_bbmg.getThread().start();
+								
+							System.out.println("	Thread n°"+i);
+							
+						}
+							
+						for(int j = 0 ; j < L_BbmG.size(); j++){
+							try {
+								L_BbmG.get(j).getThread().join();
+								System.out.println("	Attente Thread n°"+j);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+								System.out.println("erreur !");
+							}
+						}
+						
+						System.out.println("			Fin multithreads");
+
+						Cadre_multi c_m = new Cadre_multi(L_BbmG,500);
+						c_m.setVisible(true);
+					
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				
+				else if(is_testAlgo) {
+					BombermanGame BG = new BombermanGame();
+					
+					Map map;
+					try {
+						map = new Map("./layout/perceptron.lay");
+						GameState GameS  = new GameState(map,BG);
+						int strat[] = {0};
+						GameS.setStrats(strat);
+						GameS.setCampagne(false);
+						
+						GameState state = SerializationUtils.clone(GameS);
+
+						
+						int taille =3;
+						Sensor sens = new Sensor(new SimpleStateSensor(taille));
+						Reward r = new SimpleReward();
+						
+						RechercheAleatoire ra = new RechercheAleatoire(50, 40, Math.random()*0.2-0.1, state,r, sens);
+						for(int i=0;i<10; i++){
+							ra.evoluer();
+						}
+						Perceptron perceptron = ra.getMeilleur();
+						PerceptronAgent agent_bomberman = new PerceptronAgent(state.getBombermans().get(0),sens, perceptron);
+						
+						GameS.setBomberman(0, agent_bomberman);
+						
+						ArrayList<BombermanGame> L_BbmG = new ArrayList<BombermanGame>();
+						for (int i = 0 ; i < 500 ; i++){
+							PerceptronAgent agent_b = SerializationUtils.clone(agent_bomberman);
+							BombermanGame un_bbmg = new BombermanGame();
+							
+							try {
+								un_bbmg.loadFile("./layout/perceptron.lay");
+
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							
+							
+							un_bbmg.init();
+							un_bbmg.etatJeu.setCampagne(false);
+							un_bbmg.etatJeu.setStrats(strat);
+							un_bbmg.etatJeu.setBomberman(0, agent_b);
+							
+							un_bbmg.setTemps(1);
+							un_bbmg.new_thread();
+							L_BbmG.add(un_bbmg);
+							un_bbmg.getThread().start();
+								
+							System.out.println("	Thread n°"+i);
+							
+						}
+							
+						for(int j = 0 ; j < L_BbmG.size(); j++){
+							try {
+								L_BbmG.get(j).getThread().join();
+								System.out.println("	Attente Thread n°"+j);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+								System.out.println("erreur !");
+							}
+						}
+						
+						System.out.println("			Fin multithreads");
+
+						Cadre_multi c_m = new Cadre_multi(L_BbmG,500);
+						c_m.setVisible(true);
+		
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				else if(is_campagne) {
 					ArrayList<Integer> index_winner = new ArrayList<Integer>();
 					ArrayList<Integer> index_winner2 = new ArrayList<Integer>();
 					ArrayList<BombermanGame> L_BbmG = new ArrayList<BombermanGame>();
