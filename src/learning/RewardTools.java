@@ -84,7 +84,7 @@ public class RewardTools {
 	 */
 
 	
-	public static void vizualize(GameState initial_state, PerceptronAgent bomberman_agent,Reward reward,int size_max_trajectory,int timestep)
+	public static void vizualize(GameState initial_state, Agent_Bomberman bomberman_agent,Reward reward,int size_max_trajectory,int timestep)
 	{
 		
 		BombermanGame BbmG = new BombermanGame(initial_state, initial_state.getMap());
