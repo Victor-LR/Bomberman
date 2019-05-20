@@ -15,18 +15,16 @@ import strategies.Strategie_D;
 import strategies.Strategie_PVE;
 import strategies.Strategie_PVP;
 import agents.Agent;
-import learning.Quadruplet;
 
 public class Agent_Bomberman extends Agent {
 	
 	private int range;
 	private int points = 0;
 	private int nbBombes;
+	
 	private ColorBomberman couleur;
 	private int nbActions = 10;
 	private int maladie = 10;
-	
-//	private int life;
 
 	private boolean isInvincible;
 	private int etatInvincible;
@@ -41,7 +39,6 @@ public class Agent_Bomberman extends Agent {
 		super(AgentType.BOMBERMAN, px, py);
 		super.setId(id);
 		
-		
 		this.range = 1;
 		this.points = 0;
 		this.nbBombes = 1;
@@ -52,10 +49,10 @@ public class Agent_Bomberman extends Agent {
 		this.isSick = false;
 		this.etatSick = 0;
 		
-		//this.id = id;
 	}
 	
 
+	//renvoi une action a effectué en fonction du comportement du Bomberman
 	public AgentAction chooseAction(GameState etatjeu) 
 	{
 		AgentAction action ;
@@ -128,6 +125,7 @@ public class Agent_Bomberman extends Agent {
 				
 	}	
 	
+	//getteur et setteur de la stratégie du bomberman
 	public Strategie getStrategie() {
 		return strategie;
 	}
@@ -140,30 +138,40 @@ public class Agent_Bomberman extends Agent {
 		this.strat = strat;
 	}
 	
+	//getteurs et setteurs des différentes informations liées au bombes du Bomberman
 	public int getRange() {
 		return range;
 	}
-
 
 	public void setRange(int range) {
 		this.range = range;
 	}
 	
-	public int getPoints() {
-		return points;
-	}
-
-	public void setPoints(int point) {
-		this.points = point;
-	}
-	
-	
 	public int getNbBombes() {
 		return nbBombes;
 	}
-
+	
 	public void setNbBombes(int nbBombes) {
 		this.nbBombes = nbBombes;
+	}
+	
+	// getteur et setteur du nombre d'action que peut effectuer un Bomberman
+	public int getNbActions() {
+		return nbActions;
+	}
+
+	public void setNbActions(int actions) {
+		this.nbActions = actions;
+	}
+	
+	//getteurs et setteurs de la couleur et des points du Bomberman
+	
+	public int getPoints() {
+		return points;
+	}
+	
+	public void setPoints(int point) {
+		this.points = point;
 	}
 	
 	public ColorBomberman getCouleur() {
@@ -174,6 +182,7 @@ public class Agent_Bomberman extends Agent {
 		this.couleur = couleur;
 	}
 
+	//getteurs et setteurs des différents états que peut avoir le Bomberman
 	public boolean isInvincible() {
 		return isInvincible;
 	}
@@ -206,28 +215,13 @@ public class Agent_Bomberman extends Agent {
 		this.etatSick = etatSick;
 	}
 	
-	public int getNbActions() {
-		return nbActions;
-	}
-
-
-	public void setNbActions(int actions) {
-		this.nbActions = actions;
-	}
-	
 	public int getMaladie() {
 		return maladie;
 	}
-
 
 	public void setMaladie(int mal) {
 		this.maladie = mal;
 	}
 	
 	
-	
-//	@Override
-//	public int getId() {
-//		return this.id;
-//	}
 }

@@ -19,17 +19,8 @@ public class Agent_Bird extends Agent {
 	public AgentAction chooseAction(GameState etatjeu) 
 	{
 		
-		Strategie_Bird str = new Strategie_Bird(etatjeu, this);
-//		
+		Strategie_Bird str = new Strategie_Bird(etatjeu, this);	
 		return str.action();
-////		ArrayList<AgentAction> listAction=new ArrayList<AgentAction>();
-////		for(int i=0;i<5;i++)
-////		{
-////			if (etatjeu.isLegalMoveBird(new AgentAction(i), this))
-////				listAction.add(new AgentAction(i));
-////		}		
-////		return(listAction.get((int)(Math.random()*listAction.size())));
-		//return new AgentAction(Map.STOP_BIRD);
 	}
 	
 	public int getEtat() {

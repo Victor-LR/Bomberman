@@ -8,7 +8,6 @@ import agents.AgentType;
 import map.Map;
 import map.GameState;
 
-//@SuppressWarnings("serial")
 public class Agent implements Serializable{
 	
 	static int current_Id = 0;
@@ -34,7 +33,7 @@ public class Agent implements Serializable{
 		this.isDead = false;
 	}
 	
-	//créé une liste d'AgentAction qui retourne une action possible aléatoire entre toutes celles possible 
+	//créé une liste d'AgentAction qui retourne une action aléatoire entre toutes celles possibles 
 	
 	public AgentAction chooseAction(GameState etatjeu) 
 	{
@@ -48,7 +47,7 @@ public class Agent implements Serializable{
 		//return new AgentAction(Map.STOP);
 	}
 	
-	//setteur et setteur pour y
+	// getteur et setteur des coordonnées de l'agent
 	
 	public int getY() {
 		return y;
@@ -57,8 +56,6 @@ public class Agent implements Serializable{
 	public void setY(int y) {
 		this.y = y;
 	}
-	
-	//setteur et setteur pour x
 
 	public int getX() {
 		return x;
@@ -68,11 +65,12 @@ public class Agent implements Serializable{
 		this.x = x;
 	}
 	
-	//getteur pour l'agent
+	//retourne le type de l'agent
 
 	public AgentType getAgentype() {
 		return agent;
 	}
+	
 	
 	//getteur et setteur pour l'id
 	
@@ -85,6 +83,7 @@ public class Agent implements Serializable{
 	}
 	
 
+	//getteur et setteur pour le nombre de vies de l'agent
 	
 	public int getLife() {
 		return life;
@@ -106,7 +105,7 @@ public class Agent implements Serializable{
 		this.direction = direction;
 	}
 	
-	//setteur et setteur pour la la variable isDead
+	//getteur et setteur pour la mort d'un agent
 
 
 	public boolean isDead() {

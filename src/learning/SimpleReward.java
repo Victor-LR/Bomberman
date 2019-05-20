@@ -9,14 +9,14 @@ public class SimpleReward implements Reward {
 		if (to.getFinPartie() == GameState.WIN_SOLO || to.getFinPartie() == GameState.WIN_SCORE)
 			return  1000;
 		if (to.getFinPartie() == GameState.GAME_OVER)
-			return -100;
+			return -500;
 		if (to.getFinPartie() == GameState.FIN_TOUR)
-			return -100;
+			return -500;
 //		System.out.println(to.getBrokableWals() +"		"+	from.getBrokableWals());
 		if (to.getBrokableWals() == nb_murs) //tout les mur de "to" sont resté intacte
 			return 0;
 		else //des murs de "to" on été detruit dans "from"
-			return 1;
+			return 10;
 	}
 
 }
