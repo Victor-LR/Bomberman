@@ -207,10 +207,13 @@ public class paint_score implements GameObserver {
 			}
 		});
 		
+		
+		
 		slider.addChangeListener(new ChangeListener() {
-		      public void stateChanged(ChangeEvent event) {
+			double temps_start = BbmG.getTemps();
+		    public void stateChanged(ChangeEvent event) {
 		        int value = slider.getValue();
-		        BbmG.setTemps(1.0/value*1000);
+		        BbmG.setTemps(1.0/value*temps_start);
 		      }
 		 });
 		
@@ -226,7 +229,7 @@ public class paint_score implements GameObserver {
 	public void update() {
 		
 		for(int i = 0; i < this.BbmG.etatJeu.getBombermans().size(); i++){
-			Agent_Bomberman bomberman = this.BbmG.etatJeu.getBombermans().get(i);
+			Agent_Bomberman bomberman = (Agent_Bomberman) this.BbmG.etatJeu.getBombermans().get(i);
 			affichage_score(bomberman,bomberman.getId());
 			
 			//System.out.println("		test score "+ bomberman.getPoints());

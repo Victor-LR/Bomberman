@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import agents.Agent_Bomberman;
+
 import map.GameState;
 
 public class Cadre_multi extends JFrame {
@@ -87,11 +89,12 @@ public class Cadre_multi extends JFrame {
 		for(int j = 0 ; j < L_BbmG.size(); j++){
 			
 			typeFin = L_BbmG.get(j).etatJeu.getFinPartie();
-			//System.out.println(j+"				"+typeFin);
-			int point_gagnant = L_BbmG.get(j).etatJeu.getBombermans().get(L_BbmG.get(j).etatJeu.getIdGagnant()).getPoints();
+			
+			Agent_Bomberman bbm = L_BbmG.get(j).etatJeu.getBombermans().get(L_BbmG.get(j).etatJeu.getIdGagnant());
+			int point_gagnant = bbm.getPoints();
 			
 			for(int i = 0; i < nb_bbm; i++){
-				point_joueur[i] +=  L_BbmG.get(j).etatJeu.getBombermans().get(i).getPoints();
+				point_joueur[i] +=  ( L_BbmG.get(j).etatJeu.getBombermans().get(i)).getPoints();
 			}
 			
 			switch(typeFin){
@@ -159,9 +162,9 @@ public class Cadre_multi extends JFrame {
 					String joueur = "<font color = #009FFF >Joueur "+(i+1)+"</font>";
 					String pourcent_joueur = "<font color = #39B835 >"+ df.format((total/nb_threads)*100)+"%</font>";
 					
-					if (L_BbmG.get(0).etatJeu.getBombermans().get(i).getStrategie() == null) 
+					if (( L_BbmG.get(0).etatJeu.getBombermans().get(i)).getStrategie() == null) 
 						pan_result2.setText("<html>"+ joueur +" a gagné "+pourcent_joueur+" du temps avec la strategie <font color = #C90F0F >aléatoire</font>, dont :</html>");
-					else pan_result2.setText("<html>"+ joueur +" a gagné "+ pourcent_joueur +"% du temps avec strategie <font color = #C90F0F >"+L_BbmG.get(0).etatJeu.getBombermans().get(i).getStrategie().getClass().getSimpleName()+"</font>, dont :</html>");
+					else pan_result2.setText("<html>"+ joueur +" a gagné "+ pourcent_joueur +"% du temps avec strategie <font color = #C90F0F >"+( L_BbmG.get(0).etatJeu.getBombermans().get(i)).getStrategie().getClass().getSimpleName()+"</font>, dont :</html>");
 					pan_result2.setHorizontalAlignment(JLabel.CENTER);
 					panel_joueur.add(pan_result2);
 					

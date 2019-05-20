@@ -69,7 +69,6 @@ public class Cadre_gagnant extends JFrame {
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evenement) {
 				
-				
 				Cadre_menu fen = new Cadre_menu();//BbmG.getMap().getFilename());
 				fen.setVisible(true);
 				cadre_jeu.dispose();

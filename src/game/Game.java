@@ -7,6 +7,7 @@ public abstract class Game implements Runnable, InterfaceGame {
 	protected ArrayList<GameObserver> observers = new ArrayList<GameObserver>();
 	
 	private double temps = 150;
+
 	protected int turn;
 	protected int maxTurn = 1000;
 	
@@ -86,6 +87,10 @@ public abstract class Game implements Runnable, InterfaceGame {
 		turn++;	
 		notifierObservateurs();	
 		taketurn();
+	}
+	
+	public double getTemps() {
+		return temps;
 	}
 	
 	public void setTemps(double temps) {

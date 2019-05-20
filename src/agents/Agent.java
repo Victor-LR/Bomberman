@@ -1,5 +1,6 @@
 package agents;
 //import java.io.Serializable;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import agents.AgentAction;
@@ -8,7 +9,7 @@ import map.Map;
 import map.GameState;
 
 //@SuppressWarnings("serial")
-public class Agent{
+public class Agent implements Serializable{
 	
 	static int current_Id = 0;
 	

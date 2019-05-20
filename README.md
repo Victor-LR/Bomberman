@@ -273,7 +273,6 @@ Pour finir le multithread est géré à l'interieur du cadre_Menu, cela signifie
 13/05/19:
 
 - Phase de recherche pour l'implémentation d'un perceptron. Observation d'un comportement qui semble innaproprié pour l'ia du jeu Pacman utilisant un perceptron. En effet malgré l'utilisation de celui-ci, l'ia du pacman boucle dans son déplacement à partir d'un moment, ne cherche pas à gagner ou avoir plus de points.
-- 
 
 14/05/04:
 
@@ -286,6 +285,7 @@ Pour finir le multithread est géré à l'interieur du cadre_Menu, cela signifie
 - Solutions choisi par Victor et Kevin, pour eviter le problème du au choix des stratégie, au lieu de passer par une interface comme Agent_B nous prenons dle choix que toutes les classe redeffinissant la methode chooseAction extend de Agent_Bomberman.
 
 - La manoeuvre est plus ou moins réussie, le chooseAction choisi par le Bomberman correspond bien au perceptron quand celui-ci est demandé. À partir de là nous avons pus lancer la partie apprentissage puis avoir le resultat sur un jeu Bomberman avec interface graphique. Cependant nous observons, comme pour le Pacman que ce dernier rentre dans un état de boucle ou il va de haut en bas sans aucuns but. Le problème n'est pas claire et nous n'avons pas encore de réponse.
+
         
 16/05/19
 

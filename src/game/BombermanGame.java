@@ -1,9 +1,11 @@
 package game;
 
+import java.io.Serializable;
+
 import map.GameState;
 import map.Map;
 
-public class BombermanGame extends Game implements InterfaceGame {
+public class BombermanGame extends Game implements InterfaceGame, Serializable {
 
 	Map map;
 	public GameState etatJeu;
@@ -18,6 +20,17 @@ public class BombermanGame extends Game implements InterfaceGame {
 		this.filename = stage2[0];
 	}
 	
+	public BombermanGame () {
+
+	}
+	
+	public BombermanGame (GameState etatJ, Map map){
+		this.etatJeu = etatJ;
+//		this.etatJeu.setStrats(etatJ.getStrats());
+//		this.etatJeu.setCampagne(etatJ.getCampagne());
+		this.map = map;
+	}
+	
 	@Override
 	public void initializeGame() {
 		System.out.println("initialisation bombermanGame");
@@ -29,7 +42,7 @@ public class BombermanGame extends Game implements InterfaceGame {
 	@Override
 	public void taketurn() {
 		if(!etatJeu.getEnd())
-			etatJeu.taketurn();	
+			etatJeu.taketurn(null,-1);	
 		
 	}
 	
@@ -48,5 +61,10 @@ public class BombermanGame extends Game implements InterfaceGame {
 
 	public void setFilename(String filename) {
 		this.filename = filename;
+	}
+
+	public void setMaxTurn(int maxT) {
+		this.maxTurn = maxT;
+		
 	}
 }

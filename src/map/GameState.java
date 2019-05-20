@@ -1,4 +1,5 @@
 package map;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -19,13 +20,21 @@ import objets.Objet;
 import objets.Objet_Bomb;
 import objets.ObjetType;
 
-public class GameState {
-	
-	Map map;
-	
-	private Keys key_action;
-	private Keys_2 key_action_2;
 
+public class GameState implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	 Map map;
+	
+	transient private Keys key_action;
+	transient private Keys_2 key_action_2;
+
+	private boolean brokable_walls[][];
+	
 	private ArrayList<Agent_Ennemy> ennemies;
 	private ArrayList<Agent_Bird> birds;
 	private ArrayList<Agent_Rajion> rajions;
@@ -51,6 +60,7 @@ public class GameState {
 	public final static int WIN_SURVIE = 3;
 	public final static int EX_AEQUO = 4;
 	public final static int GAME_OVER = 5;
+	public final static int FIN_TOUR = 6;
 	
 	
 	private int finPartie = PLANTAGE;
@@ -65,10 +75,12 @@ public class GameState {
 	
 	
 	//Construit l'état courant de la map
-
+	
 	public GameState(Map map,BombermanGame BbmG){
 		
 		
+		brokable_walls = map.getStart_brokable_walls();
+
 		ennemies = new ArrayList<Agent_Ennemy>();
 		bombermans = new ArrayList<Agent_Bomberman>();
 		bombes = new ArrayList<Objet_Bomb>();
@@ -131,7 +143,7 @@ public class GameState {
 		int x = action.getVx();
 		int y = action.getVy();
 		
-		if(map.isWall(agent.getX()+x, agent.getY()+y) || map.isBrokable_Wall(agent.getX()+x, agent.getY()+y) || isBombe(agent.getX()+x, agent.getY()+y) || isTower(agent.getX()+x, agent.getY()+y) || isRajion(agent.getX()+x, agent.getY()+y))
+		if(map.isWall(agent.getX()+x, agent.getY()+y) || this.isBrokable_Wall(agent.getX()+x, agent.getY()+y) || isBombe(agent.getX()+x, agent.getY()+y) || isTower(agent.getX()+x, agent.getY()+y) || isRajion(agent.getX()+x, agent.getY()+y))
 			return false;
 		else return true;
 	}
@@ -142,7 +154,7 @@ public class GameState {
 		int x = actionbbm.getVx();
 		int y = actionbbm.getVy();
 			
-		if(map.isWall(bbm.getX()+x, bbm.getY()+y) || map.isBrokable_Wall(bbm.getX()+x, bbm.getY()+y) || isBombe(bbm.getX()+x, bbm.getY()+y) || isBomberman(bbm.getId(),bbm.getX()+x, bbm.getY()+y) || isTower(bbm.getX()+x, bbm.getY()+y) )
+		if(map.isWall(bbm.getX()+x, bbm.getY()+y) || this.isBrokable_Wall(bbm.getX()+x, bbm.getY()+y) || isBombe(bbm.getX()+x, bbm.getY()+y) || isBomberman(bbm.getId(),bbm.getX()+x, bbm.getY()+y) || isTower(bbm.getX()+x, bbm.getY()+y) )
 			return false;
 		else return true;
 	}
@@ -282,13 +294,14 @@ public class GameState {
 		int x = bomb.getObjX();
 		int y = bomb.getObjY();
 		
+		
 		int taille_range = 1;
 		
 		
 		if (direction == Map.EAST) {
 			for(int i = 0; i<=bomb.getRange(); i++){
 				if(x+i<map.getSizeX()){
-					if(map.isBrokable_Wall(x+i, y) || map.isWall(x+i, y)){
+					if(this.isBrokable_Wall(x+i, y) || map.isWall(x+i, y)){
 						taille_range = x+i;
 						break;
 					}
@@ -300,7 +313,7 @@ public class GameState {
 		if (direction == Map.SOUTH) {
 			for(int i = 0; i<=bomb.getRange(); i++){
 				if(y+i < map.getSizeY()){
-					if(map.isBrokable_Wall(x, y+i) || map.isWall(x, y+i)){
+					if(this.isBrokable_Wall(x, y+i) || map.isWall(x, y+i)){
 						taille_range = y+i;
 						break;
 					} else taille_range = y+i;
@@ -311,7 +324,7 @@ public class GameState {
 		if (direction == Map.WEST) {
 			for(int i = 0; i<=bomb.getRange(); i++){
 				if(x-i>=0){
-					if(map.isBrokable_Wall(x-i, y) || map.isWall(x-i, y)){
+					if(this.isBrokable_Wall(x-i, y) || map.isWall(x-i, y)){
 						taille_range = x-i;
 						break;
 					} else taille_range = x-i;
@@ -321,7 +334,7 @@ public class GameState {
 		if (direction == Map.NORTH) {
 			for(int i = 0; i<=bomb.getRange(); i++){
 				if(y-i>=0){
-					if(map.isBrokable_Wall(x, y-i) || map.isWall(x, y-i)){
+					if(this.isBrokable_Wall(x, y-i) || map.isWall(x, y-i)){
 						taille_range = y-i;
 						break;
 					} else taille_range = y-i;
@@ -351,8 +364,8 @@ public class GameState {
 		
 		range_limit = test_range(Map.EAST,bomb);
 		
-		if(map.isBrokable_Wall(range_limit, y)) {
-			map.setBrokable_Wall(range_limit,y,false);
+		if(this.isBrokable_Wall(range_limit, y)) {
+			this.setBrokable_Wall(range_limit,y,false);
 			r =(int)(Math.random()*100);
 			if ( r < pourcentage) placeItem(range_limit,y);
 		}
@@ -422,8 +435,8 @@ public class GameState {
 		
 		range_limit = test_range(Map.SOUTH,bomb);
 		
-		if(map.isBrokable_Wall(x, range_limit)) {
-			map.setBrokable_Wall(x,range_limit,false);
+		if(this.isBrokable_Wall(x, range_limit)) {
+			this.setBrokable_Wall(x,range_limit,false);
 			r =(int)(Math.random()*100);
 			if ( r < pourcentage) placeItem(x,range_limit);
 		}
@@ -495,8 +508,8 @@ public class GameState {
 			
 		range_limit = test_range(Map.WEST,bomb);
 		
-		if(map.isBrokable_Wall(range_limit, y)) {
-			map.setBrokable_Wall(range_limit,y,false);
+		if(this.isBrokable_Wall(range_limit, y)) {
+			this.setBrokable_Wall(range_limit,y,false);
 			r =(int)(Math.random()*100);
 			if ( r < pourcentage) placeItem(range_limit,y);
 		}
@@ -567,8 +580,8 @@ public class GameState {
 			
 		range_limit = test_range(Map.NORTH,bomb);
 		
-		if(map.isBrokable_Wall(x, range_limit )) {
-			map.setBrokable_Wall(x,range_limit,false);
+		if(this.isBrokable_Wall(x, range_limit )) {
+			this.setBrokable_Wall(x,range_limit,false);
 			r =(int)(Math.random()*100);
 			if ( r < pourcentage) placeItem(x,range_limit);
 		}
@@ -639,83 +652,84 @@ public class GameState {
 	
 	//Réalise un tour du jeu 
 	
-	public void taketurn(){
-		if(getCampagne()) {
+	public void taketurn(AgentAction action, int id_bbm){
 
-			if(!getEnd()) {
-
-				this.isEndCampagne(BbmG);
-				bombermansTurn();
-				ennemiesTurn();
-				birdsTurn();
-				rajionsTurn();
-				towerTurn();
-
-				
-			}else {
-
-				if(BbmG.etatJeu.getNum_niveau() == 1) {
-					try {
-						game.loadFile("./layout/niveau2.lay");
-					} catch (Exception e) {
-						e.printStackTrace();
+			if(getCampagne()) {
+	
+				if(!getEnd()) {
+	
+					this.isEndCampagne(BbmG);
+					bombermansTurn(action,id_bbm);
+					ennemiesTurn();
+					birdsTurn();
+					rajionsTurn();
+					towerTurn();
+	
+					
+				}else {
+					if(BbmG.etatJeu.getNum_niveau() == 1) {
+						try {
+							game.loadFile("./layout/niveau2.lay");
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						game.init();
+						
+						game.etatJeu.setCampagne(true);		
+						game.etatJeu.setNum_niveau(2);
+						game.etatJeu.setStrats(BbmG.etatJeu.getStrats());
+						(game.etatJeu.getBombermans().get(0)).setPoints(( BbmG.etatJeu.getBombermans().get(0)).getPoints());
+						(game.etatJeu.getBombermans().get(0)).setRange(( BbmG.etatJeu.getBombermans().get(0)).getRange());
+						( game.etatJeu.getBombermans().get(0)).setNbBombes(( BbmG.etatJeu.getBombermans().get(0)).getNbBombes());
+						
+						System.out.println(getWinner()+" stage 1");
+						
+						BbmG.stop();
+						game.launch();
+						
 					}
-					game.init();
-					
-					game.etatJeu.setCampagne(true);		
-					game.etatJeu.setNum_niveau(2);
-					game.etatJeu.setStrats(BbmG.etatJeu.getStrats());
-					game.etatJeu.getBombermans().get(0).setPoints(BbmG.etatJeu.getBombermans().get(0).getPoints());
-					game.etatJeu.getBombermans().get(0).setRange(BbmG.etatJeu.getBombermans().get(0).getRange());
-					game.etatJeu.getBombermans().get(0).setNbBombes(BbmG.etatJeu.getBombermans().get(0).getNbBombes());
-					
-					System.out.println(getWinner()+" stage 1");
-					
-					BbmG.stop();
-					game.launch();
-					
-				}
-					
-				if(BbmG.etatJeu.getNum_niveau() == 2) {
-					
-					try {
-						game.loadFile("./layout/niveau3.lay");
-					} catch (Exception e) {
-						e.printStackTrace();
+						
+					if(BbmG.etatJeu.getNum_niveau() == 2) {
+						
+						try {
+							game.loadFile("./layout/niveau3.lay");
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						game.init();
+						
+						game.etatJeu.setCampagne(true);		
+						game.etatJeu.setNum_niveau(3);	
+						game.etatJeu.setStrats(BbmG.etatJeu.getStrats());
+						( game.etatJeu.getBombermans().get(0)).setPoints(( BbmG.etatJeu.getBombermans().get(0)).getPoints());
+						( game.etatJeu.getBombermans().get(0)).setRange(( BbmG.etatJeu.getBombermans().get(0)).getRange());
+						( game.etatJeu.getBombermans().get(0)).setNbBombes(( BbmG.etatJeu.getBombermans().get(0)).getNbBombes());
+						
+						System.out.println(getWinner()+" stage 2");
+						
+						BbmG.stop();
+						game.launch();
+						
 					}
-					game.init();
 					
-					game.etatJeu.setCampagne(true);		
-					game.etatJeu.setNum_niveau(3);	
-					game.etatJeu.setStrats(BbmG.etatJeu.getStrats());
-					game.etatJeu.getBombermans().get(0).setPoints(BbmG.etatJeu.getBombermans().get(0).getPoints());
-					game.etatJeu.getBombermans().get(0).setRange(BbmG.etatJeu.getBombermans().get(0).getRange());
-					game.etatJeu.getBombermans().get(0).setNbBombes(BbmG.etatJeu.getBombermans().get(0).getNbBombes());
-					
-					System.out.println(getWinner()+" stage 2");
-					
-					BbmG.stop();
-					game.launch();
-					
-				}
-				
-				if(BbmG.etatJeu.getNum_niveau() == 3) {
-					BbmG.stop();
-					System.out.println(getWinner()+" stage 3");
+					if(BbmG.etatJeu.getNum_niveau() == 3) {
+						BbmG.stop();
+						System.out.println(getWinner()+" stage 3");
+					}
 				}
 			}
-		}
-		else if(!getEnd()) {
-				this.isEnd(BbmG);
-				bombermansTurn();
-				ennemiesTurn();
-				birdsTurn();
-				rajionsTurn();
-				towerTurn();
-			}else {
-
-				BbmG.stop();
-			}
+			else if(!getEnd()) {
+					this.isEnd(BbmG);
+					bombermansTurn(action,id_bbm);
+					ennemiesTurn();
+					birdsTurn();
+					rajionsTurn();
+					towerTurn();
+				}else {
+	
+					BbmG.stop();
+				}
+		
 	}	
 	
 	
@@ -791,7 +805,7 @@ public class GameState {
 	
 	//Réalise le tour des bombermans
 	
-		public void bombermansTurn() {
+		public void bombermansTurn(AgentAction action, int id_bbm ) {
 			
 			ArrayList<Agent_Bomberman> bombermans = this.getBombermans();
 			
@@ -828,7 +842,7 @@ public class GameState {
 						
 						if ( (bomberman.getX() == item.getObjX()) && (bomberman.getY() == item.getObjY()) ){
 							
-							if(item.getType() == ObjetType.FIRE_UP & !bomberman.isInvincible()) bomberman.setRange(bomberman.getRange()+1);
+							if(item.getType() == ObjetType.FIRE_UP ) bomberman.setRange(bomberman.getRange()+1);
 							else if((item.getType() == ObjetType.FIRE_DOWN & !bomberman.isInvincible() ) && bomberman.getRange() > 1) bomberman.setRange(bomberman.getRange()-1);
 							else if((item.getType() == ObjetType.BOMB_UP)) bomberman.setNbBombes(bomberman.getNbBombes()+1);
 							else if((item.getType() == ObjetType.BOMB_DOWN & !bomberman.isInvincible()) && bomberman.getNbBombes() > 1) bomberman.setNbBombes(bomberman.getNbBombes()-1);
@@ -896,7 +910,10 @@ public class GameState {
 							 }
 					
 					
-						bombermanAction = bomberman.chooseAction(this);
+						if( i == id_bbm){
+							bombermanAction = action;
+						}
+						else bombermanAction = bomberman.chooseAction(this);
 	
 					if (bombermanAction.getAction() < 5){
 							
@@ -905,7 +922,7 @@ public class GameState {
 						
 	//					System.out.println("après deplacement	Range -> "+ bomberman.getRange());
 					}
-					else if ((bomberman.getStrat()== 0 || bomberman.getStrat()== 1) & i < 2) {
+					else if ((bomberman.getStrat()== 1 || bomberman.getStrat()== 2) & i < 2) {
 							if (bombermanAction.getAction() == 5 & (bomberman.getMaladie() != 0 & bomberman.getMaladie() != 1)){
 								this.placeBomb(bomberman);
 								this.bombeTurn(bomberman);
@@ -1016,14 +1033,14 @@ public class GameState {
 		
 		if(compteBbm == 0  & nbBbm == 1) {
 			setEnd(true);
-			game.etatJeu.setEnd(true);
+//			game.etatJeu.setEnd(true);
 			this.winner = "GAME OVER";
 			this.finPartie = GAME_OVER;
 		}
 		
 		if(compteBbm == 1 & nbBbm == 1 & compteEnn == 0) {
 			setEnd(true);
-			game.etatJeu.setEnd(true);
+//			game.etatJeu.setEnd(true);
 			winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant Partie SOLO";
 			this.finPartie = WIN_SOLO;
 			
@@ -1032,14 +1049,14 @@ public class GameState {
 		
 		if(compteBbm == 1 & nbBbm != 1) {
 			setEnd(true);
-			game.etatJeu.setEnd(true);
+//			game.etatJeu.setEnd(true);
 			this.winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant";
 			this.finPartie = WIN_SURVIE;
 		}
 		
 		if(compteBbm == 0 & nbBbm != 1) {
 			setEnd(true);
-			game.etatJeu.setEnd(true);
+//			game.etatJeu.setEnd(true);
 			this.winner = "GAME OVER";
 			this.finPartie = GAME_OVER;
 		}
@@ -1052,8 +1069,8 @@ public class GameState {
 			if(nbBbm == 1) {
 				setEnd(true);
 				game.etatJeu.setEnd(true);
-				this.winner = "GAME OVER";
-				this.finPartie = GAME_OVER;
+				this.winner = "FIN_TOUR";
+				this.finPartie = FIN_TOUR;
 
 			}
 			else{
@@ -1165,24 +1182,49 @@ public class GameState {
 		}
 			
 	}
+	
+	//test si un mur est cassable
+	
+	public boolean isBrokable_Wall(int x,int y) 
+	{
+		assert((x>=0) && (x<map.getSizeX()));
+		assert((y>=0) && (y<map.getSizeY()));
+		//System.out.println(brokable_walls[x][y]);
+		return(brokable_walls[x][y]);
+	}
+	
+	//Setteur d'un brokable wall pour soit en créer un soit en faire disparaitre un
+	
+	public void setBrokable_Wall(int x,int y, boolean bool) 
+	{
+		this.brokable_walls[x][y] = bool;
+	}
+	
+	
 
 	//Renvoie un agent en fonction d'un id 
 
 	public Agent_Ennemy getEnnemy(GameState etat, int agentId){
 		
-		for (Agent_Ennemy p : etat.getEnnemies()){
-			if(p.getId() == agentId){
-				return p;
-			}
-		}
+//		for (int p = 0 ; p < this.getEnnemies() ; p++){
+//			if(this..getId() == agentId){
+//				return p;
+//			}
+//		}
+		return this.getEnnemies().get(agentId);
 
-		return null;
+		//return null;
 	}
 	
 	//accesseur sur la liste de bombermans
 	
 	public ArrayList<Agent_Bomberman> getBombermans(){
 		return bombermans;
+	}
+	
+	public void setBomberman(int id, Agent_Bomberman abbm){
+		this.bombermans.remove(id);
+		this.bombermans.add(id, abbm);
 	}
 	
 	//accesseur sur la liste de birds
@@ -1310,6 +1352,15 @@ public class GameState {
 		this.num_niveau = num_niveau;
 	}
 	
+
+	public BombermanGame getBbmG() {
+		return BbmG;
+	}
+
+	public void setBbmG(BombermanGame bbmG) {
+		BbmG = bbmG;
+	}
+
 	public BombermanGame getGame() {
 		return game;
 	}
@@ -1320,6 +1371,19 @@ public class GameState {
 
 	public void setTower(Agent_Tower agent_Tower) {
 		this.tower = agent_Tower;
+	}
+	
+	//compte le nombre de brokable walls sur la map
+	
+	public int getBrokableWals() {
+		int nb = 0;
+		for(int i = 0; i< map.getSizeX(); i++) {
+			for(int j = 0; j< map.getSizeY(); j++) {
+				if(this.isBrokable_Wall(i, j)) nb++;
+			}
+		}
+
+		return nb;
 	}
 
 }

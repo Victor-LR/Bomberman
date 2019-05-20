@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 //import java.io.BufferedReader;
 //import java.io.File;
 //import java.io.FileInputStream;
@@ -12,7 +13,7 @@ import java.io.InputStreamReader;
 //import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Map {
+public class Map implements Serializable {
 	
 	public static int NORTH = 0;
 	public static int SOUTH = 1;
@@ -26,7 +27,7 @@ public class Map {
 	private int size_x;
 	private int size_y;
 	private boolean walls[][];
-	private boolean brokable_walls[][];
+	private boolean start_brokable_walls[][];
 	
 	protected ArrayList<Integer> ennemy_start_x;
 	protected ArrayList<Integer> ennemy_start_y;
@@ -51,7 +52,7 @@ public class Map {
 		this.filename = filename;
 		
 		try{
-			System.out.println("Le fichier chargé : "+filename);
+//			System.out.println("Le fichier chargé : "+filename);
 		//On lit le fichier pour determiner les différents éléments de la map
 		
 		InputStream flux =new FileInputStream(filename); 
@@ -74,7 +75,7 @@ public class Map {
 			nbY++;
 		}			
 		tampon.close(); 
-		System.out.println("### Taille de la map "+nbX+" ; "+nbY);
+//		System.out.println("### Taille de la map "+nbX+" ; "+nbY);
 		
 		//implémentation des différentes valeurs dans les variable correspondante
 		
@@ -82,7 +83,7 @@ public class Map {
 		size_y = nbY;
 		
 		walls = new boolean [size_x][size_y];
-		brokable_walls  = new boolean [size_x][size_y];
+		start_brokable_walls  = new boolean [size_x][size_y];
 		
 		ennemy_start_x = new  ArrayList<Integer>();
 		ennemy_start_y = new  ArrayList<Integer>();
@@ -114,8 +115,8 @@ public class Map {
 				else walls[x][y]=false;
 				
 				if (ligne.charAt(x)=='$') 
-					brokable_walls[x][y]=true; 
-				else brokable_walls[x][y]=false;
+					start_brokable_walls[x][y]=true; 
+				else start_brokable_walls[x][y]=false;
 				
 				//On rentre les coordonnée des ennemies dans differents ArrayList
 				
@@ -161,7 +162,7 @@ public class Map {
 		for(int x=0;x<size_x;x++) if (!walls[x][size_y-1]) throw new Exception("Mauvais format du fichier: la carte doit etre close");
 		for(y=0;y<size_y;y++) if (!walls[0][y]) throw new Exception("Mauvais format du fichier: la carte doit etre close");
 		for(y=0;y<size_y;y++) if (!walls[size_x-1][y]) throw new Exception("Mauvais format du fichier: la carte doit etre close");
-		System.out.println("### Carte chargée.");
+//		System.out.println("### Carte chargée.");
 		
 		
 		}catch (Exception e){
@@ -178,6 +179,16 @@ public class Map {
 		}
 	}
 	
+	public Map copy() {
+		try {
+			Map m = new Map(this.filename);
+			return m;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+}
 	
 	//renvoie la largeur de la map
 	public int getSizeX() {return(size_x);}
@@ -194,19 +205,20 @@ public class Map {
 	}
 	
 	//verifie à une coordonnée si c'est un mur destructible ou non 
-	public boolean isBrokable_Wall(int x,int y) 
-	{
-		assert((x>=0) && (x<size_x));
-		assert((y>=0) && (y<size_y));
-		return(brokable_walls[x][y]);
-	}
-	
-	//Setteur d'un brokable wall pour soit en créer unsoit en faire disparaitre un
-	
-	public void setBrokable_Wall(int x,int y, boolean bool) 
-	{
-		this.brokable_walls[x][y] = bool;
-	}
+//	public boolean isBrokable_Wall(int x,int y) 
+//	{
+//		assert((x>=0) && (x<size_x));
+//		assert((y>=0) && (y<size_y));
+//		//System.out.println(brokable_walls[x][y]);
+//		return(brokable_walls[x][y]);
+//	}
+//	
+//	//Setteur d'un brokable wall pour soit en créer unsoit en faire disparaitre un
+//	
+//	public void setBrokable_Wall(int x,int y, boolean bool) 
+//	{
+//		this.brokable_walls[x][y] = bool;
+//	}
 	
 	//Recupère le nom du fichier 
 	public String getFilename(){
@@ -215,6 +227,11 @@ public class Map {
 
 ////////////////////////////////BOMBERMAN/////////////////////////////////
 	
+	public boolean[][] getStart_brokable_walls() {
+		return start_brokable_walls;
+	}
+
+
 	//Renvoie le nb de bomberman
 	public int getNumber_of_bombermans(){
 		return bomberman_start_x.size();

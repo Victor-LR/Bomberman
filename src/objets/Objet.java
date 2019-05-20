@@ -1,5 +1,7 @@
 package objets;
 
+import java.io.Serializable;
+
 /*import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -12,7 +14,7 @@ import objets.ObjetType;
 //import map.GameState;
 
 
-public class Objet {
+public class Objet  implements Serializable{
 
 static int current_Id = 0;
 	

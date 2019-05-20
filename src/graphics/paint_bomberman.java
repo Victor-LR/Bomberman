@@ -106,7 +106,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 				}
 				
 				//Création des briques destructibles
-				else if (this.BbmG.etatJeu.getMap().isBrokable_Wall(x, y)){
+				else if (this.BbmG.etatJeu.isBrokable_Wall(x, y)){
 					try {
 						Image img = ImageIO.read(new File("./image/brique_2.png"));
 						g.drawImage(img, (int)position_x, (int)position_y, (int)stepx, (int)stepy, this);
@@ -1115,7 +1115,7 @@ public class paint_bomberman extends JPanel implements GameObserver{
 		}
 		else{
 			if(BbmG.etatJeu.getCampagne()) {
-				BbmG.etatJeu.taketurn();
+				BbmG.etatJeu.taketurn(null,-1);
 				if(BbmG.etatJeu.getNum_niveau() == 1) {
 					
 					Cadre_Jeu fenetre = new Cadre_Jeu(BbmG.etatJeu.getGame());

@@ -37,7 +37,7 @@ public class Strategie_C extends Strategie{
 		{
 			Action = new AgentAction(i);
 			
-			if (getEtat().getMap().isBrokable_Wall(x+Action.getVx(), y+Action.getVy())) comptBW++;
+			if (getEtat().isBrokable_Wall(x+Action.getVx(), y+Action.getVy())) comptBW++;
 			if (getEtat().getMap().isWall(x+Action.getVx(), y+Action.getVy())) comptW++;
 			
 			for(int j =0 ; j < bombermans.size(); j++) {

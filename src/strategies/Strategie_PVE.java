@@ -33,7 +33,7 @@ public class Strategie_PVE extends Strategie{
 		{
 			Action = new AgentAction(i);
 			
-			if (getEtat().getMap().isBrokable_Wall(x+Action.getVx(), y+Action.getVy())) comptBW++;
+			if (getEtat().isBrokable_Wall(x+Action.getVx(), y+Action.getVy())) comptBW++;
 			if (getEtat().getMap().isWall(x+Action.getVx(), y+Action.getVy())) comptW++;
 			
 			int new_ec = 0;
@@ -57,7 +57,7 @@ public class Strategie_PVE extends Strategie{
 				
 				if(ecart < getAgent().getRange()+2) {
 					for(int k = 0 ; k<getEtat().getBombes().size(); k++) {
-						if(getEtat().getBombes().get(k).getId_bbm() == getAgent().getId()) 
+						if( (getEtat().getBombes().get(k)).getId_bbm() == getAgent().getId()) 
 							nb_bombes_bbm++;
 					}
 					if(nb_bombes_bbm == 0 || getAgent().getNbBombes() > 1)

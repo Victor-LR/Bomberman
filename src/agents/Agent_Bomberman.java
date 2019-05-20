@@ -15,6 +15,7 @@ import strategies.Strategie_D;
 import strategies.Strategie_PVE;
 import strategies.Strategie_PVP;
 import agents.Agent;
+import learning.Quadruplet;
 
 public class Agent_Bomberman extends Agent {
 	
@@ -24,6 +25,8 @@ public class Agent_Bomberman extends Agent {
 	private ColorBomberman couleur;
 	private int nbActions = 10;
 	private int maladie = 10;
+	
+//	private int life;
 
 	private boolean isInvincible;
 	private int etatInvincible;
@@ -31,12 +34,13 @@ public class Agent_Bomberman extends Agent {
 	private boolean isSick;
 	private int etatSick;
 	
-	private int strat = 10;
+	private int strat = -1;
 	private Strategie strategie;
 
 	public Agent_Bomberman (int px, int py,int id) {
 		super(AgentType.BOMBERMAN, px, py);
 		super.setId(id);
+		
 		
 		this.range = 1;
 		this.points = 0;
@@ -48,9 +52,9 @@ public class Agent_Bomberman extends Agent {
 		this.isSick = false;
 		this.etatSick = 0;
 		
+		//this.id = id;
 	}
 	
-
 
 	public AgentAction chooseAction(GameState etatjeu) 
 	{
@@ -96,6 +100,7 @@ public class Agent_Bomberman extends Agent {
 		case 9:
 			this.strategie = new Strategie_D(etatjeu,this);
 			return this.strategie.action();
+
 		case 10:
 			this.strategie = new Strategie_A_PVP(etatjeu,this);
 			return this.strategie.action();
@@ -116,6 +121,7 @@ public class Agent_Bomberman extends Agent {
 			else return(listAction.get((int)(Math.random()*this.nbActions)));
 		default:
 			return new AgentAction(Map.STOP);
+			
 		}
 		
 		
@@ -217,4 +223,11 @@ public class Agent_Bomberman extends Agent {
 	public void setMaladie(int mal) {
 		this.maladie = mal;
 	}
+	
+	
+	
+//	@Override
+//	public int getId() {
+//		return this.id;
+//	}
 }
