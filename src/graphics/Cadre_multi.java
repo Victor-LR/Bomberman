@@ -37,7 +37,7 @@ public class Cadre_multi extends JFrame {
 	
 	java.text.DecimalFormat df = new java.text.DecimalFormat("0.##");
 	
-	Cadre_multi(ArrayList<BombermanGame> L_BbmG, int nb_threads){
+	public Cadre_multi(ArrayList<BombermanGame> L_BbmG, int nb_threads){
 		
 		this.setL_BbmG(L_BbmG);
 		this.setNb_threads(nb_threads);

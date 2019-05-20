@@ -1,6 +1,5 @@
 package learning.test;
 
-import java.util.ArrayList;
 
 import org.apache.commons.lang3.SerializationUtils;
 
@@ -14,10 +13,7 @@ import learning.SimpleStateSensor;
 import learning.perceptron.LabeledSet;
 import learning.perceptron.Perceptron;
 import learning.perceptron.PerceptronAgent;
-import agents.Agent;
-import agents.Agent_Bomberman;
 import game.BombermanGame;
-import game.Game;
 import map.GameState;
 import map.Map;
 

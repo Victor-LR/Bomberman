@@ -1,11 +1,18 @@
 package learning;
 
 import learning.perceptron.SparseVector;
+
+import java.io.Serializable;
+
 import agents.AgentAction;
 import map.GameState;
 
-public class Sensor 
+public class Sensor implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected StateSensor state_sensor;
 	
 	public Sensor(StateSensor ss)

@@ -1,8 +1,13 @@
 package learning.perceptron;
 
+import java.io.Serializable;
 
-public class Perceptron implements BinaryClassifier
+public class Perceptron implements BinaryClassifier, Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected SparseVector parameters;
 	protected int nb_iterations;
 	protected double epsilon;
