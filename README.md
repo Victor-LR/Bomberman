@@ -1,5 +1,7 @@
 # TER_Bomberman
 
+Soutenance 4 juin 10h \\[T]/
+
 Tuto git :
 http://rogerdudler.github.io/git-guide/index.fr.html
 
@@ -272,5 +274,20 @@ Pour finir le multithread est géré à l'interieur du cadre_Menu, cela signifie
 
 - Phase de recherche pour l'implémentation d'un perceptron. Observation d'un comportement qui semble innaproprié pour l'ia du jeu Pacman utilisant un perceptron. En effet malgré l'utilisation de celui-ci, l'ia du pacman boucle dans son déplacement à partir d'un moment, ne cherche pas à gagner ou avoir plus de points.
 
+14/05/04:
+
+- En reprenant le Tp sur les perceptrons implémenté dans le jeu Pacman, nous avons pus incorporer dans notre bomberman le TestAverageReward. Cela nous a pris quelque temp sdus à de nombreux problème d'implementation et d'ajustement pour que cette parti soit efficace à partir de notre code.
+
+15/05/19:
+
+- Nous sommes en train d'impléméneter le perceptron_0 dans notre Bomberman pour permttre l'utilistation d'une ia. Cependant on se rend compte petit à petit que le choix desstratégie au niveau de Gamestate pose probleme. En effet nous avons du réaliser une interface qui s'implemente dans les classe deffinissant un agaent Bomberman. Cette inteface deffini la methode choose action, hors c'est dans cette méthode qu'est choisi les stratégie du gamstate. De plus notre gameState charge des Agent_Bomberman et non pas des Agent_B (interface) dans le jeu, de ce fait la methode choisi pour chooseAction correspond toujours à celle d'Agent_Bomberman et non de celle que nous rediffinnissant dans certaine classe qui elle même implémente Agent_B, comme perceptronAgent.
+
+- Solutions choisi par Victor et Kevin, pour eviter le problème du au choix des stratégie, au lieu de passer par une interface comme Agent_B nous prenons dle choix que toutes les classe redeffinissant la methode chooseAction extend de Agent_Bomberman.
+
+- La manoeuvre est plus ou moins réussie, le chooseAction choisi par le Bomberman correspond bien au perceptron quand celui-ci est demandé. À partir de là nous avons pus lancer la partie apprentissage puis avoir le resultat sur un jeu Bomberman avec interface graphique. Cependant nous observons, comme pour le Pacman que ce dernier rentre dans un état de boucle ou il va de haut en bas sans aucuns but. Le problème n'est pas claire et nous n'avons pas encore de réponse.
 
         
+16/05/19
+
+- Apres la reunion fors insctructive de ce matin. Nous avons pu arranger grace a une deep copy les problemes de liaison entre les gameState. Avec quelques modification au niveau du gamestate, de agentFitted, rewardtools nous obtenons peut etre en théorie un agent Bomberman qui choisi ses actions en fonction d'un training fait au préalable. Cependant le résultat n'est toujours ne semble convaincant vis à vis des stratégie que nous avions dévelloppées auparavant.
+
