@@ -3,17 +3,9 @@ package learning;
 import game.BombermanGame;
 import graphics.Cadre_Jeu;
 
-import java.awt.Dimension;
-import java.util.ArrayList;
-
-import javax.swing.JFrame;
-
 import agents.AgentAction;
 import agents.Agent_Bomberman;
-import agents.Agent_Ennemy;
 import agents.ColorBomberman;
-import game.Game;
-import learning.perceptron.PerceptronAgent;
 import map.GameState;
 
 
@@ -38,18 +30,21 @@ public class RewardTools {
 			bomberman_agent.setY(next_game.getBombermans().get(0).getY());
 			AgentAction action = bomberman_agent.chooseAction(next_game);
 			
-			int nbmurs = next_game.getBrokableWals();
+			int nbmurs = next_game.getBombermans().get(0).getNb_murs();
+			int nbpoints = next_game.getBombermans().get(0).getPoints();
+			int nbbonus = next_game.getBombermans().get(0).getNb_bonus();
+			boolean axe_bombe = next_game.getBombermans().get(0).isAxe_bombe();
 					
 			next_game.taketurn(action, next_game.getBombermans().get(0).getId());
 			
 			if (next_game.getFinPartie() != GameState.GAME_OVER & next_game.getFinPartie() != GameState.WIN_SOLO)
 			{
-				double r = reward.getReward(next_game, nbmurs);
+				double r = reward.getReward(next_game, nbmurs, nbpoints, nbbonus, axe_bombe);
 				rs+=r;
 			}
 			else
 			{
-				double r=reward.getReward(next_game, nbmurs);
+				double r=reward.getReward(next_game, nbmurs, nbpoints, nbbonus, axe_bombe);
 				rs+=r;
 				flag=false;
 			}
