@@ -104,18 +104,18 @@ public class Agent_Bomberman extends Agent {
 			
 		//Comportement aléatoire
 		case 0:
-			this.strategie = null;
-			ArrayList<AgentAction> listAction=new ArrayList<AgentAction>();
-			for(int i=0;i<=5;i++)
-			{
-				if (etatjeu.isLegalMoveBbm(new AgentAction(i), this)) {
-					//System.out.println(i);
-					listAction.add(new AgentAction(i));
-				}
-			}		
-			this.nbActions = listAction.size();
-			if(nbActions == 0) return  new AgentAction(Map.STOP);
-			else return(listAction.get((int)(Math.random()*this.nbActions)));
+//			this.strategie = null;
+//			ArrayList<AgentAction> listAction=new ArrayList<AgentAction>();
+//			for(int i=0;i<=5;i++)
+//			{
+//				if (etatjeu.isLegalMoveBbm(new AgentAction(i), this)) {
+//					//System.out.println(i);
+//					listAction.add(new AgentAction(i));
+//				}
+//			}		
+//			this.nbActions = listAction.size();
+//			if(nbActions == 0) return  new AgentAction(Map.STOP);
+//			else return(listAction.get((int)(Math.random()*this.nbActions)));
 		default:
 			return new AgentAction(Map.STOP);
 			

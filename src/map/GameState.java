@@ -1069,7 +1069,7 @@ public class GameState implements Serializable{
 			if(nbBbm == 1) {
 				setEnd(true);
 				game.etatJeu.setEnd(true);
-				this.winner = "FIN_TOUR";
+				this.winner = "FIN TOUR";
 				this.finPartie = FIN_TOUR;
 
 			}
