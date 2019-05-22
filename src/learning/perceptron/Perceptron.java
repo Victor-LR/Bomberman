@@ -44,8 +44,7 @@ public class Perceptron implements BinaryClassifier, Serializable
 	@Override
 	public void train(LabeledSet training_set) 
 	{
-		//System.out.println("éééé" +training_set.size());
-		for(int i=0;i<nb_iterations ;i++){
+				for(int i=0;i<nb_iterations ;i++){
 			
 			for (int j=0;j<training_set.size();j++){
 				
