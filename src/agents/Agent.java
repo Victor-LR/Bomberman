@@ -10,6 +10,8 @@ import map.GameState;
 
 public class Agent implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	static int current_Id = 0;
 	
 	private int x;

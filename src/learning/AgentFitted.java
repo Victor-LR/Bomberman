@@ -41,14 +41,17 @@ public class AgentFitted extends Agent_Bomberman {
 		
 		GameState game = SerializationUtils.clone(state);
 		
-		int nb_murs = game.getBrokableWals();
+		int nb_murs = game.getBombermans().get(0).getNb_murs();
+		int nb_points = game.getBombermans().get(0).getPoints();
+		int nb_bonus = game.getBombermans().get(0).getNb_bonus();
+		boolean axe_bombe = game.getBombermans().get(0).isAxe_bombe();
 		
 		game.taketurn(aa,this.getId());
 		
 		SparseVector atteint = s.getVector(game, aa);
 		Reward rw = new SimpleReward();
 	
-		double score = rw.getReward(game, nb_murs);
+		double score = rw.getReward(game, nb_murs, nb_points, nb_bonus, axe_bombe);
 		
 		lis.add(new Quadruplet(init, aa, atteint, score));
 		return aa;

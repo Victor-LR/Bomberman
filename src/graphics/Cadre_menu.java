@@ -64,6 +64,7 @@ public class Cadre_menu extends JFrame{
 	//JMenu pour les modes
 	private JMenuBar menu = null;
 	private JMenu mode = null;
+	private JLabel nom_mode = null;
 	private JMenuItem campagne= null;
 	private JMenuItem normal = null;
 	private JMenuItem perceptron_0 = null;
@@ -92,6 +93,9 @@ public class Cadre_menu extends JFrame{
 		mode = new JMenu();
 		mode.setText("Mode");
 		
+		nom_mode = new JLabel();
+		nom_mode.setText("   :   Normal");
+		
 		is_campagne = false;
 		is_perceptron = false;
 		is_testAlgo = false;
@@ -114,6 +118,7 @@ public class Cadre_menu extends JFrame{
 		mode.add(perceptron_0);
 		
 		menu.add(mode);
+		menu.add(nom_mode);
 		
 		listStrat = new ArrayList<JComboBox<String>>();
 		
@@ -183,6 +188,14 @@ public class Cadre_menu extends JFrame{
 		campagne.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent evenement) {
+				
+				menu.remove(nom_mode);
+				
+				nom_mode = new JLabel();
+				nom_mode.setText("   :   Campagne");
+				
+				menu.add(nom_mode);
+				
 				is_campagne = true;
 				setIs_perceptron(false);
 				setIs_testAlgo(false);
@@ -230,6 +243,13 @@ public class Cadre_menu extends JFrame{
 			//action du mode normal
 			public void actionPerformed(ActionEvent evenement) {
 				
+				menu.remove(nom_mode);
+				
+				nom_mode = new JLabel();
+				nom_mode.setText("   :   Normal");
+				
+				menu.add(nom_mode);
+				
 				is_campagne = false;
 				setIs_perceptron(false);
 				setIs_testAlgo(false);
@@ -276,6 +296,13 @@ public class Cadre_menu extends JFrame{
 			//action du mode perceptron
 			public void actionPerformed(ActionEvent evenement) {
 				
+				menu.remove(nom_mode);
+				
+				nom_mode = new JLabel();
+				nom_mode.setText("   :   Perceptron_0");
+				
+				menu.add(nom_mode);
+				
 				is_campagne = false;
 				setIs_perceptron(true);
 				setIs_testAlgo(false);
@@ -310,6 +337,13 @@ public class Cadre_menu extends JFrame{
 		testAlgoAlea.addActionListener(new ActionListener() {
 			//action du mode test algo
 			public void actionPerformed(ActionEvent evenement) {
+				
+				menu.remove(nom_mode);
+				
+				nom_mode = new JLabel();
+				nom_mode.setText("   :   TestAlgoAlea");
+				
+				menu.add(nom_mode);
 				
 				is_campagne = false;
 				setIs_perceptron(false);

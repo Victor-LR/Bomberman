@@ -73,7 +73,6 @@ public class GameState implements Serializable{
 
 	private BombermanGame game = new BombermanGame();
 	
-	
 	//Construit l'état courant de la map
 	
 	public GameState(Map map,BombermanGame BbmG){
@@ -132,9 +131,6 @@ public class GameState implements Serializable{
 		if(map.tower_x != 0 & map.tower_y != 0)
 			this.setTower(new Agent_Tower(map.tower_x,map.tower_y,0));
 		else tower = null;
-		
-
-
 	}
 	
 	//Verifie si l'action de déplacement est possible à l'état courant pour un agent
@@ -153,7 +149,7 @@ public class GameState implements Serializable{
 	public boolean isLegalMoveBbm(AgentAction actionbbm, Agent_Bomberman bbm){
 		int x = actionbbm.getVx();
 		int y = actionbbm.getVy();
-			
+		
 		if(map.isWall(bbm.getX()+x, bbm.getY()+y) || this.isBrokable_Wall(bbm.getX()+x, bbm.getY()+y) || isBombe(bbm.getX()+x, bbm.getY()+y) || isBomberman(bbm.getId(),bbm.getX()+x, bbm.getY()+y) || isTower(bbm.getX()+x, bbm.getY()+y) )
 			return false;
 		else return true;
@@ -272,9 +268,7 @@ public class GameState implements Serializable{
 			Objet_Bomb bomb = new Objet_Bomb(ObjetType.BOMB,x,y,agent.getId(),agent.getRange());
 			bombes.add(bomb);
 		}
-			
 	}
-
 	
 	//Place un item
 	public void placeItem(int itemx, int itemy)
@@ -294,9 +288,7 @@ public class GameState implements Serializable{
 		int x = bomb.getObjX();
 		int y = bomb.getObjY();
 		
-		
 		int taille_range = 1;
-		
 		
 		if (direction == Map.EAST) {
 			for(int i = 0; i<=bomb.getRange(); i++){
@@ -343,7 +335,6 @@ public class GameState implements Serializable{
 			}
 		}
 		return taille_range;
-		
 	}
 	
 	//détruit les murs adjacent de la bombe et les ennemies
@@ -367,7 +358,11 @@ public class GameState implements Serializable{
 		if(this.isBrokable_Wall(range_limit, y)) {
 			this.setBrokable_Wall(range_limit,y,false);
 			r =(int)(Math.random()*100);
-			if ( r < pourcentage) placeItem(range_limit,y);
+			if ( r < pourcentage) {placeItem(range_limit,y);}
+			
+			if(bomb.getId_bbm() == bombermans.get(bomb.getId_bbm()).getId())
+				bombermans.get(bomb.getId_bbm()).setNb_murs(bombermans.get(bomb.getId_bbm()).getNb_murs()+1);
+			
 		}
 		
 		for(int i = x; i<= range_limit; i++){
@@ -429,7 +424,6 @@ public class GameState implements Serializable{
 						tower.setDead(true);
 						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 1000);
 					}
-						
 				}
 		}
 		
@@ -439,6 +433,9 @@ public class GameState implements Serializable{
 			this.setBrokable_Wall(x,range_limit,false);
 			r =(int)(Math.random()*100);
 			if ( r < pourcentage) placeItem(x,range_limit);
+			
+			if(bomb.getId_bbm() == bombermans.get(bomb.getId_bbm()).getId())
+				bombermans.get(bomb.getId_bbm()).setNb_murs(bombermans.get(bomb.getId_bbm()).getNb_murs()+1);
 		}
 		
 		for(int i = y; i<= range_limit; i++){
@@ -512,6 +509,9 @@ public class GameState implements Serializable{
 			this.setBrokable_Wall(range_limit,y,false);
 			r =(int)(Math.random()*100);
 			if ( r < pourcentage) placeItem(range_limit,y);
+			
+			if(bomb.getId_bbm() == bombermans.get(bomb.getId_bbm()).getId())
+				bombermans.get(bomb.getId_bbm()).setNb_murs(bombermans.get(bomb.getId_bbm()).getNb_murs()+1);
 		}
 		
 		for(int i = x; i >= range_limit; i--){
@@ -584,6 +584,9 @@ public class GameState implements Serializable{
 			this.setBrokable_Wall(x,range_limit,false);
 			r =(int)(Math.random()*100);
 			if ( r < pourcentage) placeItem(x,range_limit);
+			
+			if(bomb.getId_bbm() == bombermans.get(bomb.getId_bbm()).getId())
+				bombermans.get(bomb.getId_bbm()).setNb_murs(bombermans.get(bomb.getId_bbm()).getNb_murs()+1);
 		}
 		
 		for(int i = y; i >= range_limit; i--){
@@ -816,11 +819,10 @@ public class GameState implements Serializable{
 				Agent_Bomberman bomberman = bombermans.get(i);
 				AgentAction bombermanAction;
 				
+				//System.out.println(bomberman.isAxe_bombe());
+				
 				if(!bomberman.isDead()) {
 					
-		
-										
-					//System.out.println(bombermanAction.getAction());
 					if (!bomberman.isInvincible()){
 						if(isEnnemie(bomberman.getX(),bomberman.getY())) {
 							bomberman.setDead(true);
@@ -842,18 +844,24 @@ public class GameState implements Serializable{
 						
 						if ( (bomberman.getX() == item.getObjX()) && (bomberman.getY() == item.getObjY()) ){
 							
-							if(item.getType() == ObjetType.FIRE_UP ) bomberman.setRange(bomberman.getRange()+1);
+							if(item.getType() == ObjetType.FIRE_UP ) {
+								bomberman.setRange(bomberman.getRange()+1);
+								bomberman.setNb_bonus(bomberman.getNb_bonus()+1);
+							}
 							else if((item.getType() == ObjetType.FIRE_DOWN & !bomberman.isInvincible() ) && bomberman.getRange() > 1) bomberman.setRange(bomberman.getRange()-1);
-							else if((item.getType() == ObjetType.BOMB_UP)) bomberman.setNbBombes(bomberman.getNbBombes()+1);
+							else if((item.getType() == ObjetType.BOMB_UP)) {
+								bomberman.setNbBombes(bomberman.getNbBombes()+1);
+								bomberman.setNb_bonus(bomberman.getNb_bonus()+1);
+							}
 							else if((item.getType() == ObjetType.BOMB_DOWN & !bomberman.isInvincible()) && bomberman.getNbBombes() > 1) bomberman.setNbBombes(bomberman.getNbBombes()-1);
 							else if((item.getType() == ObjetType.FIRE_SUIT)) {
 								bomberman.setInvincible(true);
 								bomberman.setEtatInv(0);
+								bomberman.setNb_bonus(bomberman.getNb_bonus()+1);
 								
 							}else if((item.getType() == ObjetType.SKULL & !bomberman.isInvincible())) {
 								
 								bomberman.setMaladie((int) (Math.random()*3));//(int) (Math.random()*3));
-	//							System.out.println("	maladie : "+bomberman.getMaladie());
 								bomberman.setSick(true);
 								bomberman.setEtatSick(0);
 							}
@@ -909,18 +917,30 @@ public class GameState implements Serializable{
 							   bomberman.setMaladie(10);
 							 }
 					
-					
 						if( i == id_bbm){
 							bombermanAction = action;
 						}
 						else bombermanAction = bomberman.chooseAction(this);
-	
+						
+						for(int k = 0; k< this.bombes.size(); ++k) {
+							Objet_Bomb bombe = bombes.get(k);
+							for(int j = 0; j< bombe.getRange(); j++) {
+								if(bombe.getId_bbm() != bomberman.getId()) {
+									if((bombe.getObjX() + j == bomberman.getX() && bombe.getObjY() == bomberman.getY()) || (bombe.getObjX() == bomberman.getX() && bombe.getObjY()+ j  == bomberman.getY())) {
+										bomberman.setAxe_bombe(true);
+									}
+									else bomberman.setAxe_bombe(false);
+								}
+							}
+						}	
+						
+						if(this.bombes.size() == 0) bomberman.setAxe_bombe(false);
+						
 					if (bombermanAction.getAction() < 5){
 							
 						this.moveAgent(bomberman, bombermanAction);
 						this.bombeTurn(bomberman);
 						
-	//					System.out.println("après deplacement	Range -> "+ bomberman.getRange());
 					}
 					else if ((bomberman.getStrat()== 1 || bomberman.getStrat()== 2) & i < 2) {
 							if (bombermanAction.getAction() == 5 & (bomberman.getMaladie() != 0 & bomberman.getMaladie() != 1)){
@@ -1033,14 +1053,12 @@ public class GameState implements Serializable{
 		
 		if(compteBbm == 0  & nbBbm == 1) {
 			setEnd(true);
-//			game.etatJeu.setEnd(true);
 			this.winner = "GAME OVER";
 			this.finPartie = GAME_OVER;
 		}
 		
 		if(compteBbm == 1 & nbBbm == 1 & compteEnn == 0) {
 			setEnd(true);
-//			game.etatJeu.setEnd(true);
 			winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant Partie SOLO";
 			this.finPartie = WIN_SOLO;
 			
@@ -1049,14 +1067,12 @@ public class GameState implements Serializable{
 		
 		if(compteBbm == 1 & nbBbm != 1) {
 			setEnd(true);
-//			game.etatJeu.setEnd(true);
 			this.winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant";
 			this.finPartie = WIN_SURVIE;
 		}
 		
 		if(compteBbm == 0 & nbBbm != 1) {
 			setEnd(true);
-//			game.etatJeu.setEnd(true);
 			this.winner = "GAME OVER";
 			this.finPartie = GAME_OVER;
 		}
@@ -1095,9 +1111,6 @@ public class GameState implements Serializable{
 					}
 				}
 				
-				
-				
-				
 				if( compteExec < 2 ) {
 					setEnd(true);
 					this.winner = "Le joueur "+(bombermans.get(idGagnant).getId()+1)+" est le gagnant par score = " + maxScore ;
@@ -1111,7 +1124,6 @@ public class GameState implements Serializable{
 			}
 			
 		}
-		//if (winner != null) System.out.println(this.winner);
 }
 	
 
@@ -1189,7 +1201,6 @@ public class GameState implements Serializable{
 	{
 		assert((x>=0) && (x<map.getSizeX()));
 		assert((y>=0) && (y<map.getSizeY()));
-		//System.out.println(brokable_walls[x][y]);
 		return(brokable_walls[x][y]);
 	}
 	
@@ -1199,21 +1210,12 @@ public class GameState implements Serializable{
 	{
 		this.brokable_walls[x][y] = bool;
 	}
-	
-	
 
 	//Renvoie un agent en fonction d'un id 
 
 	public Agent_Ennemy getEnnemy(GameState etat, int agentId){
-		
-//		for (int p = 0 ; p < this.getEnnemies() ; p++){
-//			if(this..getId() == agentId){
-//				return p;
-//			}
-//		}
 		return this.getEnnemies().get(agentId);
 
-		//return null;
 	}
 	
 	//accesseur sur la liste de bombermans
@@ -1329,10 +1331,6 @@ public class GameState implements Serializable{
 	public int getFinPartie() {
 		return finPartie;
 	}
-
-//	public void setFinPartie(int finPartie) {
-//		this.finPartie = finPartie;
-//	}
 	
 	//permet de savoir si le mode de jeu choisi est une campagne 
 						

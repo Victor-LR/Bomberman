@@ -18,6 +18,7 @@ import agents.Agent;
 
 public class Agent_Bomberman extends Agent {
 	
+	private static final long serialVersionUID = 1L;
 	private int range;
 	private int points = 0;
 	private int nbBombes;
@@ -25,6 +26,10 @@ public class Agent_Bomberman extends Agent {
 	private ColorBomberman couleur;
 	private int nbActions = 10;
 	private int maladie = 10;
+	private int nb_murs = 0;
+	private int nb_bonus = 0;
+	private boolean axe_bombe = false;
+
 
 	private boolean isInvincible;
 	private int etatInvincible;
@@ -38,7 +43,7 @@ public class Agent_Bomberman extends Agent {
 	public Agent_Bomberman (int px, int py,int id) {
 		super(AgentType.BOMBERMAN, px, py);
 		super.setId(id);
-		
+
 		this.range = 1;
 		this.points = 0;
 		this.nbBombes = 1;
@@ -215,6 +220,15 @@ public class Agent_Bomberman extends Agent {
 		this.etatSick = etatSick;
 	}
 	
+
+	public int getNbActions() {
+		return nbActions;
+	}
+
+	public void setNbActions(int actions) {
+		this.nbActions = actions;
+	}
+
 	public int getMaladie() {
 		return maladie;
 	}
@@ -222,6 +236,32 @@ public class Agent_Bomberman extends Agent {
 	public void setMaladie(int mal) {
 		this.maladie = mal;
 	}
-	
-	
+
+	public int getNb_murs() {
+		return nb_murs;
+	}
+
+	public void setNb_murs(int nb_murs) {
+		this.nb_murs = nb_murs;
+	}
+
+
+	public int getNb_bonus() {
+		return nb_bonus;
+	}
+
+
+	public void setNb_bonus(int nb_bonus) {
+		this.nb_bonus = nb_bonus;
+	}
+
+
+	public boolean isAxe_bombe() {
+		return axe_bombe;
+	}
+
+
+	public void setAxe_bombe(boolean axe_bombe) {
+		this.axe_bombe = axe_bombe;
+	}
 }
