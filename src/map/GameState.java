@@ -150,16 +150,6 @@ public class GameState implements Serializable{
 		int x = actionbbm.getVx();
 		int y = actionbbm.getVy();
 		
-		for(int i = 0; i< this.bombes.size(); ++i) {
-			Objet_Bomb bombe = bombes.get(i);
-			for(int j = 0; j< bombe.getRange(); j++) {
-				if((bombe.getObjX() + j == bbm.getX() && bombe.getObjY() == bbm.getY()) || (bombe.getObjX() == bbm.getX() && bombe.getObjY()+ j  == bbm.getY())) {
-					bbm.setAxe_bombe(true);
-				}
-				//else bbm.setAxe_bombe(false);
-			}
-		}
-		
 		if(map.isWall(bbm.getX()+x, bbm.getY()+y) || this.isBrokable_Wall(bbm.getX()+x, bbm.getY()+y) || isBombe(bbm.getX()+x, bbm.getY()+y) || isBomberman(bbm.getId(),bbm.getX()+x, bbm.getY()+y) || isTower(bbm.getX()+x, bbm.getY()+y) )
 			return false;
 		else return true;
@@ -828,7 +818,8 @@ public class GameState implements Serializable{
 				
 				Agent_Bomberman bomberman = bombermans.get(i);
 				AgentAction bombermanAction;
-				System.out.println(bomberman.isAxe_bombe());
+				
+				//System.out.println(bomberman.isAxe_bombe());
 				
 				if(!bomberman.isDead()) {
 					
@@ -926,12 +917,25 @@ public class GameState implements Serializable{
 							   bomberman.setMaladie(10);
 							 }
 					
-					
 						if( i == id_bbm){
 							bombermanAction = action;
 						}
 						else bombermanAction = bomberman.chooseAction(this);
-	
+						
+						for(int k = 0; k< this.bombes.size(); ++k) {
+							Objet_Bomb bombe = bombes.get(k);
+							for(int j = 0; j< bombe.getRange(); j++) {
+								if(bombe.getId_bbm() != bomberman.getId()) {
+									if((bombe.getObjX() + j == bomberman.getX() && bombe.getObjY() == bomberman.getY()) || (bombe.getObjX() == bomberman.getX() && bombe.getObjY()+ j  == bomberman.getY())) {
+										bomberman.setAxe_bombe(true);
+									}
+									else bomberman.setAxe_bombe(false);
+								}
+							}
+						}	
+						
+						if(this.bombes.size() == 0) bomberman.setAxe_bombe(false);
+						
 					if (bombermanAction.getAction() < 5){
 							
 						this.moveAgent(bomberman, bombermanAction);

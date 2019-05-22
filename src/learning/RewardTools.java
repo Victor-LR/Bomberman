@@ -33,17 +33,18 @@ public class RewardTools {
 			int nbmurs = next_game.getBombermans().get(0).getNb_murs();
 			int nbpoints = next_game.getBombermans().get(0).getPoints();
 			int nbbonus = next_game.getBombermans().get(0).getNb_bonus();
+			boolean axe_bombe = next_game.getBombermans().get(0).isAxe_bombe();
 					
 			next_game.taketurn(action, next_game.getBombermans().get(0).getId());
 			
 			if (next_game.getFinPartie() != GameState.GAME_OVER & next_game.getFinPartie() != GameState.WIN_SOLO)
 			{
-				double r = reward.getReward(next_game, nbmurs, nbpoints, nbbonus);
+				double r = reward.getReward(next_game, nbmurs, nbpoints, nbbonus, axe_bombe);
 				rs+=r;
 			}
 			else
 			{
-				double r=reward.getReward(next_game, nbmurs, nbpoints, nbbonus);
+				double r=reward.getReward(next_game, nbmurs, nbpoints, nbbonus, axe_bombe);
 				rs+=r;
 				flag=false;
 			}
