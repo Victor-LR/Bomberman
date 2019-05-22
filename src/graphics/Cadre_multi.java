@@ -75,26 +75,24 @@ public class Cadre_multi extends JFrame {
 		
 		panel_haut.add(panel_stat);
 		
-		//Stoc
 		int[][] id_du_gagnant = new int[100][4];
 		int[] stat_finPartie = new int[100];
 		int[] point_joueur = new int[100];
 		int typeFin;
 		
+		
 		//Pour chaque BombermanGame lancé récupère: 
-
-
 
 		for(int j = 0 ; j < L_BbmG.size(); j++){
 			
-			//		- Le type de fin de partie
+			//- Le type de fin de partie
 			typeFin = L_BbmG.get(j).etatJeu.getFinPartie();
 			
-			//		- Le Bomberman gagnant si il y en a un
+			//- Le Bomberman gagnant si il y en a un
 			Agent_Bomberman bbm = L_BbmG.get(j).etatJeu.getBombermans().get(L_BbmG.get(j).etatJeu.getIdGagnant());
 			int point_gagnant = bbm.getPoints();
 			
-			//		- Les points pour chacun des bombermans
+			//- Les points pour chacun des bombermans
 			for(int i = 0; i < nb_bbm; i++){
 				point_joueur[i] +=  ( L_BbmG.get(j).etatJeu.getBombermans().get(i)).getPoints();
 			}
