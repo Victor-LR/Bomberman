@@ -11,6 +11,8 @@ public class BombermanGame extends Game implements InterfaceGame, Serializable {
 	public GameState etatJeu;
 	private String filename = null;
 	
+	
+	//Initialise une Map en fonction du layout en paramètre
 	public void loadFile(String filename) throws Exception {
 		map = new Map(filename);
 		String sep = "/";
@@ -24,13 +26,13 @@ public class BombermanGame extends Game implements InterfaceGame, Serializable {
 
 	}
 	
+	//Constructeur avec un GameSate et une Map déjà initialisés
 	public BombermanGame (GameState etatJ, Map map){
 		this.etatJeu = etatJ;
-//		this.etatJeu.setStrats(etatJ.getStrats());
-//		this.etatJeu.setCampagne(etatJ.getCampagne());
 		this.map = map;
 	}
 	
+	//Initialise un GameSate
 	@Override
 	public void initializeGame() {
 		System.out.println("initialisation bombermanGame");
@@ -38,7 +40,7 @@ public class BombermanGame extends Game implements InterfaceGame, Serializable {
 	}
 
 
-
+	//Permet de passer les tours du GameState
 	@Override
 	public void taketurn() {
 		if(!etatJeu.getEnd())

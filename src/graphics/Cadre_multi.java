@@ -7,7 +7,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,13 +21,7 @@ import map.GameState;
 
 public class Cadre_multi extends JFrame {
 
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private JLabel resultat = null;
-	private ArrayList<JLabel> listlab;
 	private JButton back;
 	
 	private int nb_threads;
@@ -37,6 +30,7 @@ public class Cadre_multi extends JFrame {
 	
 	java.text.DecimalFormat df = new java.text.DecimalFormat("0.##");
 	
+	
 	public Cadre_multi(ArrayList<BombermanGame> L_BbmG, int nb_threads){
 		
 		this.setL_BbmG(L_BbmG);
@@ -44,13 +38,13 @@ public class Cadre_multi extends JFrame {
 		int nb_bbm = L_BbmG.get(0).getMap().getNumber_of_bombermans();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		this.setLocationRelativeTo(null);
+		Border border = LineBorder.createGrayLineBorder();
 		
+		//Définit la taille du JFrame, créer les Layouts et les différents Panel
 		if(nb_bbm < 10)
 			this.setSize(750,nb_bbm*50+250);
 		else this.setSize(1000,nb_bbm*50+250);
-		
-		this.setLocationRelativeTo(null);
-		Border border = LineBorder.createGrayLineBorder();
 		
 		this.setLayout(new BorderLayout());
 		
@@ -62,7 +56,6 @@ public class Cadre_multi extends JFrame {
 		
 		this.add("North",panel_haut);
 		this.add("South",panel_bas);
-		
 		
 		back = new JButton("back to menu");
 		panel_haut.add(this.back);
@@ -82,21 +75,32 @@ public class Cadre_multi extends JFrame {
 		
 		panel_haut.add(panel_stat);
 		
+		//Stoc
 		int[][] id_du_gagnant = new int[100][4];
 		int[] stat_finPartie = new int[100];
 		int[] point_joueur = new int[100];
 		int typeFin;
+		
+		//Pour chaque BombermanGame lancé récupère: 
+
+
+
 		for(int j = 0 ; j < L_BbmG.size(); j++){
 			
+			//		- Le type de fin de partie
 			typeFin = L_BbmG.get(j).etatJeu.getFinPartie();
 			
+			//		- Le Bomberman gagnant si il y en a un
 			Agent_Bomberman bbm = L_BbmG.get(j).etatJeu.getBombermans().get(L_BbmG.get(j).etatJeu.getIdGagnant());
 			int point_gagnant = bbm.getPoints();
 			
+			//		- Les points pour chacun des bombermans
 			for(int i = 0; i < nb_bbm; i++){
 				point_joueur[i] +=  ( L_BbmG.get(j).etatJeu.getBombermans().get(i)).getPoints();
 			}
 			
+		//Incrémente un tableau en fonction du type de fin partie
+		//Si un bomberman a gagné la partie ses points et son id seront aussi récupérés dans un tableau	
 			switch(typeFin){
 				case GameState.PLANTAGE :
 					stat_finPartie[GameState.PLANTAGE] +=1;
@@ -136,7 +140,7 @@ public class Cadre_multi extends JFrame {
 		}
 
 		
-		
+		//Définition des statistiques de victoire des Bombermans dans différents Labels  
 		System.out.println("");
 		for(int n = 0 ; n < stat_finPartie.length; n++){
 
@@ -166,24 +170,28 @@ public class Cadre_multi extends JFrame {
 					String joueur = "<font color = #009FFF >Joueur "+(i+1)+"</font>";
 					String pourcent_joueur = "<font color = #39B835 >"+ df.format((total/nb_threads)*100)+"%</font>";
 					
+					//affichage de la stratégie adopté par le Bomberman
 					if (( L_BbmG.get(0).etatJeu.getBombermans().get(i)).getStrategie() == null) 
 						pan_result2.setText("<html>"+ joueur +" a gagné "+pourcent_joueur+" du temps avec la strategie <font color = #C90F0F >aléatoire</font>, dont :</html>");
 					else pan_result2.setText("<html>"+ joueur +" a gagné "+ pourcent_joueur +"% du temps avec strategie <font color = #C90F0F >"+( L_BbmG.get(0).etatJeu.getBombermans().get(i)).getStrategie().getClass().getSimpleName()+"</font>, dont :</html>");
 					pan_result2.setHorizontalAlignment(JLabel.CENTER);
 					panel_joueur.add(pan_result2);
 					
+					//pourcentage de victoire avec un seul Bomberman
 					if ( id_du_gagnant[i][0] != 0) {
 						JLabel win_solo = new JLabel();
 						win_solo.setText( "<html> <font color = #E7C019 >"+df.format((id_du_gagnant[i][0]/total)*100) +"%</font> en solo");
 						win_solo.setHorizontalAlignment(JLabel.CENTER);
 						panel_joueur.add(win_solo);
 					}
+					//pourcentage de victoire au score
 					if ( id_du_gagnant[i][1] != 0) {
 						JLabel win_score = new JLabel();
 						win_score.setText("<html> <font color = #E7C019 >"+df.format((id_du_gagnant[i][1]/total)*100) +"%</font> au score");
 						win_score.setHorizontalAlignment(JLabel.CENTER);
 						panel_joueur.add(win_score);
 					}
+					//pourcentage de victoire en étant le dernier en vie
 					if ( id_du_gagnant[i][2] != 0) {
 						JLabel win_survie = new JLabel();
 						win_survie.setText("<html> <font color = #E7C019 >"+df.format((id_du_gagnant[i][2]/total)*100) +"%</font> en restant le dernier en vie");
@@ -191,11 +199,13 @@ public class Cadre_multi extends JFrame {
 						panel_joueur.add(win_survie);
 					}
 					
+					//moyenne des points en cas de victoire
 					JLabel moy_victoire = new JLabel();
 					moy_victoire.setText("<html>"+joueur+" a en moyenne "+df.format(id_du_gagnant[i][3]/total)+" points lorsqu'il gagne </html>");
 					moy_victoire.setHorizontalAlignment(JLabel.CENTER);
 					panel_joueur.add(moy_victoire);
 					
+					//moyenne des points en général
 					JLabel moy_totale = new JLabel();
 					moy_totale.setText("<html>"+joueur+" a eu en moyenne "+point_joueur[i]/nb_threads+" points sur toutes les parties</html>");
 					moy_totale.setHorizontalAlignment(JLabel.CENTER);
@@ -227,6 +237,7 @@ public class Cadre_multi extends JFrame {
 		creer_button();
 	}
 	
+	//Créer un bouton qui permet de retourner sur le menu principal
 	public void creer_button(){
 		
 		back.addActionListener(new ActionListener() {
@@ -240,13 +251,7 @@ public class Cadre_multi extends JFrame {
 		});
 	}
 
-	public JLabel getResultat() {
-		return resultat;
-	}
-
-	public void setResultat(JLabel resultat) {
-		this.resultat = resultat;
-	}
+	//getteurs et setteurs du nombre du nombre de threads et de la liste de BombermanGame
 
 	public int getNb_threads() {
 		return nb_threads;

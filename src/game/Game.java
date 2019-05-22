@@ -50,12 +50,9 @@ public abstract class Game implements Runnable, InterfaceGame {
 	}
 	
 	public void new_thread(){
-		
 		thread = new Thread(this);
-
 	}
 	
-
 	public Thread getThread() {
 		return thread;
 	}
@@ -81,7 +78,7 @@ public abstract class Game implements Runnable, InterfaceGame {
 		}
 	}
 	
-	//Réalise le tours suivant
+	//Réalise le tour suivant
 	
 	public void nextTurn(){
 		turn++;	
@@ -89,6 +86,7 @@ public abstract class Game implements Runnable, InterfaceGame {
 		taketurn();
 	}
 	
+	// getteur et setteur sur le temps entre chaque tours
 	public double getTemps() {
 		return temps;
 	}
@@ -97,21 +95,22 @@ public abstract class Game implements Runnable, InterfaceGame {
 		this.temps = temps;
 	}
 	
+	//informations sur le tour actuel et le maximum de tour possible
 	public int getTurn() {
 		return this.turn;
 	}
 	
-	//Arrete le jeu en mettent à faux isRunning
+	public int getMaxTurn() {
+		return maxTurn;
+	}
+	
+	//Arrete le jeu en mettant à faux isRunning
 	
 	public void stop(){
 		isRunning = false;
 	}
 	
-//	public void restart(){
-//		init();
-//		launch();
-//	}
-//	
+	
 	//Verifie si le nombre de tours courant est inferieur au nombre de tours maximum permis par le jeu
 	
 	public boolean gameContinue(){
@@ -132,6 +131,7 @@ public abstract class Game implements Runnable, InterfaceGame {
 		this.isRunning = isRunning;
 	}
 	
+	
 	//design paterns
 	
 	public void addObserver(GameObserver o) {
@@ -148,10 +148,7 @@ public abstract class Game implements Runnable, InterfaceGame {
 			observateur.update();
 		}
 	}
-	
-	public int getMaxTurn() {
-		return maxTurn;
-	}
+
 
 	protected abstract void initializeGame();
 

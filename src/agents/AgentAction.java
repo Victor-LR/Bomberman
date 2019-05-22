@@ -5,16 +5,13 @@ import java.io.Serializable;
 import map.Map;
 
 public class AgentAction implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
 	private int vx;
 	private int vy;
 	
 	private int action;
 	
+	// détermine le changement des coordonnées en fonction de l'action passé en paramètre
 	public  AgentAction(int dir){
 		this.action = dir;
 		if (dir < 5) deplacement();
@@ -25,6 +22,7 @@ public class AgentAction implements Serializable {
 		}
 	}
 	
+
 	public void deplacement(){
 	
 		if (action==Map.STOP)

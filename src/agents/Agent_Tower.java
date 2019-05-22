@@ -10,9 +10,9 @@ public class Agent_Tower extends Agent {
 	//tableau avec les cordonnées x,y et la vie des 4 pilliers
 	private int[][] coord_pilliers = new int[4][3];
 	
+	//détermine les pilliers détruits ou non
 	private boolean[] pill_detruit = new boolean[4];
-	
-	
+
 	private boolean hurt;
 	private int etat;
 	
@@ -48,6 +48,8 @@ public class Agent_Tower extends Agent {
 		return new AgentAction(Map.STOP);
 	}
 
+	//getteur et setteur pour le tableau des coordonnées des pilliers
+	
 	public int[][] getCoord_pilliers() {
 		return coord_pilliers;
 	}
@@ -57,6 +59,7 @@ public class Agent_Tower extends Agent {
 	}
 
 	
+	// getteur et setteur de la vie d'un pillier spécifique
 	public int getPill_life(int i) {
 		return this.coord_pilliers[i][2];
 	}
@@ -75,6 +78,7 @@ public class Agent_Tower extends Agent {
 		this.pill_detruit[i] = detruit;
 	}
 
+	// détermine si un pillier est touché par une bombe ou non
 	public boolean isHurt() {
 		return hurt;
 	}
@@ -83,6 +87,7 @@ public class Agent_Tower extends Agent {
 		this.hurt = hurt;
 	}
 
+	
 	public int getEtat() {
 		return etat;
 	}

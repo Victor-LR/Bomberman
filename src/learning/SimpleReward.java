@@ -40,7 +40,6 @@ public class SimpleReward implements Reward {
 		 * tuer un bomberman 
 		 * tuer un ennemie
 		 */
-		
 	}
 
 }
