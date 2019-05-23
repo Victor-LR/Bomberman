@@ -219,15 +219,6 @@ public class Agent_Bomberman extends Agent {
 	public void setEtatSick(int etatSick) {
 		this.etatSick = etatSick;
 	}
-	
-
-	public int getNbActions() {
-		return nbActions;
-	}
-
-	public void setNbActions(int actions) {
-		this.nbActions = actions;
-	}
 
 	public int getMaladie() {
 		return maladie;
