@@ -34,6 +34,7 @@ import learning.perceptron.Perceptron;
 import learning.perceptron.PerceptronAgent;
 import learning.perceptron.RechercheAleatoire;
 
+
 public class Cadre_menu extends JFrame{
 
 	//JFrame menu principal : permet de choisir entre les différents modes 
@@ -64,7 +65,6 @@ public class Cadre_menu extends JFrame{
 	//JMenu pour les modes
 	private JMenuBar menu = null;
 	private JMenu mode = null;
-	private JLabel nom_mode = null;
 	private JMenuItem campagne= null;
 	private JMenuItem normal = null;
 	private JMenuItem perceptron_0 = null;
@@ -93,9 +93,6 @@ public class Cadre_menu extends JFrame{
 		mode = new JMenu();
 		mode.setText("Mode");
 		
-		nom_mode = new JLabel();
-		nom_mode.setText("   :   Normal");
-		
 		is_campagne = false;
 		is_perceptron = false;
 		is_testAlgo = false;
@@ -118,7 +115,6 @@ public class Cadre_menu extends JFrame{
 		mode.add(perceptron_0);
 		
 		menu.add(mode);
-		menu.add(nom_mode);
 		
 		listStrat = new ArrayList<JComboBox<String>>();
 		
@@ -188,14 +184,6 @@ public class Cadre_menu extends JFrame{
 		campagne.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent evenement) {
-				
-				menu.remove(nom_mode);
-				
-				nom_mode = new JLabel();
-				nom_mode.setText("   :   Campagne");
-				
-				menu.add(nom_mode);
-				
 				is_campagne = true;
 				setIs_perceptron(false);
 				setIs_testAlgo(false);
@@ -243,13 +231,6 @@ public class Cadre_menu extends JFrame{
 			//action du mode normal
 			public void actionPerformed(ActionEvent evenement) {
 				
-				menu.remove(nom_mode);
-				
-				nom_mode = new JLabel();
-				nom_mode.setText("   :   Normal");
-				
-				menu.add(nom_mode);
-				
 				is_campagne = false;
 				setIs_perceptron(false);
 				setIs_testAlgo(false);
@@ -296,26 +277,19 @@ public class Cadre_menu extends JFrame{
 			//action du mode perceptron
 			public void actionPerformed(ActionEvent evenement) {
 				
-				menu.remove(nom_mode);
-				
-				nom_mode = new JLabel();
-				nom_mode.setText("   :   Perceptron_0");
-				
-				menu.add(nom_mode);
-				
 				is_campagne = false;
 				setIs_perceptron(true);
 				setIs_testAlgo(false);
 				
-				panelMap.remove(choixStage);
-				panelMap.remove(liste_lay);
+				panelMap.add(choixStage);
+				panelMap.add(liste_lay);
 				
 				listStrat = new ArrayList<JComboBox<String>>();
 				remove(choixStrats);
 				choixStrats = new JPanel();
 				remove(review);
 				
-				content = "./layout/perceptron.lay";
+				content = liste_lay.getSelectedItem().toString();
 				
 				try {
 					BbmG.loadFile(content);
@@ -325,11 +299,26 @@ public class Cadre_menu extends JFrame{
 				}
 				BbmG.init();
 				
+				choixStrats.setLayout(new GridLayout(BbmG.etatJeu.getBombermans().size(),2));
+				
+				String[] nomStrat = {"Auto","Joueur1","Joueur2","A_Items","A","B","C","PVE","PVP","D","A PVP"};
+				
+				choixStrats.add(new JLabel("Joueur avec perceptron :"));
+				choixStrats.add(new JLabel("Perceptron 0"));
+				//choixStrats.add(liste);
+				
+				for(int i = 1; i<BbmG.etatJeu.getBombermans().size();i++) {
+					JComboBox<String> liste =  new JComboBox<String>(nomStrat);
+					choixStrats.add(new JLabel("Joueur n°"+(int)(( BbmG.etatJeu.getBombermans().get(i)).getId()+1)));
+					listStrat.add(liste);
+					choixStrats.add(liste);
+				}
+				add("South",choixStrats);
+				
 				review = new Review(BbmG);
 				add("Center",review);
 				setSize(review.getTaille_x()*40, review.getTaille_y()*40+BbmG.etatJeu.getBombermans().size()*25+50);
 				setLocationRelativeTo(null);
-				
 				revalidate();
 			}
 		});
@@ -337,13 +326,6 @@ public class Cadre_menu extends JFrame{
 		testAlgoAlea.addActionListener(new ActionListener() {
 			//action du mode test algo
 			public void actionPerformed(ActionEvent evenement) {
-				
-				menu.remove(nom_mode);
-				
-				nom_mode = new JLabel();
-				nom_mode.setText("   :   TestAlgoAlea");
-				
-				menu.add(nom_mode);
 				
 				is_campagne = false;
 				setIs_perceptron(false);
@@ -371,7 +353,8 @@ public class Cadre_menu extends JFrame{
 				
 				String[] nomStrat = {"Auto","Joueur1","Joueur2","A_Items","A","B","C","PVE","PVP","D","A PVP"};
 				
-				choixStrats.add(new JLabel("Joueur avec perceptron : testAlgoAlea"));
+				choixStrats.add(new JLabel("Joueur avec perceptron :"));
+				choixStrats.add(new JLabel("testAlgoAlea"));
 				//choixStrats.add(liste);
 				
 				for(int i = 1; i<BbmG.etatJeu.getBombermans().size();i++) {
@@ -402,11 +385,61 @@ public class Cadre_menu extends JFrame{
 					
 					Map map;
 					try {
-						map = new Map("./layout/perceptron.lay");
+						map = new Map(content);
 						GameState GameS  = new GameState(map,BG);
-						int strat[] = {0};
-						GameS.setStrats(strat);
+						strategies[0]=0;
+//						 (strat);
 						GameS.setCampagne(false);
+						
+						for(int i = 0; i<listStrat.size();i++) {
+							System.out.println(listStrat.get(i).getSelectedItem().toString());
+							switch(listStrat.get(i).getSelectedItem().toString()) {
+								case "Auto":
+									strategies[i+1]=0;
+								break;
+								
+								case "Joueur1":
+									strategies[i+1]=1;
+								break;
+								
+								case "Joueur2":
+									strategies[i+1]=2;
+								break;
+							
+								case "A_Items":
+									strategies[i+1]=3;
+								break;
+								
+								case "A":
+									strategies[i+1]=4;
+								break;
+								
+								case "B":
+									strategies[i+1]=5;
+								break;
+								
+								case "C":
+									strategies[i+1]=6;
+								break;
+								
+								case "PVE":
+									strategies[i+1]=7;
+								break;
+								
+								case "PVP":
+									strategies[i+1]=8;
+								break;
+									
+								case "D":
+									strategies[i+1]=9;
+								break;
+								
+								case "A PVP":
+									strategies[i+1]=10;
+								break;
+							}
+						}
+						GameS.setStrats(strategies);
 						
 						GameState state = SerializationUtils.clone(GameS);
 						
@@ -454,54 +487,54 @@ public class Cadre_menu extends JFrame{
 						map = new Map(content);
 						GameState GameS  = new GameState(map,BG);
 						strategies[0]=0;
-//						GameS.setStrats(strat);
+//						 (strat);
 						GameS.setCampagne(false);
 						
-						for(int i = 1; i<listStrat.size();i++) {
+						for(int i = 0; i<listStrat.size();i++) {
 							System.out.println(listStrat.get(i).getSelectedItem().toString());
 							switch(listStrat.get(i).getSelectedItem().toString()) {
 								case "Auto":
-									strategies[i]=0;
+									strategies[i+1]=0;
 								break;
 								
 								case "Joueur1":
-									strategies[i]=1;
+									strategies[i+1]=1;
 								break;
 								
 								case "Joueur2":
-									strategies[i]=2;
+									strategies[i+1]=2;
 								break;
 							
 								case "A_Items":
-									strategies[i]=3;
+									strategies[i+1]=3;
 								break;
 								
 								case "A":
-									strategies[i]=4;
+									strategies[i+1]=4;
 								break;
 								
 								case "B":
-									strategies[i]=5;
+									strategies[i+1]=5;
 								break;
 								
 								case "C":
-									strategies[i]=6;
+									strategies[i+1]=6;
 								break;
 								
 								case "PVE":
-									strategies[i]=7;
+									strategies[i+1]=7;
 								break;
 								
 								case "PVP":
-									strategies[i]=8;
+									strategies[i+1]=8;
 								break;
 									
 								case "D":
-									strategies[i]=9;
+									strategies[i+1]=9;
 								break;
 								
 								case "A PVP":
-									strategies[i]=10;
+									strategies[i+1]=10;
 								break;
 							}
 						}
@@ -515,7 +548,7 @@ public class Cadre_menu extends JFrame{
 						Reward r = new SimpleReward();
 						
 						RechercheAleatoire ra = new RechercheAleatoire(50, 40, Math.random()*0.2-0.1, state,r, sens);
-						for(int i=0;i<10; i++){
+						for(int i=0;i<10; i++){ 
 							ra.evoluer();
 						}
 						Perceptron perceptron = ra.getMeilleur();
@@ -619,16 +652,66 @@ public class Cadre_menu extends JFrame{
 			 */
 			public void actionPerformed(ActionEvent evenement) {
 				////////////////////////////////////////////perceptron///////////////////////////////////////////
-				if(is_perceptron) {
+				if(getIs_perceptron()) {
 					BombermanGame BG = new BombermanGame();
 					
 					Map map;
 					try {
-						map = new Map("./layout/perceptron.lay");
+						map = new Map(content);
 						GameState GameS  = new GameState(map,BG);
-						int strat[] = {0};
-						GameS.setStrats(strat);
+						strategies[0]=0;
+//						 (strat);
 						GameS.setCampagne(false);
+						
+						for(int i = 1; i<listStrat.size();i++) {
+							System.out.println(listStrat.get(i).getSelectedItem().toString());
+							switch(listStrat.get(i).getSelectedItem().toString()) {
+								case "Auto":
+									strategies[i]=0;
+								break;
+								
+								case "Joueur1":
+									strategies[i]=1;
+								break;
+								
+								case "Joueur2":
+									strategies[i]=2;
+								break;
+							
+								case "A_Items":
+									strategies[i]=3;
+								break;
+								
+								case "A":
+									strategies[i]=4;
+								break;
+								
+								case "B":
+									strategies[i]=5;
+								break;
+								
+								case "C":
+									strategies[i]=6;
+								break;
+								
+								case "PVE":
+									strategies[i]=7;
+								break;
+								
+								case "PVP":
+									strategies[i]=8;
+								break;
+									
+								case "D":
+									strategies[i]=9;
+								break;
+								
+								case "A PVP":
+									strategies[i]=10;
+								break;
+							}
+						}
+						GameS.setStrats(strategies);
 						
 						GameState state = SerializationUtils.clone(GameS);
 
@@ -663,7 +746,7 @@ public class Cadre_menu extends JFrame{
 							BombermanGame un_bbmg = new BombermanGame();
 							
 							try {
-								un_bbmg.loadFile("./layout/perceptron.lay");
+								un_bbmg.loadFile(content);
 
 							} catch (Exception e) {
 								e.printStackTrace();
@@ -672,7 +755,7 @@ public class Cadre_menu extends JFrame{
 							
 							un_bbmg.init();
 							un_bbmg.etatJeu.setCampagne(false);
-							un_bbmg.etatJeu.setStrats(strat);
+							un_bbmg.etatJeu.setStrats(strategies);
 							un_bbmg.etatJeu.setBomberman(0, agent_b);
 							
 							un_bbmg.setTemps(1);
@@ -704,16 +787,66 @@ public class Cadre_menu extends JFrame{
 					}
 				}
 				////////////////////////////////////////////testAlgoALea///////////////////////////////////////////
-				else if(is_testAlgo) {
+				else if(getIs_testAlgo()) {
 					BombermanGame BG = new BombermanGame();
 					
 					Map map;
 					try {
-						map = new Map("./layout/perceptron_lab.lay");
+						map = new Map(content);
 						GameState GameS  = new GameState(map,BG);
-						int strat[] = {0};
-						GameS.setStrats(strat);
+						strategies[0]=0;
+//						 (strat);
 						GameS.setCampagne(false);
+						
+						for(int i = 1; i<listStrat.size();i++) {
+							System.out.println(listStrat.get(i).getSelectedItem().toString());
+							switch(listStrat.get(i).getSelectedItem().toString()) {
+								case "Auto":
+									strategies[i]=0;
+								break;
+								
+								case "Joueur1":
+									strategies[i]=1;
+								break;
+								
+								case "Joueur2":
+									strategies[i]=2;
+								break;
+							
+								case "A_Items":
+									strategies[i]=3;
+								break;
+								
+								case "A":
+									strategies[i]=4;
+								break;
+								
+								case "B":
+									strategies[i]=5;
+								break;
+								
+								case "C":
+									strategies[i]=6;
+								break;
+								
+								case "PVE":
+									strategies[i]=7;
+								break;
+								
+								case "PVP":
+									strategies[i]=8;
+								break;
+									
+								case "D":
+									strategies[i]=9;
+								break;
+								
+								case "A PVP":
+									strategies[i]=10;
+								break;
+							}
+						}
+						GameS.setStrats(strategies);
 						
 						GameState state = SerializationUtils.clone(GameS);
 
@@ -737,7 +870,7 @@ public class Cadre_menu extends JFrame{
 							BombermanGame un_bbmg = new BombermanGame();
 							
 							try {
-								un_bbmg.loadFile("./layout/perceptron_lab.lay");
+								un_bbmg.loadFile(content);
 
 							} catch (Exception e) {
 								e.printStackTrace();
@@ -746,7 +879,7 @@ public class Cadre_menu extends JFrame{
 							
 							un_bbmg.init();
 							un_bbmg.etatJeu.setCampagne(false);
-							un_bbmg.etatJeu.setStrats(strat);
+							un_bbmg.etatJeu.setStrats(strategies);
 							un_bbmg.etatJeu.setBomberman(0, agent_b);
 							
 							un_bbmg.setTemps(1);
@@ -1082,7 +1215,9 @@ public class Cadre_menu extends JFrame{
 		//action lors du choix de niveau : avec le changement de la preview
 		liste_lay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evenement) {
+				
 				listStrat = new ArrayList<JComboBox<String>>();
+				
 				remove(choixStrats);
 				choixStrats = new JPanel();
 				remove(review);
@@ -1096,23 +1231,38 @@ public class Cadre_menu extends JFrame{
 				}
 				game.init();
 				
+				
+				
 				choixStrats.setLayout(new GridLayout(game.etatJeu.getBombermans().size(),2));
 				
 				String[] nomStrat = {"Auto","Joueur1","Joueur2","A_Items","A","B","C","PVE","PVP","D","A PVP"};
-				System.out.println(is_testAlgo);
 				
-				if (getIs_testAlgo()){
-					choixStrats.add(new JLabel("Joueur avec perceptron :"));
-					//choixStrats.add(new JLabel("TestAlgoAlea"));
-					choixStrats.add(liste);
-					
-					for(int i = 1; i<BbmG.etatJeu.getBombermans().size();i++) {
+				
+				
+				if (getIs_perceptron()){
+					choixStrats.add(new JLabel("Joueur avec perceptron "));
+					choixStrats.add(new JLabel("Perceptron 0"));
+					//choixStrats.add(liste);
+					System.out.println("   test");
+					for(int i = 1; i<game.etatJeu.getBombermans().size();i++) {
 						JComboBox<String> liste =  new JComboBox<String>(nomStrat);
-						choixStrats.add(new JLabel("Joueur n°"+(int)(( BbmG.etatJeu.getBombermans().get(i)).getId()+1)));
+						choixStrats.add(new JLabel("Joueur n°"+(int)(( game.etatJeu.getBombermans().get(i)).getId()+1)));
 						listStrat.add(liste);
 						choixStrats.add(liste);
 					}
+					add("South",choixStrats);
+				}else if (getIs_testAlgo()){
+					choixStrats.add(new JLabel("Joueur avec perceptron "));
+					choixStrats.add(new JLabel("TestAlgoAlea"));
+					//choixStrats.add(liste);
 					
+					for(int i = 1; i<game.etatJeu.getBombermans().size();i++) {
+						JComboBox<String> liste =  new JComboBox<String>(nomStrat);
+						choixStrats.add(new JLabel("Joueur n°"+(int)(( game.etatJeu.getBombermans().get(i)).getId()+1)));
+						listStrat.add(liste);
+						choixStrats.add(liste);
+					}
+					add("South",choixStrats);
 
 				}else{
 					for(int i =0; i<game.etatJeu.getBombermans().size();i++) {
@@ -1122,8 +1272,9 @@ public class Cadre_menu extends JFrame{
 						listStrat.add(liste);
 						choixStrats.add(liste);
 					}
+					add("South",choixStrats);
 				}
-				add("South",choixStrats);
+				
 				
 				review = new Review(game);
 				add("Center",review);
