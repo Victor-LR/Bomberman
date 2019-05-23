@@ -6,6 +6,7 @@ import agents.Agent_Bomberman;
 import learning.Quadruplet;
 import learning.Sensor;
 import map.GameState;
+import map.Map;
 
 public class PerceptronAgent extends Agent_Bomberman {
 
@@ -33,14 +34,20 @@ public class PerceptronAgent extends Agent_Bomberman {
 			if(state.isLegalMoveBbm(new AgentAction(i), as))
 				aa.add(new AgentAction(i));
 		}
-		for(int i=0;i<aa.size();i++){
-			SparseVector v = senseur.getVector(state, aa.get(i));
-			if(scoreMax < perce.getScore(v)){
-				scoreMax = perce.getScore(v);
-				ind=i;
-			}
+		System.out.println("test :    "+aa.size());
+		if(aa.size()==0){
+			return new AgentAction(Map.STOP);
 		}
-		return aa.get(ind);
+		else{
+			for(int i=0;i<aa.size();i++){
+				SparseVector v = senseur.getVector(state, aa.get(i));
+				if(scoreMax < perce.getScore(v)){
+					scoreMax = perce.getScore(v);
+					ind=i;
+				}
+			}
+			return aa.get(ind);
+		}
 	}
 
 	
