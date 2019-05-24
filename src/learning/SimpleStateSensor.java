@@ -25,7 +25,7 @@ public class SimpleStateSensor implements StateSensor, Serializable	{
 	
 	@Override
 	public int size() {
-		return n*n*3;
+		return n*n*6;
 	}
 
 	
@@ -70,7 +70,28 @@ public class SimpleStateSensor implements StateSensor, Serializable	{
 		for (int i=ab1; i<= ab2; i++){
 			for (int j=or1; j<= or2; j++){				
 				
-				if (s.isEnnemie(i, j)){ //si un fantome
+				if (s.isEnnemie(i, j)){ //si un ennemie
+					vector.setValue(cpt, 1);
+				}
+				else
+					vector.setValue(cpt,0);
+				cpt++;
+				
+				if (s.isBird(i, j)){ //si un bird
+					vector.setValue(cpt, 1);
+				}
+				else
+					vector.setValue(cpt,0);
+				cpt++;
+				
+				if (s.isRajion(i, j)){ //si un Rajion
+					vector.setValue(cpt, 1);
+				}
+				else
+					vector.setValue(cpt,0);
+				cpt++;
+				
+				if (s.isItem(i, j)){ //si un Item
 					vector.setValue(cpt, 1);
 				}
 				else

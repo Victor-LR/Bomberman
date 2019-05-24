@@ -228,6 +228,18 @@ public class GameState implements Serializable{
 			return en;
 		}
 		
+		public boolean isItem(int x, int y) {
+			boolean en = false;
+			
+			ArrayList<Objet> items = this.items;
+			for(int i=0; i< items.size(); i++) {
+				Objet item = items.get(i);
+				if((item.getObjX() == x & item.getObjY() == y)) en = true;
+			}
+			
+			return en;
+		}
+		
 		public boolean isTower(int x, int y) {
 			if (tower != null)
 			for (int i= 0; i < 4 ; i++) {

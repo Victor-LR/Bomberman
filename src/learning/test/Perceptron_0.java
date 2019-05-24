@@ -66,7 +66,7 @@ public class Perceptron_0 {
 			PerceptronAgent agent_bomberman = new PerceptronAgent(state.getBombermans().get(0),s, p);
 			GameS.setBomberman(0, agent_bomberman);
 			
-			RewardTools.vizualize(GameS, agent_bomberman, r, 1000,20);
+			RewardTools.vizualize(GameS, agent_bomberman, r, 1000,150);
 		
 		} catch (Exception e) {
 			e.printStackTrace();

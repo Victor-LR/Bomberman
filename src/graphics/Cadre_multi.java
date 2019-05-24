@@ -169,7 +169,7 @@ public class Cadre_multi extends JFrame {
 					String pourcent_joueur = "<font color = #39B835 >"+ df.format((total/nb_threads)*100)+"%</font>";
 					
 					//affichage de la stratégie adopté par le Bomberman
-					if (perceptron == Cadre_menu.NON_PERCEPTRON) {
+					if (perceptron == Cadre_menu.NON_PERCEPTRON || i != 0) {
 						if (( L_BbmG.get(0).etatJeu.getBombermans().get(i)).getStrategie() == null) 
 							pan_result2.setText("<html>"+ joueur +" a gagné "+pourcent_joueur+" du temps avec la strategie <font color = #C90F0F >aléatoire</font>, dont :</html>");
 						else pan_result2.setText("<html>"+ joueur +" a gagné "+ pourcent_joueur +"% du temps avec strategie <font color = #C90F0F >"+( L_BbmG.get(0).etatJeu.getBombermans().get(i)).getStrategie().getClass().getSimpleName()+"</font>, dont :</html>");

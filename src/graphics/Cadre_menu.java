@@ -682,7 +682,7 @@ public class Cadre_menu extends JFrame{
 		
 		multi.addActionListener(new ActionListener() {
 			/* Basiquement la meme chose que Jouer mais lance en multithreads
-			 * Multithread sur le sperceptrons : basiquement la même chose qu'un perceptrons normal,
+			 * Multithread sur les perceptrons : basiquement la même chose qu'un perceptron normal,
 			 * tout en en prenant en compte que la serialization n'est certainement pas la meilleurs chose pour le gain de performance.
 			 * 
 			 * Quand le mod choisi est le mode campagne : le multithreds differt on lance le nb thread une fois
@@ -903,7 +903,7 @@ public class Cadre_menu extends JFrame{
 						GameS.setBomberman(0, agent_bomberman);
 						
 						ArrayList<BombermanGame> L_BbmG = new ArrayList<BombermanGame>();
-						for (int i = 0 ; i < 500 ; i++){
+						for (int i = 0 ; i < 250 ; i++){
 							PerceptronAgent agent_b = SerializationUtils.clone(agent_bomberman);
 							BombermanGame un_bbmg = new BombermanGame();
 							
@@ -941,7 +941,7 @@ public class Cadre_menu extends JFrame{
 						
 						System.out.println("			Fin multithreads");
 
-						Cadre_multi c_m = new Cadre_multi(L_BbmG,500,PERCEP_ALGO_ALEA);
+						Cadre_multi c_m = new Cadre_multi(L_BbmG,250,PERCEP_ALGO_ALEA);
 						c_m.setVisible(true);
 		
 					} catch (Exception e) {
