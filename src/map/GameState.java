@@ -395,7 +395,7 @@ public class GameState implements Serializable{
 					Agent_Rajion rajion = rajions.get(j);
 					if(rajion.getX() == i & rajion.getY() == y & !rajion.isDead()){
 						rajions.remove(j);
-						//bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
+						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 50);
 					}
 				}
 			
@@ -468,7 +468,7 @@ public class GameState implements Serializable{
 				Agent_Rajion rajion = rajions.get(j);
 				if(rajion.getX() == x & rajion.getY() == i & !rajion.isDead()){
 					rajions.remove(j);
-					//bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
+					bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 50);
 				}
 			}
 				
@@ -551,7 +551,7 @@ public class GameState implements Serializable{
 					Agent_Rajion rajion = rajions.get(j);
 					if(rajion.getX() == i & rajion.getY() == y & !rajion.isDead()){
 						rajions.remove(j);
-						//bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
+						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 50);
 					}
 				}
 				
@@ -626,7 +626,7 @@ public class GameState implements Serializable{
 					Agent_Rajion rajion = rajions.get(j);
 					if(rajion.getX() == x & rajion.getY() == i & !rajion.isDead()){
 						rajions.remove(j);
-						//bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 100);
+						bombermans.get(bomb.getId_bbm()).setPoints(bombermans.get(bomb.getId_bbm()).getPoints() + 50);
 					}
 				}
 

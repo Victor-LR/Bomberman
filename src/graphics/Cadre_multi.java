@@ -31,7 +31,7 @@ public class Cadre_multi extends JFrame {
 	java.text.DecimalFormat df = new java.text.DecimalFormat("0.##");
 	
 	
-	public Cadre_multi(ArrayList<BombermanGame> L_BbmG, int nb_threads){
+	public Cadre_multi(ArrayList<BombermanGame> L_BbmG, int nb_threads, int perceptron){
 		
 		this.setL_BbmG(L_BbmG);
 		this.setNb_threads(nb_threads);
@@ -169,9 +169,12 @@ public class Cadre_multi extends JFrame {
 					String pourcent_joueur = "<font color = #39B835 >"+ df.format((total/nb_threads)*100)+"%</font>";
 					
 					//affichage de la stratégie adopté par le Bomberman
-					if (( L_BbmG.get(0).etatJeu.getBombermans().get(i)).getStrategie() == null) 
-						pan_result2.setText("<html>"+ joueur +" a gagné "+pourcent_joueur+" du temps avec la strategie <font color = #C90F0F >aléatoire</font>, dont :</html>");
-					else pan_result2.setText("<html>"+ joueur +" a gagné "+ pourcent_joueur +"% du temps avec strategie <font color = #C90F0F >"+( L_BbmG.get(0).etatJeu.getBombermans().get(i)).getStrategie().getClass().getSimpleName()+"</font>, dont :</html>");
+					if (perceptron == Cadre_menu.NON_PERCEPTRON) {
+						if (( L_BbmG.get(0).etatJeu.getBombermans().get(i)).getStrategie() == null) 
+							pan_result2.setText("<html>"+ joueur +" a gagné "+pourcent_joueur+" du temps avec la strategie <font color = #C90F0F >aléatoire</font>, dont :</html>");
+						else pan_result2.setText("<html>"+ joueur +" a gagné "+ pourcent_joueur +"% du temps avec strategie <font color = #C90F0F >"+( L_BbmG.get(0).etatJeu.getBombermans().get(i)).getStrategie().getClass().getSimpleName()+"</font>, dont :</html>");
+					} else if (perceptron == Cadre_menu.PERCEPTRON_0) pan_result2.setText("<html>"+ joueur +" a gagné "+pourcent_joueur+" du temps avec la strategie <font color = #C90F0F >perceptron 0</font>, dont :</html>");
+					  else if (perceptron == Cadre_menu.PERCEP_ALGO_ALEA) pan_result2.setText("<html>"+ joueur +" a gagné "+pourcent_joueur+" du temps avec la strategie <font color = #C90F0F >perceptron algo alea</font>, dont :</html>");
 					pan_result2.setHorizontalAlignment(JLabel.CENTER);
 					panel_joueur.add(pan_result2);
 					

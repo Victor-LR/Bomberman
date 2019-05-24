@@ -34,7 +34,7 @@ public class PerceptronAgent extends Agent_Bomberman {
 			if(state.isLegalMoveBbm(new AgentAction(i), as))
 				aa.add(new AgentAction(i));
 		}
-		System.out.println("test :    "+aa.size());
+
 		if(aa.size()==0){
 			return new AgentAction(Map.STOP);
 		}

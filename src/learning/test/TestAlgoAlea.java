@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.commons.lang3.SerializationUtils;
 
 import game.BombermanGame;
+import graphics.Cadre_menu;
 import graphics.Cadre_multi;
 import learning.Reward;
 import learning.RewardTools;
@@ -89,7 +90,7 @@ public class TestAlgoAlea {
 			
 			System.out.println("			Fin multithreads");
 
-			Cadre_multi c_m = new Cadre_multi(L_BbmG,500);
+			Cadre_multi c_m = new Cadre_multi(L_BbmG,500,Cadre_menu.PERCEP_ALGO_ALEA);
 			c_m.setVisible(true);
 			
 		}

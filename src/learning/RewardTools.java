@@ -7,6 +7,7 @@ import agents.AgentAction;
 import agents.Agent_Bomberman;
 import agents.ColorBomberman;
 import map.GameState;
+import map.Map;
 
 
 import org.apache.commons.lang3.SerializationUtils;
@@ -85,6 +86,11 @@ public class RewardTools {
 		BombermanGame BbmG = new BombermanGame(initial_state, initial_state.getMap());
 		BbmG.setTemps(timestep);
 		BbmG.setMaxTurn(size_max_trajectory);
+		String sep = "/";
+		String stage[] = initial_state.getMap().getFilename().split(sep);
+		String sep2 = ".lay";
+		String stage2[] = stage[2].split(sep2);
+		BbmG.setFilename(stage2[0]);
 		BbmG.init();
 		
 		

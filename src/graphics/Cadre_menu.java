@@ -79,6 +79,10 @@ public class Cadre_menu extends JFrame{
 	private Boolean is_perceptron = null;
 	private Boolean is_testAlgo = null;
 	
+	public final static int NON_PERCEPTRON = 0;
+	public final static int PERCEPTRON_0 = 1;
+	public final static int PERCEP_ALGO_ALEA = 2;
+	
 	private int[] strategies = new int[100];
 	private int nb_threads = 10000;
 	
@@ -697,51 +701,51 @@ public class Cadre_menu extends JFrame{
 //						 (strat);
 						GameS.setCampagne(false);
 						
-						for(int i = 1; i<listStrat.size();i++) {
+						for(int i = 0; i<listStrat.size();i++) {
 							System.out.println(listStrat.get(i).getSelectedItem().toString());
 							switch(listStrat.get(i).getSelectedItem().toString()) {
 								case "Auto":
-									strategies[i]=0;
+									strategies[i+1]=0;
 								break;
 								
 								case "Joueur1":
-									strategies[i]=1;
+									strategies[i+1]=1;
 								break;
 								
 								case "Joueur2":
-									strategies[i]=2;
+									strategies[i+1]=2;
 								break;
 							
 								case "A_Items":
-									strategies[i]=3;
+									strategies[i+1]=3;
 								break;
 								
 								case "A":
-									strategies[i]=4;
+									strategies[i+1]=4;
 								break;
 								
 								case "B":
-									strategies[i]=5;
+									strategies[i+1]=5;
 								break;
 								
 								case "C":
-									strategies[i]=6;
+									strategies[i+1]=6;
 								break;
 								
 								case "PVE":
-									strategies[i]=7;
+									strategies[i+1]=7;
 								break;
 								
 								case "PVP":
-									strategies[i]=8;
+									strategies[i+1]=8;
 								break;
 									
 								case "D":
-									strategies[i]=9;
+									strategies[i+1]=9;
 								break;
 								
 								case "A PVP":
-									strategies[i]=10;
+									strategies[i+1]=10;
 								break;
 							}
 						}
@@ -813,7 +817,7 @@ public class Cadre_menu extends JFrame{
 						
 						System.out.println("			Fin multithreads");
 
-						Cadre_multi c_m = new Cadre_multi(L_BbmG,500);
+						Cadre_multi c_m = new Cadre_multi(L_BbmG,500,PERCEPTRON_0);
 						c_m.setVisible(true);
 					
 					} catch (Exception e) {
@@ -832,51 +836,51 @@ public class Cadre_menu extends JFrame{
 //						 (strat);
 						GameS.setCampagne(false);
 						
-						for(int i = 1; i<listStrat.size();i++) {
+						for(int i = 0; i<listStrat.size();i++) {
 							System.out.println(listStrat.get(i).getSelectedItem().toString());
 							switch(listStrat.get(i).getSelectedItem().toString()) {
 								case "Auto":
-									strategies[i]=0;
+									strategies[i+1]=0;
 								break;
 								
 								case "Joueur1":
-									strategies[i]=1;
+									strategies[i+1]=1;
 								break;
 								
 								case "Joueur2":
-									strategies[i]=2;
+									strategies[i+1]=2;
 								break;
 							
 								case "A_Items":
-									strategies[i]=3;
+									strategies[i+1]=3;
 								break;
 								
 								case "A":
-									strategies[i]=4;
+									strategies[i+1]=4;
 								break;
 								
 								case "B":
-									strategies[i]=5;
+									strategies[i+1]=5;
 								break;
 								
 								case "C":
-									strategies[i]=6;
+									strategies[i+1]=6;
 								break;
 								
 								case "PVE":
-									strategies[i]=7;
+									strategies[i+1]=7;
 								break;
 								
 								case "PVP":
-									strategies[i]=8;
+									strategies[i+1]=8;
 								break;
 									
 								case "D":
-									strategies[i]=9;
+									strategies[i+1]=9;
 								break;
 								
 								case "A PVP":
-									strategies[i]=10;
+									strategies[i+1]=10;
 								break;
 							}
 						}
@@ -937,7 +941,7 @@ public class Cadre_menu extends JFrame{
 						
 						System.out.println("			Fin multithreads");
 
-						Cadre_multi c_m = new Cadre_multi(L_BbmG,500);
+						Cadre_multi c_m = new Cadre_multi(L_BbmG,500,PERCEP_ALGO_ALEA);
 						c_m.setVisible(true);
 		
 					} catch (Exception e) {
@@ -1143,7 +1147,7 @@ public class Cadre_menu extends JFrame{
 					
 					System.out.println("			Fin multithreads");
 		
-					Cadre_multi c_m = new Cadre_multi(L_BbmAll,L_BbmAll.size());
+					Cadre_multi c_m = new Cadre_multi(L_BbmAll,L_BbmAll.size(),NON_PERCEPTRON);
           
 					c_m.setVisible(true);
 					
@@ -1234,7 +1238,7 @@ public class Cadre_menu extends JFrame{
 					
 					System.out.println("			Fin multithreads");
 		
-					Cadre_multi c_m = new Cadre_multi(L_BbmG,nb_threads);
+					Cadre_multi c_m = new Cadre_multi(L_BbmG,nb_threads,NON_PERCEPTRON);
 					c_m.setVisible(true);
 					
 					cadre_menu.dispose();
@@ -1245,7 +1249,7 @@ public class Cadre_menu extends JFrame{
 				}
 				
 			});
-		System.out.println(is_testAlgo);
+
 		//action lors du choix de niveau : avec le changement de la preview
 		liste_lay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evenement) {
@@ -1276,8 +1280,7 @@ public class Cadre_menu extends JFrame{
 				if (getIs_perceptron()){
 					choixStrats.add(new JLabel("Joueur avec perceptron "));
 					choixStrats.add(new JLabel("Perceptron 0"));
-					//choixStrats.add(liste);
-					System.out.println("   test");
+
 					for(int i = 1; i<game.etatJeu.getBombermans().size();i++) {
 						JComboBox<String> liste =  new JComboBox<String>(nomStrat);
 						choixStrats.add(new JLabel("Joueur n°"+(int)(( game.etatJeu.getBombermans().get(i)).getId()+1)));
@@ -1288,7 +1291,6 @@ public class Cadre_menu extends JFrame{
 				}else if (getIs_testAlgo()){
 					choixStrats.add(new JLabel("Joueur avec perceptron "));
 					choixStrats.add(new JLabel("TestAlgoAlea"));
-					//choixStrats.add(liste);
 					
 					for(int i = 1; i<game.etatJeu.getBombermans().size();i++) {
 						JComboBox<String> liste =  new JComboBox<String>(nomStrat);
