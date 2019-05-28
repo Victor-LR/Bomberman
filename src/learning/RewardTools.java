@@ -1,6 +1,7 @@
 package learning;
 
 import game.BombermanGame;
+import game.Game;
 import graphics.Cadre_Jeu;
 
 import agents.AgentAction;
@@ -37,6 +38,7 @@ public class RewardTools {
 			boolean axe_bombe = next_game.getBombermans().get(0).isAxe_bombe();
 					
 			next_game.taketurn(action, next_game.getBombermans().get(0).getId());
+			//next_game.getBbmG().setTurn(next_game.getBbmG().getTurn()+1);
 			
 			if (next_game.getFinPartie() != GameState.GAME_OVER & next_game.getFinPartie() != GameState.WIN_SOLO)
 			{

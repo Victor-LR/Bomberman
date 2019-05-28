@@ -100,6 +100,10 @@ public abstract class Game implements Runnable, InterfaceGame {
 		return this.turn;
 	}
 	
+	public void setTurn(int turn) {
+		this.turn = turn;
+	}
+
 	public int getMaxTurn() {
 		return maxTurn;
 	}

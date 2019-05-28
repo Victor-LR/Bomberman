@@ -42,7 +42,7 @@ public class RechercheAleatoire {
 	
 	public void evoluer() {
 		for(int i=0;i<n;i++){
-			lis.get(i).score=RewardTools.getAverageReward(state, new PerceptronAgent(state.getBombermans().get(0),s,lis.get(i).perceptron), r, 50, 100);
+			lis.get(i).score=RewardTools.getAverageReward(state, new PerceptronAgent(state.getBombermans().get(0),s,lis.get(i).perceptron), r, 200, 100);
 		}
 		Collections.sort(lis);
 
@@ -51,7 +51,7 @@ public class RechercheAleatoire {
 			int y=(int)Math.random()*m;
 			e.perceptron = lis.get(y).perceptron;
 			e.perceptron.bruiter(variance);
-			e.score = RewardTools.getAverageReward(state, new PerceptronAgent(state.getBombermans().get(0),s, e.perceptron), r, 100, 100);
+			e.score = RewardTools.getAverageReward(state, new PerceptronAgent(state.getBombermans().get(0),s, e.perceptron), r, 200, 100);
 			lis.set(i, e);
 		}
 		Collections.sort(lis);
